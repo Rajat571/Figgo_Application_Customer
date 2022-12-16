@@ -33,4 +33,16 @@ import android.content.SharedPreferences
     fun isFirstTimeLaunch(): Boolean {
         return pref!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
     }
+
+     fun setmPinonetime(mpin: String){
+         editor!!.putString("mpin",mpin)
+         editor?.commit()
+     }
+
+
+     fun getmpin():String{
+         return pref?.getString("mpin","").toString()
+     }
+
+
 }

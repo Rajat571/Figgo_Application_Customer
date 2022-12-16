@@ -47,14 +47,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).build()
 
-        continuetv.setOnClickListener {
-            if (savedInstanceState == null) {
-                supportFragmentManager.commit {
-                    setReorderingAllowed(true)
-                    add<MPinGenerate>(R.id.container)
-                }
-            }
-        }
+
 
        /* binding.email.setOnClickListener{
             binding.inputEmail.isVisible=true
