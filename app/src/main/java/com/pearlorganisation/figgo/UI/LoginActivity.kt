@@ -2,24 +2,21 @@ package com.pearlorganisation.figgo.UI
 
 import android.Manifest
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.Fragments.MPinGenerate
+
 
 class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks {
@@ -35,12 +32,13 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         var email = findViewById<TextView>(R.id.email)
         var number = findViewById<TextView>(R.id.number)
         var input_number = findViewById<TextView>(R.id.input_number)
-        var continuetv = findViewById<TextView>(R.id.continuetv)
+        val continuetv:TextView = findViewById<TextView>(R.id.continuetv)
         var forgot_account = findViewById<TextView>(R.id.forgot_account)
         var google_login_button = findViewById<TextView>(R.id.google_login_button)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
+
 
         ActivityCompat.requestPermissions(
             this,
@@ -48,6 +46,15 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         mGoogleApiClient =
             GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).build()
+
+        continuetv.setOnClickListener {
+            if (savedInstanceState == null) {
+                supportFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    add<MPinGenerate>(R.id.container)
+                }
+            }
+        }
 
        /* binding.email.setOnClickListener{
             binding.inputEmail.isVisible=true
