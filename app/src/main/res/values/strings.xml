@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Figgo</string>
+    <string name="welcome">"Genuine, reasonable and trust \n worthy cab/taxi services in \nterms of customer satisfaction \n by using latest and \n innovative technology. "</string>
+    <string name="Customers">CUSTOMER</string>
+    <string name="partners">PARTNER</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logindetails">By proceeding,you consent to get calls,whatsapp or sms,messages including by automated means from uber and its affiliates to the number provided</string>
+    <string name="e_verification"> Congratulations,\n e-Verification has been completed successfully.\n To use this app you are requested to generate MPIN</string>
+    <string name="title_activity_cab_details">CabDetails</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <!-- check dummy data  -->
+
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Welcome to Javatpoint!</string>
+    <string name="slide_1_desc">Javatpoint is passionate to offer better technical content to the world.</string>
+
+    <string name="slide_2_title">Android</string>
+    <string name="slide_2_desc">Android is a mobile operating system developed by Google.</string>
+</resources>

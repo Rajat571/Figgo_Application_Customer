@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorlightblue"
+    tools:context=".UI.Fragments.Shared_Cab_Fragment.VehicleNumberFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/backgrouund"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/choose_user"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_18sdp"
+        android:visibility="visible"
+        android:layout_marginTop="-122dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.590">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/black"
+                android:text="Activa - CH-01-2015"
+                android:textSize="@dimen/_13sdp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/bg_circle_black"
+                android:src="@drawable/girl_img"
+                app:civ_border_width="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_45sdp"
+                android:layout_marginStart="@dimen/_12sdp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:text="Ravi Singh"
+                android:layout_marginStart="@dimen/_66sdp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DL. No. Cgdjn9857imvc"
+                android:layout_marginStart="@dimen/_66sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/googlemapimg"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            app:civ_border_width="@dimen/_1sdp"
+            android:src="@drawable/share_img"
+            android:layout_marginTop="@dimen/_105sdp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_16sdp"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/_105sdp"
+            android:layout_height="@dimen/_29sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_95sdp"
+            android:background="@color/colorRed"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="@dimen/_102sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_gravity="center"
+                android:text="Emergency"
+                android:gravity="center"
+                android:background="@drawable/sqaureoutline_bg_yellow"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Click Here only Major Issue,other wise punished"
+            android:textColor="@color/colorRed"
+            android:layout_marginTop="@dimen/_120sdp"
+            android:textSize="@dimen/_10sdp"/>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/car"
+        android:scaleType="centerCrop"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottombuttonbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/figgofooter"/>
+
+    <include
+        layout="@layout/bottom_button_layout"
+        android:id="@+id/bottombuttonbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

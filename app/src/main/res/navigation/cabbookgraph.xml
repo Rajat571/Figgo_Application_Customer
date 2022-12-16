@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cabbookgraph"
+    app:startDestination="@id/cabBookFragment">
+
+    <fragment
+        android:id="@+id/cabBookFragment"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.CabBookFragment"
+        android:label="fragment_cab_book"
+        tools:layout="@layout/fragment_cab_book" >
+        <action
+            android:id="@+id/action_cabBookFragment_to_payFragment"
+            app:destination="@id/payFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/payFragment"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.PayFragment"
+        android:label="fragment_pay"
+        tools:layout="@layout/fragment_pay" >
+        <action
+            android:id="@+id/action_payFragment_to_paymentWayFragment"
+            app:destination="@id/paymentWayFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentWayFragment"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.PaymentWayFragment"
+        android:label="fragment_payment_way"
+        tools:layout="@layout/fragment_payment_way" >
+        <action
+            android:id="@+id/action_paymentWayFragment_to_thankyouScreenFragment"
+            app:destination="@id/thankyouScreenFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/thankyouScreenFragment"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment"
+        android:label="fragment_thankyou_screen"
+        tools:layout="@layout/fragment_thankyou_screen" >
+        <action
+            android:id="@+id/action_thankyouScreenFragment_to_vehicleNumberFragment"
+            app:destination="@id/vehicleNumberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleNumberFragment"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.VehicleNumberFragment"
+        android:label="fragment_vehicle_number"
+        tools:layout="@layout/fragment_vehicle_number" >
+        <action
+            android:id="@+id/action_vehicleNumberFragment_to_thankyou_Rating_Fragment"
+            app:destination="@id/thankyou_Rating_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thankyou_Rating_Fragment"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.Thankyou_Rating_Fragment"
+        android:label="fragment_thankyou__rating_"
+        tools:layout="@layout/fragment_thankyou__rating_" />
+
+</navigation>

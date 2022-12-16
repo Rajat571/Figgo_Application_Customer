@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    >
+
+
+   <!-- <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+       &lt;!&ndash; <action
+            android:id="@+id/action_welcomeFragment_to_verifyNumber2"
+            app:destination="@id/verifyNumber2" />&ndash;&gt;
+     &lt;!&ndash;   <action
+            android:id="@+id/action_welcomeFragment_to_verifyNumber22"
+            app:destination="@id/verifyNumber2" />&ndash;&gt;
+        <action
+            android:id="@+id/action_welcomeFragment_to_MPinGenerate2"
+            app:destination="@id/MPinGenerate2" />
+    </fragment>-->
+    <!--<fragment
+        android:id="@+id/verifyNumber2"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.VerifyNumber"
+        android:label="fragment_verify_number"
+        tools:layout="@layout/login_activity" >
+        <action
+            android:id="@+id/action_verifyNumber2_to_MPinGenerate2"
+            app:destination="@id/MPinGenerate2" />
+        <action
+            android:id="@+id/action_verifyNumber2_to_MPinGenerate22"
+            app:destination="@id/MPinGenerate2" />
+        <action
+            android:id="@+id/action_verifyNumber2_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>-->
+
+   <!-- <fragment
+        android:id="@+id/MPinGenerate2"
+        android:name="com.pearlorganisation.figgo.UI.Fragments.MPinGenerate"
+        android:label="fragment_m_pin_generate"
+        tools:layout="@layout/fragment_m_pin_generate" >
+        <action
+            android:id="@+id/action_MPinGenerate2_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>-->
+</navigation>
