@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorlightblue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.Fragments.PayFragment">
 
@@ -30,8 +31,8 @@
         android:id="@+id/choose_user"
         android:layout_width="match_parent"
         android:layout_height="420dp"
-        android:layout_margin="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_18sdp"
         android:visibility="visible"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
@@ -56,24 +57,24 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="3dp"
-                >
+                android:layout_margin="3dp">
                 <EditText
                   android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_height="40dp"
                     android:hint="Passenger Name"
                     android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="3dp"
-                >
+                android:layout_margin="3dp">
                 <EditText
                     android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:hint="Passenger Contact No."
                     android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -91,25 +92,23 @@
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="3dp"
-                >
+                android:layout_height="40dp">
                 <EditText
                     android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
                     android:hint="Landmark"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="3dp"
-                >
+                android:layout_height="40dp">
                 <EditText
                     android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:hint="Attach Pick Up Location"
                     android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -121,8 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:hint="any Message"
-                    android:textColorHint="@color/white"
-                   />
+                    android:textColorHint="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_margin="3dp"

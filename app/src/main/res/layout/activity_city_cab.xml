@@ -71,8 +71,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/backgrouund"
-        >
+        app:layout_constraintBottom_toBottomOf="@+id/backgrouund">
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation_bar"
             android:layout_width="match_parent"
@@ -118,7 +117,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
