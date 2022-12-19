@@ -1,21 +1,18 @@
 package com.pearlorganisation.figgo.UI
 
 import android.Manifest
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
 import androidx.navigation.NavController
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.Fragments.MPinGenerate
 
 
 class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener,
@@ -57,15 +54,18 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             binding.inputNumber.isVisible=true
             binding.inputEmail.isVisible=false
         }
-        binding.continuetv.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_verifyNumber2_to_MPinGenerate2)
-        }*/
+        */
 
 
    /*     var nav_host_fragment=supportFragmentManager.findFragmentById(R.id.nav_controller) as NavHostFragment
         nav_controller=nav_host_fragment.navController
         var next_button=findViewById<TextView>(R.id.next_button)*/
     // setupWithNavController(next_button,nav_controller)
+       continuetv.setOnClickListener {
+           startActivity(Intent(this,MPinGenerate::class.java))
+
+        }
+
     }
     override fun onConnectionFailed(p0: ConnectionResult) {
         TODO("Not yet implemented")
