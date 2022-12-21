@@ -32,8 +32,8 @@ class DashBoard : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
-        val RecyclerView = findViewById<RecyclerView>(R.id.figgo_add_list)
-        val RecyclerView = findViewById<RecyclerView>(R.id.cab_category_list)
+        /*val RecyclerView = findViewById<RecyclerView>(R.id.figgo_add_list)
+        val RecyclerView = findViewById<RecyclerView>(R.id.cab_category_list)*/
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
