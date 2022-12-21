@@ -85,7 +85,6 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
                                }else{
                                 startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
                                }
-
                                cc_number.isVisible = true
                                progress.isVisible = false
                            }else{

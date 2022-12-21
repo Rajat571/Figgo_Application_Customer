@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:headerLayout="@layout/nav_header_customer_menu_drawer"
-        app:menu="@menu/menuseleti0nteambise"
+        app:menu="@menu/activity_customer_menu_drawer2_drawer"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"/>
 
