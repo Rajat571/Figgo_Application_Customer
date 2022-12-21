@@ -19,10 +19,9 @@ import com.pearlorganisation.figgo.UI.Shared_cab_Activity
 class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCategory>):
     Adapter<CabCategoryAdapter.CabCategoryHolder>() {
 
-    class CabCategoryHolder(itemview:View):ViewHolder(itemview){
+    class CabCategoryHolder(itemview:View):ViewHolder(itemview) {
         var cab_category=itemview.findViewById<ImageView>(R.id.cab_category)
         var cab_name=itemview.findViewById<TextView>(R.id.cab_name)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CabCategoryHolder {

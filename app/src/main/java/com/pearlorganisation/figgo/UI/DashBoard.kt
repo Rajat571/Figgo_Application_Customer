@@ -30,7 +30,7 @@ class DashBoard : AppCompatActivity(){
     var figgo_add_list=ArrayList<FiggoAdd>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      setContentView(R.layout.activity_dash_board)
+      setContentView(R.layout.a_dashboard)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))

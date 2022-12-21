@@ -54,12 +54,12 @@
         android:id="@+id/girlimage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginStart="8dp"
         android:scaleType="centerCrop"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:src="@drawable/girl"
         app:layout_constraintBottom_toTopOf="@id/bottombuttonbar"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backgrouund" />
 
     <ImageView
         android:id="@+id/car"
