@@ -77,6 +77,10 @@ class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCate
                     holder.cab_name.setTextColor(Color.WHITE)
                     holder.cab_category.setImageResource(R.drawable.train)
                 }
+
+             /*   adhbgehsabgfehrg*/
+
+
                 10->{
                     holder.cab_name.setTextColor(Color.WHITE)
                     holder.cab_category.setImageResource(R.drawable.bus)
