@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -32,8 +31,8 @@ class DashBoard : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
-        /*val RecyclerView = findViewById<RecyclerView>(R.id.figgo_add_list)
-        val RecyclerView = findViewById<RecyclerView>(R.id.cab_category_list)*/
+        val recyclerView: RecyclerView = findViewById(R.id.figgo_add_list)
+        val recycler: RecyclerView = findViewById(R.id.cab_category_list)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
@@ -46,7 +45,18 @@ class DashBoard : AppCompatActivity(){
         }
         /**---------------------------Cab_Category-----------------------*/
 
-     binding.cabCategoryList.layoutManager=GridLayoutManager(this,4)
+        binding.figgoAddList.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
+        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
+        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
+        figgoAddAdapter=FiggoAddAdapter(figgo_add_list)
+        recycler.layoutManager = GridLayoutManager(this,3)
+        recycler.adapter=figgoAddAdapter
+        binding.figgoAddList.adapter=figgoAddAdapter
+
+
+
+        binding.cabCategoryList.layoutManager=GridLayoutManager(this,4)
         cab_category_list.add(CabCategory(R.drawable.citycab,"City-Cab"))
         cab_category_list.add(CabCategory(R.drawable.outstationcab,"Outstation"))
         cab_category_list.add(CabCategory(R.drawable.fadesharecab,"Share-Cab"))
@@ -60,16 +70,12 @@ class DashBoard : AppCompatActivity(){
         cab_category_list.add(CabCategory(R.drawable.fadebus,"Micro Bus"))
         cab_category_list.add(CabCategory(R.drawable.fademore,"More"))
         cabCategoryAdapter= CabCategoryAdapter(this,cab_category_list)
+        recyclerView.layoutManager= GridLayoutManager(this,4)
+        recyclerView.adapter=cabCategoryAdapter
         binding.cabCategoryList.adapter=cabCategoryAdapter
 
         /**------------------------Figgo Add---------------------------------*/
 
-        binding.figgoAddList.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
-        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
-        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
-        figgoAddAdapter=FiggoAddAdapter(figgo_add_list)
-        binding.figgoAddList.adapter=figgoAddAdapter
 
         /**--------------------------------------------------------------------------*/
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
