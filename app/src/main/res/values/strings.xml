@@ -28,4 +28,27 @@
 
     <string name="slide_2_title">Android</string>
     <string name="slide_2_desc">Android is a mobile operating system developed by Google.</string>
+    <string name="title_activity_customer_menu">Customer_Menu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="Change_MPIN">Change MPIN</string>
+    <string name="Rides">Rides</string>
+    <string name="Offer_Plan">Offer Plan</string>
+   <!-- <String name="Figgo_Business">Figgo Business</String>-->
+
+    <!--<String name="figgo_business">Figgo Business</String>
+    <String name="Invetment">Invetment</String>
+    <String name="Wallets">Wallets</String>
+    <String name="Term_Condition">Terms Condition</String>
+    <String name="Cancellation_Policy">Cancellation Policy</String>
+    <String name="About_Figgo">About Figgo</String>
+    <String name="Support">Support</String>
+    <String name="Logout">Logout</String>
+    <string name="title_activity_customer_menu_drawer">Customer Menu Drawer</string>-->
+    <string name="title_activity_customer_menu_drawer">Customer Menu Drawer</string>
 </resources>

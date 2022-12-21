@@ -1,19 +1,17 @@
 package com.pearlorganisation.figgo.UI
 
-import android.Manifest
+import android.content.Intent
 import android.graphics.Color
-import android.icu.lang.UCharacter.VerticalOrientation
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.HorizontalScrollView
-import androidx.core.app.ActivityCompat
-import androidx.databinding.DataBindingUtil
+import android.view.View
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.material.navigation.NavigationView
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
 import com.pearlorganisation.figgo.Model.CabCategory
@@ -21,18 +19,28 @@ import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 
+
 class DashBoard : AppCompatActivity(){
     lateinit var binding: ActivityDashBoardBinding
+    lateinit var toggle: ActionBarDrawerToggle
+    lateinit var navView : NavigationView
     lateinit var cabCategoryAdapter: CabCategoryAdapter
     var cab_category_list=ArrayList<CabCategory>()
     lateinit var figgoAddAdapter: FiggoAddAdapter
     var figgo_add_list=ArrayList<FiggoAdd>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      binding=DataBindingUtil.setContentView(this,R.layout.activity_dash_board)
+      setContentView(R.layout.activity_dash_board)
+        binding = ActivityDashBoardBinding.inflate(layoutInflater)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
+        val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+        var navView = findViewById<NavigationView>(R.id.navView)
 
+
+        binding.apply {
+
+        }
         /**---------------------------Cab_Category-----------------------*/
 
      binding.cabCategoryList.layoutManager=GridLayoutManager(this,4)
@@ -61,6 +69,29 @@ class DashBoard : AppCompatActivity(){
         binding.figgoAddList.adapter=figgoAddAdapter
 
         /**--------------------------------------------------------------------------*/
+        toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.change_mpin -> {
+                    Toast.makeText(this@DashBoard, "change_mpin Clicked", Toast.LENGTH_SHORT).show()
+                }
+                R.id.rides -> {
+                    Toast.makeText(this@DashBoard, "rides Clicked", Toast.LENGTH_SHORT).show()
+                }
+                R.id.Logout -> {
+                    startActivity(Intent(this,LoginActivity::class.java))
+                }
+
+            }
+            true
+        }
 
     }
+
+
 }

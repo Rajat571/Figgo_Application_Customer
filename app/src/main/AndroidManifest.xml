@@ -18,9 +18,26 @@
         android:theme="@style/Theme.Figgo"
         tools:targetApi="31">
         <activity
-            android:name=".UI.MPinGenerate"
+            android:name=".CustomerMenuDrawerActivity"
             android:exported="false"
-            >
+            android:label="@string/title_activity_customer_menu_drawer"
+            android:theme="@style/Theme.Figgo.NoActionBar" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Customer_Menu_Drawer"
+            android:exported="false"
+            android:label="@string/title_activity_customer_menu_drawer"
+            android:theme="@style/Theme.Figgo.NoActionBar" />
+        <activity
+            android:name=".Customer_Menu"
+            android:exported="false"
+            android:label="@string/title_activity_customer_menu"
+            android:theme="@style/Theme.Figgo.NoActionBar" />
+        <activity
+            android:name=".UI.MPinGenerate"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -64,7 +81,7 @@
         </activity>
         <activity
             android:name=".WelcomeSlider"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".UI.WelcomeActivity"
             android:exported="false">

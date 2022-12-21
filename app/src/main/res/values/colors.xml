@@ -15,6 +15,7 @@
     <color name="colorcoffie">#EEEEEE</color>
     <color name="grey">#aaa</color>
     <color name="colordown">#000F3B</color>
+    <color name="colormenutransparent">#E8E9E8</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#aaa</color>
