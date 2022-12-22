@@ -10,8 +10,7 @@
     android:layout_height="30dp"
     android:padding="2dp"
     android:src="@drawable/city_cab"
-    android:id="@+id/cab_category"
-    />
+    android:id="@+id/cab_category" />
     <TextView
         android:gravity="center"
         android:textAlignment="center"
@@ -21,6 +20,5 @@
         android:text="City Cab"
         android:textSize="10sp"
         android:padding="5dp"
-        android:textColor="#56698F"
-       />
+        android:textColor="#56698F" />
 </LinearLayout>

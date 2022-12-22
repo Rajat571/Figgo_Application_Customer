@@ -1,4 +1,4 @@
-package com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment
+package com.pearlorganisation.figgo.UI.Fragments.OutStation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.pearlorganisation.figgo.R
 
-class Live_available_cab : Fragment() {
+
+class PackageFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,9 +19,12 @@ class Live_available_cab : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_live_available_cab, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_package, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+    }
 }

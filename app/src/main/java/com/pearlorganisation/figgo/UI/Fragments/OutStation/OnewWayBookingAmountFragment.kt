@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import com.pearlorganisation.figgo.R
 
 
-class OutStation_cab : Fragment() {
-
+class OnewWayBookingAmountFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +20,11 @@ class OutStation_cab : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_out_station_cab, container, false)
+        return inflater.inflate(R.layout.fragment_onew_way_booking_amount, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+    }
 }
