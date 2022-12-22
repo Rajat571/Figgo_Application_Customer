@@ -8,15 +8,15 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
 import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 
 
@@ -31,48 +31,86 @@ class DashBoard : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
-        val recyclerView: RecyclerView = findViewById(R.id.figgo_add_list)
-        val recycler: RecyclerView = findViewById(R.id.cab_category_list)
+//        val recyclerView: RecyclerView = findViewById(R.id.figgo_add_list)
+//        val recycler: RecyclerView = findViewById(R.id.cab_category_list)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+        var homeFrag = HomeDashboard()
+        var rides = Menu_1_Fragment()
+        var more = Menu_2_Fragment()
+        var support = Menu_2_Fragment()
         var navView = findViewById<NavigationView>(R.id.navView)
+        setfragment(homeFrag)
+       var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)
+        bottom.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home_b->{
+                    setfragment(homeFrag)
+                    true
+
+                }
+                R.id.rides_b->{
+                    setfragment(homeFrag)
+                    true
+
+                }
 
 
-        binding.apply {
+                R.id.more_b->{
+            setfragment(homeFrag)
+            true
 
         }
+                R.id.support_b->{
+            setfragment(homeFrag)
+            true
+
+
+        }
+
+                else -> {
+                    setfragment(homeFrag)
+                        true
+
+                }                }
+            }
+
+
+//        binding.apply {
+//
+//        }
         /**---------------------------Cab_Category-----------------------*/
 
-        binding.figgoAddList.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
-        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
-        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
-        figgoAddAdapter=FiggoAddAdapter(figgo_add_list)
-        recycler.layoutManager = GridLayoutManager(this,3)
-        recycler.adapter=figgoAddAdapter
-        binding.figgoAddList.adapter=figgoAddAdapter
-
-
-
-        binding.cabCategoryList.layoutManager=GridLayoutManager(this,4)
-        cab_category_list.add(CabCategory(R.drawable.citycab,"City-Cab"))
-        cab_category_list.add(CabCategory(R.drawable.outstationcab,"Outstation"))
-        cab_category_list.add(CabCategory(R.drawable.fadesharecab,"Share-Cab"))
-        cab_category_list.add(CabCategory(R.drawable.airportcab,"Airpot-Cab"))
-        cab_category_list.add(CabCategory(R.drawable.royalcab,"Royal-cab"))
-        cab_category_list.add(CabCategory(R.drawable.fadetour,"Tour-plan"))
-        cab_category_list.add(CabCategory(R.drawable.goodsparcel,"Goods vechile"))
-        cab_category_list.add(CabCategory(R.drawable.fadehote,"Hotel"))
-        cab_category_list.add(CabCategory(R.drawable.fadeflight,"Flight"))
-        cab_category_list.add(CabCategory(R.drawable.fadetrain,"Train"))
-        cab_category_list.add(CabCategory(R.drawable.fadebus,"Micro Bus"))
-        cab_category_list.add(CabCategory(R.drawable.fademore,"More"))
-        cabCategoryAdapter= CabCategoryAdapter(this,cab_category_list)
-        recyclerView.layoutManager= GridLayoutManager(this,4)
-        recyclerView.adapter=cabCategoryAdapter
-        binding.cabCategoryList.adapter=cabCategoryAdapter
+//        binding.figgoAddList.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+//        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
+//        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
+//        figgo_add_list.add(FiggoAdd(R.drawable.figgoadd))
+//        figgoAddAdapter=FiggoAddAdapter(figgo_add_list)
+//        recycler.layoutManager = GridLayoutManager(this,3)
+//        recycler.adapter=figgoAddAdapter
+//        binding.figgoAddList.adapter=figgoAddAdapter
+//
+//
+//
+//        binding.cabCategoryList.layoutManager=GridLayoutManager(this,4)
+//        cab_category_list.add(CabCategory(R.drawable.citycab,"City-Cab"))
+//        cab_category_list.add(CabCategory(R.drawable.outstationcab,"Outstation"))
+//        cab_category_list.add(CabCategory(R.drawable.fadesharecab,"Share-Cab"))
+//        cab_category_list.add(CabCategory(R.drawable.airportcab,"Airpot-Cab"))
+//        cab_category_list.add(CabCategory(R.drawable.royalcab,"Royal-cab"))
+//        cab_category_list.add(CabCategory(R.drawable.fadetour,"Tour-plan"))
+//        cab_category_list.add(CabCategory(R.drawable.goodsparcel,"Goods vechile"))
+//        cab_category_list.add(CabCategory(R.drawable.fadehote,"Hotel"))
+//        cab_category_list.add(CabCategory(R.drawable.fadeflight,"Flight"))
+//        cab_category_list.add(CabCategory(R.drawable.fadetrain,"Train"))
+//        cab_category_list.add(CabCategory(R.drawable.fadebus,"Micro Bus"))
+//        cab_category_list.add(CabCategory(R.drawable.fademore,"More"))
+//        cabCategoryAdapter= CabCategoryAdapter(this,cab_category_list)
+//        recyclerView.layoutManager= GridLayoutManager(this,4)
+//        recyclerView.adapter=cabCategoryAdapter
+//        binding.cabCategoryList.adapter=cabCategoryAdapter
 
         /**------------------------Figgo Add---------------------------------*/
 
@@ -102,5 +140,10 @@ class DashBoard : AppCompatActivity(){
 
     }
 
+    private fun setfragment(frag: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.framedash, frag)
+            commit()
+        }}
 
 }

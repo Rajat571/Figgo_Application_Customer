@@ -8,21 +8,21 @@ import android.view.ViewGroup
 import com.pearlorganisation.figgo.R
 
 
-class ThankRatingFragment : Fragment() {
-
+class RideshBottomFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_thank_rating, container, false)
+        return inflater.inflate(R.layout.fragment_ridesh_bottom, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
 
 }

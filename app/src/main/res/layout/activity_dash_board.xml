@@ -4,79 +4,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:background="#B9E5FA"
-    android:layout_height="match_parent"
-    tools:context=".UI.DashBoard">
-
-    <include layout="@layout/top_layout"
-        android:id="@+id/layout"
-        app:layout_constraintBottom_toTopOf="@id/backgrouund"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/backgrouund"
         android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:background="@drawable/background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout"
-        tools:ignore="MissingConstraints" >
+        android:layout_height="match_parent"
+        android:background="#B9E5FA"
+        tools:context=".UI.DashBoard">
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/cab_category_list"-->
-<!--            android:id="@+id/figgo_ad_list"/>-->
+        <include
+            android:id="@+id/layout"
+            layout="@layout/top_layout"
+            app:layout_constraintBottom_toTopOf="@id/backgrouund"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="387dp"
-            android:id="@+id/figgo_add_list"
-            android:layout_height="158dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:padding="6dp"
-            app:layout_constraintBottom_toTopOf="@id/cab_category_list"
-            tools:layout_editor_absoluteX="14dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/backgrouund"
+            android:layout_width="match_parent"
+            android:layout_height="390dp"
+            android:background="@drawable/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout"
+            tools:ignore="MissingConstraints">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cab_category_list"
+            <!--        <androidx.recyclerview.widget.RecyclerView-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            app:layout_constraintBottom_toTopOf="@id/cab_category_list"-->
+            <!--            android:id="@+id/figgo_ad_list"/>-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/girlimage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backgrouund" />
+
+        <ImageView
+            android:id="@+id/car"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/figgofooter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/framedash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_margin="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="@+id/backgrouund"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout" />
 
-    <ImageView
-        android:id="@+id/girlimage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/girl"
-        app:layout_constraintBottom_toTopOf="@id/bottombuttonbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backgrouund" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/black"
+            android:padding="5dp"
+            android:textAlignment="center"
+            app:itemIconTint="@color/white"
+            app:itemRippleColor="@color/purple_200"
+            app:itemTextColor="@drawable/bottomnavtextcolor"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/driver_dashboard_menu" />
 
-    <ImageView
-        android:id="@+id/car"
-        android:scaleType="centerCrop"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottombuttonbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/figgofooter"/>
-    <include
+        <!--include
         layout="@layout/bottom_button_layout"
         android:id="@+id/bottombuttonbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintBottom_toBottomOf="parent" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
