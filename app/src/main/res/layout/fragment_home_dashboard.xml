@@ -8,7 +8,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/figgo_add_list"
-        android:layout_width="387dp"
+        android:layout_width="match_parent"
         android:layout_height="158dp"
         android:padding="6dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/cab_category_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_38sdp"
+        android:layout_marginVertical="@dimen/_18sdp"
         app:layout_constraintTop_toBottomOf="@+id/figgo_add_list"
         tools:layout_editor_absoluteX="10dp" />
 

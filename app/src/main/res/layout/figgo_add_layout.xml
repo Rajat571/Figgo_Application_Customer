@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/figgo_add"
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="135dp"
         android:layout_gravity="center"
         android:padding="4dp"

@@ -3,7 +3,9 @@ package com.pearlorganisation.figgo.UI
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +22,10 @@ import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 import com.pearlorganisation.figgo.UI.Fragments.OutStation.FragmentOneWay
 import com.pearlorganisation.figgo.UI.Fragments.OutStation.PackageFragment
 import com.pearlorganisation.figgo.UI.Fragments.OutStation.RoundAndTourFragment
+import com.pearlorganisation.figgo.UI.Fragments.RidesBottom
+import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
+import com.pearlorganisation.figgo.databinding.FragmentRidesBottomBinding
 
 
 class DashBoard : AppCompatActivity(){
@@ -41,10 +46,20 @@ class DashBoard : AppCompatActivity(){
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         var homeFrag = HomeDashboard()
-        var rides = FragmentOneWay()
+        var rides = RidesBottom()
         var more = RoundAndTourFragment()
-        var support = PackageFragment()
+        var support = SupportBottomNav()
         var navView = findViewById<NavigationView>(R.id.navView)
+
+
+        toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        var layout = findViewById<ImageView>(R.id.menu_naviagtion)
+        layout.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT)
+        }
+
         setfragment(homeFrag)
        var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)
         bottom.setOnItemSelectedListener {
@@ -55,19 +70,21 @@ class DashBoard : AppCompatActivity(){
 
                 }
                 R.id.rides_b->{
-                    setfragment(homeFrag)
+                    setfragment(rides)
                     true
 
                 }
 
 
                 R.id.more_b->{
-            setfragment(homeFrag)
+                    drawerLayout.openDrawer(Gravity.LEFT)
+                  //  navView.showContextMenu()
+            //setfragment(more)
             true
 
         }
                 R.id.support_b->{
-            setfragment(homeFrag)
+            setfragment(support)
             true
 
 
@@ -119,9 +136,7 @@ class DashBoard : AppCompatActivity(){
 
 
         /**--------------------------------------------------------------------------*/
-        toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

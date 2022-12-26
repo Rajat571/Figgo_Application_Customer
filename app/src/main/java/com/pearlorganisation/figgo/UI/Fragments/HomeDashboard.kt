@@ -31,7 +31,7 @@ class HomeDashboard : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView: RecyclerView = view.findViewById(R.id.figgo_add_list)
+       // val recyclerView: RecyclerView = view.findViewById(R.id.figgo_add_list)
         var cabCategoryAdapter: CabCategoryAdapter
         var cab_category_list=ArrayList<CabCategory>()
         val recycler: RecyclerView = view.findViewById(R.id.cab_category_list)
@@ -39,15 +39,16 @@ class HomeDashboard : Fragment() {
         var cabCategoryList = view.findViewById<RecyclerView>(R.id.cab_category_list)
         lateinit var figgoAddAdapter: FiggoAddAdapter
         var figgoAddList1=ArrayList<FiggoAdd>()
+        figgoAddList1.add(FiggoAdd(R.drawable.figgoadd))
+        figgoAddList1.add(FiggoAdd(R.drawable.figgoadd))
+        figgoAddList1.add(FiggoAdd(R.drawable.figgoadd))
+
 
         figgoAddList.layoutManager= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-        figgoAddList1.add(FiggoAdd(R.drawable.figgoadd))
-        figgoAddList1.add(FiggoAdd(R.drawable.figgoadd))
-        figgoAddList1.add(FiggoAdd(R.drawable.figgoadd))
         figgoAddAdapter= FiggoAddAdapter(figgoAddList1)
 
-        recycler.layoutManager = GridLayoutManager(requireContext(),3)
-        recycler.adapter=figgoAddAdapter
+       // recycler.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        //recycler.adapter=figgoAddAdapter
         figgoAddList.adapter=figgoAddAdapter
 
 
@@ -66,8 +67,8 @@ class HomeDashboard : Fragment() {
         cab_category_list.add(CabCategory(R.drawable.fadebus,"Micro Bus"))
         cab_category_list.add(CabCategory(R.drawable.fademore,"More"))
         cabCategoryAdapter= CabCategoryAdapter(requireContext(),cab_category_list)
-        recyclerView.layoutManager= GridLayoutManager(requireContext(),4)
-        recyclerView.adapter=figgoAddAdapter
+      //  recyclerView.layoutManager= GridLayoutManager(requireContext(),4)
+     //   recyclerView.adapter=figgoAddAdapter
         cabCategoryList.adapter=cabCategoryAdapter
 
 
