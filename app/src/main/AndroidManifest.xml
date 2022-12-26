@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Figgo"
         tools:targetApi="31">
         <activity
+            android:name=".One_Way_OutStationActivity"
+            android:exported="false" />
+        <activity
             android:name=".CustomerMenuDrawerActivity"
             android:exported="false"
             android:label="@string/title_activity_customer_menu_drawer"

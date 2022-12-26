@@ -11,14 +11,17 @@
         android:name="com.pearlorganisation.figgo.UI.Fragments.Advance_cityCab"
         android:label="fragment_advance_city_cab"
         tools:layout="@layout/fragment_advance_city_cab" />
+
     <fragment
         android:id="@+id/current"
         android:name="com.pearlorganisation.figgo.UI.Fragments.Current_cityCab"
         android:label="fragment_current_city_cab"
         tools:layout="@layout/fragment_current_city_cab" />
+
     <fragment
         android:id="@+id/packagee"
         android:name="com.pearlorganisation.figgo.UI.Fragments.Package_cityCab"
         android:label="fragment_package_city_cab"
         tools:layout="@layout/fragment_package_city_cab" />
+
 </navigation>
