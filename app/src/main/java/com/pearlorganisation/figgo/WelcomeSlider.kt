@@ -16,6 +16,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.UI.DashBoard
 import com.pearlorganisation.figgo.UI.LoginActivity
 
 
@@ -33,8 +34,6 @@ class WelcomeSlider : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Checking for first time launch - before calling setContentView()
-
-
 
         setContentView(R.layout.activity_welcome_slider)
         prefManager = PrefManager(this)
@@ -98,9 +97,11 @@ class WelcomeSlider : AppCompatActivity() {
 
     private fun launchHomeScreen() {
         prefManager!!.setFirstTimeLaunch(false)
+
         startActivity(Intent(this@WelcomeSlider, LoginActivity::class.java))
         finish()
     }
+
 
     //  viewpager change listener
     var viewPagerPageChangeListener: OnPageChangeListener = object : OnPageChangeListener {

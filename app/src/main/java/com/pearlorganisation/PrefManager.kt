@@ -14,7 +14,7 @@ import android.content.SharedPreferences
      var PRIVATE_MODE = 0
     var pref: SharedPreferences? = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
     var editor: SharedPreferences.Editor? = pref!!.edit()
-    var _context: Context? = null
+    var _context: Context? = context
 
 
 
@@ -34,7 +34,7 @@ import android.content.SharedPreferences
         return pref!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
     }
 
-     fun setMpinonetime(mpin: String){
+     fun setMpin(mpin: String){
          editor!!.putString("mpin",mpin)
          editor?.commit()
      }
@@ -48,6 +48,7 @@ import android.content.SharedPreferences
          editor?.putString("token",token)
          editor?.commit()
      }
+
      fun getToken():String{
          return pref?.getString("token","null").toString()
      }

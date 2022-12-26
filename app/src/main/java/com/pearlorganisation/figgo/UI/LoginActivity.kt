@@ -53,7 +53,6 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
-
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION)
         mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this).build()
@@ -79,24 +78,32 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
                                pref.setToken(token)
                                Toast.makeText(this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
                                Log.d("SendData", "token===" + token)
-                               startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
+                             //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+                               if(pref.getMpin().equals("")){
                                    startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                               }else{
-                                startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+                               }
+                               else{
+                                   startActivity(Intent(this@LoginActivity,DashBoard::class.java))
                                }
                                cc_number.isVisible = true
                                progress.isVisible = false
                            }else{
-                               val token = response.getString("token")
-                               pref.setToken(token)
-                               Toast.makeText(this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
-                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
-                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                               }else{
-                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                               }
-                               startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+//                               val token = response.getString("token")
+//                               pref.setToken(token)
+//                               Toast.makeText(this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
+//                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
+//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+//                               }else{
+//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+//                               }
+//                               startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+//                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
+//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+//                               }
+//                               else{
+//                                   startActivity(Intent(this@LoginActivity,DashBoard::class.java))
+//                               }
+                               startActivity(Intent(this@LoginActivity,DashBoard::class.java))
                            }
 
                        }
