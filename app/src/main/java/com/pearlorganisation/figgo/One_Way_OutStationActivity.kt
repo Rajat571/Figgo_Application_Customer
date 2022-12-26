@@ -14,6 +14,9 @@ class One_Way_OutStationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
         setContentView(R.layout.activity_one_way_out_station)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
