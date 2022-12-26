@@ -55,9 +55,13 @@
 
     </LinearLayout>
 
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-8dp"
         android:orientation="vertical">
 
       <androidx.cardview.widget.CardView
@@ -69,10 +73,49 @@
           app:cardElevation="@dimen/_6sdp"
           app:cardMaxElevation="@dimen/_6sdp">
 
+
+
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="ONE WAY"
+                  android:background="@drawable/circle_yellow_white"
+                  android:layout_gravity="center|top"
+                  android:fontFamily="sans-serif-black"
+                  android:textColor="@color/black"
+                  android:textSize="@dimen/_12sdp" />
+
+
+
+         <!-- <LinearLayout
+              android:layout_width="@dimen/_95sdp"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center|top"
+              android:layout_marginTop="-12dp"
+              android:layout_marginStart="@dimen/_12sdp"
+              android:layout_marginEnd="@dimen/_12sdp"
+              android:background="@drawable/circle_yellow_white"
+              android:orientation="vertical">
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="ONE WAY"
+                  android:layout_gravity="center"
+                  android:fontFamily="sans-serif-black"
+                  android:layout_marginTop="@dimen/_6sdp"
+                  android:textColor="@color/black"
+                  android:textSize="@dimen/_12sdp" />
+
+          </LinearLayout>-->
+
+
+
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/_5sdp"
+              android:layout_marginTop="@dimen/_15sdp"
               android:orientation="vertical">
 
               <LinearLayout
@@ -85,8 +128,9 @@
                       android:layout_height="match_parent"
                       android:inputType="text"
                       android:layout_marginStart="@dimen/_12sdp"
-                      android:textSize="@dimen/_12sdp"
+                      android:textSize="@dimen/_14sdp"
                       android:layout_gravity="center"
+                      android:fontFamily="sans-serif-black"
                       android:background="@null"
                       android:hint="25.10.2022"
                       android:textColor="@color/black" />
@@ -105,8 +149,9 @@
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:inputType="text"
+                      android:fontFamily="sans-serif-black"
                       android:layout_marginStart="@dimen/_42sdp"
-                      android:textSize="@dimen/_12sdp"
+                      android:textSize="@dimen/_14sdp"
                       android:layout_gravity="center"
                       android:background="@null"
                       android:hint="6.00 pm"
@@ -137,6 +182,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="250 Km."
+                      android:fontFamily="sans-serif-black"
                       android:textColor="@color/white"
                       android:textSize="@dimen/_12sdp"
                       android:layout_gravity="center"
@@ -146,6 +192,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="250 Km."
+                      android:fontFamily="sans-serif-black"
                       android:textColor="@color/white"
                       android:textSize="@dimen/_12sdp"
                       android:layout_gravity="center"
@@ -182,6 +229,212 @@
 
     </LinearLayout>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            app:cardCornerRadius="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:cardElevation="@dimen/_6sdp"
+            app:cardMaxElevation="@dimen/_6sdp">
+
+
+            <!-- <LinearLayout
+                 android:layout_width="@dimen/_95sdp"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center|top"
+                 android:layout_marginTop="-12dp"
+                 android:layout_marginStart="@dimen/_12sdp"
+                 android:layout_marginEnd="@dimen/_12sdp"
+                 android:background="@drawable/circle_yellow_white"
+                 android:orientation="vertical">
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="ONE WAY"
+                     android:layout_gravity="center"
+                     android:fontFamily="sans-serif-black"
+                     android:layout_marginTop="@dimen/_6sdp"
+                     android:textColor="@color/black"
+                     android:textSize="@dimen/_12sdp" />
+
+             </LinearLayout>-->
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="Compact Cab"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="WegonR, Swift, i-20,similer"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_49sdp"
+                            android:layout_height="@dimen/_29sdp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/carimage"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="@dimen/_19sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_directions_car_24"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="@dimen/_19sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_directions_car_24"/>
+                        <ImageView
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="@dimen/_19sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_directions_car_24"/>
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="@dimen/_19sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_directions_car_24"/>
+                        <ImageView
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="@dimen/_19sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_directions_car_24"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="@dimen/_19sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_directions_car_24"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_22sdp"
+                    android:orientation="horizontal">
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="@dimen/_135sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:textSize="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:background="@drawable/whiteoutline_with_lightyellowcolor"
+                            android:textColor="@color/black"
+                            android:text="Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"/>
+
+                        <TextView
+                            android:layout_width="@dimen/_135sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:textSize="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:background="@drawable/white_outline_with_purple_color"
+                            android:textColor="@color/black"
+                            android:text="Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-68dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_76sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_39sdp"
+                        android:gravity="center"
+                        android:background="@drawable/white_square_outline_bg"
+                        android:text="Rs. 2555.00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_76sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_63sdp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@drawable/whiteoutline_with_bluecolor"
+                        android:text="Rs. 2555.00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp" />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    <ImageView
+        android:id="@+id/car"
+        android:scaleType="centerCrop"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:layout_marginTop="@dimen/_69sdp"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toTopOf="@+id/bottombuttonbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/figgofooter"/>
 
 
 </LinearLayout>

@@ -17,6 +17,9 @@ import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
+import com.pearlorganisation.figgo.UI.Fragments.OutStation.FragmentOneWay
+import com.pearlorganisation.figgo.UI.Fragments.OutStation.PackageFragment
+import com.pearlorganisation.figgo.UI.Fragments.OutStation.RoundAndTourFragment
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 
 
@@ -38,9 +41,9 @@ class DashBoard : AppCompatActivity(){
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         var homeFrag = HomeDashboard()
-        var rides = Menu_1_Fragment()
-        var more = Menu_2_Fragment()
-        var support = Menu_2_Fragment()
+        var rides = FragmentOneWay()
+        var more = RoundAndTourFragment()
+        var support = PackageFragment()
         var navView = findViewById<NavigationView>(R.id.navView)
         setfragment(homeFrag)
        var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)

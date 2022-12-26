@@ -213,7 +213,6 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:textColor="@color/black"
-                    android:background="@drawable/btn_bg_coffiesquare"
                     android:backgroundTint="@color/colorcoffie"
                     android:fontFamily="sans-serif-black"
                     android:gravity="center"
@@ -231,7 +230,6 @@
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:background="@drawable/btn_bg_coffiesquare"
                     android:backgroundTint="@color/colorcoffie"
                     android:fontFamily="sans-serif-black"
                     android:gravity="center"
@@ -264,7 +262,6 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_41sdp"
-                android:background="@drawable/btn_bg_rightcorner"
                 android:orientation="vertical">
 
                 <ImageView
@@ -311,7 +308,6 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_75sdp"
-                android:background="@drawable/btn_bg_rightcorner"
                 android:orientation="vertical">
 
                 <ImageView
