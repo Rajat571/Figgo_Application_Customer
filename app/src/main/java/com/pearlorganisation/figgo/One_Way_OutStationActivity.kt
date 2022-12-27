@@ -21,8 +21,8 @@ class One_Way_OutStationActivity : AppCompatActivity() {
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
-        var nav_host_fragment=supportFragmentManager.findFragmentById(R.id.navigation_bar2) as NavHostFragment
-        nav_controller=nav_host_fragment.navController
+      //  var nav_host_fragment=supportFragmentManager.findFragmentById(R.id.navigation_bar2) as NavHostFragment
+      //  nav_controller=nav_host_fragment.navController
 
 
     }
