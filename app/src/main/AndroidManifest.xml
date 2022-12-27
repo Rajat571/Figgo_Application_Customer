@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Figgo"
         tools:targetApi="31">
         <activity
+            android:name=".FreedomOutstationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.pearlorganisation.RoundAndTourActivity"
+            android:exported="false" />
+        <activity
             android:name=".One_Way_OutStationActivity"
             android:exported="false" />
         <activity

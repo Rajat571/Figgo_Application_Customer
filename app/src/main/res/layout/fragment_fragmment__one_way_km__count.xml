@@ -131,7 +131,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/btn_bg_coffiesquare"
+                           android:background="@color/grey"
                             android:text="reject"
                             android:backgroundTint="@color/colorcoffie"
                             android:textColor="@color/black"
@@ -142,9 +142,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:text="accept"
-                            android:backgroundTint="@color/colorgreen"
                             android:layout_marginStart="@dimen/_3sdp"
-                            android:background="@drawable/btn_bg_coffiesquare"
+                            android:background="@color/colorgreen"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp" />
 
@@ -220,9 +219,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@drawable/btn_bg_coffiesquare"
+                           android:background="@color/grey"
                             android:text="reject"
-                            android:backgroundTint="@color/colorcoffie"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp" />
 
@@ -231,9 +229,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:text="accept"
-                            android:backgroundTint="@color/colorgreen"
                             android:layout_marginStart="@dimen/_3sdp"
-                            android:background="@drawable/btn_bg_coffiesquare"
+                            android:background="@color/colorgreen"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp" />
 
