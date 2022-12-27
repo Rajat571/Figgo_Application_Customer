@@ -62,7 +62,7 @@ class HomeDashboard : Fragment() {
         cab_category_list.add(CabCategory(R.drawable.fadetour,"Tour-plan"))
         cab_category_list.add(CabCategory(R.drawable.goodsparcel,"Goods vechile"))
         cab_category_list.add(CabCategory(R.drawable.fadehote,"Hotel"))
-        cab_category_list.add(CabCategory(R.drawable.fadeflight,"Flight"))
+        cab_category_list.add(CabCategory(R.drawable.airportcab12,"Flight"))
         cab_category_list.add(CabCategory(R.drawable.fadetrain,"Train"))
         cab_category_list.add(CabCategory(R.drawable.fadebus,"Micro Bus"))
         cab_category_list.add(CabCategory(R.drawable.fademore,"More"))

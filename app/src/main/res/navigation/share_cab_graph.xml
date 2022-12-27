@@ -26,6 +26,7 @@
             android:id="@+id/action_liveSharecab_Fragment_to_shareCab_Fragment"
             app:destination="@id/shareCab_Fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/advanceSharecab_Fragment"
         android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.AdvanceSharecab_Fragment"
@@ -35,4 +36,5 @@
             android:id="@+id/action_advanceSharecab_Fragment_to_shareCab_Fragment"
             app:destination="@id/shareCab_Fragment" />
     </fragment>
+
 </navigation>

@@ -9,8 +9,8 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class One_Way_OutStationActivity : AppCompatActivity() {
+    lateinit var nav_controller: NavController
 
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,12 +18,11 @@ class One_Way_OutStationActivity : AppCompatActivity() {
 
 
         setContentView(R.layout.activity_one_way_out_station)
+
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
-        val navHostFragment=supportFragmentManager.findFragmentById(R.id.mainContainer) as NavHostFragment
-        navController=navHostFragment.navController
-        val bottomNavigationView=findViewById<BottomNavigationView>(R.id.navigation_bar)
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+        var nav_host_fragment=supportFragmentManager.findFragmentById(R.id.navigation_bar2) as NavHostFragment
+        nav_controller=nav_host_fragment.navController
 
 
     }

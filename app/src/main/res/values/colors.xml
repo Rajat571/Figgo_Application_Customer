@@ -19,6 +19,7 @@
     <color name="colorlightpurple">#CBC3E3</color>
     <color name="colorbluedark">#3C2B99</color>
     <color name="coloryellowlight">#FFF5B4</color>
+    <color name="colorgreen">#00FF00</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#aaa</color>

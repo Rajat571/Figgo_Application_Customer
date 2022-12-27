@@ -136,6 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Submit"
+                android:textColor="@color/white"
                 android:textAllCaps="true"
                 android:backgroundTint="#000F3B"/>
         </LinearLayout>
@@ -187,6 +188,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NEXT"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:backgroundTint="#000F3B"/>
 

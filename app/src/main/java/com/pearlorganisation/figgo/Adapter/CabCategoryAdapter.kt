@@ -35,8 +35,10 @@ class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCate
         holder.itemView.setOnClickListener {
             when(holder.adapterPosition){
                 0->{
-                    holder.cab_category.setImageResource(R.drawable.citycab)
+
                     holder.cab_name.setTextColor(Color.WHITE)
+                    holder.cab_category.setImageResource(R.drawable.citycab)
+
                context.startActivity(Intent(context,CityCabActivity::class.java))
                 }
                 1->{
@@ -70,14 +72,12 @@ class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCate
                 }
                 8->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.cab_category.setImageResource(R.drawable.flight)
+                    holder.cab_category.setImageResource(R.drawable.flightwhite)
                 }
                 9->{
                     holder.cab_name.setTextColor(Color.WHITE)
                     holder.cab_category.setImageResource(R.drawable.train)
                 }
-
-
 
                 10->{
                     holder.cab_name.setTextColor(Color.WHITE)

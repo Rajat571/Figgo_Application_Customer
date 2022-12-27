@@ -78,20 +78,23 @@
                     android:background="@drawable/background_card"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:text="250 Km. "/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textAlignment="textEnd"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:padding="6dp"
+                    android:gravity="center"
                     android:background="@drawable/background_card"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:text="250 Km. "/>
             </LinearLayout>
 

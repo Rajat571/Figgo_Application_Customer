@@ -22,15 +22,15 @@ import java.util.*
 
 
 class Advance_cityCab : Fragment() {
+
     lateinit var binding: FragmentAdvanceCityCabBinding
     lateinit var advanceCityAdapter: AdvanceCityAdapter
     var cablist=ArrayList<AdvanceCityCab>()
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_advance_city_cab, container, false)
         return binding.root
     }

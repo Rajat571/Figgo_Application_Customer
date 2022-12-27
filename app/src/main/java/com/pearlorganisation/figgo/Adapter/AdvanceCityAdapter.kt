@@ -19,8 +19,8 @@ import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 
 
-class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>):
-    Adapter<AdvanceCityAdapter.AdvanceCityHolder>() {
+class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>): Adapter<AdvanceCityAdapter.AdvanceCityHolder>() {
+
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {
         var cab=itemview.findViewById<ImageView>(R.id.cab)

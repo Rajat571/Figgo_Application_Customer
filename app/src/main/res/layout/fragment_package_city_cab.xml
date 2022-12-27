@@ -85,8 +85,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Submit"
+                android:textColor="@color/white"
                 android:textAllCaps="true"
                 android:backgroundTint="#000F3B"/>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
