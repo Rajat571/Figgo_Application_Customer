@@ -1,8 +1,11 @@
 package com.pearlorganisation.figgo.UI
+
 import android.Manifest
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.InputType.*
 import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -12,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
@@ -21,7 +23,6 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.mlkit.common.sdkinternal.SharedPrefManager
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
 import org.json.JSONObject
@@ -57,6 +58,20 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this).build()
 
+        email.setOnClickListener {
+            input_number.setHint("Enter Your Email Id")
+            email.setTypeface(Typeface.DEFAULT_BOLD);
+            input_number.inputType = TYPE_CLASS_TEXT
+            number.setTypeface(Typeface.DEFAULT)
+
+
+        }
+        number.setOnClickListener {
+            input_number.setHint("Enter Your Mobile number")
+            number.setTypeface(Typeface.DEFAULT_BOLD);
+            email.setTypeface(Typeface.DEFAULT)
+            input_number.inputType = TYPE_CLASS_NUMBER
+        }
 
        continuetv.setOnClickListener {
            cc_number.isVisible = false

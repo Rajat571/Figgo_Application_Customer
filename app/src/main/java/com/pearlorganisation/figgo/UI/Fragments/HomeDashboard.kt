@@ -50,6 +50,7 @@ class HomeDashboard : Fragment() {
        // recycler.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         //recycler.adapter=figgoAddAdapter
         figgoAddList.adapter=figgoAddAdapter
+        figgoAddAdapter.notifyDataSetChanged()
 
 
 

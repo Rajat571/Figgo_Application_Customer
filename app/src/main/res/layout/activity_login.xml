@@ -94,7 +94,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/out_line_box"
-                    android:hint="Enter Your Mobile number"
+                    android:hint="Enter Your Email Id"
                     android:inputType="number"
                     android:textAlignment="center"
                     android:visibility="visible" />

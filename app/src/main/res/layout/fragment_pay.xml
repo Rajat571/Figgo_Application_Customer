@@ -88,6 +88,9 @@
                                 android:padding="8dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
+                                android:inputType="number"
+                                android:maxEms="10"
+                                android:maxLength="10"
                                 android:hint="Passenger Contact No."
                                 android:textColor="@color/black"/>
                         </com.google.android.material.textfield.TextInputLayout>
@@ -132,7 +135,7 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
-                                android:hint="any Message"
+                                android:hint="Any Message"
                                 android:textColorHint="@color/black"/>
                         </com.google.android.material.textfield.TextInputLayout>
 

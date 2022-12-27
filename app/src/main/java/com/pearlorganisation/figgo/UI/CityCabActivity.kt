@@ -53,4 +53,9 @@ class CityCabActivity : AppCompatActivity() {
        /* NavigationUI.setupWithNavController(bottomNavigationView, navController)*/
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,DashBoard::class.java))
+    }
 }
