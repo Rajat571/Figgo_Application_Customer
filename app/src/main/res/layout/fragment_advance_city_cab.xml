@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.Fragments.Advance_cityCab">
 
     <LinearLayout
@@ -43,10 +43,9 @@
 
                     <TextView
                         android:id="@+id/datetext"
-                        android:layout_width="0dp"
-                        android:layout_weight="1.2"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="25.06.2022"
+                        android:text="25-06-2022"
                         android:background="@drawable/background_card"
                         android:padding="8dp"
                         android:layout_marginRight="50dp"
@@ -77,10 +76,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:orientation="horizontal">
-                    <EditText
+                    <TextView
                         android:background="@drawable/out_line_box"
                         android:layout_width="0dp"
                         android:layout_weight="3"
+                        android:id="@+id/live_loc"
                         android:layout_gravity="center"
                         android:padding="9dp"
                         android:layout_height="wrap_content"
@@ -89,6 +89,7 @@
                         android:layout_margin="2dp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:id="@+id/linear_loc"
                         android:background="@drawable/background_card"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
@@ -111,14 +112,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:orientation="horizontal">
-                    <EditText
-                        android:background="@drawable/out_line_box"
-                        android:layout_width="0dp"
-                        android:layout_weight="3"
-                        android:layout_gravity="center"
-                        android:padding="9dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Fill manual"/>
+
+
+
+                                <TextView
+                                    android:background="@drawable/out_line_box"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="3"
+                                    android:layout_gravity="center"
+                                    android:padding="9dp"
+                                    android:id="@+id/loc_manual"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Fill manual"/>
+
+
+
+
+
+
+
+
                     <LinearLayout
                         android:layout_margin="2dp"
                         android:layout_width="0dp"
@@ -130,6 +143,7 @@
                             android:layout_width="30dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
+
                             android:src="@drawable/ic_baseline_location_on_24"/>
                         <TextView
                             android:layout_gravity="center"
@@ -138,6 +152,9 @@
                             android:text="Location"/>
                     </LinearLayout>
 
+
+
+
                 </LinearLayout>
                 <Button
                     android:layout_width="match_parent"
@@ -145,6 +162,8 @@
                     android:text="Submit"
                     android:textColor="@color/white"
                     android:textAllCaps="true"
+
+                    android:id="@+id/submit"
                     android:backgroundTint="#000F3B"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -170,10 +189,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-                     <androidx.recyclerview.widget.RecyclerView
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:id="@+id/recyler_cab_list"/>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            >
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyler_cab_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        </FrameLayout>
                     </LinearLayout>
 
                     <LinearLayout
