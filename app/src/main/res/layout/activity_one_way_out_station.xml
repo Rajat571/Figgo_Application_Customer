@@ -9,6 +9,9 @@
     android:id="@+id/navigation_bar2"
     tools:context=".One_Way_OutStationActivity">
 
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
