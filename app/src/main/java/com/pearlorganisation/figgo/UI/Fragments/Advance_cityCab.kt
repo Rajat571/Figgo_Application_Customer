@@ -50,8 +50,12 @@ class Advance_cityCab : Fragment() {
                 DatePickerDialog(
                     it1,
                     { view, year, monthOfYear, dayOfMonth ->
-
-                        val dat = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                        val dat : String
+                        if (monthOfYear < 9){
+                            dat = (dayOfMonth.toString() + "-0" + (monthOfYear + 1) + "-" + year)
+                        }else {
+                             dat = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                        }
                         datetext.setText(dat)
                     },
                     year,

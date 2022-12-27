@@ -1,5 +1,6 @@
 package com.pearlorganisation.figgo.UI
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,4 +25,10 @@ class Shared_cab_Activity : AppCompatActivity() {
         nav_controller=nav_host_fragment.navController
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,DashBoard::class.java))
+    }
+
 }

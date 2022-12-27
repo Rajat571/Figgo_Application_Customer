@@ -3,6 +3,8 @@ package com.pearlorganisation.figgo.UI
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
@@ -36,6 +38,9 @@ class DashBoard : AppCompatActivity(){
     var cab_category_list=ArrayList<CabCategory>()
     lateinit var figgoAddAdapter: FiggoAddAdapter
     var figgo_add_list=ArrayList<FiggoAdd>()
+    var doubleBackToExitPressedOnce = false
+    var count = 0
+    var backPressedTime: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
@@ -164,4 +169,28 @@ class DashBoard : AppCompatActivity(){
             commit()
         }}
 
+
+
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+        if (count == 0) {
+            if (doubleBackToExitPressedOnce) {
+                // System.exit(0);
+                val a = Intent(Intent.ACTION_MAIN)
+                a.addCategory(Intent.CATEGORY_HOME)
+                a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(a)
+                finish()
+                return
+            }
+            this.doubleBackToExitPressedOnce = true
+            Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
+
+            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+                doubleBackToExitPressedOnce = false
+            }, 2000)
+        } else {
+            supportFragmentManager.popBackStack()
+        }
+    }
 }
