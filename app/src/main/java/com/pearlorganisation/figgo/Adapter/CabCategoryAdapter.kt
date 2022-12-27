@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pearlorganisation.figgo.Model.CabCategory
+import com.pearlorganisation.figgo.One_Way_OutStationActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CityCabActivity
 import com.pearlorganisation.figgo.UI.MainActivity
@@ -44,6 +45,7 @@ class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCate
                 1->{
                     holder.cab_name.setTextColor(Color.WHITE)
                     holder.cab_category.setImageResource(R.drawable.intracity)
+                    context.startActivity(Intent(context,One_Way_OutStationActivity::class.java))
                 }
                 2->{
                     holder.cab_name.setTextColor(Color.WHITE)
