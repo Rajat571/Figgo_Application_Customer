@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_accept"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_85sdp"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_22sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_22sdp"
+        android:background="@drawable/btn_bg_coffiesquare"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/vehiclemodel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="sans-serif-black"
+                android:text="Active-2012                                 Rs.45.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/raingcountlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="4.5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <RatingBar
+                    android:id="@+id/ride_service_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:max="5"
+                    android:numStars="5"/>
+
+                <TextView
+                    android:id="@+id/reject"
+                    android:layout_width="@dimen/_38sdp"
+                    android:layout_height="@dimen/_21sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@color/grey"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:backgroundTint="@color/colorcoffie"
+                    android:text="Reject"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/acceptcountlist"
+                    android:layout_width="@dimen/_38sdp"
+                    android:layout_height="@dimen/_21sdp"
+                    android:layout_marginStart="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@color/colorgreen"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="accept"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

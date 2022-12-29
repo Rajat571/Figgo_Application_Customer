@@ -2,31 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/oneway_outstation_graph"
-    app:startDestination="@id/oneway">
+    android:id="@+id/oneway_outstation_graph">
 
-    <fragment
-        android:id="@+id/fragmentOneWay2"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.OutStation.FragmentOneWay"
-        android:label="fragment_one_way"
-        tools:layout="@layout/fragment_one_way" />
-
-    <fragment
-        android:id="@+id/roundAndTourFragment2"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.OutStation.RoundAndTourFragment"
-        android:label="RoundAndTourFragment"
-        tools:layout="@layout/fragment_round_and_tour"/>
-
-    <fragment
-        android:id="@+id/packageFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.OutStation.PackageFragment"
-        android:label="fragment_package"
-        tools:layout="@layout/fragment_package" />
-    <fragment
-        android:id="@+id/freedomFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.OutStation.FreedomFragment"
-        android:label="fragment_freedom"
-        tools:layout="@layout/fragment_freedom" />
 
 
 </navigation>

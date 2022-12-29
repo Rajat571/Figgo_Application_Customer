@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".UI.Fragments.Shared_Cab_Fragment.RoundAndTourFragment">
+    android:orientation="vertical"
+    tools:context="com.pearlorganisation.RoundAndTourActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_height="@dimen/_170sdp"
         android:orientation="vertical"
         android:background="@drawable/bottomradius_background">
 
@@ -59,15 +59,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-       android:layout_marginTop="-26dp"
+        android:layout_marginTop="-41dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_50sdp"
             app:cardCornerRadius="@dimen/_6sdp"
             app:cardMaxElevation="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_1sdp">
+            android:layout_marginStart="@dimen/_5sdp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,8 +81,9 @@
                     android:scaleType="fitXY" />
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_21sdp"
                     android:text="one way"
+                    android:layout_gravity="center"
                     android:fontFamily="sans-serif-black"
                     android:textColor="@color/black"
                     android:gravity="center"
@@ -94,10 +95,11 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_50sdp"
             app:cardCornerRadius="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_11sdp">
+            android:layout_marginStart="@dimen/_6sdp">
             <LinearLayout
+                android:id="@+id/roundandtour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -109,11 +111,12 @@
                     android:background="@color/white"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_21sdp"
                     android:text="Round/Tour"
                     android:fontFamily="sans-serif-black"
                     android:textColor="@color/black"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:background="@color/colorcoffie"/>
 
             </LinearLayout>
@@ -122,9 +125,9 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_50sdp"
             app:cardCornerRadius="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_18sdp">
+            android:layout_marginStart="@dimen/_9sdp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,7 +140,7 @@
                     android:background="@color/white"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_21sdp"
                     android:text="Package"
                     android:fontFamily="sans-serif-black"
                     android:textColor="@color/black"
@@ -150,9 +153,9 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_50sdp"
             app:cardCornerRadius="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_11sdp">
+            android:layout_marginStart="@dimen/_6sdp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,7 +169,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_21sdp"
                     android:text="Freedom"
                     android:gravity="center"
                     android:fontFamily="sans-serif-black"
@@ -182,11 +185,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_300sdp"
+            android:layout_height="@dimen/_320sdp"
             app:cardCornerRadius="@dimen/_6sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_9sdp"
@@ -202,8 +206,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/calendar_month"
                     android:layout_marginStart="@dimen/_6sdp"/>
 
@@ -219,8 +223,8 @@
                     android:text="25.06.2022" />
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/ic_baseline_watch_later_24"
                     android:layout_marginStart="@dimen/_66sdp"/>
 
@@ -240,7 +244,7 @@
             <LinearLayout
                 android:layout_width="@dimen/_220sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_41sdp"
+                android:layout_marginTop="@dimen/_36sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
                 android:orientation="horizontal">
@@ -261,7 +265,7 @@
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_26sdp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_41sdp"
                 android:orientation="vertical">
 
@@ -286,12 +290,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_75sdp"
+                android:layout_marginTop="@dimen/_73sdp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/calendar_month"
                     android:layout_marginStart="@dimen/_6sdp"/>
 
@@ -307,8 +311,8 @@
                     android:text="25.06.2022" />
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/ic_baseline_watch_later_24"
                     android:layout_marginStart="@dimen/_66sdp"/>
 
@@ -329,7 +333,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="-42dp"
+                android:layout_marginTop="-44dp"
                 android:layout_marginEnd="@dimen/_9sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
@@ -339,7 +343,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -352,8 +356,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_gravity="end"
                     android:orientation="vertical">
 
                     <ImageView
@@ -374,13 +378,18 @@
 
                 </LinearLayout>
 
+
+
+
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
@@ -390,7 +399,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -434,9 +443,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_26sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_39sdp"
+                android:layout_marginTop="@dimen/_45sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
@@ -446,7 +455,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -490,9 +499,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_26sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_72sdp"
+                android:layout_marginTop="@dimen/_82sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
@@ -500,7 +509,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -542,9 +551,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12sdp"
-               android:layout_gravity="center"
+                android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_99sdp"
+                android:layout_marginTop="@dimen/_119sdp"
                 android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:text="Add"/>
@@ -566,8 +575,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_gravity="bottom"
+                android:gravity="center"
                 android:background="@color/colornavyblue"
                 android:orientation="vertical">
 
@@ -596,8 +606,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:src="@drawable/figgofooter"/>
-
-
-
 
 </LinearLayout>
