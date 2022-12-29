@@ -30,9 +30,12 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    android:id="@+id/backimg"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:src="@drawable/ic_arrow_back"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,18 +53,19 @@
                     android:src="@drawable/bell_icon"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/shareimg"
+                    android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_gravity="center"
-                    android:src="@drawable/share_icon"/>
+                    android:src="@drawable/ic_baseline_share_24"/>
             </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/carfamily"/>
+                android:src="@drawable/girl"/>
 
         </LinearLayout>
 

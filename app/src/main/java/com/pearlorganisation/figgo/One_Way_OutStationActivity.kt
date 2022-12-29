@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
+import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 
 class One_Way_OutStationActivity : AppCompatActivity() {
 
@@ -31,6 +32,21 @@ class One_Way_OutStationActivity : AppCompatActivity() {
         var iv_oneway  = findViewById<ImageView>(R.id.iv_oneway)
         var iv_round  = findViewById<ImageView>(R.id.iv_round)
         var submitoutstation = findViewById<LinearLayout>(R.id.submitoutstation)
+        var shareimg = findViewById<ImageView>(R.id.shareimg)
+        var backimg = findViewById<ImageView>(R.id.backimg)
+
+        backimg.setOnClickListener {
+            val intent = Intent(this, HomeDashboard::class.java)
+            startActivity(intent)
+        }
+
+        shareimg.setOnClickListener {
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
+            intent.setType("text/plain");
+            startActivity(Intent.createChooser(intent, "Invite Friends"));
+        }
 
         submitoutstation.setOnClickListener {
             startActivity(Intent(this,OneWay_Km_CountActivity::class.java))

@@ -27,11 +27,11 @@ class LiveVehicleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var whatsappicon=view.findViewById<ImageView>(R.id.whatsappicon)
-        var callicon=view.findViewById<ImageView>(R.id.callicon)
+       /* var whatsappicon=view.findViewById<ImageView>(R.id.whatsappicon)
+        var callicon=view.findViewById<ImageView>(R.id.callicon)*/
         var shareimg=view.findViewById<ImageView>(R.id.shareimg)
 
-        whatsappicon.setOnClickListener {
+      /*  whatsappicon.setOnClickListener {
             val url = "https://api.whatsapp.com/send?phone=7505145405"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
@@ -43,7 +43,8 @@ class LiveVehicleFragment : Fragment() {
             callIntent.data = Uri.parse("tel:+123")
             callIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(callIntent)
-        }
+        }*/
+
         shareimg.setOnClickListener {
             var intent= Intent()
             intent.action= Intent.ACTION_SEND
