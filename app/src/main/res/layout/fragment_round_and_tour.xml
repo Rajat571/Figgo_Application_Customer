@@ -239,7 +239,7 @@
 
             <LinearLayout
                 android:layout_width="@dimen/_220sdp"
-                android:layout_height="@dimen/_26sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_41sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
@@ -247,7 +247,7 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -327,7 +327,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_26sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="-42dp"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -374,17 +374,13 @@
 
                 </LinearLayout>
 
-
-
-
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_26sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"

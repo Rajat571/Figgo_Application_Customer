@@ -206,8 +206,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/calendar_month"
                     android:layout_marginStart="@dimen/_6sdp"/>
 
@@ -223,8 +223,8 @@
                     android:text="25.06.2022" />
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/ic_baseline_watch_later_24"
                     android:layout_marginStart="@dimen/_66sdp"/>
 
@@ -243,15 +243,15 @@
 
             <LinearLayout
                 android:layout_width="@dimen/_220sdp"
-                android:layout_height="@dimen/_32sdp"
-                android:layout_marginTop="@dimen/_41sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_36sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
                 android:orientation="horizontal">
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -265,7 +265,7 @@
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_26sdp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_41sdp"
                 android:orientation="vertical">
 
@@ -290,12 +290,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_75sdp"
+                android:layout_marginTop="@dimen/_73sdp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/calendar_month"
                     android:layout_marginStart="@dimen/_6sdp"/>
 
@@ -311,8 +311,8 @@
                     android:text="25.06.2022" />
 
                 <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/ic_baseline_watch_later_24"
                     android:layout_marginStart="@dimen/_66sdp"/>
 
@@ -331,9 +331,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="-42dp"
+                android:layout_marginTop="-44dp"
                 android:layout_marginEnd="@dimen/_9sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_left_corner"
@@ -343,7 +343,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -356,8 +356,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_gravity="end"
                     android:orientation="vertical">
 
                     <ImageView
@@ -387,7 +387,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -399,7 +399,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -443,7 +443,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_45sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -455,7 +455,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -499,7 +499,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_82sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -509,7 +509,7 @@
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:textSize="@dimen/_12sdp"
@@ -575,8 +575,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_gravity="bottom"
+                android:gravity="center"
                 android:background="@color/colornavyblue"
                 android:orientation="vertical">
 

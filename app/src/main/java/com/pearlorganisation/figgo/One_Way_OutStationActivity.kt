@@ -1,6 +1,7 @@
 package com.pearlorganisation.figgo
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,13 +10,8 @@ import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class One_Way_OutStationActivity : AppCompatActivity() {
-    lateinit var nav_controller: NavController
-
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +30,11 @@ class One_Way_OutStationActivity : AppCompatActivity() {
         var iv_freedom  = findViewById<ImageView>(R.id.iv_freedom)
         var iv_oneway  = findViewById<ImageView>(R.id.iv_oneway)
         var iv_round  = findViewById<ImageView>(R.id.iv_round)
+        var submitoutstation = findViewById<LinearLayout>(R.id.submitoutstation)
+
+        submitoutstation.setOnClickListener {
+            startActivity(Intent(this,OneWay_Km_CountActivity::class.java))
+        }
 
 
 

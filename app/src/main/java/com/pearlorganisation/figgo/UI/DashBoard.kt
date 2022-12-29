@@ -21,13 +21,10 @@ import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
-import com.pearlorganisation.figgo.UI.Fragments.OutStation.FragmentOneWay
-import com.pearlorganisation.figgo.UI.Fragments.OutStation.PackageFragment
 import com.pearlorganisation.figgo.UI.Fragments.OutStation.RoundAndTourFragment
 import com.pearlorganisation.figgo.UI.Fragments.RidesBottom
 import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
-import com.pearlorganisation.figgo.databinding.FragmentRidesBottomBinding
 
 
 class DashBoard : AppCompatActivity(){

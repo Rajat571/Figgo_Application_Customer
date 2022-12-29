@@ -29,6 +29,7 @@ class Current_cityCab : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.currentCabList.layoutManager=GridLayoutManager(context,4)
         cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
         cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
