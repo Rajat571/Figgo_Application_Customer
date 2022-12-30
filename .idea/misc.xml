@@ -57,6 +57,7 @@
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_one_way_booking.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_one_way_km_count.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_one_way_out_station.xml" value="0.25" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_otp_page.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_payment_method.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_payment_pay.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_round_and_tour.xml" value="0.3229166666666667" />
@@ -129,6 +130,9 @@
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/slider_item.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/toolbar1.xml" value="0.3171875" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/top_layout.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/vehicleaboutactivity.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/vehiclebookactivity.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/vehiclebooklist.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/vehicleinfolist.xml" value="0.24140625" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/welcome_slide1.xml" value="0.3171875" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/welcome_slide2.xml" value="0.3182291666666667" />

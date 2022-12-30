@@ -7,9 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.figgo.Model.BookingAmountList
+import com.pearlorganisation.figgo.Model.VehicleBookPayList
 import com.pearlorganisation.figgo.R
 
 class BookingAmountAdapter (private val mList1: List<BookingAmountList>) : RecyclerView.Adapter<BookingAmountAdapter.ViewHolder>()  {
+
+    var onItemClick : ((BookingAmountList) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingAmountAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.onewaybookinglist, parent, false)
@@ -25,6 +28,10 @@ class BookingAmountAdapter (private val mList1: List<BookingAmountList>) : Recyc
         holder.driverchange.text = BookingAmountList.driverchange
         holder.amountpurple.text = BookingAmountList.amountpurple
         holder.driverchangepurple.text = BookingAmountList.driverchangepurple
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(BookingAmountList)
+        }
 
     }
 

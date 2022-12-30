@@ -51,7 +51,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/choose_user"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="580dp"
         android:layout_marginStart="@dimen/_18sdp"
         android:layout_marginEnd="@dimen/_18sdp"
         android:visibility="visible"

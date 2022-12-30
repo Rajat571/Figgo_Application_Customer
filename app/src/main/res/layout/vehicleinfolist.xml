@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -10,7 +11,7 @@
         android:orientation="horizontal">
 
         <ImageView
-
+            android:id="@+id/activaimg"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
             android:layout_margin="20dp"
@@ -20,7 +21,7 @@
 
 
         <TextView
-            android:id="@+id/vehiclemodel"
+            android:id="@+id/activavehiclenumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
@@ -48,16 +49,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-29dp"
+        android:layout_marginTop="-35dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_95sdp"
+            android:layout_height="@dimen/_105sdp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_2sdp"
+            app:cardMaxElevation="@dimen/_2sdp"
             android:layout_margin="@dimen/_12sdp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/driverimg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -70,20 +74,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_22sdp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/ravisingh"
+                    android:id="@+id/drivername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:padding="@dimen/_5sdp"
                     android:fontFamily="sans-serif-black"
-                    android:layout_marginStart="@dimen/_29sdp"
-                    android:gravity="center"
                     android:text="Ravi Singh"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_16sdp" />
 
                 <RatingBar
                     android:layout_width="wrap_content"
@@ -91,23 +93,20 @@
                     android:max="5"
                     android:scaleX=".5"
                     android:scaleY=".5"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_22sdp"
+                    android:layout_gravity="end"
                     android:numStars="5"
                     android:id="@+id/ride_service_rating"/>
-
-
 
                 <TextView
                     android:id="@+id/vehiclenumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_29sdp"
-                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_32sdp"
                     android:text="DL. No. Cgdjn9857imvc"
+                    android:padding="@dimen/_5sdp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_15sdp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -116,39 +115,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="4"
         android:gravity="center"
-        android:layout_marginTop="-8dp"
-        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/_45sdp"
-            android:layout_height="@dimen/_22sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Reject"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:padding="@dimen/_5sdp"
             android:gravity="center"
-            android:layout_marginStart="@dimen/_12sdp"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"
             android:background="@color/colornavyblue"/>
 
         <ImageView
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/call"
-            android:layout_marginStart="@dimen/_32sdp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/call"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_5sdp"
             android:textColor="@color/black"
             android:text="95625-65214" />
 
         <TextView
-            android:layout_width="@dimen/_45sdp"
-            android:layout_height="@dimen/_22sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Accept"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:padding="@dimen/_5sdp"
             android:gravity="center"
-            android:layout_marginStart="@dimen/_19sdp"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/black"
             android:background="@color/coloryellowlight"/>
