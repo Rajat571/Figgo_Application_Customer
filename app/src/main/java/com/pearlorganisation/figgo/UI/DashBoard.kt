@@ -1,18 +1,38 @@
 package com.pearlorganisation.figgo.UI
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.location.LocationRequest
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.location.LocationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
@@ -27,10 +47,10 @@ import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 
 
-class DashBoard : AppCompatActivity(){
+class DashBoard : AppCompatActivity() {
     lateinit var binding: ActivityDashBoardBinding
     lateinit var toggle: ActionBarDrawerToggle
-    lateinit var navView : NavigationView
+    lateinit var locationRequest : LocationRequest
     lateinit var cabCategoryAdapter: CabCategoryAdapter
     var cab_category_list=ArrayList<CabCategory>()
     lateinit var figgoAddAdapter: FiggoAddAdapter
@@ -38,6 +58,16 @@ class DashBoard : AppCompatActivity(){
     var doubleBackToExitPressedOnce = false
     var count = 0
     var backPressedTime: Long = 0
+    private val permissionId = 2
+    var homeFrag = HomeDashboard()
+    private var mMap: GoogleMap? = null
+    private var mGoogleApiClient: GoogleApiClient? = null
+    var mLastLocation: Location? = null
+    var mLocationRequest: com.google.android.gms.location.LocationRequest? = null
+    private val mLogout: Button? = null
+    private val mRequest: Button? = null
+    private val pickupLocation: LatLng? = null
+    lateinit var navView : NavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
@@ -47,7 +77,7 @@ class DashBoard : AppCompatActivity(){
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
-        var homeFrag = HomeDashboard()
+
         var rides = RidesBottom()
         var more = RoundAndTourFragment()
         var support = SupportBottomNav()
@@ -62,7 +92,21 @@ class DashBoard : AppCompatActivity(){
             drawerLayout.openDrawer(Gravity.LEFT)
         }
 
-        setfragment(homeFrag)
+       setfragment(homeFrag)
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                setfragment(homeFrag)
+            } else {
+                Toast.makeText(this@DashBoard, "Please turn on location", Toast.LENGTH_LONG)
+                    .show()
+               // val intent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+               // startActivity(intent)
+                displayLocationSettingsRequest(applicationContext)
+            }
+        }else {
+                requestPermissions()
+            }
+
        var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)
         bottom.setOnItemSelectedListener {
             when(it.itemId){
@@ -190,4 +234,88 @@ class DashBoard : AppCompatActivity(){
             supportFragmentManager.popBackStack()
         }
     }
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager = this@DashBoard.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this@DashBoard,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this@DashBoard,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this@DashBoard,
+            arrayOf(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            permissionId
+        )
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == permissionId) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                setfragment(homeFrag)
+            }
+        }
+    }
+
+   /* override fun onResume() {
+        super.onResume()
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                setfragment(homeFrag)
+            } else {
+                Toast.makeText(this@DashBoard, "Please turn on location", Toast.LENGTH_LONG)
+                    .show()
+                val intent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        }else {
+            requestPermissions()
+        }
+    }*/
+   private fun displayLocationSettingsRequest(context: Context) {
+       val googleApiClient = GoogleApiClient.Builder(context)
+           .addApi(LocationServices.API).build()
+       googleApiClient.connect()
+       val locationRequest = com.google.android.gms.location.LocationRequest.create()
+       locationRequest.priority = com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
+       locationRequest.interval = 10000
+       locationRequest.fastestInterval = (10000 / 2).toLong()
+       val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+       builder.setAlwaysShow(true)
+       val result =
+           LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
+       result.setResultCallback { result ->
+           val status = result.status
+           when (status.statusCode) {
+               LocationSettingsStatusCodes.SUCCESS -> {}
+               LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {}
+               LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {}
+           }
+       }
+
+
+
+
+   }
+
+
+
+
 }

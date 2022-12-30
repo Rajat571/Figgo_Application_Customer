@@ -42,8 +42,8 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         pref = PrefManager(this)
-        var email = findViewById<TextView>(R.id.email)
-        var number = findViewById<TextView>(R.id.number)
+      //  var email = findViewById<TextView>(R.id.email)
+      //  var number = findViewById<TextView>(R.id.number)
         var input_number = findViewById<TextView>(R.id.input_number)
         val continuetv = findViewById<TextView>(R.id.continuetv)
         var forgot_account = findViewById<TextView>(R.id.forgot_account)
@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this).build()
 
-        email.setOnClickListener {
+       /* email.setOnClickListener {
             input_number.setHint("Enter Your Email Id")
             email.setTypeface(Typeface.DEFAULT_BOLD);
             input_number.inputType = TYPE_CLASS_TEXT
@@ -69,9 +69,9 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         number.setOnClickListener {
             input_number.setHint("Enter Your Mobile number")
             number.setTypeface(Typeface.DEFAULT_BOLD);
-            email.setTypeface(Typeface.DEFAULT)
+          //  email.setTypeface(Typeface.DEFAULT)
             input_number.inputType = TYPE_CLASS_NUMBER
-        }
+        }*/
 
        continuetv.setOnClickListener {
            cc_number.isVisible = false
