@@ -176,6 +176,17 @@ class Advance_cityCab : Fragment() {
 
             }
         }
+
+        locLinear?.setOnClickListener {
+
+            val internet :Boolean = isOnline(requireActivity())
+            if(internet == true) {
+                getLocation()
+            }else{
+                Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
+
+            }
+        }
        // Initialize Places.
 
     }
@@ -186,6 +197,9 @@ class Advance_cityCab : Fragment() {
             if (isLocationEnabled()) {
                 mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
                     val location: Location? = task.result
+                    if (location == null) {
+                        return@addOnCompleteListener;
+                    }
                     if (location != null) {
                         val geocoder = Geocoder(requireActivity(), Locale.getDefault())
                         val list: List<Address> =
@@ -195,7 +209,7 @@ class Advance_cityCab : Fragment() {
                           //  tvLongitude.text = "Longitude\n${list[0].longitude}"
                            // tvCountryName.text = "Country Name\n${list[0].countryName}"
                             var location: String?  =  "${list[0].getAddressLine(0)}"
-                            locText!!.text = location?.replace("7xmr+pwr","")?.replace("133","")?.replace(",","")
+                            locText!!.text = location?.replace("133","")
                             //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
                         }
                     }
