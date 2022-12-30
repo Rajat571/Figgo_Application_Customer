@@ -23,6 +23,36 @@
 
 
         <activity
+            android:name=".PaymentMethodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentPayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CabBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OneWayBookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DriveRatingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmergencyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TotalDistance_Count_Km_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".OneWay_Km_CountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FreedomOutstationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.pearlorganisation.RoundAndTourActivity"
+            android:exported="false" />
+        <activity
             android:name=".One_Way_OutStationActivity"
             android:exported="false" />
 

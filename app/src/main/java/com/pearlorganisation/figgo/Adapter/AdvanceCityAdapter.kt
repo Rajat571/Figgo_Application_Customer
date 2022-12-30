@@ -57,6 +57,7 @@ class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>):
          context.startActivity(Intent(context,CabDetailsActivity::class.java))
         }
     }
+
     override fun getItemCount(): Int {
        return cablist.size
     }

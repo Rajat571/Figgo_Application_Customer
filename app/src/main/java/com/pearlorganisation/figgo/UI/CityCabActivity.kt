@@ -20,23 +20,26 @@ class CityCabActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_cab)
 
-        var whatsappicon=findViewById<ImageView>(R.id.whatsappicon)
-        var callicon=findViewById<ImageView>(R.id.callicon)
+       /* var whatsappicon=findViewById<ImageView>(R.id.whatsappicon)
+        var callicon=findViewById<ImageView>(R.id.callicon)*/
+
         var shareimg=findViewById<ImageView>(R.id.shareimg)
 
-        whatsappicon.setOnClickListener {
+       /* whatsappicon.setOnClickListener {
             val url = "https://api.whatsapp.com/send?phone=7505145405"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
-        }
-        callicon.setOnClickListener {
+        }*/
+       /* callicon.setOnClickListener {
             // val callIntent = Intent(Intent.ACTION_CALL)
             val callIntent = Intent(Intent.ACTION_DIAL)
             callIntent.data = Uri.parse("tel:+123")
             callIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(callIntent)
-        }
+        }*/
+
+
         shareimg.setOnClickListener {
             var intent= Intent()
             intent.action= Intent.ACTION_SEND

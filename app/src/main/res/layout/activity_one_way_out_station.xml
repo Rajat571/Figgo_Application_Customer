@@ -10,18 +10,17 @@
     tools:context=".One_Way_OutStationActivity">
 
 
-
+<!--
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorlightblue"
         android:orientation="vertical"
-        tools:context=".UI.Fragments.OutStation.FragmentOneWay">
+        tools:context=".UI.Fragments.OutStation.FragmentOneWay">-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_170sdp"
             android:orientation="vertical"
             android:background="@drawable/bottomradius_background">
 
@@ -31,9 +30,12 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    android:id="@+id/backimg"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:src="@drawable/ic_arrow_back"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -51,18 +53,19 @@
                     android:src="@drawable/bell_icon"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/shareimg"
+                    android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_gravity="center"
-                    android:src="@drawable/share_icon"/>
+                    android:src="@drawable/ic_baseline_share_24"/>
             </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/carfamily"/>
+                android:src="@drawable/girl"/>
 
         </LinearLayout>
 
@@ -70,16 +73,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="-26dp"
+            android:layout_marginTop="-36dp"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/oneway"
                 android:layout_width="@dimen/_65sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_50sdp"
                 app:cardCornerRadius="@dimen/_6sdp"
                 app:cardMaxElevation="@dimen/_6sdp"
-                android:layout_marginStart="@dimen/_1sdp">
+                android:layout_marginStart="@dimen/_6sdp">
 
                 <LinearLayout
 
@@ -96,7 +99,7 @@
                         android:scaleType="fitXY" />
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_21sdp"
                         android:text="one way"
                         android:fontFamily="sans-serif-black"
                         android:textColor="@color/black"
@@ -110,9 +113,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/roundandtour"
                 android:layout_width="@dimen/_65sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_50sdp"
                 app:cardCornerRadius="@dimen/_6sdp"
-                android:layout_marginStart="@dimen/_11sdp">
+                android:layout_marginStart="@dimen/_6sdp">
 
                 <LinearLayout
 
@@ -128,7 +131,7 @@
                         android:background="@color/white"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_21sdp"
                         android:text="Round/Tour"
                         android:fontFamily="sans-serif-black"
                         android:textColor="@color/black"
@@ -141,9 +144,9 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="@dimen/_65sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_50sdp"
                 app:cardCornerRadius="@dimen/_6sdp"
-                android:layout_marginStart="@dimen/_18sdp">
+                android:layout_marginStart="@dimen/_9sdp">
 
                 <LinearLayout
                     android:id="@+id/packageoneway"
@@ -159,7 +162,7 @@
                         android:background="@color/white"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_21sdp"
                         android:text="Package"
                         android:fontFamily="sans-serif-black"
                         android:textColor="@color/black"
@@ -173,9 +176,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/freedomoneway"
                 android:layout_width="@dimen/_65sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_50sdp"
                 app:cardCornerRadius="@dimen/_6sdp"
-                android:layout_marginStart="@dimen/_11sdp">
+                android:layout_marginStart="@dimen/_6sdp">
 
                 <LinearLayout
 
@@ -193,7 +196,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_21sdp"
                         android:text="Freedom"
                         android:gravity="center"
                         android:fontFamily="sans-serif-black"
@@ -215,7 +218,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
+                android:layout_height="@dimen/_162sdp"
                 app:cardCornerRadius="@dimen/_6sdp"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -267,28 +270,29 @@
 
                 <LinearLayout
                     android:layout_width="@dimen/_220sdp"
-                    android:layout_height="@dimen/_26sdp"
-                    android:layout_marginTop="@dimen/_41sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_36sdp"
                     android:layout_marginStart="@dimen/_9sdp"
                     android:background="@drawable/btn_left_corner"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:background="@null"
+                        android:layout_gravity="center"
                         android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_9sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:text="Auto Dedect Live location"
-                        android:textColor="@color/white" />
+                        android:layout_marginStart="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:hint="Auto Dedect Live location"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_26sdp"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_41sdp"
                     android:orientation="vertical">
 
@@ -313,28 +317,28 @@
 
                 <LinearLayout
                     android:layout_width="@dimen/_220sdp"
-                    android:layout_height="@dimen/_26sdp"
-                    android:layout_marginTop="@dimen/_75sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_77sdp"
                     android:layout_marginStart="@dimen/_9sdp"
                     android:background="@drawable/btn_left_corner"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_9sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:text="Fill menaul"
-                        android:textColor="@color/white" />
+                        android:background="@null"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:hint="Fill menaul"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_26sdp"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_75sdp"
                     android:orientation="vertical">
 
@@ -357,9 +361,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/submitoutstation"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_height="@dimen/_32sdp"
                     android:layout_gravity="bottom"
+                    android:gravity="center"
                     android:background="@color/colornavyblue"
                     android:orientation="vertical">
 
@@ -387,6 +393,10 @@
             android:gravity="center"
             android:visibility="gone"
             android:orientation="vertical">
+
+
+
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -610,7 +620,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_26sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_gravity="end"
                         android:layout_marginEnd="@dimen/_12sdp"
                         android:layout_marginTop="@dimen/_41sdp"
@@ -642,7 +652,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_26sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_39sdp"
                     android:layout_marginEnd="@dimen/_9sdp"
@@ -666,7 +676,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_26sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_gravity="end"
                         android:layout_marginEnd="@dimen/_12sdp"
                         android:layout_marginTop="@dimen/_41sdp"
@@ -757,21 +767,6 @@
                     android:textColor="@color/black"
                     android:text="Add"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_25sdp"
@@ -856,7 +851,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_26sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:layout_marginTop="@dimen/_41sdp"
                     android:layout_marginStart="@dimen/_9sdp"
                     android:gravity="center"
@@ -878,14 +873,14 @@
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_86sdp"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/_129sdp"
-                        android:layout_height="@dimen/_26sdp"
+                        android:layout_width="@dimen/_119sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_marginStart="@dimen/_12sdp"
                         android:background="@drawable/btn_left_corner"
                         android:orientation="vertical">
@@ -893,7 +888,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:gravity="center"
                             android:textSize="@dimen/_12sdp"
                             android:layout_gravity="center"
@@ -905,7 +900,7 @@
 
                     <LinearLayout
                         android:layout_width="@dimen/_129sdp"
-                        android:layout_height="@dimen/_26sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_marginStart="@dimen/_16sdp"
                         android:background="@drawable/btn_left_corner"
                         android:orientation="vertical">
@@ -930,17 +925,21 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/btn_left_corner"
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/editText1"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_80sdp"
+                        android:layout_height="wrap_content"
                         android:hint="Text your massase"
                         android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_22sdp"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:background="@null"
                         android:textColor="@color/black"
@@ -965,7 +964,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_height="@dimen/_32sdp"
                     android:layout_gravity="bottom"
                     android:background="@color/colornavyblue"
                     android:orientation="vertical">
@@ -1017,20 +1016,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/figgofooter"/>
-
-        </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

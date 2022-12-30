@@ -27,6 +27,9 @@
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/dot_default.xml" value="0.254" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/dot_selected.xml" value="0.254" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/edit_round_color_yellow.xml" value="0.2655" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2725" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.2725" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.2725" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/login.xml" value="0.254" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/sqaureoutline_bg_yellow.xml" value="0.254" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/tab_selector.xml" value="0.254" />
@@ -35,10 +38,15 @@
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/whiteoutline_with_bluecolor.xml" value="0.2675" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/whiteoutline_with_lightyellowcolor.xml" value="0.2675" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/a_dashboard.xml" value="0.3171875" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/active_ride_layout.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_cab_book.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_cab_details.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_city_cab.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_customer_menu_drawer.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_dash_board.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_drive_rating.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_emergency.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_freedom_outstation.xml" value="0.3067708333333333" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_home.xml" value="0.2602564102564103" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_login.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
@@ -46,9 +54,15 @@
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_main3.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_main4.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_mpin_generate.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_one_way_booking.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_one_way_km_count.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_one_way_out_station.xml" value="0.25" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_payment_method.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_payment_pay.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_round_and_tour.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_shared_cab.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_splash.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_total_distance_count_km.xml" value="0.18" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_welcome.xml" value="0.2" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_welcome2.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_welcome_slider.xml" value="0.3182291666666667" />
@@ -91,11 +105,13 @@
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_package_city_cab.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_pay.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_payment_way.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_rides_bottom.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_ridesh_bottom.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_round_and_tour.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_share_cab_.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_share_cab__easy_life_share.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_slideshow.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_support_bottom_nav.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_thank_rating.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_thankyou__rating_.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/fragment_thankyou_screen.xml" value="0.3182291666666667" />
@@ -106,10 +122,14 @@
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/livesharecab_layout.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/nav_header_customer_menu.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/nav_header_customer_menu_drawer.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/new_onewaynavigationscreen.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/oneway_count_list.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/onewaybookinglist.xml" value="0.321875" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/rideslist.xml" value="0.321875" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/slider_item.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/toolbar1.xml" value="0.3171875" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/top_layout.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/vehicleinfolist.xml" value="0.24140625" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/welcome_slide1.xml" value="0.3171875" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/welcome_slide2.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/menu/activity_customer_menu_drawer.xml" value="0.3182291666666667" />
