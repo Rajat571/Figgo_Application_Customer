@@ -12,7 +12,7 @@ class PaymentMethodActivity : AppCompatActivity() {
         var nextpage = findViewById<TextView>(R.id.nextpage)
 
         nextpage.setOnClickListener {
-            startActivity(Intent(this,DriveRatingActivity::class.java))
+            startActivity(Intent(this,OTPVerifyPageActivity::class.java))
         }
     }
 }

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,9 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Figgo"
         tools:targetApi="31">
-
-
-
+        <activity
+            android:name=".StudenAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OTPVerifyPageActivity"
+            android:exported="false" />
         <activity
             android:name=".PaymentMethodActivity"
             android:exported="false" />
@@ -29,7 +33,7 @@
             android:name=".PaymentPayActivity"
             android:exported="false" />
         <activity
-            android:name=".CabBookActivity"
+            android:name=".VehicleBookActivity"
             android:exported="false" />
         <activity
             android:name=".OneWayBookingActivity"
@@ -41,7 +45,7 @@
             android:name=".EmergencyActivity"
             android:exported="false" />
         <activity
-            android:name=".TotalDistance_Count_Km_Activity"
+            android:name=".VehicleAboutActivity"
             android:exported="false" />
         <activity
             android:name=".OneWay_Km_CountActivity"
@@ -55,8 +59,6 @@
         <activity
             android:name=".One_Way_OutStationActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".CustomerMenuDrawerActivity"
             android:exported="false"

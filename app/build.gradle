@@ -5,13 +5,13 @@ plugins {
 
 android {
     namespace 'com.pearlorganisation.figgo'
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.pearlorganisation.figgo"
         minSdk 23
         versionCode 1
-        targetSdk 31
+        targetSdk 32
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
