@@ -42,6 +42,7 @@ import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
 import org.json.JSONArray
@@ -95,6 +96,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
          liveLoc = view?.findViewById<TextView>(R.id.live_loc)
         var locLinear = view?.findViewById<LinearLayout>(R.id.linear_loc)
         var submit = view?.findViewById<Button>(R.id.submit)
+        var next = view?.findViewById<Button>(R.id.next)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         ll_choose_vehicle?.isVisible = false
         val apiKey = getString(R.string.api_key)
@@ -190,6 +192,17 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
             }
 
         }
+        next?.setOnClickListener {
+
+
+         startActivity(Intent(requireActivity(), CabDetailsActivity::class.java))
+
+
+
+        }
+
+
+
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -249,6 +262,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         json.put("to_lng", to_lng)
         json.put("from_lat", from_lat)
         json.put("from_lng", from_lng)
+        json.put("type", "advance_booking")
 
 
         val jsonOblect: JsonObjectRequest =
@@ -270,7 +284,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
                         val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                                cablist.add(AdvanceCityCabModel(image,name))
+                                cablist.add(AdvanceCityCabModel(name,image))
                             }
 
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)

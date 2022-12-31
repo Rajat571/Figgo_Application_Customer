@@ -60,8 +60,10 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
                 8->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 9->holder.cab.setImageResource(R.drawable.ola_bike_active)
             }
-         context.startActivity(Intent(context,CabDetailsActivity::class.java))
-        }
+           }
+
+
+
     }
 
     override fun getItemCount(): Int {

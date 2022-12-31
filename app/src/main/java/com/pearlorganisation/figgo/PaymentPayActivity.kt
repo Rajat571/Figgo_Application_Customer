@@ -12,7 +12,7 @@ class PaymentPayActivity : AppCompatActivity() {
 
         var pay_now = findViewById<Button>(R.id.pay_now)
         pay_now.setOnClickListener {
-            startActivity(Intent(this,PaymentMethodActivity::class.java))
+           // startActivity(Intent(this,PaymentMethodActivity::class.java))
         }
     }
 }
