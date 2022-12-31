@@ -50,10 +50,10 @@ class CityCabActivity : AppCompatActivity() {
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
-       /* val navHostFragment=supportFragmentManager.findFragmentById(R.id.mainContainer) as NavHostFragment
-        navController=navHostFragment.navController*/
+        val navHostFragment=supportFragmentManager.findFragmentById(R.id.mainContainer) as NavHostFragment
+        navController=navHostFragment.navController
         val bottomNavigationView=findViewById<BottomNavigationView>(R.id.navigation_bar)
-       /* NavigationUI.setupWithNavController(bottomNavigationView, navController)*/
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
     }
 

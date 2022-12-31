@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import com.pearlorganisation.figgo.R
 
 class RoundAndTourActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_round_and_tour)

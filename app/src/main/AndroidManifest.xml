@@ -23,6 +23,12 @@
 
 
         <activity
+            android:name=".StudenAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OTPVerifyPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".PaymentMethodActivity"
             android:exported="false" />
         <activity
