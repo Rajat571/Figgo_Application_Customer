@@ -37,21 +37,26 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityAdapter
+import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
+import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
 class Advance_cityCab : Fragment(), IOnBackPressed {
 
     lateinit var binding: FragmentAdvanceCityCabBinding
-    lateinit var advanceCityAdapter: AdvanceCityAdapter
-    var cablist=ArrayList<AdvanceCityCab>()
+    lateinit var advanceCityAdapter: AdvanceCityDataAdapter
+    var cablist=ArrayList<AdvanceCityCabModel>()
     var manualLoc: TextView? = null
     var liveLoc: TextView? = null
     var AUTOCOMPLETE_REQUEST_CODE = -1
@@ -80,9 +85,9 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         pref = PrefManager(requireActivity())
-        var calenderimg = view.findViewById<ImageView>(R.id.calenderimg)
+        var calenderimg = view.findViewById<LinearLayout>(R.id.calenderimg)
          datetext = view.findViewById<TextView>(R.id.datetext)
-        var watchimg = view?.findViewById<ImageView>(R.id.watchimg)
+        var watchimg = view?.findViewById<LinearLayout>(R.id.watchimg)
          timetext = view?.findViewById<TextView>(R.id.timetext)
          ll_location = view?.findViewById<LinearLayout>(R.id.ll_location)!!
          ll_choose_vehicle = view?.findViewById<LinearLayout>(R.id.ll_choose_vehicle)!!
@@ -96,6 +101,21 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
         }
+
+
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val currentDate = LocalDateTime.now().format(formatter)
+            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
+            val currentTime = LocalDateTime.now().format(formated)
+
+           datetext?.setText(currentDate)
+           timetext?.setText(currentTime)
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
+
         calenderimg.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
@@ -106,10 +126,13 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                     it1,
                     { view, year, monthOfYear, dayOfMonth ->
                         val dat : String
+                        val datApi : String
                         if (monthOfYear < 9){
-                            dat = (dayOfMonth.toString() + "-0" + (monthOfYear + 1) + "-" + year)
+                           // dat = (dayOfMonth.toString() + "-0" + (monthOfYear + 1) + "-" + year.toString())
+                            dat = (year.toString() + "-0" + (monthOfYear + 1) + "-" + dayOfMonth.toString())
                         }else {
-                             dat = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                             //dat = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year.toString())
+                            dat = (year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString())
                         }
                         datetext?.setText(dat)
                     },
@@ -128,7 +151,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                     cal.set(Calendar.HOUR_OF_DAY, hour)
                     cal.set(Calendar.MINUTE, minute)
                     if (timetext != null) {
-                        timetext?.text = SimpleDateFormat("HH:mm").format(cal.time)
+                        timetext?.text = SimpleDateFormat("HH:mm:s").format(cal.time)
                     }
                 }
                 TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
@@ -155,10 +178,16 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
         submit?.setOnClickListener {
 
-            ll_location.isVisible = false
-            ll_choose_vehicle.isVisible = true
-            submitform()
 
+
+            if (to_lat == ""){
+                Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
+            }else if (from_lat == ""){
+                Toast.makeText(requireActivity(), "Please select Destination Address", Toast.LENGTH_LONG).show()
+
+            }else {
+                submitform()
+            }
 
         }
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -166,14 +195,12 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
 
         binding.recylerCabList.layoutManager=GridLayoutManager(context,4)
-        cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))
-        cablist.add(AdvanceCityCab(R.drawable.ola_mini,"256-420"))
+      //  cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
+       // cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
+       // cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
+      //  cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))
+       // cablist.add(AdvanceCityCab(R.drawable.ola_mini,"256-420"))
 
-        advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)
-        binding.recylerCabList.adapter=advanceCityAdapter
 
 
 
@@ -227,6 +254,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
+                @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
 
                     Log.d("SendData", "response===" + response)
@@ -234,17 +262,33 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
                         ll_location?.isVisible = false
                        ll_choose_vehicle?.isVisible  =true
+
+                        val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
+                       val rideId = response.getJSONObject("data").getString("ride_id")
+
+                        for(p2 in 0 until size) {
+
+                        val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
+                            val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
+                                cablist.add(AdvanceCityCabModel(image,name))
+                            }
+
+                        advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
+                        binding.recylerCabList.adapter=advanceCityAdapter
+
                     }
                     // Get your json response and convert it to whatever you want.
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
+                    Log.d("SendData", "error===" + error)
                     // Error
                 }
             }) {
                      @Throws(AuthFailureError::class)
                  override fun getHeaders(): Map<String, String> {
                      val headers: MutableMap<String, String> = HashMap()
+                         headers.put("Content-Type", "application/json; charset=UTF-8");
                          headers.put("Authorization", "Bearer " + pref.getToken());
                      return headers
                  }
@@ -273,7 +317,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                                 to_lng = "${list[0].longitude}"
                                 // tvCountryName.text = "Country Name\n${list[0].countryName}"
                                 var location: String? = "${list[0].getAddressLine(0)}"
-                                liveLoc!!.text = location?.replace("133", "")
+                                liveLoc!!.text = location?.replace("133", "")?.replace(",","")
                                 //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
                             }else{
                                     from_lat  = "${list[0].latitude}"
@@ -281,7 +325,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
 
                                 var location: String? = "${list[0].getAddressLine(0)}"
-                                manualLoc!!.text = location?.replace("133", "")
+                                manualLoc!!.text = location?.replace("133", "")?.replace(",","")
                                 //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
                             }
                         }
@@ -301,7 +345,11 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                 val place = Autocomplete.getPlaceFromIntent(data!!)
                 if (press.equals("manual")) {
                     manualLoc!!.setText(place.address)
+                    from_lat = place.latLng.latitude.toString()
+                    from_lng = place.latLng.longitude.toString()
                 }else if (press.equals("live")){
+                    to_lat = place.latLng.latitude.toString()
+                    to_lng = place.latLng.longitude.toString()
                     liveLoc!!.setText(place.address)
                 }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
@@ -343,6 +391,5 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
         return true
     }
-
 
 }
