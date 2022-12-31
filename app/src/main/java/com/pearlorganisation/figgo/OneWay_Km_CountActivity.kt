@@ -19,7 +19,7 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_way_km_count)
-        var nextscreen = findViewById<TextView>(R.id.nextscreen)
+        /*var nextscreen = findViewById<TextView>(R.id.nextscreen)*/
         var ll_accept = findViewById<LinearLayout>(R.id.ll_accept)
         val recyclerview = findViewById<RecyclerView>(R.id.onewayvehiclelist)
         val mList = ArrayList<OneWayListRatingVehicle>()
@@ -48,6 +48,16 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
 
         recyclerview.adapter = OneWayKmCountAdapter(mList)
         recyclerview.layoutManager = LinearLayoutManager(this)
+        oneWayKmCountAdapter = OneWayKmCountAdapter(mList)
+        recyclerview.adapter = oneWayKmCountAdapter
+
+        oneWayKmCountAdapter.onItemClick = {
+            val intent = Intent(this,VehicleAboutActivity::class.java)
+            intent.putExtra("oneWayKmCountAdapter",it)
+            startActivity(intent)
+        }
     }
 
 }
+
+

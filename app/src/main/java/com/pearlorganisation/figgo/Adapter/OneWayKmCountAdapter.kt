@@ -15,6 +15,7 @@ import com.pearlorganisation.figgo.UI.CityCabActivity
 
 class OneWayKmCountAdapter( private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<OneWayKmCountAdapter.ViewHolder>() {
 
+    var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OneWayKmCountAdapter.ViewHolder {
 
@@ -25,28 +26,15 @@ class OneWayKmCountAdapter( private val mList: List<OneWayListRatingVehicle>) : 
     override fun onBindViewHolder(holder: OneWayKmCountAdapter.ViewHolder, position: Int) {
         val OneWayListRatingVehicle = mList[position]
 
-        holder.itemView.setOnClickListener {
-            when(holder.adapterPosition){
-                0->{
-
-                    holder.acceptcountlist.text
-//                    holder.cab.setOnClickListener{
-//                        recreate(context)
-                    //  }
-                }
-                1-> holder.acceptcountlist.text
-                2-> holder.acceptcountlist.text
-                3-> holder.acceptcountlist.text
-                5-> holder.acceptcountlist.text
-            }
-
-        }
-
         holder.vehiclemodel.text = OneWayListRatingVehicle.vehiclemodel
    //     holder.raingcountlist.text = OneWayListRatingVehicle.raingcountlist
       //  holder.ride_service_rating.text = OneWayListRatingVehicle.ride_service_rating
         holder.reject.text = OneWayListRatingVehicle.reject
         holder.acceptcountlist.text = OneWayListRatingVehicle.acceptcountlist
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(OneWayListRatingVehicle)
+        }
 
     }
 

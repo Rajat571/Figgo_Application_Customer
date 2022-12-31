@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
-import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 
 class EmergencyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +16,7 @@ class EmergencyActivity : AppCompatActivity() {
         var backimg = findViewById<ImageView>(R.id.backimg)
 
         backimg.setOnClickListener {
-            val intent = Intent(this, TotalDistance_Count_Km_Activity::class.java)
+            val intent = Intent(this, VehicleAboutActivity::class.java)
             startActivity(intent)
         }
 
