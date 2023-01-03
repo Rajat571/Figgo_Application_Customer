@@ -12,13 +12,15 @@
         android:layout_height="200dp"
         android:background="@drawable/background"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" >
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-46dp">
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
+            android:id="@+id/image"
             android:src="@drawable/carfamily"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +55,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.644">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,9 +70,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp"
+                android:id="@+id/created_at"
                 android:text="25.10.2022 / 6.00 pm"
                 android:textColor="#000F3B"
                 android:textSize="20sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,6 +89,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
+                    android:id="@+id/dis"
                     android:textColor="@color/black"
                     android:text="250 Km. "/>
                 <TextView
@@ -92,6 +100,7 @@
                     android:gravity="center"
                     android:background="@drawable/background_card"
                     android:textSize="16sp"
+                    android:id="@+id/dis2"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -103,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp"
+                android:id="@+id/updated_at"
                 android:text="25.10.2022 / 6.00 pm"
                 android:textColor="#000F3B"
                 android:textSize="20sp" />
@@ -112,7 +122,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp"
-                android:text="Sector 34, Chandigarh\nRohani Delhi, India"
+                android:id="@+id/to_loc"
+                android:text="Sector 34, Chandigarh"
+                android:textColor="#000F3B"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+               android:id="@+id/from_loc"
+                android:text="Rohani Delhi, India"
                 android:textColor="#000F3B"
                 android:textSize="20sp" />
 
@@ -122,22 +141,45 @@
                 android:layout_gravity="center"
                 android:lineSpacingExtra="4dp"
                 android:padding="10dp"
+                android:id="@+id/fare"
                 android:text="Approx.. fare Rs. 125 to 145,\n                for this ride\nwithout waiting  parking charge\nFinal Price is differ from Approx. "
                 android:textColor="#000F3B"
                 android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/continue_background"
-                android:padding="8dp"
-                android:text="Book now"
-                android:id="@+id/book_now"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/book_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/continue_background"
+                    android:padding="8dp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="Book for Other"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/book_self"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/continue_background"
+                    android:padding="8dp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:text="Book for Self"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
         </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.cardview.widget.CardView>
 
     <ImageView

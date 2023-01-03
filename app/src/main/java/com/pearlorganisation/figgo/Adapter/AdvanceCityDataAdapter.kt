@@ -16,6 +16,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.transition.Hold
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
@@ -24,7 +25,7 @@ import com.squareup.picasso.Picasso
 
 
 class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityCabModel>): Adapter<AdvanceCityDataAdapter.AdvanceCityHolder>() {
-
+    lateinit var pref: PrefManager
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {
         var cab=itemview.findViewById<ImageView>(R.id.cab)
@@ -37,6 +38,7 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
 
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: AdvanceCityHolder, position: Int) {
+        pref = PrefManager(context)
      var data=cablist[position]
       //  holder.cab.setImageResource(data.cab)
         holder.ratings.text=data.name
@@ -60,6 +62,11 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
                 8->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 9->holder.cab.setImageResource(R.drawable.ola_bike_active)
             }
+
+
+           pref.setRideId(data.rideId)
+            pref.setVehicleId(data.vehicleId)
+
            }
 
 

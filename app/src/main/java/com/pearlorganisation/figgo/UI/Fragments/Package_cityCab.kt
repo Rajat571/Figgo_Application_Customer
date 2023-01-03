@@ -20,7 +20,7 @@ class Package_cityCab : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      binding=DataBindingUtil.inflate(inflater,R.layout.fragment_package_city_cab, container, false)
+    //  binding=DataBindingUtil.inflate(inflater,R.layout.fragment_package_city_cab, container, false)
         return binding.root
     }
 

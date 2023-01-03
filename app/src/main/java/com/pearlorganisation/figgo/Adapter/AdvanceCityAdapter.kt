@@ -2,24 +2,23 @@ package com.pearlorganisation.figgo.Adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.recreate
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.transition.Hold
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
+import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 
 
-class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>): Adapter<AdvanceCityAdapter.AdvanceCityHolder>() {
+class AdvanceCityAdapter(var context:Activity, var cablist: ArrayList<AdvanceCityCab>): Adapter<AdvanceCityAdapter.AdvanceCityHolder>() {
 
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {

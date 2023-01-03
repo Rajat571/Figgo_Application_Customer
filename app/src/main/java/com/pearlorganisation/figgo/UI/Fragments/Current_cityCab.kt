@@ -38,7 +38,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
+import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
@@ -52,7 +52,7 @@ import kotlin.collections.ArrayList
 class Current_cityCab : Fragment(),IOnBackPressed {
     lateinit var binding: FragmentCurrentCityCabBinding
     lateinit var advanceCityAdapter: AdvanceCityAdapter
-    var cablist=ArrayList<AdvanceCityCab>()
+    var cablist=ArrayList<AdvanceCityCabModel>()
     var to_lat :String ?= ""
     var from_lat :String ?= ""
     var to_lng :String ?= ""
@@ -219,12 +219,9 @@ class Current_cityCab : Fragment(),IOnBackPressed {
         }
 
         binding.currentCabList.layoutManager=GridLayoutManager(context,4)
-        cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))
-        advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)
-        binding.currentCabList.adapter=advanceCityAdapter
+
+    //    advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)
+    //    binding.currentCabList.adapter=advanceCityAdapter
 
     }
 
@@ -239,7 +236,9 @@ class Current_cityCab : Fragment(),IOnBackPressed {
         json.put("to_lng", to_lng)
         json.put("from_lat", from_lat)
         json.put("from_lng", from_lng)
-
+        json.put("to_location_name", manualLoc?.text.toString())
+        json.put("from_location_name", liveLoc?.text.toString())
+        json.put("type", "current_booking")
 
         val jsonOblect: JsonObjectRequest =
                 object : JsonObjectRequest(Method.POST, URL, json, object :
@@ -251,6 +250,24 @@ class Current_cityCab : Fragment(),IOnBackPressed {
 
                             ll_location?.isVisible = false
                             ll_choose_vehicle?.isVisible  =true
+
+                            val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
+                            val rideId = response.getJSONObject("data").getString("ride_id")
+
+                            for(p2 in 0 until size) {
+
+                                val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
+                                val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
+
+
+                                val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
+                                val ride_id = response.getJSONObject("data").getString("ride_id")
+
+                                cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id))
+                            }
+
+                           // advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)
+                          //  binding.currentCabList.adapter=advanceCityAdapter
                         }
                         // Get your json response and convert it to whatever you want.
                     }
