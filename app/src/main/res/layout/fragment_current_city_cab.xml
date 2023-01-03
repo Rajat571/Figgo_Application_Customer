@@ -195,7 +195,7 @@
                android:layout_height="wrap_content"
                android:id="@+id/current_cab_list"/>
 
-            <RadioGroup
+            <!--<RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RadioButton
@@ -210,8 +210,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PAY WALLET"/>
-            </RadioGroup>
+            </RadioGroup>-->
             <Button
+                android:id="@+id/nxtbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NEXT"

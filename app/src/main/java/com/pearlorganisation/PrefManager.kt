@@ -61,5 +61,25 @@ import android.content.SharedPreferences
          return pref?.getString("userid","").toString()
      }
 
+     fun setvehicle_type_id(vehicle_type_id:String){
+         editor?.putString("vehicle_type_id",vehicle_type_id)
+         editor?.commit()
+     }
+
+     fun getvehicle_type_id():String{
+         return pref?.getString("vehicle_type_id"," ").toString()
+     }
+
+     fun setride_id(ride_id:String){
+         editor?.putString("ride_id",ride_id)
+         editor?.commit()
+     }
+
+     fun getride_id():String{
+         return pref?.getString("ride_id"," ").toString()
+     }
+
+
+
 
 }

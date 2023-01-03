@@ -8,24 +8,7 @@
     tools:context=".UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/backgrouund"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/background"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" >
-
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/carfamily"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/header_layout"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/choose_user"

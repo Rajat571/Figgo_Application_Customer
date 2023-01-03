@@ -4,18 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     android:background="#54C5CF"
     android:id="@+id/navigation_bar2"
     tools:context=".One_Way_OutStationActivity">
 
-    <include layout="@layout/header_layout"/>
+    <!--<include layout="@layout/header_layout"/>-->
+
+    <ImageView
+        android:id="@+id/work_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/work_in_progress"/>
+
+
+
+    <include layout="@layout/header_layout"
+        android:visibility="gone"/>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_marginTop="-36dp"
             android:orientation="horizontal">
 
@@ -155,6 +169,7 @@
             android:id="@+id/ll_oneway"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_15sdp"
             android:orientation="vertical">
@@ -914,6 +929,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/_12sdp"
             android:orientation="vertical">
 
@@ -939,6 +955,7 @@
                 android:scaleType="centerCrop"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
+                android:visibility="gone"
                 android:layout_gravity="bottom"
                 app:layout_constraintBottom_toTopOf="@+id/bottombuttonbar"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,16 +1,17 @@
 package com.pearlorganisation.figgo
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.*
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
@@ -23,63 +24,44 @@ import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
 import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.Model.VehicleInfoList
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
+import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
+import com.pearlorganisation.figgo.databinding.FragmentOneWayRideBinding
 import org.json.JSONObject
 import java.util.HashMap
 
-class OneWay_Km_CountActivity : AppCompatActivity() {
 
-
-
+class OneWayRideFragment : Fragment() {
     lateinit var oneWayKmCountAdapter: OneWayKmCountAdapter
-    lateinit var binding:OneWay_Km_CountActivity
-    lateinit var pref:PrefManager
-    val mList = ArrayList<OneWayListRatingVehicle>()
+    lateinit var binding: FragmentOneWayRideBinding
+    lateinit var pref: PrefManager
+    var mList= ArrayList<OneWayListRatingVehicle>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_one_way_km_count)
-        var ll_accept = findViewById<LinearLayout>(R.id.ll_accept)
-        val recyclerview = findViewById<RecyclerView>(R.id.onewayvehiclelist)
-        var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var backimg = findViewById<ImageView>(R.id.backimg)
 
-
-     /*   getnxtbtn()*/
-        backimg.setOnClickListener {
-            val intent = Intent(this, HomeDashboard::class.java)
-            startActivity(intent)
-        }
-
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
-
-       /* mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
-        mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
-        mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","accept"))
-        mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
-        mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))*/
-
-        /*recyclerview.adapter = OneWayKmCountAdapter(this,mList)
-        recyclerview.layoutManager = LinearLayoutManager(this)
-        oneWayKmCountAdapter = OneWayKmCountAdapter(this,mList)
-        recyclerview.adapter = oneWayKmCountAdapter*/
-
-
-      /*  oneWayKmCountAdapter.onItemClick = {
-            val intent = Intent(this,VehicleAboutActivity::class.java)
-            *//*intent.putExtra("oneWayKmCountAdapter")*//*
-            startActivity(intent)
-        }*/
     }
 
-   /* private fun getnxtbtn() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        return inflater.inflate(R.layout.fragment_one_way_ride, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var ll_accept =view.findViewById<LinearLayout>(R.id.ll_accept)
+        val onewayvehiclelist = view.findViewById<RecyclerView>(R.id.onewayvehiclelist)
+        var shareimg =view.findViewById<ImageView>(R.id.shareimg)
+        var backimg =view.findViewById<ImageView>(R.id.backimg)
+
+        getnxtbtn()
+
+    }
+
+
+
+    private fun getnxtbtn() {
         val URL = "https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
-        val queue = Volley.newRequestQueue(this)
+        val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
         json.put("vehicle_type_id",pref.getvehicle_type_id())
         json.put("ride_id",pref.getride_id())
@@ -92,8 +74,8 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                       *//* ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true*//*
+                        /* ll_location?.isVisible = false
+                         ll_choose_vehicle?.isVisible  =true*/
 
                         val from_location = response.getJSONObject("data").getJSONObject("vehicle").getString("from_location")
                         val image = response.getJSONObject("data").getJSONObject("vehicle").getString("image")
@@ -114,16 +96,16 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
 
                         }
 
-
-
-
+                        oneWayKmCountAdapter= OneWayKmCountAdapter(requireActivity(),mList)
+                        binding.onewayvehiclelist.layoutManager=LinearLayoutManager(requireActivity())
+                        binding.onewayvehiclelist.adapter=oneWayKmCountAdapter
 
                     }
                     // Get your json response and convert it to whatever you want.
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
-                    *//*Toast.makeText(this(), "Something went wrong !!", Toast.LENGTH_LONG).show()*//*
+                    /*Toast.makeText(this(), "Something went wrong !!", Toast.LENGTH_LONG).show()*/
                     Log.d("SendData", "error===" + error)
                     // Error
                 }
@@ -139,12 +121,6 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
 
         queue.add(jsonOblect)
 
-    }*/
+    }
 
 }
-
-
-
-
-
-

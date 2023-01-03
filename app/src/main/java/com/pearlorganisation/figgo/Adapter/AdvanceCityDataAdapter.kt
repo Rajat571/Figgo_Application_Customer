@@ -16,29 +16,32 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.transition.Hold
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
+import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.squareup.picasso.Picasso
 
 
 class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityCabModel>): Adapter<AdvanceCityDataAdapter.AdvanceCityHolder>() {
-
+    lateinit var pref: PrefManager
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {
         var cab=itemview.findViewById<ImageView>(R.id.cab)
         var ratings=itemview.findViewById<TextView>(R.id.rating)
     }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvanceCityHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvanceCityHolder {
         return AdvanceCityHolder(LayoutInflater.from(parent.context).inflate(R.layout.city_cab_layout,parent,false))
     }
 
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: AdvanceCityHolder, position: Int) {
-     var data=cablist[position]
-      //  holder.cab.setImageResource(data.cab)
+        pref = PrefManager(context)
+        var data=cablist[position]
+        //  holder.cab.setImageResource(data.cab)
         holder.ratings.text=data.name
 
         Picasso.get().load(data.image).into(holder.cab)
@@ -49,7 +52,7 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
                     holder.cab.setImageResource(R.drawable.ola_auto_active)
 //                    holder.cab.setOnClickListener{
 //                        recreate(context)
-                  //  }
+                    //  }
                 }
                 1->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 2->holder.cab.setImageResource(R.drawable.ola_e_rick_active)
@@ -60,13 +63,18 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
                 8->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 9->holder.cab.setImageResource(R.drawable.ola_bike_active)
             }
-           }
+
+
+            //  pref.setRideId()
+            //  pref.setVehicleId()
+
+        }
 
 
 
     }
 
     override fun getItemCount(): Int {
-       return cablist.size
+        return cablist.size
     }
 }

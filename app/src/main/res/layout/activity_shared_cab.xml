@@ -7,12 +7,23 @@
     android:background="#54C5CF"
     tools:context=".UI.Shared_cab_Activity">
 
+    <ImageView
+        android:id="@+id/work_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/work_in_progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <fragment
         android:id="@+id/nav_controller"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

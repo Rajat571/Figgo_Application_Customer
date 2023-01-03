@@ -7,11 +7,17 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:visibility="visible"
     tools:context=".UI.Fragments.Package_cityCab">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/work_in_progress" />
     <androidx.cardview.widget.CardView
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
@@ -94,6 +100,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
       android:layout_marginLeft="30dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:id="@+id/recycler_package_list"/>
 

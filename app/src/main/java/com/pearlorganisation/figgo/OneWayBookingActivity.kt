@@ -73,45 +73,25 @@ class OneWayBookingActivity : AppCompatActivity() {
                 "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"
             )
         )
-        mList1.add(
-            BookingAmountList(
-                "Compact Cab",
-                "WegonR, Swift, i-20,similer",
-                "Rs. 2555.00",
-                "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra",
-                "Rs. 2555.00",
-                "Rs. 2555.00",
+        mList1.add(BookingAmountList("Compact Cab", "WegonR, Swift, i-20,similer", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Rs. 2555.00", "Rs. 2555.00",
                 "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra",
                 "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"
             )
         )
-        mList1.add(
-            BookingAmountList(
-                "Compact Cab",
-                "WegonR, Swift, i-20,similer",
-                "Rs. 2555.00",
-                "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra",
-                "Rs. 2555.00",
-                "Rs. 2555.00",
-                "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra",
-                "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"
-            )
-        )
-        mList1.add(
-            BookingAmountList("Compact Cab", "WegonR, Swift, i-20,similer", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Rs. 2555.00", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"))
-
+        mList1.add(BookingAmountList("Compact Cab", "WegonR, Swift, i-20,similer", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Rs. 2555.00", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"))
+        mList1.add(BookingAmountList("Compact Cab", "WegonR, Swift, i-20,similer", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Rs. 2555.00", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"))
         mList1.add(BookingAmountList("Compact Cab", "WegonR, Swift, i-20,similer", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Rs. 2555.00", "Rs. 2555.00", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra", "Driver Charge Extra, Toll  State Tax EXTRAParking Charge Extra"))
 
-        recyclerView.adapter = BookingAmountAdapter(mList1)
+        recyclerView.adapter = BookingAmountAdapter(this,mList1)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        bookingAmountAdapter = BookingAmountAdapter(mList1)
+        bookingAmountAdapter = BookingAmountAdapter(this,mList1)
         recyclerView.adapter = bookingAmountAdapter
 
-        bookingAmountAdapter.onItemClick = {
+      /*  bookingAmountAdapter.onItemClick = {
             val intent = Intent(this, VehicleBookActivity::class.java)
             intent.putExtra("vehicleAboutAdapter", it)
             startActivity(intent)
-        }
+        }*/
     }
 }

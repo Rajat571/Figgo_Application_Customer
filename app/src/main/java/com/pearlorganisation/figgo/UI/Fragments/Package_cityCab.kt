@@ -27,12 +27,12 @@ class Package_cityCab : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerPackageList.layoutManager=GridLayoutManager(context,3)
-        package_city_list.add(AdvanceCityCab(R.drawable.figgo_auto,"Rs. 2500/-"))
+       /* package_city_list.add(AdvanceCityCab(R.drawable.figgo_auto,"Rs. 2500/-"))
         package_city_list.add(AdvanceCityCab(R.drawable.figgo_bike,"Rs. 1500/-"))
         package_city_list.add(AdvanceCityCab(R.drawable.figgo_lux,"Rs. 4500/-"))
         package_city_list.add(AdvanceCityCab(R.drawable.figgo_e_rick,"Rs. 2500/-"))
         package_city_list.add(AdvanceCityCab(R.drawable.figgo_auto,"Rs. 1500/-"))
-        package_city_list.add(AdvanceCityCab(R.drawable.figgo_lux,"Rs. 2500/-"))
+        package_city_list.add(AdvanceCityCab(R.drawable.figgo_lux,"Rs. 2500/-"))*/
         advanceCityAdapter=AdvanceCityAdapter(requireActivity(),package_city_list)
         binding.recyclerPackageList.adapter=advanceCityAdapter
     }

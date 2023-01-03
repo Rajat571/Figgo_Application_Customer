@@ -9,13 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.figgo.EmergencyActivity
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
+import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.pearlorganisation.figgo.UI.CityCabActivity
+import com.pearlorganisation.figgo.VehicleAboutActivity
 
-class OneWayKmCountAdapter( private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<OneWayKmCountAdapter.ViewHolder>() {
+class OneWayKmCountAdapter(var context: Context, private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<OneWayKmCountAdapter.ViewHolder>() {
 
-    var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null
+   /* var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null*/
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OneWayKmCountAdapter.ViewHolder {
 
@@ -32,12 +35,16 @@ class OneWayKmCountAdapter( private val mList: List<OneWayListRatingVehicle>) : 
         holder.reject.text = OneWayListRatingVehicle.reject
         holder.acceptcountlist.text = OneWayListRatingVehicle.acceptcountlist
 
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(OneWayListRatingVehicle)
+        holder.acceptcountlist.setOnClickListener {
+            context.startActivity(Intent(context, VehicleAboutActivity::class.java))
+
         }
 
-    }
+      /*  holder.itemView.setOnClickListener {
+            onItemClick?.invoke(OneWayListRatingVehicle)
+        }*/
 
+    }
 
     override fun getItemCount(): Int {
         return mList.size

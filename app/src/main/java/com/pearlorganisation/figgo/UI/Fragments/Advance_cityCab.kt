@@ -23,6 +23,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -38,11 +40,15 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityAdapter
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
+import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
+import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
+import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
+import com.pearlorganisation.figgo.UI.CityCabActivity
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
 import org.json.JSONArray
@@ -57,9 +63,12 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
     lateinit var binding: FragmentAdvanceCityCabBinding
     lateinit var advanceCityAdapter: AdvanceCityDataAdapter
+    lateinit var recyclerView: RecyclerView
     var cablist=ArrayList<AdvanceCityCabModel>()
     var manualLoc: TextView? = null
     var liveLoc: TextView? = null
+    var vehicle_type_id: String =" "
+    var ride_id: String =" "
     var AUTOCOMPLETE_REQUEST_CODE = -1
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
@@ -72,13 +81,12 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
     var selects : String ?= "";
     lateinit var ll_location : LinearLayout
     lateinit var ll_choose_vehicle : LinearLayout
-
     var press : String ?= "";
     var datetext: TextView? = null
     var timetext: TextView? = null
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_advance_city_cab, container, false)
         return binding.root
     }
@@ -98,12 +106,13 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         var submit = view?.findViewById<Button>(R.id.submit)
         var next = view?.findViewById<Button>(R.id.next)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
-        ll_choose_vehicle?.isVisible = false
+       /* val recylerCabList = view.findViewById<RecyclerView>(R.id.recylerCabList)*/
+
+     //   ll_choose_vehicle?.isVisible = false
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
         }
-
 
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -177,11 +186,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                 .build(requireActivity())
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
         }
-
         submit?.setOnClickListener {
-
-
-
             if (to_lat == ""){
                 Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
             }else if (from_lat == ""){
@@ -193,28 +198,23 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
         }
         next?.setOnClickListener {
+            if (vehicle_type_id == ""){
+                startActivity(Intent(requireActivity(), OneWay_Km_CountActivity::class.java))
+                Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
+            }else if (ride_id == ""){
+               /* Toast.makeText(requireActivity(), "Please select Destination Address", Toast.LENGTH_LONG).show()*/
 
-
-         startActivity(Intent(requireActivity(), CabDetailsActivity::class.java))
-
-
+            }else {
+               /* nextbtn()*/
+            }
 
         }
 
-
-
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
-
-        binding.recylerCabList.layoutManager=GridLayoutManager(context,4)
       //  cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
       //  cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))
        // cablist.add(AdvanceCityCab(R.drawable.ola_mini,"256-420"))
-
-
 
 
         locLinear?.setOnClickListener {
@@ -223,9 +223,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
             if(internet == true) {
                 mainBinding = ActivityMainBinding.inflate(layoutInflater)
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
                 selects = "start"
-
                 getLocation()
             }else{
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
@@ -252,7 +250,6 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
     }
 
     private fun submitform() {
-
         val URL = "https://test.pearl-developer.com/figo/api/ride/create-city-ride"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
@@ -263,8 +260,8 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         json.put("from_lat", from_lat)
         json.put("from_lng", from_lng)
         json.put("type", "advance_booking")
-
-
+        json.put("to_location_name", manualLoc?.text.toString())
+        json.put("from_location_name", liveLoc?.text.toString())
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
@@ -275,18 +272,21 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                     if (response != null) {
 
                         ll_location?.isVisible = false
-                       ll_choose_vehicle?.isVisible  =true
+                        ll_choose_vehicle?.isVisible  =true
 
                         val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                       val rideId = response.getJSONObject("data").getString("ride_id")
+                        val rideId = response.getJSONObject("data").getString("ride_id")
 
                         for(p2 in 0 until size) {
 
-                        val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
+                            val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                                cablist.add(AdvanceCityCabModel(name,image))
-                            }
 
+                            val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
+                            val vehicle_id = response.getJSONObject("data").getString("ride_id")
+
+                            cablist.add(AdvanceCityCabModel(name,image))
+                        }
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
                         binding.recylerCabList.adapter=advanceCityAdapter
 
@@ -296,21 +296,24 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    // Error
+                    Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
+
                 }
             }) {
-                     @Throws(AuthFailureError::class)
-                 override fun getHeaders(): Map<String, String> {
-                     val headers: MutableMap<String, String> = HashMap()
-                         headers.put("Content-Type", "application/json; charset=UTF-8");
-                         headers.put("Authorization", "Bearer " + pref.getToken());
-                     return headers
-                 }
+                @SuppressLint("SuspiciousIndentation")
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers: MutableMap<String, String> = HashMap()
+                    headers.put("Content-Type", "application/json; charset=UTF-8");
+                    headers.put("Authorization", "Bearer " + pref.getToken());
+                    return headers
+                }
             }
 
         queue.add(jsonOblect)
 
     }
+
 
     @SuppressLint("MissingPermission", "SetTextI18n")
     private fun getLocation() {

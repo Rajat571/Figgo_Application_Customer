@@ -20,7 +20,7 @@
 
             <ImageView
                 android:id="@+id/backimg"
-                android:layout_width="@dimen/_28sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -38,14 +38,16 @@
             <ImageView
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="@dimen/_28sdp"
+                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:src="@drawable/bell_icon"/>
 
             <ImageView
                 android:id="@+id/shareimg"
-                android:layout_width="@dimen/_28sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:padding="@dimen/_5sdp"
+                android:layout_weight="3"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_baseline_share_24"/>
         </LinearLayout>
