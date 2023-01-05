@@ -15,7 +15,6 @@ import com.pearlorganisation.figgo.R
 
 class CityCabActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_cab)

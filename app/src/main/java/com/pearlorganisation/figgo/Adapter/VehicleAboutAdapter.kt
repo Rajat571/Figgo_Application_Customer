@@ -35,10 +35,10 @@ class VehicleAboutAdapter(private val vehicle_about_list:ArrayList<VehicleInfoLi
 
         val VehicleInfoList = vehicle_about_list[position]
 
-        holder.vehiclenumber.text=VehicleInfoList.vehiclenumber
+        /*holder.vehiclenumber.text=VehicleInfoList.vehiclenumber*/
         holder.activaimg.setImageResource(R.drawable.blueactiva_img)
         holder.driverimg.setImageResource(R.drawable.girl_img)
-        holder.activavehiclenumber.text=VehicleInfoList.activavehiclenumber
+       /* holder.activavehiclenumber.text=VehicleInfoList.activavehiclenumber*/
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(VehicleInfoList)

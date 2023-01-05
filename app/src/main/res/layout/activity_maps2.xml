@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".VehicleAboutActivity">
+    tools:context=".CurrentMap.MapsActivity2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
 
             <ImageView
                 android:id="@+id/backimg"
-                android:layout_width="@dimen/_28sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -38,14 +38,16 @@
             <ImageView
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="@dimen/_28sdp"
+                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:src="@drawable/bell_icon"/>
 
             <ImageView
                 android:id="@+id/shareimg"
-                android:layout_width="@dimen/_28sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:padding="@dimen/_5sdp"
+                android:layout_weight="3"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_baseline_share_24"/>
         </LinearLayout>
@@ -56,7 +58,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-104dp"
+        android:layout_marginTop="-114dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -68,12 +70,12 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/coloryellow"
-                android:scaleType="fitXY"
-                android:src="@drawable/googlemapimg" />
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".CurrentMap.MapsActivity1" />
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>
@@ -87,7 +89,7 @@
             android:id="@+id/activaimg"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
-            android:layout_weight="1"
+            android:layout_marginStart="@dimen/_12sdp"
             android:src="@drawable/blueactiva_img" />
 
 
@@ -98,6 +100,7 @@
             android:fontFamily="sans-serif-black"
             android:text="Activa - CH-01-2015"
             android:layout_weight="1"
+            android:layout_marginStart="@dimen/_22sdp"
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
@@ -120,16 +123,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-25dp"
+        android:layout_marginTop="-19dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/_6sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:cardMaxElevation="@dimen/_2sdp"
-            android:layout_margin="@dimen/_12sdp">
+            app:cardMaxElevation="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp">
 
             <ImageView
                 android:id="@+id/driverimg"
@@ -186,6 +190,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
         android:weightSum="4"
         android:gravity="center"
         android:orientation="horizontal">

@@ -7,15 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pearlorganisation.figgo.EmergencyActivity
+import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.CabDetailsActivity
-import com.pearlorganisation.figgo.UI.CityCabActivity
 
-class OneWayKmCountAdapter( private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<OneWayKmCountAdapter.ViewHolder>() {
+class OneWayKmCountAdapter(var context: Context, private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<OneWayKmCountAdapter.ViewHolder>() {
 
-    var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null
+    lateinit var pref: PrefManager
+   /* var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null*/
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OneWayKmCountAdapter.ViewHolder {
 
@@ -27,17 +28,21 @@ class OneWayKmCountAdapter( private val mList: List<OneWayListRatingVehicle>) : 
         val OneWayListRatingVehicle = mList[position]
 
         holder.vehiclemodel.text = OneWayListRatingVehicle.vehiclemodel
-   //     holder.raingcountlist.text = OneWayListRatingVehicle.raingcountlist
-      //  holder.ride_service_rating.text = OneWayListRatingVehicle.ride_service_rating
         holder.reject.text = OneWayListRatingVehicle.reject
         holder.acceptcountlist.text = OneWayListRatingVehicle.acceptcountlist
 
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(OneWayListRatingVehicle)
+        holder.acceptcountlist.setOnClickListener {
+            context.startActivity(Intent(context, MapsActivity2::class.java))
+
         }
+       /* pref.setvehicle_type_id(OneWayListRatingVehicle.vehicle_type_id)
+        pref.setride_id(OneWayListRatingVehicle.ride_id)
+*/
+      /*  holder.itemView.setOnClickListener {
+            onItemClick?.invoke(OneWayListRatingVehicle)
+        }*/
 
     }
-
 
     override fun getItemCount(): Int {
         return mList.size

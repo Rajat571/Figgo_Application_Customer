@@ -29,10 +29,10 @@ class ShareCab_Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var share_cab_list=view.findViewById<RecyclerView>(R.id.share_cab_list)
         share_cab_list.layoutManager= GridLayoutManager(context,4)
-        cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
+       /* cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
         cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
         cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))
+        cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))*/
         advanceCityAdapter=AdvanceCityAdapter(requireActivity() ,cablist)
         share_cab_list.adapter=advanceCityAdapter
 
