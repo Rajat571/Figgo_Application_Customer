@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.app.ActivityCompat.recreate
 import androidx.navigation.Navigation
@@ -30,6 +31,10 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
     {
         var cab=itemview.findViewById<ImageView>(R.id.cab)
         var ratings=itemview.findViewById<TextView>(R.id.rating)
+        var min=itemview.findViewById<TextView>(R.id.min)
+        var max=itemview.findViewById<TextView>(R.id.max)
+        var ll_main=itemview.findViewById<LinearLayout>(R.id.ll_main)
+
     }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvanceCityHolder {
@@ -42,10 +47,17 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
      var data=cablist[position]
       //  holder.cab.setImageResource(data.cab)
         holder.ratings.text=data.name
-
+        holder.min.text=data.min
+        holder.max.text=data.max
         Picasso.get().load(data.image).into(holder.cab)
         holder.itemView.setOnClickListener {
-            when(holder.adapterPosition)
+
+         //   if(holder.adapterPosition.)
+
+
+
+            holder.ll_main.setBackgroundColor(context.resources.getColor(R.color.quantum_bluegrey700))
+           /* when(holder.adapterPosition)
             {
                 0->{
                     holder.cab.setImageResource(R.drawable.ola_auto_active)
@@ -61,11 +73,13 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
                 7->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 8->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 9->holder.cab.setImageResource(R.drawable.ola_bike_active)
-            }
+            }*/
 
 
            pref.setRideId(data.rideId)
             pref.setVehicleId(data.vehicleId)
+
+            context.startActivity(Intent(context, CabDetailsActivity::class.java))
 
            }
 

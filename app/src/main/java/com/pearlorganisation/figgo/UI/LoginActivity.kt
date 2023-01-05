@@ -30,6 +30,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.WelcomeSlider
 import org.json.JSONObject
 
 
@@ -48,6 +49,10 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         pref = PrefManager(this)
+        if(pref.isValid().equals("true")){
+
+            startActivity(Intent(this, DashBoard::class.java))
+        }
       //  var email = findViewById<TextView>(R.id.email)
       //  var number = findViewById<TextView>(R.id.number)
         var input_number = findViewById<TextView>(R.id.input_number)
@@ -107,6 +112,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
                                val token = response.getString("token")
                                pref.setToken(token)
+                               pref.setisValid("true")
                                Toast.makeText(this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
                                Log.d("SendData", "token===" + token)
                              //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
@@ -134,6 +140,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 //                               else{
 //                                   startActivity(Intent(this@LoginActivity,DashBoard::class.java))
 //                               }
+                               pref.setisValid("true")
                                startActivity(Intent(this@LoginActivity,DashBoard::class.java))
                            }
 
