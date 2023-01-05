@@ -263,7 +263,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
                                 val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
                                 val ride_id = response.getJSONObject("data").getString("ride_id")
 
-                                cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id))
+                                cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id,"",""))
                             }
 
                            // advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)

@@ -2,6 +2,7 @@ package com.pearlorganisation.figgo.UI.Fragments
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
@@ -219,7 +220,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
-        binding.recylerCabList.layoutManager=GridLayoutManager(context,4)
+        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
       //  cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
@@ -275,7 +276,8 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
     }
 
     private fun submitform() {
-
+        val progressDialog = ProgressDialog(requireActivity())
+        progressDialog.show()
         val URL = "https://test.pearl-developer.com/figo/api/ride/create-city-ride"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
@@ -301,6 +303,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
 
+                        progressDialog.hide()
                         ll_location?.isVisible = false
                        ll_choose_vehicle?.isVisible  =true
 
@@ -314,9 +317,10 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
 
                             val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
-                            val ride_id = response.getJSONObject("data").getString("ride_id")
+                            val min = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
+                            val max = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")
 
-                            cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id))
+                            cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id,min,max))
                             }
 
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)

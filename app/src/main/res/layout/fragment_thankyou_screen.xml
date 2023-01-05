@@ -61,9 +61,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/booking_id"
                 android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
-                android:text="Booking Id. 1234567"
                 android:textSize="@dimen/_10sdp" />
 
             <TextView
@@ -149,7 +149,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-black"
-                android:text="OTP - 2546"
+                android:id="@+id/otp"
                 android:textSize="@dimen/_13sdp" />
             <TextView
                 android:layout_width="wrap_content"

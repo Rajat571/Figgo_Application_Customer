@@ -52,7 +52,14 @@ import android.content.SharedPreferences
      fun getToken():String{
          return pref?.getString("token","null").toString()
      }
+     fun setisValid(token:String){
+         editor?.putString("login",token)
+         editor?.commit()
+     }
 
+     fun isValid():String{
+         return pref?.getString("login","null").toString()
+     }
      fun setRideId(ride_id:String){
          editor?.putString("ride_id",ride_id)
          editor?.commit()
@@ -60,6 +67,24 @@ import android.content.SharedPreferences
 
      fun getRideId():String{
          return pref?.getString("ride_id","null").toString()
+     }
+
+     fun setOtp(otp:String){
+         editor?.putString("otp",otp)
+         editor?.commit()
+     }
+
+     fun getOtp():String{
+         return pref?.getString("otp","null").toString()
+     }
+
+     fun setBookingNo(book_no:String){
+         editor?.putString("book_no",book_no)
+         editor?.commit()
+     }
+
+     fun getBookingNo():String{
+         return pref?.getString("book_no","null").toString()
      }
 
      fun setVehicleId(vehicle_id:String){
