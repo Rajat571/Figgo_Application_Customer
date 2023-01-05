@@ -312,6 +312,8 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
                         for(p2 in 0 until size) {
 
+
+
                         val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
 
