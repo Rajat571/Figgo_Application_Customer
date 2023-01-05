@@ -35,6 +35,9 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
         var max=itemview.findViewById<TextView>(R.id.max)
         var ll_main=itemview.findViewById<LinearLayout>(R.id.ll_main)
 
+
+
+
     }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvanceCityHolder {
