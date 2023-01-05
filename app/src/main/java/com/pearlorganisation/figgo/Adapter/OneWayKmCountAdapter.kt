@@ -9,13 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
-import com.pearlorganisation.figgo.EmergencyActivity
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
-import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.CabDetailsActivity
-import com.pearlorganisation.figgo.UI.CityCabActivity
-import com.pearlorganisation.figgo.VehicleAboutActivity
 
 class OneWayKmCountAdapter(var context: Context, private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<OneWayKmCountAdapter.ViewHolder>() {
 
