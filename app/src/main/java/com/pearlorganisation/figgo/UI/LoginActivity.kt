@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
@@ -136,7 +137,13 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
                             return headers
                         }*/
                }
-
+           jsonOblect.setRetryPolicy(
+               DefaultRetryPolicy(
+                   10000,
+                   DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                   DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+               )
+           )
            queue.add(jsonOblect)
 
 

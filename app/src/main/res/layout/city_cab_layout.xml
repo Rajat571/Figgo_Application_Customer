@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="3dp"
+    android:layout_margin="10dp"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="4dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="@drawable/circle_background"
-        android:id="@+id/cab"/>
+        android:orientation="vertical"
+        android:gravity="center">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/girl"
+            android:id="@+id/cab"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:text="name"/>
+
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
+        android:id="@+id/price"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="20-30"/>
 
 

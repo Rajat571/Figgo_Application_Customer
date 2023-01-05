@@ -13,7 +13,6 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +21,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
@@ -37,13 +38,12 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
-import com.pearlorganisation.figgo.Adapter.AdvanceCityAdapter
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
+import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
+import com.pearlorganisation.figgo.Model.CurrentModel
 import com.pearlorganisation.figgo.OneWayRideFragment
-import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
@@ -52,13 +52,18 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class Current_cityCab : Fragment(),IOnBackPressed {
     lateinit var binding: FragmentCurrentCityCabBinding
+
     lateinit var advanceCityAdapter: AdvanceCityDataAdapter
     private lateinit var recyclerView: RecyclerView
+    lateinit var recyclerv: RecyclerView
     var cablist=ArrayList<AdvanceCityCabModel>()
+    var mList= ArrayList<CurrentModel>()
+    lateinit var oneWayKmCountAdapter: OneWayKmCountAdapter
+
     var to_lat :String ?= ""
     var from_lat :String ?= ""
     var to_lng :String ?= ""
@@ -77,6 +82,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
     var datetext: TextView? = null
     var timetext: TextView? = null
     var manualLoc: TextView? = null
+    var progress: ProgressBar? = null
     var liveLoc: TextView? = null
     var nxtbtn: Button? = null
     private lateinit var mainBinding: ActivityMainBinding
@@ -103,6 +109,8 @@ class Current_cityCab : Fragment(),IOnBackPressed {
         liveLoc = view?.findViewById<TextView>(R.id.live_loc)
         nxtbtn = view.findViewById(R.id.nxtbtn)
         recyclerView = view.findViewById(R.id.current_cab_list)
+        progress = view.findViewById<ProgressBar>(R.id.progress)
+        val recyclerv = view.findViewById<RecyclerView>(R.id.onewayvehiclelist)
       //  current_loc = view?.findViewById<TextView>(R.id.current_loc)
       /*  destination_loc = view?.findViewById<TextView>(R.id.destination_loc)*/
 
@@ -125,7 +133,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
             datetext?.setText(currentDate)
             timetext?.setText(currentTime)
         } else {
-            TODO("VERSION.SDK_INT < O")
+
         }
 
         calenderimg.setOnClickListener {
@@ -187,7 +195,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
 
         submit?.setOnClickListener {
             if (to_lat == ""){
-                startActivity(Intent(requireActivity(), OneWay_Km_CountActivity::class.java))
+              //  startActivity(Intent(requireActivity(), OneWay_Km_CountActivity::class.java))
                 Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
             }else if (from_lat == ""){
                 Toast.makeText(requireActivity(), "Please select Destination Address", Toast.LENGTH_LONG).show()
@@ -197,17 +205,10 @@ class Current_cityCab : Fragment(),IOnBackPressed {
             }
 
             nxtbtn?.setOnClickListener {
-                if (to_lat == ""){
-                    startActivity(Intent(requireActivity(), OneWayRideFragment::class.java))
-                    Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
-                }else if (from_lat == ""){
-                    Toast.makeText(requireActivity(), "Please select Destination Address", Toast.LENGTH_LONG).show()
-
-                }else {
-                   /* nxtbtn()*/
+                startActivity(Intent(requireActivity(), OneWayRideFragment::class.java))
                     /*vehicle_type_id.setvehicle_type_id("vehicle_type_id")
                     ride_id.setride_id("ride_id")*/
-                }
+
             }
 
         }
@@ -244,7 +245,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
             }
         }
 
-        binding.currentCabList.layoutManager=GridLayoutManager(context,4)
+
        /* cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
         cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
         cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
@@ -254,58 +255,10 @@ class Current_cityCab : Fragment(),IOnBackPressed {
 
     }
 
-    private fun nxtbtn() {
-        val URL = "https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
-        val queue = Volley.newRequestQueue(requireContext())
-        val json = JSONObject()
-        json.put("vehicle_type_id",pref.getvehicle_type_id())
-        json.put("ride_id",pref.getride_id())
-        Log.d("SendData", "json===" + json)
-        val jsonOblect: JsonObjectRequest =
-            object : JsonObjectRequest(Method.POST, URL, json, object :
-                Response.Listener<JSONObject?>               {
-                @SuppressLint("SuspiciousIndentation")
-                override fun onResponse(response: JSONObject?) {
-                    Log.d("SendData", "response===" + response)
-                    if (response != null) {
-                        ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true
-
-                        val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                        val rideId = response.getJSONObject("data").getString("ride_id")
-
-                        for(p2 in 0 until size) {
-                            val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
-                            val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                            val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
-                            val vehicle_id = response.getJSONObject("data").getString("ride_id")
-
-                        }
-
-                    }
-                    // Get your json response and convert it to whatever you want.
-                }
-            }, object : Response.ErrorListener {
-                override fun onErrorResponse(error: VolleyError?) {
-                    Toast.makeText(requireActivity(), "Something went wrong !!", Toast.LENGTH_LONG).show()
-                    Log.d("SendData", "error===" + error)
-                    // Error
-                }
-            }) {
-                @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers: MutableMap<String, String> = HashMap()
-                    headers.put("Content-Type", "application/json; charset=UTF-8");
-                    headers.put("Authorization", "Bearer " + pref.getToken());
-                    return headers
-                }
-            }
-
-        queue.add(jsonOblect)
-
-    }
-
     private fun submitform() {
+        progress?.isVisible = true
+        ll_location?.isVisible = false
+        ll_choose_vehicle?.isVisible  =false
         val URL = "https://test.pearl-developer.com/figo/api/ride/create-city-ride"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
@@ -319,31 +272,62 @@ class Current_cityCab : Fragment(),IOnBackPressed {
         json.put("from_location_name", liveLoc?.text.toString())
         json.put("type","current_booking")
         Log.d("SendData", "json===" + json)
-        val jsonOblect: JsonObjectRequest =
-                object : JsonObjectRequest(Method.POST, URL, json, object :
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                         Response.Listener<JSONObject?>               {
                     override fun onResponse(response: JSONObject?) {
 
                         Log.d("SendData", "response===" + response)
                         if (response != null) {
+                            val status = response.getString("status")
+                            if(status.equals("false")){
+                                Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                            }else{
+                                val data = response.getJSONObject("data")
+                                val ride_id = data.getString("ride_id")
+                                val vehicle_types = data.getJSONArray("vehicle_types")
+                                for (i in 0 until vehicle_types.length()){
 
-                            ll_location?.isVisible = false
-                            ll_choose_vehicle?.isVisible  =true
+
+                                    val name = vehicle_types.getJSONObject(i).getString("name")
+                                    val image = vehicle_types.getJSONObject(i).getString("full_image")
+                                    val id = vehicle_types.getJSONObject(i).getString("id")
+                                    val min_price = vehicle_types.getJSONObject(i).getString("min_price")
+                                    val max_price = vehicle_types.getJSONObject(i).getString("max_price")
+
+                                    cablist.add(AdvanceCityCabModel(name,image,id,ride_id,min_price, max_price))
+
+
+
+
+                                }
+                                advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
+                                recyclerView.adapter=advanceCityAdapter
+                                recyclerView.layoutManager=GridLayoutManager(context,4)
+                                progress?.isVisible = false
+                                ll_location?.isVisible = false
+                                ll_choose_vehicle?.isVisible  =true
+                            }
+
+                          /*
+
+
+
+
+
                             val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                            val rideId = response.getJSONObject("data").getString("ride_id")
+                            val ride_id = response.getJSONObject("data").getString("ride_id")
 
                             for(p2 in 0 until size) {
-
                                 val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                                 val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
+                               *//* val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("ride_id")*//*
+                                val ride_id = response.getJSONObject("data").getString("ride_id")
+                                val vehicle_id = response.getJSONObject("data").getString("vehicle_id")
 
-                                val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
-                               // val vehicle_id = response.getJSONObject("data").getString("ride_id")
-
-                                cablist.add(AdvanceCityCabModel(name,image))
+                                cablist.add(AdvanceCityCabModel(name,image,vehicle_id,ride_id))
                             }
                             advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
-                            binding.currentCabList.adapter=advanceCityAdapter
+                            binding.currentCabList.adapter=advanceCityAdapter*/
 
                         }
                         // Get your json response and convert it to whatever you want.
@@ -362,7 +346,13 @@ class Current_cityCab : Fragment(),IOnBackPressed {
                         return headers
                     }
                 }
-
+        jsonOblect.setRetryPolicy(
+            DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            )
+        )
         queue.add(jsonOblect)
 
     }

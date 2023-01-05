@@ -23,14 +23,16 @@ import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityCabModel>): Adapter<AdvanceCityDataAdapter.AdvanceCityHolder>() {
     lateinit var pref: PrefManager
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {
-        var cab=itemview.findViewById<ImageView>(R.id.cab)
-        var ratings=itemview.findViewById<TextView>(R.id.rating)
+        var cab=itemview.findViewById<CircleImageView>(R.id.cab)
+        var ratings=itemview.findViewById<TextView>(R.id.name)
+        var price=itemview.findViewById<TextView>(R.id.price)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvanceCityHolder {
@@ -43,7 +45,7 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
         var data=cablist[position]
         //  holder.cab.setImageResource(data.cab)
         holder.ratings.text=data.name
-
+holder.price.text = data.min_price +"-"+data.max_price
         Picasso.get().load(data.image).into(holder.cab)
         holder.itemView.setOnClickListener {
             when(holder.adapterPosition)
@@ -64,9 +66,8 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
                 9->holder.cab.setImageResource(R.drawable.ola_bike_active)
             }
 
-
-            //  pref.setRideId()
-            //  pref.setVehicleId()
+            pref.setvehicle_type_id(data.vehicle_type_id)
+            pref.setride_id(data.ride_id)
 
         }
 

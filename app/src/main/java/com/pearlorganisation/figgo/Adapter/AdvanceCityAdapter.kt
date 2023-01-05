@@ -28,7 +28,7 @@ class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>):
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {
         var cab=itemview.findViewById<ImageView>(R.id.cab)
-        var ratings=itemview.findViewById<TextView>(R.id.rating)
+        var ratings=itemview.findViewById<TextView>(R.id.price)
     }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvanceCityHolder {

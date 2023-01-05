@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
 import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
+import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.Model.VehicleInfoList
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
@@ -38,7 +39,7 @@ class OneWayRideFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        getnxtbtn()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,11 +54,9 @@ class OneWayRideFragment : Fragment() {
         var shareimg =view.findViewById<ImageView>(R.id.shareimg)
         var backimg =view.findViewById<ImageView>(R.id.backimg)
 
-        getnxtbtn()
+
 
     }
-
-
 
     private fun getnxtbtn() {
         val URL = "https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
@@ -76,24 +75,22 @@ class OneWayRideFragment : Fragment() {
                     if (response != null) {
                         /* ll_location?.isVisible = false
                          ll_choose_vehicle?.isVisible  =true*/
-
                         val from_location = response.getJSONObject("data").getJSONObject("vehicle").getString("from_location")
                         val image = response.getJSONObject("data").getJSONObject("vehicle").getString("image")
                         val min_price = response.getJSONObject("data").getJSONObject("vehicle").getString("min_price")
                         val max_price = response.getJSONObject("data").getJSONObject("vehicle").getString("max_price")
                         val to_location = response.getJSONObject("data").getJSONObject("vehicle").getString("to_location")
-                        val name = response.getJSONObject("data").getJSONObject("vehicle").getString("name")
+                        val reject = response.getJSONObject("data").getJSONObject("vehicle").getString("name")
                         val distance = response.getJSONObject("data").getJSONObject("vehicle").getString("distance")
-
                         val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
                         val rideId = response.getJSONObject("data").getString("id")
-
                         for(p2 in 0 until size) {
                             val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
                             val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val vehicle_id = response.getJSONObject("data").getString("ride_id")
 
+                            mList.add(OneWayListRatingVehicle(reject,to_location,min_price,max_price,from_location,image, name,distance,ride_id,from_location))
                         }
 
                         oneWayKmCountAdapter= OneWayKmCountAdapter(requireActivity(),mList)

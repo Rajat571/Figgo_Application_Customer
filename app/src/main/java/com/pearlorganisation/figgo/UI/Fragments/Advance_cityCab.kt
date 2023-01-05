@@ -281,11 +281,13 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
                             val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-
-                            val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
+                            /*val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("ride_id")*/
+                            val min_price = response.getJSONObject("data").getJSONArray("vehicle").getJSONObject(p2).getString("min_price")
+                            val max_price = response.getJSONObject("data").getJSONArray("vehicle").getJSONObject(p2).getString("max_price")
+                            val ride_id = response.getJSONObject("data").getString("vehicle_id")
                             val vehicle_id = response.getJSONObject("data").getString("ride_id")
 
-                            cablist.add(AdvanceCityCabModel(name,image))
+                            cablist.add(AdvanceCityCabModel(name,image,vehicle_id,ride_id,min_price,max_price))
                         }
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
                         binding.recylerCabList.adapter=advanceCityAdapter

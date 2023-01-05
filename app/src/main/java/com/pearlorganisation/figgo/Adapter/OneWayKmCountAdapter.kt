@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.EmergencyActivity
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.OneWay_Km_CountActivity
@@ -17,6 +18,7 @@ import com.pearlorganisation.figgo.VehicleAboutActivity
 
 class OneWayKmCountAdapter(var context: Context, private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<OneWayKmCountAdapter.ViewHolder>() {
 
+    lateinit var pref: PrefManager
    /* var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null*/
 
 
@@ -30,8 +32,6 @@ class OneWayKmCountAdapter(var context: Context, private val mList: List<OneWayL
         val OneWayListRatingVehicle = mList[position]
 
         holder.vehiclemodel.text = OneWayListRatingVehicle.vehiclemodel
-   //     holder.raingcountlist.text = OneWayListRatingVehicle.raingcountlist
-      //  holder.ride_service_rating.text = OneWayListRatingVehicle.ride_service_rating
         holder.reject.text = OneWayListRatingVehicle.reject
         holder.acceptcountlist.text = OneWayListRatingVehicle.acceptcountlist
 
@@ -39,7 +39,9 @@ class OneWayKmCountAdapter(var context: Context, private val mList: List<OneWayL
             context.startActivity(Intent(context, VehicleAboutActivity::class.java))
 
         }
-
+       /* pref.setvehicle_type_id(OneWayListRatingVehicle.vehicle_type_id)
+        pref.setride_id(OneWayListRatingVehicle.ride_id)
+*/
       /*  holder.itemView.setOnClickListener {
             onItemClick?.invoke(OneWayListRatingVehicle)
         }*/
