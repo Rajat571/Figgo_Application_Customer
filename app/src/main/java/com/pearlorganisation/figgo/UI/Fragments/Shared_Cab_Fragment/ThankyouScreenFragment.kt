@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 
 class ThankyouScreenFragment : Fragment() {
 
@@ -29,14 +30,32 @@ class ThankyouScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var next_button  = view.findViewById<TextView>(R.id.next_button)
+        var next_button = view.findViewById<TextView>(R.id.next_button)
+        var book_other = view.findViewById<TextView>(R.id.book_other)
+        var close = view.findViewById<TextView>(R.id.close)
+
         next_button.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_thankyouScreenFragment_to_vehicleNumberFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_thankyouScreenFragment_to_vehicleNumberFragment)
         }
+
 
         var ride_service_rating = view.findViewById<RatingBar>(R.id.ride_service_rating)
 //        ride_service_rating.rating
+        book_other.setOnClickListener {
 
+
+            var homeFrag = HomeDashboard()
+            requireActivity().supportFragmentManager.beginTransaction().apply {
+                replace(R.id.framedash, homeFrag)
+                commit()
+            }
+
+        }
+        close.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_thankyouScreenFragment_to_vehicleNumberFragment)
+        }
 
 
     }

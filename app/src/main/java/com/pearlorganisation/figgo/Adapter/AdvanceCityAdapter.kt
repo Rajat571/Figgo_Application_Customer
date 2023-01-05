@@ -2,33 +2,28 @@ package com.pearlorganisation.figgo.Adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.recreate
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.transition.Hold
-import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
-import com.pearlorganisation.figgo.OneWay_Km_CountActivity
+import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
-import com.squareup.picasso.Picasso
 
 
-class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>): Adapter<AdvanceCityAdapter.AdvanceCityHolder>() {
-    lateinit var pref: PrefManager
+class AdvanceCityAdapter(var context:Activity, var cablist: ArrayList<AdvanceCityCab>): Adapter<AdvanceCityAdapter.AdvanceCityHolder>() {
 
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {
         var cab=itemview.findViewById<ImageView>(R.id.cab)
-        var ratings=itemview.findViewById<TextView>(R.id.price)
+        var ratings=itemview.findViewById<TextView>(R.id.rating)
     }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvanceCityHolder {
@@ -37,11 +32,9 @@ class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>):
 
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: AdvanceCityHolder, position: Int) {
-        pref = PrefManager(context)
      var data=cablist[position]
-
-        holder.ratings.text=data.name
-        Picasso.get().load(data.image).into(holder.cab)
+        holder.cab.setImageResource(data.cab)
+        holder.ratings.text=data.rating
         holder.itemView.setOnClickListener {
             when(holder.adapterPosition)
             {
@@ -60,11 +53,7 @@ class AdvanceCityAdapter(var context:Activity,var cablist:List<AdvanceCityCab>):
                 8->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 9->holder.cab.setImageResource(R.drawable.ola_bike_active)
             }
-
-            pref.setvehicle_type_id(data.vehicle_type_id)
-            pref.setride_id(data.ride_id)
-
-     //    context.startActivity(Intent(context,OneWay_Km_CountActivity::class.java))
+         context.startActivity(Intent(context,CabDetailsActivity::class.java))
         }
     }
 

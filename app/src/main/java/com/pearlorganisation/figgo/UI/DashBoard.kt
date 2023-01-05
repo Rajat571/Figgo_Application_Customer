@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.location.LocationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
@@ -45,6 +46,11 @@ import com.pearlorganisation.figgo.UI.Fragments.OutStation.RoundAndTourFragment
 import com.pearlorganisation.figgo.UI.Fragments.RidesBottom
 import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
+import com.razorpay.PaymentResultListener
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DashBoard : AppCompatActivity() {
@@ -57,6 +63,7 @@ class DashBoard : AppCompatActivity() {
     var figgo_add_list=ArrayList<FiggoAdd>()
     var doubleBackToExitPressedOnce = false
     var count = 0
+    var transaction_id :String ?= ""
     var backPressedTime: Long = 0
     private val permissionId = 2
     var homeFrag = HomeDashboard()
@@ -314,6 +321,7 @@ class DashBoard : AppCompatActivity() {
 
 
    }
+
 
 
 

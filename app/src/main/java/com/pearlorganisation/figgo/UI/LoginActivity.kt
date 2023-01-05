@@ -3,9 +3,7 @@ package com.pearlorganisation.figgo.UI
 import android.Manifest
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.InputType.*
 import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -20,10 +18,16 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Task
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
 import org.json.JSONObject
@@ -39,6 +43,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var nav_controller:NavController
     lateinit var pref: PrefManager
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -56,9 +61,19 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION)
-        mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
-            .addOnConnectionFailedListener(this).build()
+       // mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
+        //    .addOnConnectionFailedListener(this).build()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("AIzaSyD1HxXgHCXEdsqZlusGqPjkHeJdpAuvnG0")
+            .requestEmail()
+            .build()
 
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        val googleLoginButton = findViewById<TextView>(R.id.google_login_button)
+        googleLoginButton.setOnClickListener {
+            signIn()
+        }
        /* email.setOnClickListener {
             input_number.setHint("Enter Your Email Id")
             email.setTypeface(Typeface.DEFAULT_BOLD);
@@ -164,4 +179,79 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     override fun onConnectionSuspended(p0: Int) {
         TODO("Not yet implemented")
     }
+
+
+    private fun signIn() {
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(
+            signInIntent, RC_SIGN_IN
+        )
+    }
+
+    companion object {
+        const val RC_SIGN_IN = 9001
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task =
+                GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+
+            // Signed in successfully, show authenticated UI.
+          //  updateUI(account)
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+           // Log.w(TAG, "signInResult:failed code=" + e.statusCode)
+            //updateUI(null)
+        }
+    }
+  /*  private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(
+                ApiException::class.java
+            )
+            // Signed in successfully
+            val googleId = account?.id ?: ""
+            Log.i("Google ID",googleId)
+            val googleFirstName = account?.givenName ?: ""
+            Log.i("Google First Name", googleFirstName)
+            val googleLastName = account?.familyName ?: ""
+            Log.i("Google Last Name", googleLastName)
+            val googleEmail = account?.email ?: ""
+            Log.i("Google Email", googleEmail)
+            val googleProfilePicURL = account?.photoUrl.toString()
+            Log.i("Google Profile Pic URL", googleProfilePicURL)
+            val googleIdToken = account?.idToken ?: ""
+            Log.i("Google ID Token", googleIdToken)
+        } catch (e: ApiException) {
+            // Sign in was unsuccessful
+            Log.e(
+                "failed code=", e.statusCode.toString()
+            )
+        }
+    }*/
+    private fun signOut() {
+        mGoogleSignInClient.signOut()
+            .addOnCompleteListener(this) {
+                // Update your UI here
+            }
+    }
+
+
+    private fun revokeAccess() {
+        mGoogleSignInClient.revokeAccess()
+            .addOnCompleteListener(this) {
+                // Update your UI here
+            }
+    }
+
 }

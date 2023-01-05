@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
-import android.location.Address
-import android.location.Geocoder
-import android.location.Location
+import android.content.pm.PackageManager
+import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -19,12 +19,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -38,20 +37,13 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
-import com.pearlorganisation.figgo.Adapter.AdvanceCityAdapter
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
-import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
-import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
-import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
-import com.pearlorganisation.figgo.UI.CityCabActivity
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
-import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -63,12 +55,9 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
     lateinit var binding: FragmentAdvanceCityCabBinding
     lateinit var advanceCityAdapter: AdvanceCityDataAdapter
-    lateinit var recyclerView: RecyclerView
     var cablist=ArrayList<AdvanceCityCabModel>()
     var manualLoc: TextView? = null
     var liveLoc: TextView? = null
-    var vehicle_type_id: String =" "
-    var ride_id: String =" "
     var AUTOCOMPLETE_REQUEST_CODE = -1
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
@@ -81,16 +70,27 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
     var selects : String ?= "";
     lateinit var ll_location : LinearLayout
     lateinit var ll_choose_vehicle : LinearLayout
+    private var currentLocation: Location? = null
+    lateinit var locationManager: LocationManager
+    private val requestcode = 2
+    private var hasGps = false
+    private var hasNetwork = false
+    private var locationByGps: Location? = null
+    private var locationByNetwork: Location? = null
+    private var lastKnownLocationByGps: Location? = null
+
+
     var press : String ?= "";
     var datetext: TextView? = null
     var timetext: TextView? = null
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_advance_city_cab, container, false)
         return binding.root
     }
 
+    @SuppressLint("MissingPermission")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         pref = PrefManager(requireActivity())
@@ -106,14 +106,17 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         var submit = view?.findViewById<Button>(R.id.submit)
         var next = view?.findViewById<Button>(R.id.next)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
-       /* val recylerCabList = view.findViewById<RecyclerView>(R.id.recylerCabList)*/
-
-     //   ll_choose_vehicle?.isVisible = false
+        ll_choose_vehicle?.isVisible = false
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
         }
 
+        locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+//------------------------------------------------------//
+         hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val currentDate = LocalDateTime.now().format(formatter)
@@ -186,7 +189,11 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                 .build(requireActivity())
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
         }
+
         submit?.setOnClickListener {
+
+
+
             if (to_lat == ""){
                 Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
             }else if (from_lat == ""){
@@ -198,23 +205,28 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
         }
         next?.setOnClickListener {
-            if (vehicle_type_id == ""){
-                startActivity(Intent(requireActivity(), OneWay_Km_CountActivity::class.java))
-                Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
-            }else if (ride_id == ""){
-               /* Toast.makeText(requireActivity(), "Please select Destination Address", Toast.LENGTH_LONG).show()*/
 
-            }else {
-               /* nextbtn()*/
-            }
+
+         startActivity(Intent(requireActivity(), CabDetailsActivity::class.java))
+
+
 
         }
 
+
+
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+
+        binding.recylerCabList.layoutManager=GridLayoutManager(context,4)
       //  cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
       //  cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))
        // cablist.add(AdvanceCityCab(R.drawable.ola_mini,"256-420"))
+
+
 
 
         locLinear?.setOnClickListener {
@@ -223,8 +235,13 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
             if(internet == true) {
                 mainBinding = ActivityMainBinding.inflate(layoutInflater)
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
                 selects = "start"
-                getLocation()
+                if (isLocationPermissionGranted()) {
+                    getLocation()
+                }else{
+                    requestPermissions()
+                }
             }else{
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
@@ -239,17 +256,26 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
                 selects = "dest"
-                getLocation()
+                if (isLocationPermissionGranted()) {
+                    getLocation()
+                }else{
+                    requestPermissions()
+                }
             }else{
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
             }
         }
+
+
+
+
        // Initialize Places.
 
     }
 
     private fun submitform() {
+
         val URL = "https://test.pearl-developer.com/figo/api/ride/create-city-ride"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
@@ -262,6 +288,10 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         json.put("type", "advance_booking")
         json.put("to_location_name", manualLoc?.text.toString())
         json.put("from_location_name", liveLoc?.text.toString())
+
+
+
+
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
@@ -272,23 +302,23 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                     if (response != null) {
 
                         ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true
+                       ll_choose_vehicle?.isVisible  =true
 
                         val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                        val rideId = response.getJSONObject("data").getString("ride_id")
+                       val rideId = response.getJSONObject("data").getString("ride_id")
 
                         for(p2 in 0 until size) {
 
-                            val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
+                        val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                            /*val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("ride_id")*/
-                            val min_price = response.getJSONObject("data").getJSONArray("vehicle").getJSONObject(p2).getString("min_price")
-                            val max_price = response.getJSONObject("data").getJSONArray("vehicle").getJSONObject(p2).getString("max_price")
-                            val ride_id = response.getJSONObject("data").getString("vehicle_id")
-                            val vehicle_id = response.getJSONObject("data").getString("ride_id")
 
-                            cablist.add(AdvanceCityCabModel(name,image,vehicle_id,ride_id,min_price,max_price))
-                        }
+
+                            val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
+                            val ride_id = response.getJSONObject("data").getString("ride_id")
+
+                            cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id))
+                            }
+
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
                         binding.recylerCabList.adapter=advanceCityAdapter
 
@@ -302,14 +332,14 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
 
                 }
             }) {
-                @SuppressLint("SuspiciousIndentation")
-                @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers: MutableMap<String, String> = HashMap()
-                    headers.put("Content-Type", "application/json; charset=UTF-8");
-                    headers.put("Authorization", "Bearer " + pref.getToken());
-                    return headers
-                }
+                     @SuppressLint("SuspiciousIndentation")
+                     @Throws(AuthFailureError::class)
+                 override fun getHeaders(): Map<String, String> {
+                     val headers: MutableMap<String, String> = HashMap()
+                         headers.put("Content-Type", "application/json; charset=UTF-8");
+                         headers.put("Authorization", "Bearer " + pref.getToken());
+                     return headers
+                 }
             }
 
         queue.add(jsonOblect)
@@ -317,14 +347,161 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
     }
 
 
-    @SuppressLint("MissingPermission", "SetTextI18n")
+    @SuppressLint("MissingPermission")
     private fun getLocation() {
 
-                mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
-                    val location: Location? = task.result
-                    if (location == null) {
-                        return@addOnCompleteListener;
+        if (isLocationPermissionGranted()){
+            if (hasGps) {
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    5000,
+                    0F,
+                    gpsLocationListener
+                )
+            }
+//------------------------------------------------------//
+            if (hasNetwork) {
+                locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    5000,
+                    0F,
+                    networkLocationListener
+                )
+            }
+
+
+                val lastKnownLocationByGps =
+                    locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+                // locationByGps = getLastKnownLocation()
+                lastKnownLocationByGps?.let {
+                    locationByGps = lastKnownLocationByGps
+                }
+                //------------------------------------------------------//
+
+
+            val lastKnownLocationByNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            lastKnownLocationByNetwork?.let {
+                locationByNetwork = lastKnownLocationByNetwork
+            }
+//------------------------------------------------------//
+          //  if (locationByGps != null || locationByNetwork != null) {
+              /*  if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
+                    if (selects.equals("start")) {
+
+                        to_lat = locationByGps?.latitude.toString()
+                        to_lng = locationByGps?.longitude.toString()
+
+                        val geocoder: Geocoder
+                        val addresses: List<Address>
+                        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+                        addresses = locationByGps?.let {
+                            geocoder.getFromLocation(
+                                it.latitude,
+                                it.longitude,1
+                            )
+                        }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+                        val address = addresses[0].getAddressLine(0)
+                        liveLoc?.setText(address)
+                    }else{
+
+                        from_lat = locationByGps?.latitude.toString()
+                        from_lng = locationByGps?.longitude.toString()
+
+                        val geocoder: Geocoder
+                        val addresses: List<Address>
+                        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+                        addresses = locationByGps?.let {
+                            geocoder.getFromLocation(
+                                it.latitude,
+                                it.longitude,1
+                            )
+                        }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+                        val address = addresses[0].getAddressLine(0)
+                        manualLoc?.setText(address)
                     }
+                    // use latitude and longitude as per your need
+                } else {*/
+            if (locationByNetwork == null){
+                Toast.makeText(requireActivity(), "No Network", Toast.LENGTH_LONG).show()
+
+            }else {
+                if (selects.equals("start")) {
+
+
+                    to_lat = locationByNetwork?.latitude.toString()
+                    to_lng = locationByNetwork?.longitude.toString()
+                    val geocoder: Geocoder
+                    val addresses: List<Address>
+                    geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+                    addresses = locationByNetwork?.let {
+                        geocoder.getFromLocation(
+                            it.latitude,
+                            it.longitude, 1
+                        )
+                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+                    val address = addresses[0].getAddressLine(0)
+                    liveLoc?.setText(address)
+                } else {
+
+                    from_lat = locationByNetwork?.latitude.toString()
+                    from_lng = locationByNetwork?.longitude.toString()
+
+                    val geocoder: Geocoder
+                    val addresses: List<Address>
+                    geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+                    addresses = locationByNetwork?.let {
+                        geocoder.getFromLocation(
+                            it.latitude,
+                            it.longitude, 1
+                        )
+                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+                    val address = addresses[0].getAddressLine(0)
+                    manualLoc?.setText(address)
+                }
+            }
+                    // use latitude and longitude as per your need
+               // }
+           // }
+        }else{
+            requestPermissions()
+        }
+
+
+       /* if (ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }else {
+            requestPermissions()
+        }
+        mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                    val location: Location? = task.result
+
                     if (location != null) {
                         val geocoder = Geocoder(requireActivity(), Locale.getDefault())
                         val list: List<Address> =
@@ -348,8 +525,10 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                                 //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
                             }
                         }
+                    }else{
+                        getLocation()
                     }
-                }
+                }*/
             }
 
 
@@ -409,6 +588,77 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         ll_choose_vehicle?.isVisible  =false
 
         return true
+    }
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            permissionId
+        )
+    }
+
+    private fun isLocationPermissionGranted(): Boolean {
+        return if (ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                requestcode
+            )
+            false
+        } else {
+            true
+        }
+    }
+    val gpsLocationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            locationByGps = location
+        }
+            override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+            override fun onProviderEnabled(provider: String) {}
+            override fun onProviderDisabled(provider: String) {}
+
+    }
+    //------------------------------------------------------//
+    val networkLocationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            locationByNetwork= location
+           // locationByNetwork= location
+        }
+
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLastKnownLocation(): Location? {
+        locationManager = requireActivity().getSystemService(
+            LOCATION_SERVICE
+        ) as LocationManager
+
+        val providers: List<String> = locationManager.getProviders(true)
+        var bestLocation: Location? = null
+        for (provider in providers) {
+            val l: Location = locationManager.getLastKnownLocation(provider) ?: continue
+            if (bestLocation == null || l.accuracy < bestLocation.accuracy) {
+                // Found best last known location: %s", l);
+                bestLocation = l
+            }
+        }
+        return bestLocation
     }
 
 }
