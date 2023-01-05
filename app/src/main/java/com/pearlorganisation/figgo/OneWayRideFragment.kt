@@ -90,7 +90,7 @@ class OneWayRideFragment : Fragment() {
                             val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val vehicle_id = response.getJSONObject("data").getString("ride_id")
 
-                            mList.add(OneWayListRatingVehicle(reject,to_location,min_price,max_price,from_location,image, name,distance,ride_id,from_location))
+                            mList.add(OneWayListRatingVehicle(reject,to_location,min_price,max_price,from_location/*,image, name,distance,ride_id,from_location*/))
                         }
 
                         oneWayKmCountAdapter= OneWayKmCountAdapter(requireActivity(),mList)

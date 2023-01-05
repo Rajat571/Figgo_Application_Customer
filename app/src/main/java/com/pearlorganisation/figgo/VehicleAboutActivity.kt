@@ -7,17 +7,25 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
 import com.pearlorganisation.figgo.Adapter.VehicleAboutAdapter
 import com.pearlorganisation.figgo.Model.VehicleInfoList
 
 
-class VehicleAboutActivity : AppCompatActivity() {
+class VehicleAboutActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
    /* private lateinit var vehicleAboutAdapter: VehicleAboutAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var vehicleInfoList: VehicleInfoList
     private val vehicle_about_list=ArrayList<VehicleInfoList>()*/
+   private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +51,21 @@ class VehicleAboutActivity : AppCompatActivity() {
             intent.setType("text/plain");
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        fun onMapReady(googleMap: GoogleMap) {
+
+            mMap = googleMap
+            val myLocation = LatLng(30.302810, 78.012234)
+            mMap.addMarker(MarkerOptions().position(myLocation).title("Marker in India"))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
+            mMap.uiSettings.isZoomControlsEnabled = true
+        }
+
+        fun onMarkerClick(p0: Marker): Boolean {
+            TODO("Not yet implemented")
+        }
 
       /*  recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = VehicleAboutAdapter(vehicle_about_list)
@@ -67,5 +90,13 @@ class VehicleAboutActivity : AppCompatActivity() {
             startActivity(intent)
         }*/
 
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onMarkerClick(p0: Marker): Boolean {
+        TODO("Not yet implemented")
     }
 }

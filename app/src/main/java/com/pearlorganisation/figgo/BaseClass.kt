@@ -1,19 +1,31 @@
 package com.pearlorganisation.figgo
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Build
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.webkit.MimeTypeMap
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import java.io.ByteArrayOutputStream
+import java.util.jar.Manifest
+import java.util.regex.Pattern
 
 abstract class BaseClass  : AppCompatActivity(){
 
@@ -380,21 +392,14 @@ abstract class BaseClass  : AppCompatActivity(){
     }
 
     fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         ) {
             openFileExplorer()
             return
         }
-        ActivityCompat.shouldShowRequestPermissionRationale(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        )
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+        ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
             STORAGE_PERMISSION_CODE
         )
     }
@@ -407,6 +412,7 @@ abstract class BaseClass  : AppCompatActivity(){
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
+    @SuppressLint("ServiceCast")
     fun hideKeybaord(v: View) {
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.EmergencyActivity
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.OneWay_Km_CountActivity
@@ -36,7 +37,7 @@ class OneWayKmCountAdapter(var context: Context, private val mList: List<OneWayL
         holder.acceptcountlist.text = OneWayListRatingVehicle.acceptcountlist
 
         holder.acceptcountlist.setOnClickListener {
-            context.startActivity(Intent(context, VehicleAboutActivity::class.java))
+            context.startActivity(Intent(context, MapsActivity2::class.java))
 
         }
        /* pref.setvehicle_type_id(OneWayListRatingVehicle.vehicle_type_id)

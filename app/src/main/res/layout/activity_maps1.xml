@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".OneWay_Km_CountActivity">
+    tools:context=".CurrentMap.MapsActivity1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-22dp"
+        android:layout_marginTop="-78dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -75,50 +75,50 @@
             android:layout_marginStart="@dimen/_12sdp">
 
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="@dimen/_195sdp"-->
-<!--                android:background="@color/coloryellow"-->
-<!--                android:scaleType="fitXY"-->
-<!--                android:src="@drawable/googlemapimg" />-->
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:context=".CurrentMap.MapsActivity1" />
+            <!--            <ImageView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="@dimen/_195sdp"-->
+            <!--                android:background="@color/coloryellow"-->
+            <!--                android:scaleType="fitXY"-->
+            <!--                android:src="@drawable/googlemapimg" />-->
 
             <LinearLayout
-                android:id="@+id/ll_accept"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    tools:context=".CurrentMap.MapsActivity1" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/onewayvehiclelist"
+                <LinearLayout
+                    android:id="@+id/ll_accept"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/onewayvehiclelist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                </LinearLayout>
             </LinearLayout>
-</LinearLayout>
-           <!-- <TextView
-                android:id="@+id/nextscreen"
-                android:layout_width="@dimen/_65sdp"
-                android:layout_height="@dimen/_29sdp"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/black"
-                android:text="nextscreen"
-                android:layout_marginTop="@dimen/_175sdp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@color/colorlightblue"/>-->
+            <!-- <TextView
+                 android:id="@+id/nextscreen"
+                 android:layout_width="@dimen/_65sdp"
+                 android:layout_height="@dimen/_29sdp"
+                 android:textSize="@dimen/_12sdp"
+                 android:textColor="@color/black"
+                 android:text="nextscreen"
+                 android:layout_marginTop="@dimen/_175sdp"
+                 android:layout_gravity="center"
+                 android:gravity="center"
+                 android:background="@color/colorlightblue"/>-->
 
 
 

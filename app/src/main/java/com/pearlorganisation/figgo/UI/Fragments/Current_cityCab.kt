@@ -40,10 +40,12 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
 import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.Model.CurrentModel
 import com.pearlorganisation.figgo.OneWayRideFragment
+import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
@@ -205,7 +207,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
             }
 
             nxtbtn?.setOnClickListener {
-                startActivity(Intent(requireActivity(), OneWayRideFragment::class.java))
+                startActivity(Intent(requireActivity(), MapsActivity1::class.java))
                     /*vehicle_type_id.setvehicle_type_id("vehicle_type_id")
                     ride_id.setride_id("ride_id")*/
 
@@ -296,9 +298,6 @@ class Current_cityCab : Fragment(),IOnBackPressed {
 
                                     cablist.add(AdvanceCityCabModel(name,image,id,ride_id,min_price, max_price))
 
-
-
-
                                 }
                                 advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
                                 recyclerView.adapter=advanceCityAdapter
@@ -309,10 +308,6 @@ class Current_cityCab : Fragment(),IOnBackPressed {
                             }
 
                           /*
-
-
-
-
 
                             val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
                             val ride_id = response.getJSONObject("data").getString("ride_id")
@@ -346,13 +341,8 @@ class Current_cityCab : Fragment(),IOnBackPressed {
                         return headers
                     }
                 }
-        jsonOblect.setRetryPolicy(
-            DefaultRetryPolicy(
-                10000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-            )
-        )
+        jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
+
         queue.add(jsonOblect)
 
     }
