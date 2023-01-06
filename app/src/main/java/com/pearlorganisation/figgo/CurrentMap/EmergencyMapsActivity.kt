@@ -13,32 +13,26 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.pearlorganisation.figgo.EmergencyActivity
-import com.pearlorganisation.figgo.OneWay_Km_CountActivity
+import com.pearlorganisation.figgo.DriveRatingActivity
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.databinding.ActivityMaps2Binding
+import com.pearlorganisation.figgo.databinding.ActivityEmergencyMapsBinding
 
-class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class EmergencyMapsActivity : AppCompatActivity(), OnMapReadyCallback ,GoogleMap.OnMarkerClickListener{
 
     private lateinit var mMap: GoogleMap
-    private lateinit var binding: ActivityMaps2Binding
+    private lateinit var binding: ActivityEmergencyMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMaps2Binding.inflate(layoutInflater)
+        binding = ActivityEmergencyMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        var emrgencybtn = findViewById<TextView>(R.id.emrgencybtn)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
-        var accept = findViewById<TextView>(R.id.accept)
-
-        accept.setOnClickListener {
-            startActivity(Intent(this, EmergencyMapsActivity::class.java))
-        }
 
         backimg.setOnClickListener {
-            val intent = Intent(this, OneWay_Km_CountActivity::class.java)
+            val intent = Intent(this, MapsActivity2::class.java)
             startActivity(intent)
         }
 
@@ -50,9 +44,11 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        emrgencybtn.setOnClickListener {
+            startActivity(Intent(this, DriveRatingActivity::class.java))
+        }
+
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
@@ -60,13 +56,14 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
+
         val myLocation = LatLng(30.302810, 78.012234)
         mMap.addMarker(MarkerOptions().position(myLocation).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
+
         TODO("Not yet implemented")
     }
 }

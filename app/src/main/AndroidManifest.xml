@@ -20,9 +20,32 @@
         android:theme="@style/Theme.Figgo"
         tools:targetApi="31">
 
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU" />
+
+        <activity
+            android:name=".EmergencyMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_emergency_maps" />
+
+        <activity android:name=".CurrentMap.EmergencyMapsActivity"
+            android:exported="false"/>
+        <activity android:name=".CurrentMap.MapsActivity1"
+            android:exported="false"/>
+        <activity android:name=".CurrentMap.MapsActivity2"
+            android:exported="false"/>
 
         <activity
             android:name=".StudenAddActivity"
@@ -63,8 +86,6 @@
         <activity
             android:name=".One_Way_OutStationActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".CustomerMenuDrawerActivity"
             android:exported="false"
@@ -161,30 +182,30 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        
-        <receiver
-            android:exported="false"
-            android:name="com.razorpay.RzpTokenReceiver">
-            <intent-filter>
-                <action android:name="rzp.device_token.share"/>
-            </intent-filter>
 
-        </receiver>
-        <activity
-            android:name="com.razorpay.CheckoutActivity"
+        <receiver
+            android:name="com.razorpay.RzpTokenReceiver"
             android:exported="false">
             <intent-filter>
+                <action android:name="rzp.device_token.share" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.razorpay.CheckoutActivity"
+            android:exported="true">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <data
                     android:host="rzp.io"
-                    android:scheme="io.rzp"/>
+                    android:scheme="io.rzp" />
             </intent-filter>
-
         </activity>
+
         <meta-data
             android:name="com.razorpay.plugin.googlepay_all"
             android:value="com.razorpay.RzpGpayMerge" />
-
     </application>
 
 </manifest>

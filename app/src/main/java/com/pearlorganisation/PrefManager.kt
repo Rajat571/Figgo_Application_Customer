@@ -96,23 +96,6 @@ import android.content.SharedPreferences
          return pref?.getString("vehicle_id","null").toString()
      }
 
-     fun setRideId(ride_id:String){
-         editor?.putString("ride_id",ride_id)
-         editor?.commit()
-     }
-
-     fun getRideId():String{
-         return pref?.getString("ride_id","null").toString()
-     }
-
-     fun setVehicleId(vehicle_id:String){
-         editor?.putString("vehicle_id",vehicle_id)
-         editor?.commit()
-     }
-
-     fun getVehicleId():String{
-         return pref?.getString("vehicle_id","null").toString()
-     }
 
      fun setUserId(userid:String){
          editor?.putString("userid",userid)

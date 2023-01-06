@@ -39,6 +39,8 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var backimg = findViewById<ImageView>(R.id.backimg)
         var progress = findViewById<ProgressBar>(R.id.progress)
 
+        getnxtpage()
+
         backimg.setOnClickListener {
             val intent = Intent(this, HomeDashboard::class.java)
             startActivity(intent)
@@ -83,6 +85,11 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
     override fun onMarkerClick(p0: Marker): Boolean {
         TODO("Not yet implemented")
+    }
+
+    private fun getnxtpage(){
+
+
     }
 
 }

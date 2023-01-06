@@ -22,6 +22,7 @@ import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
+import com.pearlorganisation.figgo.UI.Fragments.CabBookFragment
 import com.squareup.picasso.Picasso
 
 
@@ -30,12 +31,10 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
     class AdvanceCityHolder(itemview: View):ViewHolder(itemview)
     {
         var cab=itemview.findViewById<ImageView>(R.id.cab)
-        var ratings=itemview.findViewById<TextView>(R.id.rating)
-        var min=itemview.findViewById<TextView>(R.id.min)
-        var max=itemview.findViewById<TextView>(R.id.max)
-        var ll_main=itemview.findViewById<LinearLayout>(R.id.ll_main)
-
-
+        var name=itemview.findViewById<TextView>(R.id.name)
+        var price=itemview.findViewById<TextView>(R.id.price)
+      /*  var max=itemview.findViewById<TextView>(R.id.max)*/
+        /*var ll_main=itemview.findViewById<LinearLayout>(R.id.ll_main)*/
 
 
     }
@@ -49,40 +48,20 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
         pref = PrefManager(context)
      var data=cablist[position]
       //  holder.cab.setImageResource(data.cab)
-        holder.ratings.text=data.name
-        holder.min.text=data.min
-        holder.max.text=data.max
+        /*holder.ratings.text=data.name*/
+       /* holder.min.text=data.min
+        holder.max.text=data.max*/
+        /*Picasso.get().load(data.image).into(holder.cab)*/
+        holder.name.text=data.name
+        holder.price.text=data.min
+        /*holder.max.text=data.max*/
         Picasso.get().load(data.image).into(holder.cab)
         holder.itemView.setOnClickListener {
 
-         //   if(holder.adapterPosition.)
 
-
-
-            holder.ll_main.setBackgroundColor(context.resources.getColor(R.color.quantum_bluegrey700))
-           /* when(holder.adapterPosition)
-            {
-                0->{
-                    holder.cab.setImageResource(R.drawable.ola_auto_active)
-//                    holder.cab.setOnClickListener{
-//                        recreate(context)
-                  //  }
-                }
-                1->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                2->holder.cab.setImageResource(R.drawable.ola_e_rick_active)
-                3->holder.cab.setImageResource(R.drawable.ola_lux_active)
-                5->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                6-> holder.cab.setImageResource(R.drawable.ola_auto_active)
-                7->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                8->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                9->holder.cab.setImageResource(R.drawable.ola_bike_active)
-            }*/
-
-
-           pref.setRideId(data.rideId)
+            pref.setRideId(data.rideId)
             pref.setVehicleId(data.vehicleId)
-
-            context.startActivity(Intent(context, CabDetailsActivity::class.java))
+            /*context.startActivity(Intent(context,CabBookFragment::class.java))*/
 
            }
 

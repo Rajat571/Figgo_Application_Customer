@@ -39,13 +39,13 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
+import com.pearlorganisation.figgo.Adapter.CurrentVehicleAdapter
 import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.IOnBackPressed
+import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.Model.CurrentModel
-import com.pearlorganisation.figgo.OneWayRideFragment
-import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
@@ -58,11 +58,11 @@ import java.util.*
 
 class Current_cityCab : Fragment(),IOnBackPressed {
     lateinit var binding: FragmentCurrentCityCabBinding
-
     lateinit var advanceCityAdapter: AdvanceCityDataAdapter
+    lateinit var currentVehicleAdapter: CurrentVehicleAdapter
     private lateinit var recyclerView: RecyclerView
     lateinit var recyclerv: RecyclerView
-    var cablist=ArrayList<AdvanceCityCabModel>()
+    var cablist=ArrayList<AdvanceCityCab>()
     var mList= ArrayList<CurrentModel>()
     lateinit var oneWayKmCountAdapter: OneWayKmCountAdapter
 
@@ -296,12 +296,12 @@ class Current_cityCab : Fragment(),IOnBackPressed {
                                     val min_price = vehicle_types.getJSONObject(i).getString("min_price")
                                     val max_price = vehicle_types.getJSONObject(i).getString("max_price")
 
-                                    cablist.add(AdvanceCityCabModel(name,image,id,ride_id,min_price, max_price))
+                                    cablist.add(AdvanceCityCab(name,image,id,ride_id,min_price, max_price))
 
                                 }
-                                advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
-                                recyclerView.adapter=advanceCityAdapter
-                                recyclerView.layoutManager=GridLayoutManager(context,4)
+                                currentVehicleAdapter= CurrentVehicleAdapter(requireActivity(),cablist)
+                                recyclerView.adapter=currentVehicleAdapter
+                                recyclerView.layoutManager=GridLayoutManager(context,3)
                                 progress?.isVisible = false
                                 ll_location?.isVisible = false
                                 ll_choose_vehicle?.isVisible  =true
