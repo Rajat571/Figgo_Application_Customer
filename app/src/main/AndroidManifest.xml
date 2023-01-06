@@ -40,6 +40,8 @@
             android:exported="false"
             android:label="@string/title_activity_emergency_maps" />
 
+
+
         <activity android:name=".CurrentMap.EmergencyMapsActivity"
             android:exported="false"/>
         <activity android:name=".CurrentMap.MapsActivity1"

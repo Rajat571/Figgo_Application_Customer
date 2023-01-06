@@ -1,33 +1,18 @@
 package com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.test.core.app.ApplicationProvider
-import com.android.volley.AuthFailureError
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CityCabActivity
 import com.pearlorganisation.figgo.UI.DashBoard
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
-import com.razorpay.Checkout
-import org.json.JSONException
-import org.json.JSONObject
-import java.util.HashMap
+
 
 class ThankyouScreenFragment : Fragment() {
     lateinit var pref: PrefManager

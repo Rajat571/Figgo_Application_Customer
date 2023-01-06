@@ -5,21 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityAdapter
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
-import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.FragmentPackageCityCabBinding
 
 class Package_cityCab : Fragment() {
     lateinit var binding:FragmentPackageCityCabBinding
     lateinit var advanceCityAdapter: AdvanceCityAdapter
     var package_city_list=ArrayList<AdvanceCityCab>()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     //  binding=DataBindingUtil.inflate(inflater,R.layout.fragment_package_city_cab, container, false)
         return binding.root
     }

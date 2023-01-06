@@ -6,10 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.pearlorganisation.figgo.Adapter.AdvanceCityAdapter
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.R
 
 class Shared_cab_Activity : AppCompatActivity() {

@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pearlorganisation.figgo.Adapter.StudentAdapter
 import com.pearlorganisation.figgo.Model.Student
-import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.ActivityStudenAddBinding
 
 class StudenAddActivity : AppCompatActivity(), View.OnClickListener {

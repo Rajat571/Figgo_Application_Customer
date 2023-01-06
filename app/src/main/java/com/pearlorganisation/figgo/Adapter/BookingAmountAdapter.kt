@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.figgo.*
 import com.pearlorganisation.figgo.Model.BookingAmountList
-import com.pearlorganisation.figgo.Model.VehicleBookPayList
 
 class BookingAmountAdapter (var context: Context,private val mList1: List<BookingAmountList>) : RecyclerView.Adapter<BookingAmountAdapter.ViewHolder>()  {
 

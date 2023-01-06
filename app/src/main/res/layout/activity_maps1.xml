@@ -59,6 +59,8 @@
     </LinearLayout>
 
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,17 +77,19 @@
             android:layout_marginStart="@dimen/_12sdp">
 
 
-            <!--            <ImageView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="@dimen/_195sdp"-->
-            <!--                android:background="@color/coloryellow"-->
-            <!--                android:scaleType="fitXY"-->
-            <!--                android:src="@drawable/googlemapimg" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
                 <fragment
                     android:id="@+id/map"
                     android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -103,7 +107,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/onewayvehiclelist"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical" />
 
                 </LinearLayout>

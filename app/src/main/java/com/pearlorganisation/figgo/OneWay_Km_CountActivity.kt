@@ -1,36 +1,21 @@
 package com.pearlorganisation.figgo
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.AuthFailureError
-import com.android.volley.DefaultRetryPolicy
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.pearlorganisation.PrefManager
-import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
-import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
-import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
+import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
-import com.pearlorganisation.figgo.Model.VehicleInfoList
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 import com.pearlorganisation.figgo.databinding.ActivityOneWayKmCountBinding
-import org.json.JSONObject
-import java.util.HashMap
+
 
 class OneWay_Km_CountActivity : AppCompatActivity() {
     lateinit var binding: ActivityOneWayKmCountBinding
-    lateinit var oneWayKmCountAdapter: OneWayKmCountAdapter
+    lateinit var oneWayKmCountAdapter: CurrentOneWayKmCountAdapter
     lateinit var pref:PrefManager
     val mList = ArrayList<OneWayListRatingVehicle>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,15 +41,15 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
 
-        mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
+        /*mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
         mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
         mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","accept"))
         mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
         mList.add(OneWayListRatingVehicle("Activa - 2012    Rs.45.00","raingcountlist","ride_service_rating","Reject","Accept"))
-
-        recyclerview.adapter = OneWayKmCountAdapter(this,mList)
+*/
+        recyclerview.adapter = CurrentOneWayKmCountAdapter(this,mList)
         recyclerview.layoutManager = LinearLayoutManager(this)
-        oneWayKmCountAdapter = OneWayKmCountAdapter(this,mList)
+        oneWayKmCountAdapter = CurrentOneWayKmCountAdapter(this,mList)
         recyclerview.adapter = oneWayKmCountAdapter
 
 

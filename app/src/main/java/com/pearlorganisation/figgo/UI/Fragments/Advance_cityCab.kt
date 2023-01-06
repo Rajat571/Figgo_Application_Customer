@@ -290,13 +290,8 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
         json.put("type", "advance_booking")
         json.put("to_location_name", manualLoc?.text.toString())
         json.put("from_location_name", liveLoc?.text.toString())
-
-
-
-
-        val jsonOblect: JsonObjectRequest =
-            object : JsonObjectRequest(Method.POST, URL, json, object :
-                Response.Listener<JSONObject?>               {
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object : Response.Listener<JSONObject?>
+        {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
 
@@ -311,13 +306,8 @@ class Advance_cityCab : Fragment(), IOnBackPressed {
                        val rideId = response.getJSONObject("data").getString("ride_id")
 
                         for(p2 in 0 until size) {
-
-
-
                         val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-
-
                             val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
                             val min = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
                             val max = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")

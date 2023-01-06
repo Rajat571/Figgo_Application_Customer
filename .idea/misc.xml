@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/circle_background.xml" value="0.27" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/circular_image_crop.xml" value="0.2675" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/half_black_circle.xml" value="0.27" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/input_boder_profile.xml" value="0.27" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/input_error_profile.xml" value="0.27" />
+        <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/drawable/semi.xml" value="0.2675" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/a_dashboard.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/active_ride_layout.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/lenovo/Downloads/Figgo/app/src/main/res/layout/activity_cab_details.xml" value="0.3229166666666667" />

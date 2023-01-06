@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.pearlorganisation.figgo.UI.CityCabActivity
-import com.pearlorganisation.figgo.UI.DashBoard
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
+
 
 class DriveRatingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

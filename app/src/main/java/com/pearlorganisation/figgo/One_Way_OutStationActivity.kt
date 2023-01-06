@@ -1,7 +1,6 @@
 package com.pearlorganisation.figgo
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,8 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
+
 
 class One_Way_OutStationActivity : AppCompatActivity() {
 

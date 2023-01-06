@@ -25,16 +25,11 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
-
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.razorpay.Checkout
-import com.razorpay.PaymentData
-import com.razorpay.PaymentResultListener
 import org.json.JSONException
 import org.json.JSONObject
-import java.text.SimpleDateFormat
 import java.util.*
 
 

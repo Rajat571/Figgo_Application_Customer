@@ -3,13 +3,9 @@ package com.pearlorganisation.figgo.UI
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
-import com.pearlorganisation.figgo.Adapter.ViewPager2Adapter
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 

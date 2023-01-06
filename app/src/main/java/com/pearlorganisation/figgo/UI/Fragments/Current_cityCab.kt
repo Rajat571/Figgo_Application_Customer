@@ -40,11 +40,9 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
 import com.pearlorganisation.figgo.Adapter.CurrentVehicleAdapter
-import com.pearlorganisation.figgo.Adapter.OneWayKmCountAdapter
-import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
+import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
-import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.Model.CurrentModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
@@ -64,7 +62,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
     lateinit var recyclerv: RecyclerView
     var cablist=ArrayList<AdvanceCityCab>()
     var mList= ArrayList<CurrentModel>()
-    lateinit var oneWayKmCountAdapter: OneWayKmCountAdapter
+    lateinit var oneWayKmCountAdapter: CurrentOneWayKmCountAdapter
 
     var to_lat :String ?= ""
     var from_lat :String ?= ""
@@ -109,7 +107,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
         ll_choose_vehicle = view?.findViewById<CardView>(R.id.ll_choose_vehicle)!!
         manualLoc = view?.findViewById<TextView>(R.id.loc_manual)
         liveLoc = view?.findViewById<TextView>(R.id.live_loc)
-        nxtbtn = view.findViewById(R.id.nxtbtn)
+       /* nxtbtn = view.findViewById(R.id.nxtbtn)*/
         recyclerView = view.findViewById(R.id.current_cab_list)
         progress = view.findViewById<ProgressBar>(R.id.progress)
         val recyclerv = view.findViewById<RecyclerView>(R.id.onewayvehiclelist)
@@ -206,12 +204,12 @@ class Current_cityCab : Fragment(),IOnBackPressed {
                 submitform()
             }
 
-            nxtbtn?.setOnClickListener {
+           /* nxtbtn?.setOnClickListener {
                 startActivity(Intent(requireActivity(), MapsActivity1::class.java))
-                    /*vehicle_type_id.setvehicle_type_id("vehicle_type_id")
-                    ride_id.setride_id("ride_id")*/
+                    *//*vehicle_type_id.setvehicle_type_id("vehicle_type_id")
+                    ride_id.setride_id("ride_id")*//*
 
-            }
+            }*/
 
         }
         mainBinding = ActivityMainBinding.inflate(layoutInflater)

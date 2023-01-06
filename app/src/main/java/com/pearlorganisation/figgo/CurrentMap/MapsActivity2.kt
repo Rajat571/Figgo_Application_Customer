@@ -13,7 +13,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.pearlorganisation.figgo.EmergencyActivity
 import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMaps2Binding
@@ -59,8 +58,6 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
         val myLocation = LatLng(30.302810, 78.012234)
         mMap.addMarker(MarkerOptions().position(myLocation).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))

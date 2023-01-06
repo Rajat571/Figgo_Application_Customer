@@ -30,7 +30,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.WelcomeSlider
 import org.json.JSONObject
 
 

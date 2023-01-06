@@ -212,7 +212,8 @@
                     android:layout_height="wrap_content"
                     android:text="PAY WALLET"/>
             </RadioGroup>-->
-            <Button
+
+            <!--<Button
                 android:id="@+id/nxtbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,7 +221,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:backgroundTint="#000F3B"/>
+                android:backgroundTint="#000F3B"/>-->
 
         </LinearLayout>
             </LinearLayout>
