@@ -101,6 +101,7 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:layout_margin="3dp"
                             >
                             <EditText
@@ -114,6 +115,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
+                            android:visibility="gone"
                             android:layout_height="wrap_content">
                             <EditText
                                 android:padding="8dp"
@@ -125,6 +127,7 @@
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
+                            android:visibility="gone"
                             android:layout_height="wrap_content">
                             <TextView
                                 android:padding="8dp"

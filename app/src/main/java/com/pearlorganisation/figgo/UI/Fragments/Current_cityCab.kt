@@ -48,7 +48,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
-
+//Neeraj
 class Current_cityCab : Fragment(),IOnBackPressed {
     lateinit var binding: FragmentCurrentCityCabBinding
     lateinit var advanceCityAdapter: AdvanceCityAdapter
@@ -263,7 +263,7 @@ class Current_cityCab : Fragment(),IOnBackPressed {
                                 val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
                                 val ride_id = response.getJSONObject("data").getString("ride_id")
 
-                                cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id))
+                                cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id,"",""))
                             }
 
                            // advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)
@@ -381,6 +381,14 @@ class Current_cityCab : Fragment(),IOnBackPressed {
         ll_choose_vehicle?.isVisible  =false
 
         return true
+    }
+
+    override fun openSomeActivityForResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        TODO("Not yet implemented")
     }
 
 

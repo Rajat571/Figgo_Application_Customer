@@ -62,6 +62,38 @@ import android.content.SharedPreferences
          return pref?.getString("ride_id","null").toString()
      }
 
+     fun setOtp(otp:String){
+         editor?.putString("otp",otp)
+         editor?.commit()
+     }
+
+     fun getOtp():String{
+         return pref?.getString("otp","null").toString()
+     }
+     fun setAccountDetails(email:String,name:String,photoURL:String){
+         editor?.putString("EmailID",email)
+         editor?.putString("EmailName",name)
+         editor?.putString("PhotoUrl",photoURL)
+         editor?.commit()
+     }
+     fun getAccountMail():String{
+         return pref?.getString("EmailID","")!!
+     }
+     fun getAccountName():String{
+         return pref?.getString("EmailName","")!!
+     }
+     fun getAccountPhotoURL():String{
+         return pref?.getString("PhotoUrl","")!!
+     }
+     fun setBookingNo(book_no:String){
+         editor?.putString("book_no",book_no)
+         editor?.commit()
+     }
+
+     fun getBookingNo():String{
+         return pref?.getString("book_no","null").toString()
+     }
+
      fun setVehicleId(vehicle_id:String){
          editor?.putString("vehicle_id",vehicle_id)
          editor?.commit()

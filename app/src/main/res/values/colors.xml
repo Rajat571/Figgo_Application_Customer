@@ -24,9 +24,10 @@
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#aaa</color>
     <color name="dot_dark_screen2">#aaa</color>
+    <color name="dot_light_screen1">#fff</color>
 
     <!-- dots active colors -->
-    <color name="dot_light_screen1">#fff</color>
+
     <color name="dot_light_screen2">#fff</color>
 
     <array name="array_dot_active">

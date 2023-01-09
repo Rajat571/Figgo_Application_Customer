@@ -17,8 +17,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="api_key">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
-    <string name="google_maps_key">AIzaSyD1HxXgHCXEdsqZlusGqPjkHeJdpAuvnG0</string>
 
+        <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
     <!-- check dummy data  -->
 
     <string name="skip">SKIP</string>

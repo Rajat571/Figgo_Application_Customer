@@ -1,19 +1,38 @@
 package com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.test.core.app.ApplicationProvider
+import com.android.volley.AuthFailureError
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.CityCabActivity
+import com.pearlorganisation.figgo.UI.DashBoard
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
+import com.razorpay.Checkout
+import org.json.JSONException
+import org.json.JSONObject
+import java.util.HashMap
 
 class ThankyouScreenFragment : Fragment() {
-
+    lateinit var pref: PrefManager
+    var booking_id: TextView? = null
+    var otpText: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +52,12 @@ class ThankyouScreenFragment : Fragment() {
         var next_button = view.findViewById<TextView>(R.id.next_button)
         var book_other = view.findViewById<TextView>(R.id.book_other)
         var close = view.findViewById<TextView>(R.id.close)
+        booking_id = view.findViewById<TextView>(R.id.booking_id)
+        otpText = view.findViewById<TextView>(R.id.otp)
+        pref = PrefManager(requireActivity())
+
+        otpText?.setText("Otp -"+pref.getOtp()+"")
+        booking_id?.setText("Booking No -"+pref.getBookingNo()+"")
 
         next_button.setOnClickListener {
             Navigation.findNavController(view)
@@ -40,23 +65,18 @@ class ThankyouScreenFragment : Fragment() {
         }
 
 
-        var ride_service_rating = view.findViewById<RatingBar>(R.id.ride_service_rating)
-//        ride_service_rating.rating
         book_other.setOnClickListener {
 
-
-            var homeFrag = HomeDashboard()
-            requireActivity().supportFragmentManager.beginTransaction().apply {
-                replace(R.id.framedash, homeFrag)
-                commit()
-            }
+            startActivity(Intent(requireActivity(), CityCabActivity::class.java))
 
         }
         close.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_thankyouScreenFragment_to_vehicleNumberFragment)
+            startActivity(Intent(requireActivity(), DashBoard::class.java))
         }
 
 
     }
+
+
+
 }

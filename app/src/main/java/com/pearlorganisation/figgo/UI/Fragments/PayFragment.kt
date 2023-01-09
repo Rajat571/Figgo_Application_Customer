@@ -1,12 +1,15 @@
 package com.pearlorganisation.figgo.UI.Fragments
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -22,16 +25,20 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.razorpay.Checkout
+import com.razorpay.PaymentData
 import com.razorpay.PaymentResultListener
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PayFragment : Fragment() ,PaymentResultListener {
+
+class PayFragment : Fragment()  {
     var psg_name: EditText? = null
     var psg_contact: EditText? = null
     var pick_address: EditText? = null
@@ -89,16 +96,9 @@ class PayFragment : Fragment() ,PaymentResultListener {
             }else if (psg_contact?.text.toString().equals("")){
                 Toast.makeText(requireActivity(), "Please type Passenger Name", Toast.LENGTH_LONG).show()
 
-            }else if (pick_address?.text.toString().equals("")){
-                Toast.makeText(requireActivity(), "Please type Pick Up Address", Toast.LENGTH_LONG).show()
-
-            }else if (landmark?.text.toString().equals("")){
-                Toast.makeText(requireActivity(), "Please type Landmark", Toast.LENGTH_LONG).show()
-
-            }else if (lat.equals("")){
-                Toast.makeText(requireActivity(), "Please select Pick Up Location", Toast.LENGTH_LONG).show()
-
             }else {
+
+               // getPayUNow()
                 getPayNow();
             }
 
@@ -107,16 +107,17 @@ class PayFragment : Fragment() ,PaymentResultListener {
     }
 
     private fun getPayNow() {
-
+        val progressDialog = ProgressDialog(requireActivity())
+        progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/enter-passenger-details"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
         json.put("name", psg_name?.text.toString())
         json.put("contact", psg_contact?.text.toString())
-        json.put("lat", lat)
-        json.put("lng", lng)
-        json.put("pickup_address", pick_address?.text.toString())
-        json.put("landmark", landmark?.text.toString())
+        json.put("lat", "")
+        json.put("lng", "")
+        json.put("pickup_address", "")
+        json.put("landmark", "")
         json.put("ride_id", pref.getRideId())
         if (msg?.text.toString().equals("")){
             msg?.text = null
@@ -135,30 +136,31 @@ class PayFragment : Fragment() ,PaymentResultListener {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
 
-                       val amt = "1"
-                       val amount = Math.round(amt.toFloat() * 100).toInt()
-                      val checkout = Checkout()
-                    checkout.setKeyID("rzp_test_LrVNPY8Z5MQgNE")
-                       checkout.setImage(R.drawable.appicon)
-                       val obj = JSONObject()
-                       try {
-                          obj.put("name", "Geeks for Geeks")
-                           obj.put("description", "Test payment")
-                           obj.put("theme.color", "")
-                           obj.put("send_sms_hash", true)
-                           obj.put("allow_rotation", true)
-                           obj.put("currency", "INR")
-                          obj.put("amount", amount)
-                           val preFill = JSONObject()
-                           preFill.put("email", "a@gmail.com")
-                           preFill.put("contact", "91" + "1234567098")
-                           obj.put("prefill", preFill)
-                           checkout.open(requireActivity(), obj)
-                           } catch (e: JSONException) {
-                           Toast.makeText(getApplicationContext(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
-                           e.printStackTrace()
-                            }
-                      //  view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
+                        progressDialog.hide()
+                        val amt = "1"
+                        val amount = Math.round(amt.toFloat() * 100).toInt()
+                        val checkout = Checkout()
+                        checkout.setKeyID("rzp_test_LrVNPY8Z5MQgNE")
+                        checkout.setImage(R.drawable.appicon)
+                        val obj = JSONObject()
+                        try {
+                            obj.put("name", "Geeks for Geeks")
+                            obj.put("description", "Test payment")
+                            obj.put("theme.color", "")
+                            obj.put("send_sms_hash", true)
+                            obj.put("allow_rotation", true)
+                            obj.put("currency", "INR")
+                            obj.put("amount", amount)
+                            val preFill = JSONObject()
+                            preFill.put("email", "a@gmail.com")
+                            preFill.put("contact", "91" + "1234567098")
+                            obj.put("prefill", preFill)
+                            checkout.open(requireActivity(), obj)
+                        } catch (e: JSONException) {
+                            Toast.makeText(getApplicationContext(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
+                            e.printStackTrace()
+                        }
+                        //  view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
 
 
 
@@ -187,6 +189,133 @@ class PayFragment : Fragment() ,PaymentResultListener {
     }
 
 
+
+  /*  private fun getPayUNow() {
+
+        val URL ="https://test.pearl-developer.com/figo/api/ride/enter-passenger-details"
+        val queue = Volley.newRequestQueue(requireContext())
+        val json = JSONObject()
+        json.put("name", psg_name?.text.toString())
+        json.put("contact", psg_contact?.text.toString())
+        json.put("lat", lat)
+        json.put("lng", lng)
+        json.put("pickup_address", pick_address?.text.toString())
+        json.put("landmark", landmark?.text.toString())
+        json.put("ride_id", pref.getRideId())
+        if (msg?.text.toString().equals("")){
+            msg?.text = null
+        }
+        json.put("additional_message ", msg?.text.toString())
+
+
+
+
+        val jsonOblect: JsonObjectRequest =
+            object : JsonObjectRequest(Method.POST, URL, json, object :
+                Response.Listener<JSONObject?>               {
+                @SuppressLint("SuspiciousIndentation")
+                override fun onResponse(response: JSONObject?) {
+
+                    Log.d("SendData", "response===" + response)
+                    if (response != null) {
+
+                        val payUPaymentParams = PayUPaymentParams.Builder()
+                            .setAmount("1.0")
+                        .setIsProduction(true)
+                        .setKey("0MQaQP")
+                        .setProductInfo("Test")
+                        .setPhone("9999999999")
+                        .setTransactionId(System.currentTimeMillis().toString())
+                        .setFirstName("John")
+                        .setEmail("John@gmail.com")
+                        .setSurl("https://payu.response.firebaseapp.com/success")
+                        .setFurl("https://payu.response.firebaseapp.com/failure")
+                        //Optional, can contain any additional PG params
+                        .build()
+                        PayUCheckoutPro.open(
+                            requireActivity(), payUPaymentParams,
+                            object : PayUCheckoutProListener {
+
+
+                                override fun onPaymentSuccess(response: Any) {
+                                    response as HashMap<*, *>
+                                    val payUResponse = response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
+                                    val merchantResponse = response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
+                                }
+
+
+                                override fun onPaymentFailure(response: Any) {
+                                    response as HashMap<*, *>
+                                    val payUResponse = response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
+                                    val merchantResponse = response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
+                                }
+
+
+                                override fun onPaymentCancel(isTxnInitiated:Boolean) {
+                                }
+
+
+                                override fun onError(errorResponse: ErrorResponse) {
+                                    val errorMessage: String
+                                    if (errorResponse != null && errorResponse.errorMessage != null && errorResponse.errorMessage!!.isNotEmpty())
+                                        errorMessage = errorResponse.errorMessage!!
+                                    else {
+                                        //   errorMessage = resources.getString(R.string.some_error_occurred)
+                                    }
+                                }
+
+                                override fun setWebViewProperties(webView: WebView?, bank: Any?) {
+                                    //For setting webview properties, if any. Check Customized Integration section for more details on this
+                                }
+
+                                override fun generateHash(
+                                    valueMap: HashMap<String, String?>,
+                                    hashGenerationListener: PayUHashGenerationListener
+                                ) {
+                                    if ( valueMap.containsKey(CP_HASH_STRING)
+                                        && valueMap.containsKey(CP_HASH_STRING) != null
+                                        && valueMap.containsKey(CP_HASH_NAME)
+                                        && valueMap.containsKey(CP_HASH_NAME) != null) {
+
+                                        val hashData = valueMap[CP_HASH_STRING]
+                                        val hashName = valueMap[CP_HASH_NAME]
+
+                                        //Do not generate hash from local, it needs to be calculated from server side only. Here, hashString contains hash created from your server side.
+                                       /* val hash: String? = hashString
+                                        if (!TextUtils.isEmpty(hash)) {
+                                            val dataMap: HashMap<String, String?> = HashMap()
+                                            dataMap[hashName!!] = hash!!
+                                            hashGenerationListener.onHashGenerated(dataMap)
+                                        }*/
+                                    }
+                                }
+                            })
+
+                    }
+                    // Get your json response and convert it to whatever you want.
+                }
+            }, object : Response.ErrorListener {
+                override fun onErrorResponse(error: VolleyError?) {
+                    Log.d("SendData", "error===" + error)
+                    Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
+
+                }
+            }) {
+                @SuppressLint("SuspiciousIndentation")
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers: MutableMap<String, String> = HashMap()
+                    headers.put("Content-Type", "application/json; charset=UTF-8");
+                    headers.put("Authorization", "Bearer " + pref.getToken());
+                    return headers
+                }
+            }
+
+        queue.add(jsonOblect)
+
+    }*/
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
@@ -205,40 +334,8 @@ class PayFragment : Fragment() ,PaymentResultListener {
             }
         }
     }
-   override fun onPaymentSuccess(s: String?) {
-       Toast.makeText(requireActivity(), "payment successful", Toast.LENGTH_SHORT).show()
-     //  startActivity(Intent(requireActivity(), UOrderPlaced::class.java))
-       view?.let { Navigation.findNavController(it).navigate(R.id.thankyouScreenFragment) }
-       try {
-           transaction_id = s
-           val c: Calendar = Calendar.getInstance()
-           @SuppressLint("SimpleDateFormat") val dateformat =
-               SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa")
-           val currentTime: String = dateformat.format(c.getTime())
-         //  Log.d("transaction_id", transaction_id)
-           /*sendorderdetails(
-               transaction_id,
-               order_id,
-               java.lang.String.valueOf(total_samount),
-               1,
-               currentTime
-           )*/
-       } catch (e: Exception) {
-         //  Log.e(TAG, "Exception in onPaymentSuccess", e)
-       }
-   }
-      override fun onPaymentError(i: Int, s: String?) {
-          try {
-              Toast.makeText(requireActivity(), "Payment failed$i", Toast.LENGTH_SHORT).show()
-              val c: Calendar = Calendar.getInstance()
-              @SuppressLint("SimpleDateFormat") val dateformat =
-                  SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa")
-              val currentTime: String = dateformat.format(c.getTime())
-             // sendorderdetails("0", order_id, java.lang.String.valueOf(total_samount), 0, currentTime)
-          } catch (e: Exception) {
-              //Log.e(TAG, "Exception in onPaymentError", e)
-          }
-       }
+
+
 
 }
 

@@ -1,6 +1,7 @@
 package com.pearlorganisation.figgo.UI.Fragments
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.test.core.app.ApplicationProvider
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -18,8 +20,13 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
+import org.json.JSONException
 import org.json.JSONObject
-import java.util.HashMap
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CabBookFragment : Fragment() {
@@ -33,6 +40,8 @@ class CabBookFragment : Fragment() {
     var from_loc: TextView? = null
     var fare: TextView? = null
     var image: ImageView? = null
+    var transaction_id :String ?= ""
+    var thankyouScreenFragment = ThankyouScreenFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -72,12 +81,40 @@ class CabBookFragment : Fragment() {
         }
 
         book_self.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.paymentWayFragment)
+
+            val amt = "1"
+            val amount = Math.round(amt.toFloat() * 100).toInt()
+            val checkout = Checkout()
+            checkout.setKeyID("rzp_test_LrVNPY8Z5MQgNE")
+            checkout.setImage(R.drawable.appicon)
+            val obj = JSONObject()
+            try {
+                obj.put("name", "Geeks for Geeks")
+                obj.put("description", "Test payment")
+                obj.put("theme.color", "")
+                obj.put("send_sms_hash", true)
+                obj.put("allow_rotation", true)
+                obj.put("currency", "INR")
+                obj.put("amount", amount)
+                val preFill = JSONObject()
+                preFill.put("email", "a@gmail.com")
+                preFill.put("contact", "91" + "1234567098")
+                obj.put("prefill", preFill)
+                checkout.open(requireActivity(), obj)
+            } catch (e: JSONException) {
+                Toast.makeText(requireActivity(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
+                e.printStackTrace()
+            }
+            //  view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
+
+
+
         }
     }
 
     private fun getCabBookData() {
-
+        val progressDialog = ProgressDialog(requireActivity())
+        progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
@@ -96,6 +133,7 @@ class CabBookFragment : Fragment() {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
 
+                        progressDialog.hide()
                         val distance = response.getJSONObject("data").getString("distance")
                         val createdAt = response.getJSONObject("data").getJSONObject("ride").getString("created_at")
                         val updatedAt = response.getJSONObject("data").getJSONObject("ride").getString("updated_at")
@@ -141,6 +179,43 @@ class CabBookFragment : Fragment() {
         queue.add(jsonOblect)
 
     }
+    /*override fun onPaymentSuccess(s: String?) {
+        Toast.makeText(requireActivity(), "payment successful", Toast.LENGTH_SHORT).show()
+        //  startActivity(Intent(requireActivity(), UOrderPlaced::class.java))
+        view?.let { Navigation.findNavController(it).navigate(R.id.thankyouScreenFragment) }
+        try {
+            transaction_id = s
+            getOtp()
+            val c: Calendar = Calendar.getInstance()
+            @SuppressLint("SimpleDateFormat") val dateformat =
+                SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa")
+            val currentTime: String = dateformat.format(c.getTime())
+            //  Log.d("transaction_id", transaction_id)
+            /*sendorderdetails(
+                transaction_id,
+                order_id,
+                java.lang.String.valueOf(total_samount),
+                1,
+                currentTime
+            )*/
+        } catch (e: Exception) {
+            //  Log.e(TAG, "Exception in onPaymentSuccess", e)
+        }
+    }
+    override fun onPaymentError(i: Int, s: String?) {
+        try {
+            Toast.makeText(requireActivity(), "Payment failed$i", Toast.LENGTH_SHORT).show()
+            val c: Calendar = Calendar.getInstance()
+            @SuppressLint("SimpleDateFormat") val dateformat =
+                SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa")
+            val currentTime: String = dateformat.format(c.getTime())
+            // sendorderdetails("0", order_id, java.lang.String.valueOf(total_samount), 0, currentTime)
+        } catch (e: Exception) {
+            //Log.e(TAG, "Exception in onPaymentError", e)
+        }
+    }*/
+
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.pearlorganisation.figgo
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -96,7 +97,8 @@ class PaymentPayActivity : AppCompatActivity(), PaymentResultListener {
     }
 
     private fun getPayNow() {
-
+        val progressDialog = ProgressDialog(this@PaymentPayActivity)
+        progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/enter-passenger-details"
         val queue = Volley.newRequestQueue(this@PaymentPayActivity)
         val json = JSONObject()
@@ -124,6 +126,7 @@ class PaymentPayActivity : AppCompatActivity(), PaymentResultListener {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
 
+                        progressDialog.hide()
                         val amt = "1"
                         val amount = Math.round(amt.toFloat() * 100).toInt()
                         val checkout = Checkout()
@@ -131,7 +134,7 @@ class PaymentPayActivity : AppCompatActivity(), PaymentResultListener {
                         checkout.setImage(R.drawable.appicon)
                         val obj = JSONObject()
                         try {
-                            obj.put("name", "Geeks for Geeks")
+                            obj.put("name", "Figgo")
                             obj.put("description", "Test payment")
                             obj.put("theme.color", "")
                             obj.put("currency", "INR")
