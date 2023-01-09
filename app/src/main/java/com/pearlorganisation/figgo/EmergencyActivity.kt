@@ -15,10 +15,10 @@ class EmergencyActivity : AppCompatActivity() {
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
 
-        backimg.setOnClickListener {
+      /*  backimg.setOnClickListener {
             val intent = Intent(this, VehicleAboutActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         shareimg.setOnClickListener {
             var intent= Intent()

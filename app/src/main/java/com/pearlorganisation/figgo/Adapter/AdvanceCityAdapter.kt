@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.google.android.material.transition.Hold
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
-import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 
@@ -33,8 +30,8 @@ class AdvanceCityAdapter(var context:Activity, var cablist: ArrayList<AdvanceCit
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: AdvanceCityHolder, position: Int) {
      var data=cablist[position]
-        holder.cab.setImageResource(data.cab)
-        holder.ratings.text=data.rating
+        /*holder.cab.setImageResource(data.cab)
+        holder.ratings.text=data.rating*/
         holder.itemView.setOnClickListener {
             when(holder.adapterPosition)
             {

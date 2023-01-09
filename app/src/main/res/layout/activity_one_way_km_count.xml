@@ -13,6 +13,7 @@
         android:layout_height="@dimen/_170sdp"
         android:orientation="vertical"
         android:background="@drawable/bottomradius_background">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +21,7 @@
 
             <ImageView
                 android:id="@+id/backimg"
-                android:layout_width="@dimen/_28sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -43,7 +44,7 @@
 
             <ImageView
                 android:id="@+id/shareimg"
-                android:layout_width="@dimen/_28sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_baseline_share_24"/>
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/carfamily"/>
+            android:src="@drawable/girl"/>
     </LinearLayout>
 
 
@@ -74,20 +75,29 @@
             android:layout_marginStart="@dimen/_12sdp">
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_195sdp"
-                android:background="@color/coloryellow"
-                android:scaleType="fitXY"
-                android:src="@drawable/googlemapimg" />
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="@dimen/_195sdp"-->
+<!--                android:background="@color/coloryellow"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/googlemapimg" />-->
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:context=".CurrentMap.MapsActivity1" />
 
             <LinearLayout
                 android:id="@+id/ll_accept"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_85sdp"
                 android:orientation="horizontal">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -97,7 +107,7 @@
                     android:orientation="vertical" />
 
             </LinearLayout>
-
+</LinearLayout>
            <!-- <TextView
                 android:id="@+id/nextscreen"
                 android:layout_width="@dimen/_65sdp"
@@ -114,8 +124,15 @@
 
         </androidx.cardview.widget.CardView>
 
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:id="@+id/progress"/>
 
     </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/car"

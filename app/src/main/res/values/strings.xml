@@ -52,4 +52,8 @@
     <String name="Logout">Logout</String>
     <string name="title_activity_customer_menu_drawer">Customer Menu Drawer</string>-->
     <string name="title_activity_customer_menu_drawer">Customer Menu Drawer</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps1">MapsActivity1</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
+    <string name="title_activity_emergency_maps">EmergencyMapsActivity</string>
 </resources>

@@ -29,6 +29,7 @@
     <!-- dots active colors -->
 
     <color name="dot_light_screen2">#fff</color>
+    <color name="quantum_bluegrey700">#455A64</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>

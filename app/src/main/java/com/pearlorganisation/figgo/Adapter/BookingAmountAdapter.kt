@@ -1,19 +1,20 @@
 package com.pearlorganisation.figgo.Adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.pearlorganisation.figgo.*
 import com.pearlorganisation.figgo.Model.BookingAmountList
-import com.pearlorganisation.figgo.Model.VehicleBookPayList
-import com.pearlorganisation.figgo.R
 
-class BookingAmountAdapter (private val mList1: List<BookingAmountList>) : RecyclerView.Adapter<BookingAmountAdapter.ViewHolder>()  {
+class BookingAmountAdapter (var context: Context,private val mList1: List<BookingAmountList>) : RecyclerView.Adapter<BookingAmountAdapter.ViewHolder>()  {
 
-    var onItemClick : ((BookingAmountList) -> Unit)? = null
-
+   /* var onItemClick : ((BookingAmountList) -> Unit)? = null
+*/
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingAmountAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.onewaybookinglist, parent, false)
         return BookingAmountAdapter.ViewHolder(view)
@@ -29,9 +30,14 @@ class BookingAmountAdapter (private val mList1: List<BookingAmountList>) : Recyc
         holder.amountpurple.text = BookingAmountList.amountpurple
         holder.driverchangepurple.text = BookingAmountList.driverchangepurple
 
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(BookingAmountList)
+        holder.amountpurple.setOnClickListener {
+            context.startActivity(Intent(context, VehicleBookActivity::class.java))
+
         }
+
+       /* holder.itemView.setOnClickListener {
+            onItemClick?.invoke(BookingAmountList)
+        }*/
 
     }
 

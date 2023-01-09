@@ -1,7 +1,6 @@
 package com.pearlorganisation.figgo
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,8 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
+
 
 class One_Way_OutStationActivity : AppCompatActivity() {
 
@@ -34,8 +32,9 @@ class One_Way_OutStationActivity : AppCompatActivity() {
         var submitoutstation = findViewById<LinearLayout>(R.id.submitoutstation)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
+        var work_progress = findViewById<ImageView>(R.id.work_progress)
 
-        backimg.setOnClickListener {
+       /* backimg.setOnClickListener {
             val intent = Intent(this, HomeDashboard::class.java)
             startActivity(intent)
         }
@@ -46,11 +45,11 @@ class One_Way_OutStationActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
             intent.setType("text/plain");
             startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
+        }*/
 
-        submitoutstation.setOnClickListener {
+       /* submitoutstation.setOnClickListener {
             startActivity(Intent(this,OneWay_Km_CountActivity::class.java))
-        }
+        }*/
 
 
 

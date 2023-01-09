@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
-import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.Model.VehicleInfoList
 import com.pearlorganisation.figgo.R
 
@@ -35,10 +33,10 @@ class VehicleAboutAdapter(private val vehicle_about_list:ArrayList<VehicleInfoLi
 
         val VehicleInfoList = vehicle_about_list[position]
 
-        holder.vehiclenumber.text=VehicleInfoList.vehiclenumber
+        /*holder.vehiclenumber.text=VehicleInfoList.vehiclenumber*/
         holder.activaimg.setImageResource(R.drawable.blueactiva_img)
         holder.driverimg.setImageResource(R.drawable.girl_img)
-        holder.activavehiclenumber.text=VehicleInfoList.activavehiclenumber
+       /* holder.activavehiclenumber.text=VehicleInfoList.activavehiclenumber*/
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(VehicleInfoList)

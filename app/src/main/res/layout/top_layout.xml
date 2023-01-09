@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/menu_naviagtion"
-        android:layout_width="@dimen/_28sdp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/_28sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:src="@drawable/ic_baseline_density_medium_24"/>
@@ -23,9 +23,9 @@
 
     <ImageView
         android:id="@+id/shareimg"
-        android:layout_width="@dimen/_28sdp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginStart="@dimen/_99sdp"
+        android:layout_marginStart="@dimen/_96sdp"
         android:layout_gravity="center"
         android:src="@drawable/ic_baseline_share_24"/>
 

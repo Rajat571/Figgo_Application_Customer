@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
+import com.pearlorganisation.figgo.UI.CityCabActivity
+
 
 class DriveRatingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +17,7 @@ class DriveRatingActivity : AppCompatActivity() {
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
 
-       /* backimg.setOnClickListener {
+        backimg.setOnClickListener {
             val intent = Intent(this, EmergencyActivity::class.java)
             startActivity(intent)
         }
@@ -27,10 +28,10 @@ class DriveRatingActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
             intent.setType("text/plain");
             startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }*/
+        }
 
         submitraing.setOnClickListener {
-            startActivity(Intent(this,OneWayBookingActivity::class.java))
+            startActivity(Intent(this,CityCabActivity::class.java))
         }
     }
 }

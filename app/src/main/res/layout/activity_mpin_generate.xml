@@ -82,7 +82,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginTop="10dp"
                     android:hint="MPIN"
-                    android:inputType="number"
+                    android:inputType="numberPassword"
                     android:maxLength="4" />
 
                 <EditText
@@ -93,7 +93,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginTop="10dp"
                     android:hint="CONFIRM MPIN"
-                    android:inputType="number"
+                    android:inputType="numberPassword"
                     android:maxLength="4" />
 
                 <TextView

@@ -14,7 +14,6 @@ import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.One_Way_OutStationActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CityCabActivity
-import com.pearlorganisation.figgo.UI.MainActivity
 import com.pearlorganisation.figgo.UI.Shared_cab_Activity
 
 class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCategory>):
@@ -39,7 +38,6 @@ class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCate
 
                     holder.cab_name.setTextColor(Color.WHITE)
                     holder.cab_category.setImageResource(R.drawable.citycab)
-
                context.startActivity(Intent(context,CityCabActivity::class.java))
                 }
                 1->{

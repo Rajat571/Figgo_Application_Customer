@@ -8,6 +8,7 @@
 
     <include layout="@layout/top_layout"
         android:id="@+id/layout"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/backgrouund"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -17,6 +18,7 @@
         android:id="@+id/backgrouund"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:visibility="gone"
         android:background="@drawable/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout"
@@ -26,6 +28,7 @@
             android:layout_width="356dp"
             android:layout_height="154dp"
             android:padding="8dp"
+            android:visibility="gone"
             android:src="@drawable/sharecab"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +80,7 @@
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:id="@+id/livecard"
+        android:visibility="gone"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/backgrouund"
         android:layout_height="wrap_content"
@@ -233,6 +237,7 @@
         android:layout_marginLeft="10dp"
         app:layout_constraintTop_toBottomOf="@+id/livecard"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/car"
         android:id="@+id/share_cab_list"/>
 
@@ -241,6 +246,7 @@
         android:scaleType="centerCrop"
         android:layout_width="wrap_content"
         android:layout_height="90dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottombuttonbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -251,6 +257,7 @@
         android:id="@+id/bottombuttonbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
