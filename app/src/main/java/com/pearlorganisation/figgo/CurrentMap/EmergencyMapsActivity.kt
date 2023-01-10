@@ -30,6 +30,11 @@ class EmergencyMapsActivity : AppCompatActivity(), OnMapReadyCallback ,GoogleMap
         var emrgencybtn = findViewById<TextView>(R.id.emrgencybtn)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
+        var backtxt = findViewById<TextView>(R.id.backtxt)
+
+        backtxt.setOnClickListener {
+            startActivity(Intent(this, MapsActivity2::class.java))
+        }
 
         backimg.setOnClickListener {
             val intent = Intent(this, MapsActivity2::class.java)

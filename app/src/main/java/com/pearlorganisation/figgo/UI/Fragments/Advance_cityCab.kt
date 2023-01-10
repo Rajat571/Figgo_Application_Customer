@@ -68,6 +68,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
     GoogleMap.OnCameraMoveListener,
     GoogleMap.OnCameraMoveCanceledListener,
     GoogleMap.OnCameraIdleListener {
+
     private val REQUEST_CHECK_SETTINGS: Int=101;
     private lateinit var mMap: GoogleMap
     var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
@@ -107,7 +108,6 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
     var timetext: TextView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_advance_city_cab, container, false)
         return binding.root
     }
@@ -149,9 +149,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
 
         }
         locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
          hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-//------------------------------------------------------//
          hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
 
@@ -230,8 +228,6 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
 
         submit?.setOnClickListener {
 
-
-
             if (to_lat == ""){
                 Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
             }else if (from_lat == ""){
@@ -243,13 +239,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
 
         }
         next?.setOnClickListener {
-
-
-
                 startActivity(Intent(requireActivity(), CabDetailsActivity::class.java))
-
-
-
         }
 
 
@@ -269,26 +259,19 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
 
 
         locLinear?.setOnClickListener {
-
             val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
                 mainBinding = ActivityMainBinding.inflate(layoutInflater)
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
                 selects = "start"
                 if (isLocationPermissionGranted()) {
-
                     advance_li?.isVisible = false
                     map_li?.isVisible = true
                     val mapFragment = getChildFragmentManager()
                         .findFragmentById(R.id.map) as SupportMapFragment
                     mapFragment.getMapAsync(this)
-
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
-
                     // startActivity(Intent(requireActivity(), MapsActivity::class.java))
-
                 }else{
                     requestPermissions()
                 }
@@ -299,12 +282,10 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         }
 
         destLinear?.setOnClickListener {
-
             val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
                 mainBinding = ActivityMainBinding.inflate(layoutInflater)
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
                 selects = "dest"
                 if (isLocationPermissionGranted()) {
                     advance_li?.isVisible = false
@@ -312,9 +293,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
                     val mapFragment = getChildFragmentManager()
                         .findFragmentById(R.id.map) as SupportMapFragment
                     mapFragment.getMapAsync(this)
-
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
                 }else{
                     requestPermissions()
                 }
@@ -345,39 +324,26 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         json.put("type", "advance_booking")
         json.put("to_location_name", manualLoc?.text.toString())
         json.put("from_location_name", liveLoc?.text.toString())
-
-
-
-
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
-
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-
                         progressDialog.hide()
                         ll_location?.isVisible = false
                         ll_choose_vehicle?.isVisible  =true
-
                         val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
                         val rideId = response.getJSONObject("data").getString("ride_id")
-
                         for(p2 in 0 until size) {
-
                             val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-
-
                             val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
                             val min = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
                             val max = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")
-
                             cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id,min,max))
                         }
-
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
                         binding.recylerCabList.adapter=advanceCityAdapter
 

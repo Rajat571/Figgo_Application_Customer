@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.pearlorganisation.figgo.OneWay_Km_CountActivity
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 import com.pearlorganisation.figgo.databinding.ActivityMaps2Binding
 
 class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -31,13 +32,18 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
         var accept = findViewById<TextView>(R.id.accept)
+        var backtxt = findViewById<TextView>(R.id.backtxt)
 
         accept.setOnClickListener {
             startActivity(Intent(this, EmergencyMapsActivity::class.java))
         }
 
+        backtxt.setOnClickListener {
+            startActivity(Intent(this, MapsActivity1::class.java))
+        }
+
         backimg.setOnClickListener {
-            val intent = Intent(this, OneWay_Km_CountActivity::class.java)
+            val intent = Intent(this, MapsActivity1::class.java)
             startActivity(intent)
         }
 

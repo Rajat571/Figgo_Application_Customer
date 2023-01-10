@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:background="@drawable/bottomradius_background">
         <LinearLayout
+            android:layout_marginTop="@dimen/_3sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -23,10 +24,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_weight="1"
                 android:src="@drawable/ic_arrow_back"/>
 
             <TextView
+                android:id="@+id/backtxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12sdp"
@@ -46,9 +48,8 @@
                 android:id="@+id/shareimg"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:padding="@dimen/_5sdp"
-                android:layout_weight="3"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:src="@drawable/ic_baseline_share_24"/>
         </LinearLayout>
 

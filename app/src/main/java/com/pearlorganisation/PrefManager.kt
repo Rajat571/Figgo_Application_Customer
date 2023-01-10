@@ -10,6 +10,7 @@ import android.content.SharedPreferences
      // Shared preferences file name
      private val PREF_NAME = "welcome"
      private val IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch"
+     private val IS_VALID_LOGIN = "IsValidLogin"
      // shared pref mode
      var PRIVATE_MODE = 0
     var pref: SharedPreferences? = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
@@ -111,5 +112,15 @@ import android.content.SharedPreferences
          return pref?.getString("userid","").toString()
      }
 
+     fun setisValidLogin(isFirstTime: Boolean) {
+         editor!!.putBoolean(IS_VALID_LOGIN, isFirstTime)
+         editor!!.commit()
+     }
 
-}
+     fun isValidLogin(): Boolean {
+         return pref!!.getBoolean(IS_VALID_LOGIN, false)
+     }
+
+
+
+ }

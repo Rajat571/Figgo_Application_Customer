@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.UI.CityCabActivity
 
 
@@ -16,9 +18,14 @@ class DriveRatingActivity : AppCompatActivity() {
 
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
+        var backtxt = findViewById<TextView>(R.id.backtxt)
+
+        backtxt.setOnClickListener {
+            startActivity(Intent(this, EmergencyMapsActivity::class.java))
+        }
 
         backimg.setOnClickListener {
-            val intent = Intent(this, EmergencyActivity::class.java)
+            val intent = Intent(this, EmergencyMapsActivity::class.java)
             startActivity(intent)
         }
 
