@@ -51,6 +51,7 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
@@ -69,9 +70,9 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
     GoogleMap.OnCameraMoveCanceledListener,
     GoogleMap.OnCameraIdleListener {
 
-    private val REQUEST_CHECK_SETTINGS: Int=101;
+    private val REQUEST_CHECK_SETTINGS: Int=101
     private lateinit var mMap: GoogleMap
-    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
+    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101
     private lateinit var fusedLocationClient: FusedLocationProviderClient;
     private lateinit var lastLocation: Location;
     private lateinit var locationRequest: LocationRequest;
@@ -103,7 +104,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
     private var lastKnownLocationByGps: Location? = null
 
 
-    var press : String ?= "";
+    var press : String ?= ""
     var datetext: TextView? = null
     var timetext: TextView? = null
     override fun onCreateView(
@@ -239,7 +240,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
 
         }
         next?.setOnClickListener {
-                startActivity(Intent(requireActivity(), CabDetailsActivity::class.java))
+                startActivity(Intent(requireActivity(), MapsActivity1::class.java))
         }
 
 
@@ -248,7 +249,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
-        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
+
       //  cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
@@ -324,8 +325,10 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         json.put("type", "advance_booking")
         json.put("to_location_name", manualLoc?.text.toString())
         json.put("from_location_name", liveLoc?.text.toString())
-        val jsonOblect: JsonObjectRequest =
-            object : JsonObjectRequest(Method.POST, URL, json, object :
+        Log.d("SendData", "json===" + json)
+        Log.d("SendData", "pref.getToken()===" + pref.getToken())
+
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
@@ -345,10 +348,11 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
                             cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id,min,max))
                         }
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
+                        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
                         binding.recylerCabList.adapter=advanceCityAdapter
 
                     }
-                    // Get your json response and convert it to whatever you want.
+
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
@@ -368,10 +372,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
             }
 
         queue.add(jsonOblect)
-
     }
-
-
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {

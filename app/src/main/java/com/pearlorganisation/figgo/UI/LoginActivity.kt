@@ -107,40 +107,39 @@ class LoginActivity : AppCompatActivity(){
                  input_number.inputType = TYPE_CLASS_NUMBER
              }*/
 
-            continuetv.setOnClickListener {
-                cc_number.isVisible = false
-                progress.isVisible = true
-                //var mobile_num=binding.inputNumber.text.toString()
-                val URL = "https://test.pearl-developer.com/figo/api/register"
-                val queue = Volley.newRequestQueue(this@LoginActivity)
-                val json = JSONObject()
-                json.put("contact_no", input_number.text.toString())
-                Log.d("SendData", "json===" + json)
-                val jsonOblect: JsonObjectRequest =
-                    object : JsonObjectRequest(Method.POST, URL, json, object :
-                        Response.Listener<JSONObject?> {
-                        override fun onResponse(response: JSONObject?) {
-                            Log.d("SendData", "response===" + response)
-                            if (response != null) {
-                                if (pref.getToken().equals("") || pref.getToken().equals("null")) {
 
-                                    val token = response.getString("token")
-                                    pref.setToken(token)
-                                    Toast.makeText(
-                                        this@LoginActivity,
-                                        "Login Successfully",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    Log.d("SendData", "token===" + token)
-                                    //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                                    if (pref.getMpin().equals("")) {
-                                        startActivity(Intent(this@LoginActivity, MPinGenerate::class.java))
-                                    } else {
-                                        startActivity(Intent(this@LoginActivity, DashBoard::class.java))
-                                    }
-                                    cc_number.isVisible = true
-                                    progress.isVisible = false
+        }
+        continuetv.setOnClickListener {
+            cc_number.isVisible = false
+            progress.isVisible = true
+            //var mobile_num=binding.inputNumber.text.toString()
+            val URL = "https://test.pearl-developer.com/figo/api/register"
+            val queue = Volley.newRequestQueue(this@LoginActivity)
+            val json = JSONObject()
+            json.put("contact_no", input_number.text.toString())
+            Log.d("SendData", "json===" + json)
+            val jsonOblect: JsonObjectRequest =
+                object : JsonObjectRequest(Method.POST, URL, json, object :
+                    Response.Listener<JSONObject?> {
+                    override fun onResponse(response: JSONObject?) {
+                        Log.d("SendData", "response===" + response)
+                        if (response != null) {
+                            if (pref.getToken().equals("") || pref.getToken().equals("null")) {
+
+                                val token = response.getString("token")
+                                pref.setToken(token)
+                                pref.setisValidLogin(true)
+                                Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
+                                Log.d("SendData", "token===" + token)
+                                //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+                                if (pref.getMpin().equals("")) {
+                                    startActivity(Intent(this@LoginActivity, MPinGenerate::class.java))
                                 } else {
+                                    startActivity(Intent(this@LoginActivity, DashBoard::class.java))
+                                }
+                                cc_number.isVisible = true
+                                progress.isVisible = false
+                            } else {
 //                               val token = response.getString("token")
 //                               pref.setToken(token)
 //                               Toast.makeText(this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
@@ -156,31 +155,33 @@ class LoginActivity : AppCompatActivity(){
 //                               else{
 //                                   startActivity(Intent(this@LoginActivity,DashBoard::class.java))
 //                               }
-                                    startActivity(Intent(this@LoginActivity, DashBoard::class.java))
-                                }
-
+                                val token = response.getString("token")
+                                pref.setToken(token)
+                                pref.setisValidLogin(true)
+                                startActivity(Intent(this@LoginActivity, DashBoard::class.java))
                             }
-                            // Get your json response and convert it to whatever you want.
+
                         }
-                    }, object : Response.ErrorListener {
-                        override fun onErrorResponse(error: VolleyError?) {
-                            // Error
-                        }
-                    }) {
-                        /*     @Throws(AuthFailureError::class)
-                        override fun getHeaders(): Map<String, String> {
-                            val headers: MutableMap<String, String> = HashMap()
-                            headers["Authorization"] = "TOKEN" //put your token here
-                            return headers
-                        }*/
+                        // Get your json response and convert it to whatever you want.
                     }
+                }, object : Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError?) {
+                        // Error
+                    }
+                }) {
+                    /*     @Throws(AuthFailureError::class)
+                    override fun getHeaders(): Map<String, String> {
+                        val headers: MutableMap<String, String> = HashMap()
+                        headers["Authorization"] = "TOKEN" //put your token here
+                        return headers
+                    }*/
+                }
 
-                queue.add(jsonOblect)
+            queue.add(jsonOblect)
 
 
-                //startActivity(Intent(this,MPinGenerate::class.java))
+            //startActivity(Intent(this,MPinGenerate::class.java))
 
-            }
         }
     }
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

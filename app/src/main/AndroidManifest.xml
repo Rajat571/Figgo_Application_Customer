@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +18,10 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Figgo"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".CabBookActivity"
+            android:exported="false" />
         <activity
             android:name=".CancellationPolicy"
             android:exported="false" />
@@ -47,20 +50,18 @@
             android:name=".EmergencyMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_emergency_maps" />
-
         <activity
             android:name=".CurrentMap.EmergencyMapsActivity"
             android:exported="false" />
-
-        <activity android:name="com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity"
-            android:exported="false"/>
-
-        <activity android:name="com.pearlorganisation.DrawerItemActivity.CancellationPolicy"
-            android:exported="false"/>
-
-        <activity android:name="com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity"
-            android:exported="false"/>
-
+        <activity
+            android:name="com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.pearlorganisation.DrawerItemActivity.CancellationPolicy"
+            android:exported="false" />
+        <activity
+            android:name="com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity"
+            android:exported="false" />
         <activity
             android:name=".CurrentMap.MapsActivity1"
             android:exported="false" />
@@ -78,9 +79,6 @@
             android:exported="false" />
         <activity
             android:name=".PaymentPayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CabBookActivity"
             android:exported="false" />
         <activity
             android:name=".OneWayBookingActivity"
@@ -126,14 +124,14 @@
             android:theme="@style/Theme.Figgo.NoActionBar" />
         <activity
             android:name=".UI.MPinGenerate"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".UI.Shared_cab_Activity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -142,28 +140,28 @@
             android:name=".UI.CabDetailsActivity"
             android:exported="false"
             android:label="@string/title_activity_cab_details"
-            android:theme="@style/Theme.Figgo.NoActionBar" >
+            android:theme="@style/Theme.Figgo.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".UI.CityCabActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".UI.DashBoard"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".UI.LoginActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -173,14 +171,14 @@
             android:exported="false" />
         <activity
             android:name=".UI.WelcomeActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".UI.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -193,7 +191,7 @@
         </activity>
         <activity
             android:name=".UI.MainActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -205,7 +203,7 @@
 
         <receiver
             android:name="com.razorpay.RzpTokenReceiver"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="rzp.device_token.share" />
             </intent-filter>
@@ -213,7 +211,7 @@
 
         <activity
             android:name="com.razorpay.CheckoutActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

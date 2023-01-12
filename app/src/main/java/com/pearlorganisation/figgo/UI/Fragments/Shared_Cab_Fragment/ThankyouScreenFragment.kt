@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
@@ -56,14 +57,34 @@ class ThankyouScreenFragment : Fragment() {
         otpText = view.findViewById<TextView>(R.id.otp)
         pref = PrefManager(requireActivity())
 
+        var backtxt =view.findViewById<TextView>(R.id.backtxt)
+        var backimg =view.findViewById<ImageView>(R.id.backimg)
+        var shareimg = view.findViewById<ImageView>(R.id.shareimg)
         otpText?.setText("Otp -"+pref.getOtp()+"")
         booking_id?.setText("Booking No -"+pref.getBookingNo()+"")
+
+
+        shareimg.setOnClickListener {
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
+            startActivity(Intent.createChooser(intent, "Invite Friends"));
+        }
+        backimg.setOnClickListener {
+
+            startActivity(Intent(requireActivity(), DashBoard::class.java))
+
+        }
+        backtxt.setOnClickListener {
+            startActivity(Intent(requireActivity(), DashBoard::class.java))
+        }
+
 
         next_button.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_thankyouScreenFragment_to_vehicleNumberFragment)
         }
-
 
         book_other.setOnClickListener {
 
@@ -73,6 +94,7 @@ class ThankyouScreenFragment : Fragment() {
         close.setOnClickListener {
             startActivity(Intent(requireActivity(), DashBoard::class.java))
         }
+
 
 
     }

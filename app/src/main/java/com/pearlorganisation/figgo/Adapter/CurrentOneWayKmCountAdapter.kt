@@ -5,9 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
@@ -27,15 +29,15 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
     override fun onBindViewHolder(holder: CurrentOneWayKmCountAdapter.ViewHolder, position: Int) {
         val OneWayListRatingVehicle = mList[position]
 
-       // holder.vehiclemodel.text = OneWayListRatingVehicle.vehiclemodel
-     //   holder.reject.text = OneWayListRatingVehicle.reject
-       // holder.acceptcountlist.text = OneWayListRatingVehicle.acceptcountlist
+        holder.vehicleprice.text = mList.get(position).rating
+        holder.vehiclname.text = mList.get(position).name
+        holder.vehiclemodel.text = mList.get(position).year
+       /* holder.raing.text = mList.get(position).rating*/
 
-        holder.acceptcountlist.setOnClickListener {
-            context.startActivity(Intent(context, MapsActivity2::class.java))
-
+        holder.ll_main.setOnClickListener {
+            context.startActivity(Intent(context, MapsActivity1::class.java))
         }
-
+        pref.setRideId(OneWayListRatingVehicle.ride_id)
        /* pref.setvehicle_type_id(OneWayListRatingVehicle.vehicle_type_id)
         pref.setride_id(OneWayListRatingVehicle.ride_id)*/
 
@@ -51,11 +53,11 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView){
 
+        var vehiclname:TextView = itemView.findViewById(R.id.vehiclname)
         var vehiclemodel:TextView = itemView.findViewById(R.id.vehiclemodel)
-        val raingcountlist:TextView = itemView.findViewById(R.id.raingcountlist)
-        //   val ride_service_rating:TextView = itemView.findViewById(R.id.ride_service_rating)
-        val reject:TextView = itemView.findViewById(R.id.reject)
-        val acceptcountlist:TextView = itemView.findViewById(R.id.acceptcountlist)
+        var vehicleprice:TextView = itemView.findViewById(R.id.vehicleprice)
+        val raing:TextView = itemView.findViewById(R.id.raingcountlist)
+        val ll_main:LinearLayout = itemView.findViewById(R.id.ll_main)
 
     }
 

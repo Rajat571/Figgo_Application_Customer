@@ -20,6 +20,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.GoogleApiClient
@@ -31,6 +32,11 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentMoreFragment
+import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentRidesFragment
+import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
+import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
+import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
 import com.pearlorganisation.figgo.Model.CabCategory
@@ -47,6 +53,7 @@ import java.util.*
 class DashBoard : AppCompatActivity() {
     lateinit var binding: ActivityDashBoardBinding
     lateinit var toggle: ActionBarDrawerToggle
+    lateinit var drawerLayout: DrawerLayout
     private var hasGps = false
     private var hasNetwork = false
     lateinit var cabCategoryAdapter: CabCategoryAdapter
@@ -75,28 +82,35 @@ class DashBoard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
-//        val recyclerView: RecyclerView = findViewById(R.id.figgo_add_list)
-//        val recycler: RecyclerView = findViewById(R.id.cab_category_list)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
-
-        var rides = RidesBottom()
-        var more = RoundAndTourFragment()
+        var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
+        var rides =/* RidesBottom()*/ CurrentRidesFragment()
+        var more = /*RoundAndTourFragment()*/ CurrentMoreFragment()
         var support = SupportBottomNav()
         var navView = findViewById<NavigationView>(R.id.navView)
-
-
+        var shareimg = findViewById<ImageView>(R.id.shareimg)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
         drawerLayout.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle.syncState()
-        var layout = findViewById<ImageView>(R.id.menu_naviagtion)
+
+        shareimg.setOnClickListener {
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
+            startActivity(Intent.createChooser(intent, "Invite Friends"));
+        }
+
+        menu_naviagtion.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT)
+        }
 
 
         grantLocPer()
-
-
 
        var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)
         bottom.setOnItemSelectedListener {
@@ -114,10 +128,8 @@ class DashBoard : AppCompatActivity() {
 
 
                 R.id.more_b->{
-                    drawerLayout.openDrawer(Gravity.LEFT)
-                  //  navView.showContextMenu()
-            //setfragment(more)
-            true
+                    setfragment(more)
+                    true
 
         }
                 R.id.support_b->{
@@ -187,6 +199,16 @@ class DashBoard : AppCompatActivity() {
                 }
                 R.id.Logout -> {
                     startActivity(Intent(this,LoginActivity::class.java))
+                }
+
+                R.id.term_condition -> {
+                    startActivity(Intent(this,TermAndConditionActivity::class.java))
+                }
+                R.id.cancellation_policy -> {
+                    startActivity(Intent(this,CancellationPolicy::class.java))
+                }
+                R.id.About_Figgo -> {
+                    startActivity(Intent(this,CurrentAboutActivity::class.java))
                 }
 
             }
@@ -310,30 +332,13 @@ class DashBoard : AppCompatActivity() {
 
 
    private fun requestPermissions() {
-       ActivityCompat.requestPermissions(
-           this@DashBoard,
-           arrayOf(
-               android.Manifest.permission.ACCESS_COARSE_LOCATION,
-               android.Manifest.permission.ACCESS_FINE_LOCATION
-           ),
-           permissionId
-       )
+       ActivityCompat.requestPermissions(this@DashBoard,
+           arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION), permissionId)
    }
     private fun isLocationPermissionGranted(): Boolean {
-        return if (ActivityCompat.checkSelfPermission(
-                this@DashBoard,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this@DashBoard,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this@DashBoard,
-                arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
+        return if (ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this@DashBoard, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),
                 requestcodes
             )
             false

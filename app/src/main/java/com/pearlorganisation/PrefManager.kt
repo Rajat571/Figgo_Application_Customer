@@ -40,7 +40,6 @@ import android.content.SharedPreferences
          editor?.commit()
      }
 
-
      fun getMpin():String{
          return pref?.getString("mpin","").toString()
      }
@@ -104,6 +103,13 @@ import android.content.SharedPreferences
          return pref?.getString("vehicle_id","null").toString()
      }
 
+
+
+     fun getdriver_id(): String {
+         return pref?.getString("driver_id","driver_id").toString()
+
+     }
+
      fun setUserId(userid:String){
          editor?.putString("userid",userid)
          editor?.commit()
@@ -120,6 +126,9 @@ import android.content.SharedPreferences
      fun isValidLogin(): Boolean {
          return pref!!.getBoolean(IS_VALID_LOGIN, false)
      }
+
+
+
 
 
 

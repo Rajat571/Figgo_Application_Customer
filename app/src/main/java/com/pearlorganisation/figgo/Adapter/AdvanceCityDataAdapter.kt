@@ -47,23 +47,7 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
         Picasso.get().load(data.image).into(holder.cab)
 
         holder.itemView.setOnClickListener {
-          /*  when(holder.adapterPosition)
-            {
-                0->{
-                    holder.linear.setBackgroundColor(R.color.colorcoffie)
-//                    holder.cab.setOnClickListener{
-//                        recreate(context)
-                  //  }
-                }
-                1->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                2->holder.cab.setImageResource(R.drawable.ola_e_rick_active)
-                3->holder.cab.setImageResource(R.drawable.ola_lux_active)
-                5->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                6-> holder.cab.setImageResource(R.drawable.ola_auto_active)
-                7->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                8->holder.cab.setImageResource(R.drawable.ola_bike_active)
-                9->holder.cab.setImageResource(R.drawable.ola_bike_active)
-            }*/
+
            pref.setRideId(data.rideId)
             pref.setVehicleId(data.vehicleId)
             row_index = position

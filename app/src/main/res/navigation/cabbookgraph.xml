@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_cabBookFragment_to_payFragment"
             app:destination="@id/payFragment" />
+        <action
+            android:id="@+id/action_cabBookFragment_to_dashBoard"
+            app:destination="@id/dashBoard" />
     </fragment>
 
     <fragment
@@ -23,6 +26,9 @@
         <action
             android:id="@+id/action_payFragment_to_paymentWayFragment"
             app:destination="@id/paymentWayFragment" />
+        <action
+            android:id="@+id/action_payFragment_to_cabBookFragment"
+            app:destination="@id/cabBookFragment" />
     </fragment>
 
     <fragment
@@ -40,9 +46,11 @@
         android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment"
         android:label="fragment_thankyou_screen"
         tools:layout="@layout/fragment_thankyou_screen" >
-        <action
+       <action
             android:id="@+id/action_thankyouScreenFragment_to_vehicleNumberFragment"
             app:destination="@id/vehicleNumberFragment" />
+
+
     </fragment>
     <fragment
         android:id="@+id/vehicleNumberFragment"
@@ -58,5 +66,10 @@
         android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.Thankyou_Rating_Fragment"
         android:label="fragment_thankyou__rating_"
         tools:layout="@layout/fragment_thankyou__rating_" />
+    <activity
+        android:id="@+id/dashBoard"
+        android:name="com.pearlorganisation.figgo.UI.DashBoard"
+        android:label="a_dashboard"
+        tools:layout="@layout/a_dashboard" />
 
 </navigation>

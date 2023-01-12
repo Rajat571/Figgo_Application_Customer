@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.R
 
@@ -43,16 +44,20 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Advanc
 
         holder.itemView.setOnClickListener {
 
-            row_index = position
-            notifyDataSetChanged()
             pref.setRideId(data.rideId)
             pref.setVehicleId(data.vehicleId)
+            row_index = position
+            notifyDataSetChanged()
             context.startActivity(Intent(context, MapsActivity1::class.java))
         }
         if (row_index === position) {
             holder.linear.setBackgroundColor(context.resources.getColor(R.color.quantum_bluegrey700))
-
         }
+
+        holder.itemView.setOnClickListener {
+            context.startActivity(Intent(context,MapsActivity1::class.java))
+        }
+
         /* if(selectedItemPosition == position)
             holder.cab.setImageResource(R.color.grey)
         else

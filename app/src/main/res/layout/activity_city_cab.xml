@@ -7,6 +7,8 @@
     android:background="@color/colorlightblue"
     tools:context=".UI.CityCabActivity">
 
+
+
     <include layout="@layout/top_layout"
         android:id="@+id/layout"
         app:layout_constraintBottom_toTopOf="@id/backgrouund"
@@ -40,7 +42,7 @@
         android:layout_width="match_parent"
         app:cardElevation="8dp"
         app:cardCornerRadius="15dp"
-     android:layout_marginLeft="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:layout_height="50dp"

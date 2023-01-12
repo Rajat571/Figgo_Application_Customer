@@ -2,8 +2,13 @@ package com.pearlorganisation.figgo.Model
 
 import android.os.Parcel
 import android.os.Parcelable
+import org.json.JSONArray
 
-data class OneWayListRatingVehicle (var vehiclemodel:String, /*var raingcountlist: String,*/ /*var ride_service_rating:String,*/var reject:String, var acceptcountlist:String
-,var price:String,var year:String,var min_price:String,var max_price:String,var vehicle_detail:String,var name:String
-
-/*,var name:String, var image:String,var min_price:String,var max_price:String,var from_location:String*/)
+data class OneWayListRatingVehicle(
+    var driverid:String,
+    var name:String,
+    var year:String,
+    var price:String,
+    var rating:String,
+    var ride_id: String
+)

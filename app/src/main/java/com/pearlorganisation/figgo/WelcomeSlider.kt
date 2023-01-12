@@ -65,6 +65,10 @@ class WelcomeSlider : AppCompatActivity() {
         btnSkip!!.setOnClickListener { launchHomeScreen() }
         btnNext!!.setOnClickListener {
             // checking for last page if true launch MainActivity
+
+            if(prefManager!!.getToken().equals("")|| prefManager!!.getToken().equals("null"))
+                startActivity(Intent(this@WelcomeSlider, LoginActivity::class.java))
+            else{
             val current = getItem(+1)
             if (current < layouts.size) {
                 // move to next screen
@@ -72,6 +76,8 @@ class WelcomeSlider : AppCompatActivity() {
             } else {
                 launchHomeScreen()
             }
+            }
+
         }
     }
 
@@ -83,7 +89,7 @@ class WelcomeSlider : AppCompatActivity() {
         for (i in dots.indices) {
             dots[i] = TextView(this)
             dots[i]!!.text = Html.fromHtml("&#8226")
-           // dots[i]!!.text(Html.fromHtml("&#8226;"));
+            // dots[i]!!.text(Html.fromHtml("&#8226;"));
             dots[i]!!.textSize = 35f
             dots[i]!!.setTextColor(colorsInactive[currentPage])
             dotsLayout!!.addView(dots[i])
@@ -97,9 +103,14 @@ class WelcomeSlider : AppCompatActivity() {
 
     private fun launchHomeScreen() {
         prefManager!!.setFirstTimeLaunch(false)
+        if(prefManager!!.getToken().equals("")){
+            startActivity(Intent(this@WelcomeSlider, LoginActivity::class.java))
+            finish()
+        }else{
+            startActivity(Intent(this@WelcomeSlider, DashBoard::class.java))
+            finish()
+        }
 
-        startActivity(Intent(this@WelcomeSlider, LoginActivity::class.java))
-        finish()
     }
 
 

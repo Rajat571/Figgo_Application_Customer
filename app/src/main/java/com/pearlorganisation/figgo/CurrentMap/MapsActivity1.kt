@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
@@ -21,10 +20,9 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
-import com.pearlorganisation.figgo.Adapter.CurrentVehicleAdapter
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.DashBoard
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 import com.pearlorganisation.figgo.databinding.ActivityMaps1Binding
 import org.json.JSONObject
@@ -50,16 +48,14 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var backimg = findViewById<ImageView>(R.id.backimg)
         var progress = findViewById<ProgressBar>(R.id.progress)
         var backtxt = findViewById<TextView>(R.id.backtxt)
-
-      /*  getnxtpage()*/
+        getnxtpage()
 
         backtxt.setOnClickListener {
-
-            startActivity(Intent(this,HomeDashboard::class.java))
+            startActivity(Intent(this,DashBoard::class.java))
         }
 
         backimg.setOnClickListener {
-            startActivity(Intent(this,HomeDashboard::class.java))
+            startActivity(Intent(this,DashBoard::class.java))
         }
 
         shareimg.setOnClickListener {
@@ -70,6 +66,7 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
 
+      /*  mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
         mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
         mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
         mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
@@ -78,11 +75,11 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
         mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
         mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
-        mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
-        mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
-        currentOneWayKmCountAdapter= CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
+        mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))*/
+
+       /* currentOneWayKmCountAdapter= CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
         binding.onewayvehiclelist.adapter=currentOneWayKmCountAdapter
-        binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)
+        binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)*/
 
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -108,74 +105,85 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         })
     }
 
-
-
-
     override fun onMarkerClick(p0: Marker): Boolean {
         TODO("Not yet implemented")
     }
 
-   /* private fun getnxtpage() {
-        *//*progress?.isVisible = true
-        ll_location?.isVisible = false
-        ll_choose_vehicle?.isVisible  =false*//*
+   private fun getnxtpage() {
         val URL = "https://test.pearl-developer.com/figo/api/ride/get-nearby-drivers"
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
-        json.put("ride_id",pref.getride_id())
+        json.put("ride_id",pref.getRideId())
+        /*json.put("ride_id","33")*/
         json.put("type","current_booking")
-        Log.d("SendData", "json===" + json)
+       Log.d("SendData", "pref.getToken()===" + pref.getToken())
+       Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
             Response.Listener<JSONObject?>               {
             override fun onResponse(response: JSONObject?) {
                 Log.d("SendData", "response===" + response)
                 if (response != null) {
                     val status = response.getString("status")
-                    if(status.equals("false")){
-                        Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                    }else{
-                        val data = response.getJSONObject("data")
-                        //val price = response.getJSONObject("price")
-                        val id = data.getString("id")
-                        val booking_id = data.getString("booking_id")
-                        val user_id = data.getString("user_id")
-                        *//*val vehicle_detail = data.getJSONObject("vehicle_detail")*//*
-                        val sub_categories = data.getJSONArray("sub_categories")
-                        for (i in 0 until data.length()){
+                    if (response != null) {
+                        val cabs = response.getJSONObject("data").getJSONArray("cabs").length()
+                        Log.d("SendData", "size===" + cabs)
+                      //  val price = response.getJSONObject("data").getJSONArray("cabs")
+                       /* val cab_drivers = response.getJSONObject("data").getJSONArray("cab_drivers")*/
+                        val ride = response.getJSONObject("data").getString("ride")
+                        /*val cab_drivers = response.getJSONObject("data").getJSONArray("cab_drivers")*/
 
-                            val id = sub_categories.getJSONObject(i).getString("id")
-                            val image = sub_categories.getJSONObject(i).getString("image")
-                           *//* val name = sub_categories.getJSONObject(i).getString("name")*//*
-                           // val from = cabs.getJSONObject(i).getString("from")
-                            val from = "25"
-//                            val upto = cabs.getJSONObject(i).getString("upto")
-                           val upto = "40"
-                           *//* val v_modal = sub_categories.getJSONObject(i).getString("v_modal")*//*
+                        for(p2 in 0 until cabs) {
 
-                            mList.add(OneWayListRatingVehicle(id,image,from,upto,booking_id,user_id))
+                            val data=response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2)
+                            val cab=data.getString( "cab")
+                            Log.d("SendData", "cab===" + cab)
+                            val id = response.getJSONObject("data").getString("id")
+                          //  val cab = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("cab")
+                            var pricestring = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("price")
+                            var cab_drivers = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("cab_drivers")
+                            val year = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("year")
+                            Log.d("SendData", "list===" + id+"\n"+cab+"\n"+pricestring+"\n"+cab_drivers+"\n"+year)
+
+                            /*val price =  String.format("$ %.2f",pricestring )*/
+                           /* Log.d("JsonObjectRequest","response==="+cab+"\n"+price+"\n"+yearArray)*/
+                           /* var driver_id: String? = null
+                            var year: String? = null
+                            var rating: String? = null*/
+                            /*for (i in 0 until yearArray.length()){
+                                 year = yearArray.getJSONObject(i).getString("year")
+                                 driver_id = yearArray.getJSONObject(i).getString("driver_id")
+                                rating = yearArray.getJSONObject(i).getJSONObject("driver").getString("rating_avg")
+                                Log.d("JsonObjectRequest","response==="+cab+"\n\n"+rating)
+                            }*/
+
+                            mList.add(OneWayListRatingVehicle(cab, id,pricestring,cab_drivers,ride,year))
+
                         }
-                        currentOneWayKmCountAdapter= CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
-                        binding.onewayvehiclelist.adapter=currentOneWayKmCountAdapter
+                        currentOneWayKmCountAdapter = CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
                         binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)
+                        binding.onewayvehiclelist.adapter=currentOneWayKmCountAdapter
+
+                        /*val currentOneWayKmCountAdapter = CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
+                        binding.onewayvehiclelist.layoutManager = LinearLayoutManager(this@MapsActivity1)
+                       binding.onewayvehiclelist.adapter = currentOneWayKmCountAdapter*/
+
 
                     }
 
-                    *//*
-
-                      val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
+                     /* val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
                       val ride_id = response.getJSONObject("data").getString("ride_id")
 
                       for(p2 in 0 until size) {
                           val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                           val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                         *//**//* val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("ride_id")*//**//*
+                          val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("ride_id")
                                 val ride_id = response.getJSONObject("data").getString("ride_id")
                                 val vehicle_id = response.getJSONObject("data").getString("vehicle_id")
 
                                 cablist.add(AdvanceCityCabModel(name,image,vehicle_id,ride_id))
                             }
                             advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
-                            binding.currentCabList.adapter=advanceCityAdapter*//*
+                            binding.currentCabList.adapter=advanceCityAdapter*/
 
                 }
                 // Get your json response and convert it to whatever you want.
@@ -198,11 +206,13 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
         queue.add(jsonOblect)
 
-    }*/
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        startActivity(Intent(this, DashBoard::class.java))
     }
 
 }
+
+

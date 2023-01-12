@@ -4,30 +4,47 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
+import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
+import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
+import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
 import com.pearlorganisation.figgo.R
 
 class CityCabActivity : AppCompatActivity() {
     private lateinit var navController: NavController
+    lateinit var toggle: ActionBarDrawerToggle
+    lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_city_cab)
-
-       /* var whatsappicon=findViewById<ImageView>(R.id.whatsappicon)
-        var callicon=findViewById<ImageView>(R.id.callicon)*/
+        setContentView(R.layout.drawer_screen2)
 
         var shareimg=findViewById<ImageView>(R.id.shareimg)
+        var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
+        val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+        var navView = findViewById<NavigationView>(R.id.navView)
+        menu_naviagtion.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT)
+        }
 
-       /* whatsappicon.setOnClickListener {
-            val url = "https://api.whatsapp.com/send?phone=7505145405"
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(url)
-            startActivity(i)
-        }*/
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.Change_MPIN, R.string.Rides)
+        drawerLayout.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        menu_naviagtion.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT)
+        }
+
+
        /* callicon.setOnClickListener {
             // val callIntent = Intent(Intent.ACTION_CALL)
             val callIntent = Intent(Intent.ACTION_DIAL)
@@ -37,13 +54,13 @@ class CityCabActivity : AppCompatActivity() {
         }*/
 
 
-       /* shareimg.setOnClickListener {
+        shareimg.setOnClickListener {
             var intent= Intent()
             intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
             startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }*/
+        }
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
@@ -54,8 +71,12 @@ class CityCabActivity : AppCompatActivity() {
 
     }
 
+
+
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(this,DashBoard::class.java))
     }
+
+
 }

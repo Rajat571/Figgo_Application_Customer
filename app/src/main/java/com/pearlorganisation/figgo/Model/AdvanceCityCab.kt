@@ -7,4 +7,5 @@ data class AdvanceCityCab(
     var vehicleId:String,
     var min:String,
     var max:String
+
 )

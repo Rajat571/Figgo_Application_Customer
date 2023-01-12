@@ -14,9 +14,6 @@ class SplashActivity : AppCompatActivity() {
 
 
     var prefManager: PrefManager? = null
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val window=window
@@ -26,11 +23,7 @@ class SplashActivity : AppCompatActivity() {
         prefManager = PrefManager(this)
         Handler().postDelayed({
 
-            if(prefManager!!.isValidLogin().equals("true")){
-                startActivity(Intent(this, DashBoard::class.java))
-            }else{
                 startActivity(Intent(this, WelcomeSlider::class.java))
-           }
 
         },3000)
         var become_the_luxury=findViewById<TextView>(R.id.become_the_luxury)

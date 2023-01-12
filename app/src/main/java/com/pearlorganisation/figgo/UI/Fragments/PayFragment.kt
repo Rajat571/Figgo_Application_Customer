@@ -70,6 +70,28 @@ class PayFragment : Fragment()  {
         pick_location = view.findViewById<TextView>(R.id.pick_location)
         msg = view.findViewById<EditText>(R.id.msg)
         pref = PrefManager(requireActivity())
+
+        var backtxt =view.findViewById<TextView>(R.id.backtxt)
+        var backimg =view.findViewById<ImageView>(R.id.backimg)
+        var shareimg = view.findViewById<ImageView>(R.id.shareimg)
+
+        backimg.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_payFragment_to_cabBookFragment)
+        }
+
+        backtxt.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_payFragment_to_cabBookFragment)
+        }
+
+        shareimg.setOnClickListener {
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
+            startActivity(Intent.createChooser(intent, "Invite Friends"))
+        }
+
+
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
@@ -87,8 +109,6 @@ class PayFragment : Fragment()  {
 
 
         pay_now.setOnClickListener {
-
-
 
             if (psg_name?.text.toString().equals("")){
                 Toast.makeText(requireActivity(), "Please type Passenger Name", Toast.LENGTH_LONG).show()
@@ -123,9 +143,6 @@ class PayFragment : Fragment()  {
             msg?.text = null
         }
         json.put("additional_message ", msg?.text.toString())
-
-
-
 
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
