@@ -138,14 +138,13 @@ class PayFragment : Fragment()  {
         json.put("lng", "")
         json.put("pickup_address", "")
         json.put("landmark", "")
-        json.put("ride_id", pref.getRideId())
+        json.put("ride_id", pref.getride_id())
         if (msg?.text.toString().equals("")){
             msg?.text = null
         }
         json.put("additional_message ", msg?.text.toString())
 
-        val jsonOblect: JsonObjectRequest =
-            object : JsonObjectRequest(Method.POST, URL, json, object :
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {

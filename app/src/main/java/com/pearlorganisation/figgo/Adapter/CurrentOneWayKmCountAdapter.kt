@@ -37,13 +37,9 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         holder.ll_main.setOnClickListener {
             context.startActivity(Intent(context, MapsActivity1::class.java))
         }
-        pref.setRideId(OneWayListRatingVehicle.ride_id)
-       /* pref.setvehicle_type_id(OneWayListRatingVehicle.vehicle_type_id)
-        pref.setride_id(OneWayListRatingVehicle.ride_id)*/
+        pref.setride_id(OneWayListRatingVehicle.ride_id)
+        pref.setdriver_id(OneWayListRatingVehicle.driver_id)
 
-      /*  holder.itemView.setOnClickListener {
-            onItemClick?.invoke(OneWayListRatingVehicle)
-        }*/
 
     }
 

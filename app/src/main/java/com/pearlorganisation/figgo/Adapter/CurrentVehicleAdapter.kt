@@ -13,11 +13,12 @@ import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
+import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 
 import com.squareup.picasso.Picasso
 
-class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<AdvanceCityCab>): RecyclerView.Adapter<CurrentVehicleAdapter.CurrentVehicleHolder>() {
+class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<CurrentVehicleModel>): RecyclerView.Adapter<CurrentVehicleAdapter.CurrentVehicleHolder>() {
     lateinit var pref: PrefManager
     var row_index = -1
 
@@ -44,8 +45,8 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Advanc
 
         holder.itemView.setOnClickListener {
 
-            pref.setRideId(data.rideId)
-            pref.setVehicleId(data.vehicleId)
+            pref.setride_id(data.ride_id)
+            pref.setVehicleId(data.driver_id)
             row_index = position
             notifyDataSetChanged()
             context.startActivity(Intent(context, MapsActivity1::class.java))

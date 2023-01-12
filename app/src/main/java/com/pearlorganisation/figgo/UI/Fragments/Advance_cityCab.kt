@@ -137,7 +137,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         ll_choose_vehicle?.isVisible = false
         pref.setBookingNo("")
         pref.setOtp("")
-        pref.setRideId("")
+        pref.setride_id("")
         pref.setVehicleId("")
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
@@ -314,6 +314,7 @@ class Advance_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         val progressDialog = ProgressDialog(requireActivity())
         progressDialog.show()
         val URL = "https://test.pearl-developer.com/figo/api/ride/create-city-ride"
+        Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
         json.put("date", datetext?.text.toString())

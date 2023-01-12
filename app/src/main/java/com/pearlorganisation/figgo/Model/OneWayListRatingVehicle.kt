@@ -5,7 +5,7 @@ import android.os.Parcelable
 import org.json.JSONArray
 
 data class OneWayListRatingVehicle(
-    var driverid:String,
+    var driver_id:String,
     var name:String,
     var year:String,
     var price:String,

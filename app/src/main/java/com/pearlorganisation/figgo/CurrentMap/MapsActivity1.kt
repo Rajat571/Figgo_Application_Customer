@@ -48,7 +48,12 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var backimg = findViewById<ImageView>(R.id.backimg)
         var progress = findViewById<ProgressBar>(R.id.progress)
         var backtxt = findViewById<TextView>(R.id.backtxt)
+        var nxtscreen = findViewById<Button>(R.id.nxtscreen)
         getnxtpage()
+
+        nxtscreen.setOnClickListener {
+            startActivity(Intent(this,MapsActivity2::class.java))
+        }
 
         backtxt.setOnClickListener {
             startActivity(Intent(this,DashBoard::class.java))
@@ -61,8 +66,8 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         shareimg.setOnClickListener {
             var intent= Intent()
             intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
 
@@ -111,9 +116,10 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
    private fun getnxtpage() {
         val URL = "https://test.pearl-developer.com/figo/api/ride/get-nearby-drivers"
+       Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
-        json.put("ride_id",pref.getRideId())
+        json.put("ride_id",pref.getride_id())
         /*json.put("ride_id","33")*/
         json.put("type","current_booking")
        Log.d("SendData", "pref.getToken()===" + pref.getToken())
@@ -137,6 +143,7 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
                             val data=response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2)
                             val cab=data.getString( "cab")
                             Log.d("SendData", "cab===" + cab)
+                            Toast.makeText(this@MapsActivity1, "try after some time", Toast.LENGTH_LONG).show()
                             val id = response.getJSONObject("data").getString("id")
                           //  val cab = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("cab")
                             var pricestring = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("price")
@@ -163,9 +170,6 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
                         binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)
                         binding.onewayvehiclelist.adapter=currentOneWayKmCountAdapter
 
-                        /*val currentOneWayKmCountAdapter = CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
-                        binding.onewayvehiclelist.layoutManager = LinearLayoutManager(this@MapsActivity1)
-                       binding.onewayvehiclelist.adapter = currentOneWayKmCountAdapter*/
 
 
                     }

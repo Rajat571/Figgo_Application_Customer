@@ -104,6 +104,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         val progressDialog = ProgressDialog(this)
         progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/get-driver"
+        Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
         json.put("driver_id", pref.getdriver_id())
@@ -112,22 +113,14 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
+
                     if (response != null) {
-                        val data = response.getJSONObject("data")
-                        if (data.equals("false")){
-                            Toast.makeText(this@MapsActivity2, "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                        }else{
-                            val driver_id = data.getString("driver_id")
-                            val name = response.getJSONObject("data").getJSONObject("driver").getString("name")
-                        }
-                        progressDialog.hide()
-                        val driver_id = data.getString("driver_id")
-                        val name = response.getJSONObject("data").getJSONObject("driver").getString("name")
-                        val mobile = response.getJSONObject("data").getJSONObject("driver").getString("mobile")
+                        val id = response.getJSONObject("data").getString("id")
+                        val driver_id = response.getJSONObject("data").getString("driver_id")
+                        val year = response.getJSONObject("data").getString("year")
 
+                        mobilenumber?.setText(year)
 
-                        drivername?.setText(name)
-                       /* mobilenumber?.setText(mobile)*/
 
                     }
 

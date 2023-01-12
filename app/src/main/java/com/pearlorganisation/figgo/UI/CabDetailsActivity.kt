@@ -70,10 +70,7 @@ class CabDetailsActivity : AppCompatActivity(), PaymentResultListener {
         val json = JSONObject()
         json.put("transaction_id", transaction_id.toString())
         json.put("payment_type", "card")
-        json.put("ride_id", pref.getRideId())
-
-
-
+        json.put("ride_id", pref.getride_id())
 
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :

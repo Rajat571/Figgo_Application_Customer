@@ -59,6 +59,7 @@ import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.CurrentModel
+import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
@@ -84,7 +85,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     lateinit var binding: FragmentCurrentCityCabBinding
     lateinit var currentVehicleAdapter: CurrentVehicleAdapter
     private lateinit var recyclerView: RecyclerView
-    var cablist=ArrayList<AdvanceCityCab>()
+    var cablist=ArrayList<CurrentVehicleModel>()
     var mList= ArrayList<CurrentModel>()
     var manualLoc: TextView? = null
     var liveLoc: TextView? = null
@@ -153,7 +154,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         ll_choose_vehicle?.isVisible = false
         pref.setBookingNo("")
         pref.setOtp("")
-        pref.setRideId("")
+        pref.setride_id("")
         pref.setVehicleId("")
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
@@ -318,6 +319,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         ll_location?.isVisible = false
         ll_choose_vehicle?.isVisible  =false
         val URL = "https://test.pearl-developer.com/figo/api/ride/create-city-ride"
+        Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
         json.put("date", datetext?.text.toString())
@@ -341,7 +343,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                             }else{
                                 val data = response.getJSONObject("data")
                                 val ride_id = data.getString("ride_id")
-                                pref.setRideId(ride_id)
+                                pref.setride_id(ride_id)
                                 val vehicle_types = data.getJSONArray("vehicle_types")
                                 for (i in 0 until vehicle_types.length()){
                                     val name = vehicle_types.getJSONObject(i).getString("name")
@@ -349,7 +351,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                                     val id = vehicle_types.getJSONObject(i).getString("id")
                                     val min_price = vehicle_types.getJSONObject(i).getString("min_price")
                                     val max_price = vehicle_types.getJSONObject(i).getString("max_price")
-                                    cablist.add(AdvanceCityCab(name,image,ride_id,min_price, max_price,max_price))
+                                    cablist.add(CurrentVehicleModel(name,image,ride_id,min_price, max_price,max_price))
 
                                 }
                                 currentVehicleAdapter= CurrentVehicleAdapter(requireActivity(),cablist)
@@ -823,10 +825,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
                 try {
 
-                    e.startResolutionForResult(
-                        requireActivity(),
-                        REQUEST_CHECK_SETTINGS
-                    )
+                    e.startResolutionForResult(requireActivity(), REQUEST_CHECK_SETTINGS)
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.
                 }
@@ -867,11 +866,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
             addresses = position?.let {
-                geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                geocoder.getFromLocation(it.latitude, it.longitude, 1)
+            }!!
 
 
             val address = addresses[0].getAddressLine(0)
@@ -893,7 +889,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     it.latitude,
                     it.longitude, 1
                 )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            }!!
 
 
             val address = addresses[0].getAddressLine(0)

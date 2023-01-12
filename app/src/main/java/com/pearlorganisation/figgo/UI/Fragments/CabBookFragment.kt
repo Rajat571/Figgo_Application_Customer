@@ -139,7 +139,7 @@ class CabBookFragment : Fragment() {
         val URL ="https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
-        json.put("ride_id", pref.getRideId())
+        json.put("ride_id", pref.getride_id())
         json.put("vehicle_type_id", pref.getVehicleId())
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
