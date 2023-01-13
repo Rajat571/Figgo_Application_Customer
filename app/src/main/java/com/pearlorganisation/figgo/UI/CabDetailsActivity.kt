@@ -91,7 +91,7 @@ class CabDetailsActivity : AppCompatActivity(), PaymentResultListener {
                             commit()
                         }
                     }
-                    // Get your json response and convert it to whatever you want.
+
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {

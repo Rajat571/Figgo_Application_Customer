@@ -60,7 +60,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         driverimg = findViewById<ImageView>(R.id.driverimg)
 
 
-        getmaps()
+      /*  getmaps()*/
 
         accept.setOnClickListener {
             startActivity(Intent(this, EmergencyMapsActivity::class.java))
@@ -78,8 +78,8 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         shareimg.setOnClickListener {
             var intent= Intent()
             intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
 
@@ -101,7 +101,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         TODO("Not yet implemented")
     }
 
-    private fun getmaps() {
+   /* private fun getmaps() {
         val progressDialog = ProgressDialog(this)
         progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/get-driver"
@@ -161,5 +161,5 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
         queue.add(jsonOblect)
 
-    }
+    }*/
 }
