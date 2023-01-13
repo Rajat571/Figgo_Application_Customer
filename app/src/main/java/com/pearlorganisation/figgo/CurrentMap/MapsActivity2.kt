@@ -52,7 +52,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var accept = findViewById<TextView>(R.id.accept)
         var backtxt = findViewById<TextView>(R.id.backtxt)
         var mobilenumber = findViewById<TextView>(R.id.mobilenumber)
-        var activaimg = findViewById<ImageView>(R.id.activaimg)
+         activaimg = findViewById<ImageView>(R.id.activaimg)
          activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
          drivername = findViewById<TextView>(R.id.drivername)
          ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
@@ -101,7 +101,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         TODO("Not yet implemented")
     }
 
-   /* private fun getmaps() {
+    private fun getmaps() {
         val progressDialog = ProgressDialog(this)
         progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/get-driver"
@@ -161,5 +161,5 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
         queue.add(jsonOblect)
 
-    }*/
+    }
 }
