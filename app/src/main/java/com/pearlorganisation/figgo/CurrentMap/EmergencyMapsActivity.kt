@@ -13,24 +13,75 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.DriveRatingActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityEmergencyMapsBinding
+import de.hdodenhof.circleimageview.CircleImageView
 
-class EmergencyMapsActivity : AppCompatActivity(), OnMapReadyCallback ,GoogleMap.OnMarkerClickListener{
+class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarkerClickListener{
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityEmergencyMapsBinding
+    lateinit var dlnumber:TextView
+    lateinit var driver_name:TextView
+    lateinit var activanumber:TextView
+
+    lateinit var pref:PrefManager
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        pref  = PrefManager(this)
         binding = ActivityEmergencyMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var emrgencybtn = findViewById<TextView>(R.id.emrgencybtn)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
         var backtxt = findViewById<TextView>(R.id.backtxt)
+        var crl_driverimg = findViewById<CircleImageView>(R.id.crl_driverimg)
+        activanumber = findViewById<TextView>(R.id.activanumber)
+        driver_name = findViewById<TextView>(R.id.driver_name)
+        dlnumber = findViewById<TextView>(R.id.dlnumber)
+        activanumber.setText(pref.getactivavehiclenumber())
+        driver_name.setText(pref.getdrivername())
+        dlnumber.setText(pref.getdl_number())
+
+
+
+
+
+        pref.getactivavehiclenumber().toString()
+        pref.getdrivername().toString()
+        pref.getdl_number().toString()
+
+
+        val bundle = intent.extras
+        if (bundle != null){
+            driver_name.text = "drivername = ${bundle.getString("drivername")}"
+            activanumber.text = "activavehiclenumber = ${bundle.getString("activavehiclenumber")}"
+            dlnumber.text = "dl_number = ${bundle.getString("dl_number")}"
+        }
 
         backtxt.setOnClickListener {
             startActivity(Intent(this, MapsActivity2::class.java))

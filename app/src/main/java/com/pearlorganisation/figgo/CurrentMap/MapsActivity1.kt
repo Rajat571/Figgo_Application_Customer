@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.DashBoard
@@ -26,7 +27,7 @@ import com.pearlorganisation.figgo.databinding.ActivityMaps1Binding
 import org.json.JSONObject
 import java.util.HashMap
 
-class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMaps1Binding
@@ -42,8 +43,25 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     lateinit var ride : String
     lateinit var year : String
     lateinit var rating : String
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
 
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
 
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

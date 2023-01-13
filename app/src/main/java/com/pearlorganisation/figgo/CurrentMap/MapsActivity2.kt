@@ -23,12 +23,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMaps2Binding
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
-class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMaps2Binding
@@ -41,6 +42,25 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     var activaimg:ImageView? = null
     var  driverimg:ImageView? = null
     var ride_service_rating:RatingBar? = null
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,18 +72,30 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var accept = findViewById<TextView>(R.id.accept)
         var backtxt = findViewById<TextView>(R.id.backtxt)
         var mobilenumber = findViewById<TextView>(R.id.mobilenumber)
+
          activaimg = findViewById<ImageView>(R.id.activaimg)
          activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
          drivername = findViewById<TextView>(R.id.drivername)
+
          ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
          dl_number = findViewById<TextView>(R.id.dl_number)
         driverimg = findViewById<ImageView>(R.id.driverimg)
 
 
-      /*  getmaps()*/
+        getmaps()
 
         accept.setOnClickListener {
-            startActivity(Intent(this, EmergencyMapsActivity::class.java))
+            val bundle = Bundle()
+            bundle.putString("drivername", drivername?.text.toString())
+            bundle.putString("activavehiclenumber", activavehiclenumber?.text.toString())
+            bundle.putString("dl_number", dl_number?.text.toString())
+            val intent = Intent(this, EmergencyMapsActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+
+
+           /* startActivity(Intent(this, EmergencyMapsActivity::class.java))*/
+
         }
 
         backtxt.setOnClickListener {
@@ -162,4 +194,9 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         queue.add(jsonOblect)
 
     }
+}
+
+private fun Intent.putExtra(s: String, drivername: TextView?) {
+
+
 }

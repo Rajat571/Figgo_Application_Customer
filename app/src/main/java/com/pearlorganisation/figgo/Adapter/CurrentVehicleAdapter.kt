@@ -21,8 +21,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
-import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 
