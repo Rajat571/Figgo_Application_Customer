@@ -79,13 +79,7 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp">
 
-            <Button
-                android:id="@+id/nxtscreen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/next"
-                android:background="@color/white"
-                android:layout_margin="@dimen/_12sdp"/>
+
 
 
 

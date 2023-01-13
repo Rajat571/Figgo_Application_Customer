@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMaps2Binding
+import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
 class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -34,7 +35,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     lateinit var pref:PrefManager
 
     var activavehiclenumber:TextView? = null
-    var vehiclenumber:TextView? = null
+    var dl_number:TextView? = null
     var drivername:TextView? = null
     var mobilenumber:TextView? = null
     var activaimg:ImageView? = null
@@ -52,11 +53,11 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var backtxt = findViewById<TextView>(R.id.backtxt)
         var mobilenumber = findViewById<TextView>(R.id.mobilenumber)
         var activaimg = findViewById<ImageView>(R.id.activaimg)
-        var activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
-        var drivername = findViewById<TextView>(R.id.drivername)
-        var ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
-        var vehiclenumber = findViewById<TextView>(R.id.vehiclenumber)
-        var driverimg = findViewById<ImageView>(R.id.driverimg)
+         activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
+         drivername = findViewById<TextView>(R.id.drivername)
+         ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
+         dl_number = findViewById<TextView>(R.id.dl_number)
+        driverimg = findViewById<ImageView>(R.id.driverimg)
 
 
         getmaps()
@@ -115,12 +116,28 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
                     Log.d("SendData", "response===" + response)
 
                     if (response != null) {
-                        val id = response.getJSONObject("data").getString("id")
-                        val driver_id = response.getJSONObject("data").getString("driver_id")
-                        val year = response.getJSONObject("data").getString("year")
+                        progressDialog.hide()
+                        val dataobject = response.getJSONObject("data")
+                        val driverObject = dataobject.getJSONObject("driver")
+                        val driverName = driverObject.getString("name")
+                        val dlNumber = driverObject.getString("dl_number")
+                        val rating = driverObject.getString("rating_avg")
+                        val vNumber = dataobject.getString("v_number")
+                        val docObject = driverObject.getJSONObject("documents")
+                        val driver_image = docObject.getString("driver_image")
+                        val taxi_image = docObject.getString("taxi_image")
+                        activavehiclenumber?.setText(vNumber)
+                        drivername?.setText(driverName)
+                        dl_number?.setText(dlNumber)
+                        ride_service_rating?.rating = rating.toFloat()
 
-                        mobilenumber?.setText(year)
+                        if(!driver_image.equals("")){
+                            Picasso.get().load(driver_image).placeholder(R.drawable.girl_img).into(driverimg)
+                        }
 
+                        if(!taxi_image.equals("")){
+                            Picasso.get().load(taxi_image).placeholder(R.drawable.blueactiva_img).into(activaimg)
+                        }
 
                     }
 

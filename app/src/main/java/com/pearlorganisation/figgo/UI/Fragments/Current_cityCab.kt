@@ -351,7 +351,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                                     val id = vehicle_types.getJSONObject(i).getString("id")
                                     val min_price = vehicle_types.getJSONObject(i).getString("min_price")
                                     val max_price = vehicle_types.getJSONObject(i).getString("max_price")
-                                    cablist.add(CurrentVehicleModel(name,image,ride_id,min_price, max_price,max_price))
+                                    cablist.add(CurrentVehicleModel(name,image,ride_id,id, min_price,max_price))
 
                                 }
                                 currentVehicleAdapter= CurrentVehicleAdapter(requireActivity(),cablist)

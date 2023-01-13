@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
@@ -23,7 +22,6 @@ import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.DashBoard
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 import com.pearlorganisation.figgo.databinding.ActivityMaps1Binding
 import org.json.JSONObject
 import java.util.HashMap
@@ -37,10 +35,23 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     lateinit var latLng: LatLng
     val mList = ArrayList<OneWayListRatingVehicle>()
     lateinit var fragment: SupportMapFragment
+    lateinit var cab_name : String
+    lateinit var driver_id : String
+    lateinit var pricestring : String
+    lateinit var cab_drivers : String
+    lateinit var ride : String
+    lateinit var year : String
+    lateinit var rating : String
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMaps1Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        var id = intent.getStringExtra("id")
+        var ride_id = intent.getStringExtra("ride_id")
         pref  = PrefManager(this)
         var ll_accept = findViewById<LinearLayout>(R.id.ll_accept)
         val onewayvehiclelist = findViewById<RecyclerView>(R.id.onewayvehiclelist)
@@ -48,12 +59,13 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         var backimg = findViewById<ImageView>(R.id.backimg)
         var progress = findViewById<ProgressBar>(R.id.progress)
         var backtxt = findViewById<TextView>(R.id.backtxt)
-        var nxtscreen = findViewById<Button>(R.id.nxtscreen)
-        getnxtpage()
 
-        nxtscreen.setOnClickListener {
-            startActivity(Intent(this,MapsActivity2::class.java))
-        }
+
+        getcablist(id,ride_id)
+
+
+
+
 
         backtxt.setOnClickListener {
             startActivity(Intent(this,DashBoard::class.java))
@@ -91,6 +103,51 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         mapFragment.getMapAsync(this)
     }
 
+    private fun getcablist(id: String?, ride_id: String?) {
+        val URL = "https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
+        Log.d("SendData", "URL===" + URL)
+        val queue = Volley.newRequestQueue(this)
+        val json = JSONObject()
+        json.put("vehicle_type_id", id)
+        json.put("ride_id",ride_id)
+        Log.d("SendData", "json===" + json)
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
+            Response.Listener<JSONObject?>               {
+            override fun onResponse(response: JSONObject?) {
+                Log.d("SendData", "response===" + response)
+                if (response != null) {
+                    val status = response.getString("status")
+                    if(status.equals("false")){
+                        Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                    }else{
+                        getnxtpage()
+                      //  Toast.makeText(this@MapsActivity1, "true", Toast.LENGTH_LONG).show()
+
+                    }
+                }
+
+            }
+        }, object : Response.ErrorListener {
+            override fun onErrorResponse(error: VolleyError?) {
+                Log.d("SendData", "error===" + error)
+                Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+            }
+        }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers: MutableMap<String, String> = HashMap()
+                headers.put("Content-Type", "application/json; charset=UTF-8");
+                headers.put("Authorization", "Bearer " + pref.getToken());
+                return headers
+            }
+        }
+        jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
+
+        queue.add(jsonOblect)
+
+
+    }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
 
@@ -121,7 +178,7 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         val json = JSONObject()
         json.put("ride_id",pref.getride_id())
         /*json.put("ride_id","33")*/
-        json.put("type","current_booking")
+      //  json.put("type","current_booking")
        Log.d("SendData", "pref.getToken()===" + pref.getToken())
        Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
@@ -131,66 +188,30 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
                 if (response != null) {
                     val status = response.getString("status")
                     if (response != null) {
-                        val cabs = response.getJSONObject("data").getJSONArray("cabs").length()
-                        Log.d("SendData", "size===" + cabs)
-                      //  val price = response.getJSONObject("data").getJSONArray("cabs")
-                       /* val cab_drivers = response.getJSONObject("data").getJSONArray("cab_drivers")*/
-                        val ride = response.getJSONObject("data").getString("ride")
-                        /*val cab_drivers = response.getJSONObject("data").getJSONArray("cab_drivers")*/
+                        val cabs = response.getJSONObject("data").getJSONArray("cabs")
+                        val ride = response.getJSONObject("data").getJSONObject("ride").getString("id")
 
-                        for(p2 in 0 until cabs) {
-
+                        for(p2 in 0 until cabs.length()) {
                             val data=response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2)
-                            val cab=data.getString( "cab")
-                            Log.d("SendData", "cab===" + cab)
-                            Toast.makeText(this@MapsActivity1, "try after some time", Toast.LENGTH_LONG).show()
-                            val id = response.getJSONObject("data").getString("id")
-                          //  val cab = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("cab")
-                            var pricestring = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("price")
-                            var cab_drivers = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("cab_drivers")
-                            val year = response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2).getString("year")
-                            Log.d("SendData", "list===" + id+"\n"+cab+"\n"+pricestring+"\n"+cab_drivers+"\n"+year)
+                            cab_name=data.getString( "cab")
+                            pricestring=data.getString( "price")
+                              val cab_driversArray = data.getJSONArray("cab_drivers")
+                           for (i in 0 until cab_driversArray.length()){
 
-                            /*val price =  String.format("$ %.2f",pricestring )*/
-                           /* Log.d("JsonObjectRequest","response==="+cab+"\n"+price+"\n"+yearArray)*/
-                           /* var driver_id: String? = null
-                            var year: String? = null
-                            var rating: String? = null*/
-                            /*for (i in 0 until yearArray.length()){
-                                 year = yearArray.getJSONObject(i).getString("year")
-                                 driver_id = yearArray.getJSONObject(i).getString("driver_id")
-                                rating = yearArray.getJSONObject(i).getJSONObject("driver").getString("rating_avg")
-                                Log.d("JsonObjectRequest","response==="+cab+"\n\n"+rating)
-                            }*/
+                               val jsonObject = cab_driversArray.getJSONObject(i)
+                               driver_id =    jsonObject.getString("driver_id")
+                             year =    jsonObject.getString("year")
+                              rating=  jsonObject.getJSONObject("driver").getString("rating_avg")
 
-                            mList.add(OneWayListRatingVehicle(cab, id,pricestring,cab_drivers,ride,year))
+                           }
+                            mList.add(OneWayListRatingVehicle(driver_id,cab_name,year,pricestring, rating,ride,))
 
                         }
                         currentOneWayKmCountAdapter = CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
                         binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)
                         binding.onewayvehiclelist.adapter=currentOneWayKmCountAdapter
-
-
-
                     }
-
-                     /* val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                      val ride_id = response.getJSONObject("data").getString("ride_id")
-
-                      for(p2 in 0 until size) {
-                          val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
-                          val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                          val ride_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("ride_id")
-                                val ride_id = response.getJSONObject("data").getString("ride_id")
-                                val vehicle_id = response.getJSONObject("data").getString("vehicle_id")
-
-                                cablist.add(AdvanceCityCabModel(name,image,vehicle_id,ride_id))
-                            }
-                            advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
-                            binding.currentCabList.adapter=advanceCityAdapter*/
-
                 }
-                // Get your json response and convert it to whatever you want.
             }
         }, object : Response.ErrorListener {
             override fun onErrorResponse(error: VolleyError?) {

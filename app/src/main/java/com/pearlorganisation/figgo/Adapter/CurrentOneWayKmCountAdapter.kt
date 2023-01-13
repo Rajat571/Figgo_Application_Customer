@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
@@ -27,15 +28,19 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
     }
 
     override fun onBindViewHolder(holder: CurrentOneWayKmCountAdapter.ViewHolder, position: Int) {
+        pref = PrefManager(context)
         val OneWayListRatingVehicle = mList[position]
 
-        holder.vehicleprice.text = mList.get(position).rating
+        holder.vehicleprice.text = mList.get(position).price
         holder.vehiclname.text = mList.get(position).name
         holder.vehiclemodel.text = mList.get(position).year
-       /* holder.raing.text = mList.get(position).rating*/
+        holder.raing.text = mList.get(position).rating
 
-        holder.ll_main.setOnClickListener {
-            context.startActivity(Intent(context, MapsActivity1::class.java))
+        holder.acceptbutton.setOnClickListener {
+            context.startActivity(Intent(context, MapsActivity2::class.java))
+        }
+        holder.reject.setOnClickListener {
+           Toast.makeText(context,"Rejected",Toast.LENGTH_SHORT).show()
         }
         pref.setride_id(OneWayListRatingVehicle.ride_id)
         pref.setdriver_id(OneWayListRatingVehicle.driver_id)
@@ -52,6 +57,8 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         var vehiclname:TextView = itemView.findViewById(R.id.vehiclname)
         var vehiclemodel:TextView = itemView.findViewById(R.id.vehiclemodel)
         var vehicleprice:TextView = itemView.findViewById(R.id.vehicleprice)
+        var acceptbutton:TextView = itemView.findViewById(R.id.acceptbutton)
+        var reject:TextView = itemView.findViewById(R.id.reject)
         val raing:TextView = itemView.findViewById(R.id.raingcountlist)
         val ll_main:LinearLayout = itemView.findViewById(R.id.ll_main)
 
