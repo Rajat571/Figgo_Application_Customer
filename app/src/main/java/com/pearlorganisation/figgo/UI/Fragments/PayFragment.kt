@@ -176,7 +176,7 @@ class PayFragment : Fragment()  {
                             Toast.makeText(getApplicationContext(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
                             e.printStackTrace()
                         }
-                        //  view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
+                          view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
 
 
 
@@ -343,9 +343,7 @@ class PayFragment : Fragment()  {
                    lng = place.latLng.longitude.toString()
 
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                val status = Autocomplete.getStatusFromIntent(
-                    data!!
-                )
+                val status = Autocomplete.getStatusFromIntent(data!!)
             } else if (resultCode == AppCompatActivity.RESULT_CANCELED) {
             }
         }

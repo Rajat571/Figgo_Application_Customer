@@ -7,8 +7,6 @@
     android:background="@color/colorlightblue"
     tools:context=".UI.CityCabActivity">
 
-
-
     <include layout="@layout/top_layout"
         android:id="@+id/layout"
         app:layout_constraintBottom_toTopOf="@id/backgrouund"
