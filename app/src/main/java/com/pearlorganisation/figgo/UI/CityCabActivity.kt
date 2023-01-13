@@ -20,12 +20,33 @@ import com.google.android.material.navigation.NavigationView
 import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
 import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
 import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 
-class CityCabActivity : AppCompatActivity() {
+class CityCabActivity : BaseClass() {
     private lateinit var navController: NavController
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.drawer_screen2)

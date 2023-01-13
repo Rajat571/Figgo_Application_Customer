@@ -6,10 +6,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 
-class Shared_cab_Activity : AppCompatActivity() {
+class Shared_cab_Activity : BaseClass() {
     lateinit var nav_controller: NavController
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

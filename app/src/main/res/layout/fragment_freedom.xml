@@ -9,54 +9,7 @@
     tools:context=".UI.Fragments.OutStation.FreedomFragment">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
-        android:orientation="vertical"
-        android:background="@drawable/bottomradius_background">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:src="@drawable/ic_arrow_back"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:text="Back" />
-
-            <ImageView
-                android:layout_width="@dimen/_180sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/bell_icon"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_share_24"/>
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_4sdp"
-            android:scaleType="fitXY"
-            android:src="@drawable/carfamily"/>
-
-    </LinearLayout>
+    <include layout="@layout/header_layout"/>
 
     <LinearLayout
         android:layout_width="match_parent"

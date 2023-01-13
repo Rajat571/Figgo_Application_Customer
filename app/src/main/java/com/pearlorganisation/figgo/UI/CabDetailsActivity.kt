@@ -17,6 +17,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
 import com.razorpay.PaymentResultListener
@@ -24,11 +25,31 @@ import org.json.JSONObject
 import java.util.*
 
 
-class CabDetailsActivity : AppCompatActivity(), PaymentResultListener {
+class CabDetailsActivity : BaseClass(), PaymentResultListener {
     lateinit var nav_controller: NavController
     var transaction_id :String ?= ""
     var thankyouScreenFragment = ThankyouScreenFragment()
     lateinit var pref: PrefManager
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cab_details)

@@ -22,8 +22,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         prefManager = PrefManager(this)
         Handler().postDelayed({
-
-                startActivity(Intent(this, WelcomeSlider::class.java))
+            startActivity(Intent(this, WelcomeSlider::class.java))
 
         },3000)
         var become_the_luxury=findViewById<TextView>(R.id.become_the_luxury)

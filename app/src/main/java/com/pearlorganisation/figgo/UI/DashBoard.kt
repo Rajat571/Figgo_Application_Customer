@@ -37,8 +37,10 @@ import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentRidesFragmen
 import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
 import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
 import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
@@ -50,7 +52,7 @@ import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 import java.util.*
 
 
-class DashBoard : AppCompatActivity() {
+class DashBoard : BaseClass() {
     lateinit var binding: ActivityDashBoardBinding
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
@@ -79,10 +81,34 @@ class DashBoard : AppCompatActivity() {
     private val mRequest: Button? = null
     private val pickupLocation: LatLng? = null
     lateinit var navView : NavigationView
+    lateinit var prefManager: PrefManager
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
+        prefManager = PrefManager(this)
+        prefManager.setToken("949|vBiS1sR6b5AICFuOTyP7zrkHoNhqzEsz7wu4AsKA")
+
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout

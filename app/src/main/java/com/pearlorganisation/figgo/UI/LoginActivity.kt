@@ -29,11 +29,12 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 import org.json.JSONObject
 
 
-class LoginActivity : AppCompatActivity(){
+class LoginActivity : BaseClass(){
 
     val URL = "https://test.pearl-developer.com/figo/api/register"
 
@@ -44,6 +45,26 @@ class LoginActivity : AppCompatActivity(){
     lateinit var nav_controller:NavController
     lateinit var pref: PrefManager
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -61,11 +82,7 @@ class LoginActivity : AppCompatActivity(){
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            REQUEST_LOCATION
-        )
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION)
         // mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
         //    .addOnConnectionFailedListener(this).build()
 
@@ -125,13 +142,13 @@ class LoginActivity : AppCompatActivity(){
                         Log.d("SendData", "response===" + response)
                         if (response != null) {
                             if (pref.getToken().equals("") || pref.getToken().equals("null")) {
-
                                 val token = response.getString("token")
                                 pref.setToken(token)
                                 pref.setisValidLogin(true)
+                                pref.setFirstTimeLaunch(false)
                                 Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
                                 Log.d("SendData", "token===" + token)
-                                //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+                                  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
                                 if (pref.getMpin().equals("")) {
                                     startActivity(Intent(this@LoginActivity, MPinGenerate::class.java))
                                 } else {

@@ -67,7 +67,7 @@ class WelcomeSlider : AppCompatActivity() {
             // checking for last page if true launch MainActivity
 
             if(prefManager!!.getToken().equals("")|| prefManager!!.getToken().equals("null"))
-                startActivity(Intent(this@WelcomeSlider, LoginActivity::class.java))
+                startActivity(Intent(this@WelcomeSlider, DashBoard::class.java))
             else{
             val current = getItem(+1)
             if (current < layouts.size) {
@@ -76,6 +76,7 @@ class WelcomeSlider : AppCompatActivity() {
             } else {
                 launchHomeScreen()
             }
+
             }
 
         }

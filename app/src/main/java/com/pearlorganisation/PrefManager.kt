@@ -113,6 +113,36 @@ import android.content.SharedPreferences
 
      }
 
+     fun setactivavehiclenumber(activavehiclenumber:String){
+         editor?.putString("activavehiclenumber",activavehiclenumber)
+         editor?.commit()
+     }
+
+     fun getactivavehiclenumber():String{
+         return pref?.getString("activavehiclenumber","null").toString()
+     }
+
+
+
+     fun setdrivername(drivername:String){
+         editor?.putString("drivername",drivername)
+         editor?.commit()
+     }
+
+     fun getdrivername():String{
+         return pref?.getString("drivername","null").toString()
+     }
+
+     fun setdl_number(dl_number:String){
+         editor?.putString("dl_number",dl_number)
+         editor?.commit()
+     }
+
+     fun getdl_number():String{
+         return pref?.getString("dl_number","null").toString()
+     }
+
+
      fun setUserId(userid:String){
          editor?.putString("userid",userid)
          editor?.commit()
@@ -129,6 +159,8 @@ import android.content.SharedPreferences
      fun isValidLogin(): Boolean {
          return pref!!.getBoolean(IS_VALID_LOGIN, false)
      }
+
+
 
 
 
