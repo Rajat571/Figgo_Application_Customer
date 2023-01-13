@@ -101,7 +101,7 @@ class MapsActivity1 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         val URL = "https://test.pearl-developer.com/figo/api/ride/get-nearby-drivers"
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
-        json.put("ride_id",pref.getride_id())
+        json.put("ride_id",pref.getRideId())
         json.put("type","current_booking")
         Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :

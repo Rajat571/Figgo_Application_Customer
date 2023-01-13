@@ -271,6 +271,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="@color/black"
                 android:text="Set"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:textSize="14dp"
                 />

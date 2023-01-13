@@ -25,6 +25,14 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.payu.base.models.ErrorResponse
+import com.payu.base.models.PayUPaymentParams
+import com.payu.checkoutpro.PayUCheckoutPro
+import com.payu.checkoutpro.utils.PayUCheckoutProConstants
+import com.payu.checkoutpro.utils.PayUCheckoutProConstants.CP_HASH_NAME
+import com.payu.checkoutpro.utils.PayUCheckoutProConstants.CP_HASH_STRING
+import com.payu.ui.model.listeners.PayUCheckoutProListener
+import com.payu.ui.model.listeners.PayUHashGenerationListener
 
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
@@ -98,8 +106,8 @@ class PayFragment : Fragment()  {
 
             }else {
 
-               // getPayUNow()
-                getPayNow();
+                getPayUNow()
+               // getPayNow();
             }
 
         }
@@ -190,17 +198,17 @@ class PayFragment : Fragment()  {
 
 
 
-  /*  private fun getPayUNow() {
+   private fun getPayUNow() {
 
         val URL ="https://test.pearl-developer.com/figo/api/ride/enter-passenger-details"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
         json.put("name", psg_name?.text.toString())
         json.put("contact", psg_contact?.text.toString())
-        json.put("lat", lat)
-        json.put("lng", lng)
-        json.put("pickup_address", pick_address?.text.toString())
-        json.put("landmark", landmark?.text.toString())
+        json.put("lat", "")
+        json.put("lng", "")
+        json.put("pickup_address","")
+        json.put("landmark", "")
         json.put("ride_id", pref.getRideId())
         if (msg?.text.toString().equals("")){
             msg?.text = null
@@ -228,8 +236,8 @@ class PayFragment : Fragment()  {
                         .setTransactionId(System.currentTimeMillis().toString())
                         .setFirstName("John")
                         .setEmail("John@gmail.com")
-                        .setSurl("https://payu.response.firebaseapp.com/success")
-                        .setFurl("https://payu.response.firebaseapp.com/failure")
+                       // .setSurl("https://payu.response.firebaseapp.com/success")
+                      //  .setFurl("https://payu.response.firebaseapp.com/failure")
                         //Optional, can contain any additional PG params
                         .build()
                         PayUCheckoutPro.open(
@@ -313,7 +321,7 @@ class PayFragment : Fragment()  {
 
         queue.add(jsonOblect)
 
-    }*/
+    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

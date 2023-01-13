@@ -33,6 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
+import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
@@ -221,9 +222,10 @@ class DashBoard : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 doubleBackToExitPressedOnce = false
             }, 2000)
-        } else {
+        } else{
             supportFragmentManager.popBackStack()
         }
+
     }
   /*  private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager = this@DashBoard.getSystemService(Context.LOCATION_SERVICE) as LocationManager

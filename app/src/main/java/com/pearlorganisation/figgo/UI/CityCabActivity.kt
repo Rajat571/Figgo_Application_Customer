@@ -6,20 +6,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
 
 class CityCabActivity : AppCompatActivity() {
     private lateinit var navController: NavController
+    lateinit var pref: PrefManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_cab)
 
        /* var whatsappicon=findViewById<ImageView>(R.id.whatsappicon)
         var callicon=findViewById<ImageView>(R.id.callicon)*/
-
+        pref = PrefManager(this@CityCabActivity)
         var shareimg=findViewById<ImageView>(R.id.shareimg)
 
        /* whatsappicon.setOnClickListener {
@@ -55,7 +58,11 @@ class CityCabActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this,DashBoard::class.java))
+            if (pref.getCount().equals("vehicle")){
+            startActivity(Intent(this@CityCabActivity, CityCabActivity::class.java))
+        } else {
+            super.onBackPressed()
+            startActivity(Intent(this, DashBoard::class.java))
+        }
     }
 }

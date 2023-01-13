@@ -435,5 +435,21 @@ class Current_cityCab : Fragment(),IOnBackPressed {
         return true
     }
 
+    override fun Any.onBackPressed(): Boolean {
+
+        ll_location?.isVisible = true
+        ll_choose_vehicle?.isVisible  =false
+
+        return true
+    }
+
+    override fun openSomeActivityForResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+
+    }
+
 
 }

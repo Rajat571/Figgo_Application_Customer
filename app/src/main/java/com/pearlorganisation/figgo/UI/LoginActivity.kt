@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity(){
             val signInIntent: Intent = mGoogleSignInClient!!.getSignInIntent()
             startActivityForResult(signInIntent, RC_SIGN_IN)
 
-
+        }
             /* email.setOnClickListener {
                  input_number.setHint("Enter Your Email Id")
                  email.setTypeface(Typeface.DEFAULT_BOLD);
@@ -126,6 +126,7 @@ class LoginActivity : AppCompatActivity(){
 
                                     val token = response.getString("token")
                                     pref.setToken(token)
+                                    pref.isValidLogin()
                                     Toast.makeText(
                                         this@LoginActivity,
                                         "Login Successfully",
@@ -174,7 +175,7 @@ class LoginActivity : AppCompatActivity(){
                         }
                     }, object : Response.ErrorListener {
                         override fun onErrorResponse(error: VolleyError?) {
-                            // Error
+                            Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
                         }
                     }) {
                         /*     @Throws(AuthFailureError::class)
@@ -191,7 +192,7 @@ class LoginActivity : AppCompatActivity(){
                 //startActivity(Intent(this,MPinGenerate::class.java))
 
             }
-        }
+
     }
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)

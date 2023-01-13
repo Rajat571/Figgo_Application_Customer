@@ -15,7 +15,7 @@ import android.content.SharedPreferences
     var pref: SharedPreferences? = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
     var editor: SharedPreferences.Editor? = pref!!.edit()
     var _context: Context? = context
-
+     private val IS_VALID_LOGIN = "no"
 
 
 
@@ -33,7 +33,15 @@ import android.content.SharedPreferences
     fun isFirstTimeLaunch(): Boolean {
         return pref!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
     }
+     fun setCount(mpin: String){
+         editor!!.putString("count",mpin)
+         editor?.commit()
+     }
 
+
+     fun getCount():String{
+         return pref?.getString("count","").toString()
+     }
      fun setMpin(mpin: String){
          editor!!.putString("mpin",mpin)
          editor?.commit()
@@ -110,6 +118,8 @@ import android.content.SharedPreferences
      fun getUserId():String{
          return pref?.getString("userid","").toString()
      }
-
+     fun isValidLogin(): Boolean {
+         return pref!!.getBoolean(IS_VALID_LOGIN, false)
+     }
 
 }
