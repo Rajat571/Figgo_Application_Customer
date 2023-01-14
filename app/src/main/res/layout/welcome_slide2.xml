@@ -9,7 +9,7 @@
         android:id="@+id/backgrouund"
         tools:ignore="MissingConstraints"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:background="@drawable/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,35 +18,36 @@
         <ImageView
             android:id="@+id/girlimage"
             android:layout_width="wrap_content"
-            android:layout_height="160dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/girl" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="60dp"
             android:padding="5dp"
             android:text="WELCOME IN FIGGO "
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/girlimage"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scaleType="fitXY"
+        android:layout_marginBottom="36dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/figgocab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backgrouund" />
 
     <include

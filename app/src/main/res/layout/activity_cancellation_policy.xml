@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pearlorganisation.DrawerItemActivity.CancellationPolicy">
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/_12sdp"
+      android:layout_marginTop="@dimen/_5sdp"
+      android:fontFamily="sans-serif-black"
+      android:text="Cancellation Policy"
+      android:textColor="@color/black"
+      android:textSize="@dimen/_14sdp" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+          android:textSize="@dimen/_12sdp"
+          android:textColor="@color/black"
+          android:text="You may cancel your booking with us any time before the start of journey only by calling us on our 24×7 Customer Care helpline number 97155-97855. The cancellation fee will be charged if the details of car and driver will be provided.
+No cancellation fee shall be payable unless Figgocabs confirms the cancellation of your ride in accordance with the terms of use and Cancellation and refund policy.
+"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:text="1.3.1 A cancelled booking can be free of charge when driver or car details are not provided.
+1.3.2 If booking request is cancelled for any reason whatsoever when the driver and/or car details provided, you’ll be charged a cancellation fee as forfeited of the complete advance amount paid by you for the booking.
+1.3.3Drivers are also able to cancel a ride request if they’ve waited 45 minutes at the pickup location and/or for any reason whatsoever you have provided wrong details of pickup location or you are not reachable at phone, mobile number and email address you have provided. You may be charged either a cancellation fee as forfeited of the complete advance amount paid by you for the booking or Rs. 3.5 per minute for hatchback / Sedan car, Rs. 4 per minute for SUV / Innova car, Rs. 10 per minute for Tempo traveller, after 45 minutes completed at the sole discretion of the Figgocabs.
+1.3.4In case, cancellation is due to external factors by the exercise of human being as reasonable diligence cannot avoid such as epidemic, tornadoes, earthquakes, hurricanes, floods, fire, strikes, lockouts or other industrial disturbances; war, terrorist acts, riot, or other civil disturbance; epidemics; or other similar forces or due to force majeure which lead to the roads closed, voucher for the complete advance amount paid by you for the booking, in Figgocabs sole discretion shall be issued without expiry to use in future or you shall demand for refund."
+          android:textColor="@color/black"
+          android:textSize="@dimen/_12sdp"
+          android:layout_marginTop="@dimen/_6sdp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:textSize="@dimen/_12sdp"
+          android:textColor="@color/black"
+          android:text="2.1As per the cancellation and refund policy, the refund will be processed. It may take 7 business days for the refund to reflect into your account. In case wrong or incorrect banking / account details provided by you, FiggoCabs shall not be responsible for any loss and/or damages whatsoever.
+2.2You shall be entitled for the vouchers without expiry to use in future in FiggoCabs sole discretion in the following cases:
+2.2.1Where the allocated driver cancels the ride without assigning any valid and reasonable reason at the last hour and the FiggoCabs fails to arrange another ride in a reasonable time you shall be entitled for the voucher for the complete advance amount paid by you for the booking.
+2.2.2Where the car breaks down during the trip and the FiggoCabs or driver does not rectify it within reasonable time, you shall be provided the voucher for the complete advance amount paid by you;
+2.2.3In case, cancellation is due to external factors which human being by the exercise of reasonable diligence cannot avoid such as epidemic, tornadoes, earthquakes, hurricanes, floods, fire, strikes, lockouts or other industrial disturbances; war, terrorist acts, riot, or other civil disturbance; epidemics; or other similar forces or due to force majeure which lead to the roads closed, voucher for the complete advance amount paid by you for the booking, in FiggoCabs sole discretion shall be issued without expiry to use in future.
+2.2 The Figgo Cab shall not be responsible to refund and/or to provide voucher in any case where you give any money or goods to the Driver except as mentioned in the invoice. FiggoCabs shall not be liable to pay any damages, if any, arises from any loss accrued to you.
+2.3 The Figgo Cab shall not be held responsible for any loss or damage happened during the ride on account of the driver who is a third party agency. However, FiggoCabs shall assist you in the entire reasonable manner to recover your loss or damage.
+2.4 The Figgo Cab reserves the right to withhold the complete advance amount paid by you for the booking on account of any misbehave or misconduct viz. physically, orally or mentally by the driver after the finalization/ clear of the matters. FiggoCabs also reserves the right jointly and/or severally with the driver to take any action against you as available as per the law applicable at the time of the incident.
+2.5 After completing trip, customer to process for the payment. Post successful processing of payment no refund can be claimed in any circumstances. Please make sure that you’ve carefully read service description before making a purchase."
+          android:layout_marginTop="@dimen/_6sdp"/>
+
+
+
+      </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+  </LinearLayout>
+
+
+
+
+
+
+
+
+
+      </LinearLayout>

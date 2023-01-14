@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         app:cardElevation="8dp"
         app:cardCornerRadius="15dp"
-     android:layout_marginLeft="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:layout_height="50dp"

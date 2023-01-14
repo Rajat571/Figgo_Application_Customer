@@ -6,26 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.Fragments.CabBookFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/backgrouund"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/background"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="-46dp">
+    <include layout="@layout/header_layout"/>
 
-        <ImageView
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/image"
-            android:src="@drawable/carfamily"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:layout_width="wrap_content"

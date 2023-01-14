@@ -108,7 +108,7 @@ class PaymentPayActivity : AppCompatActivity(), PaymentResultListener {
         json.put("lng", lng)
         json.put("pickup_address", pick_address?.text.toString())
         json.put("landmark", landmark?.text.toString())
-        json.put("ride_id", pref.getRideId())
+        json.put("ride_id", pref.getride_id())
         if (msg?.text.toString().equals("")){
             msg?.text = null
         }

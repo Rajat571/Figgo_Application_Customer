@@ -17,6 +17,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
 import com.razorpay.PaymentResultListener
@@ -24,11 +25,31 @@ import org.json.JSONObject
 import java.util.*
 
 
-class CabDetailsActivity : AppCompatActivity(), PaymentResultListener {
+class CabDetailsActivity : BaseClass(), PaymentResultListener {
     lateinit var nav_controller: NavController
     var transaction_id :String ?= ""
     var thankyouScreenFragment = ThankyouScreenFragment()
     lateinit var pref: PrefManager
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cab_details)
@@ -70,10 +91,7 @@ class CabDetailsActivity : AppCompatActivity(), PaymentResultListener {
         val json = JSONObject()
         json.put("transaction_id", transaction_id.toString())
         json.put("payment_type", "card")
-        json.put("ride_id", pref.getRideId())
-
-
-
+        json.put("ride_id", pref.getride_id())
 
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
@@ -94,7 +112,7 @@ class CabDetailsActivity : AppCompatActivity(), PaymentResultListener {
                             commit()
                         }
                     }
-                    // Get your json response and convert it to whatever you want.
+
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {

@@ -8,10 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pearlorganisation.figgo.Model.RidesModel
 import com.pearlorganisation.figgo.R
 
-class RidesAdapter(var data:List<RidesModel>): RecyclerView.Adapter<ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+class RidesAdapter(var data:List<RidesModel>): RecyclerView.Adapter<ViewHolder>()
+
+
+
+{ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+
 var inflater = LayoutInflater.from(parent.context)
-val view =inflater.inflate(R.layout.active_ride_layout,parent,false)
+    val view =inflater.inflate(R.layout.active_ride_layout,parent,false)
 return ViewHolder(view)
     }
 

@@ -4,33 +4,48 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.UI.CityCabActivity
 
 
-class DriveRatingActivity : AppCompatActivity() {
+class DriveRatingActivity : BaseClass() {
+
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_drive_rating)
-        var submitraing = findViewById<TextView>(R.id.submitraing)
-
+        shareimg()
+        onBackPress()
+        var submitrating = findViewById<TextView>(R.id.submitraing)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var backimg = findViewById<ImageView>(R.id.backimg)
+        var ll_back = findViewById<LinearLayout>(R.id.ll_back)
 
-        backimg.setOnClickListener {
-            val intent = Intent(this, EmergencyActivity::class.java)
-            startActivity(intent)
-        }
 
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
 
-        submitraing.setOnClickListener {
+
+        submitrating.setOnClickListener {
             startActivity(Intent(this,CityCabActivity::class.java))
         }
     }

@@ -1,9 +1,9 @@
 package com.pearlorganisation.figgo.CurrentMap
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -13,36 +13,74 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.DriveRatingActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityEmergencyMapsBinding
+import de.hdodenhof.circleimageview.CircleImageView
 
-class EmergencyMapsActivity : AppCompatActivity(), OnMapReadyCallback ,GoogleMap.OnMarkerClickListener{
+class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarkerClickListener{
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityEmergencyMapsBinding
+    lateinit var dlnumber:TextView
+    lateinit var driver_name:TextView
+    lateinit var activanumber:TextView
+
+    lateinit var pref:PrefManager
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        pref  = PrefManager(this)
         binding = ActivityEmergencyMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var emrgencybtn = findViewById<TextView>(R.id.emrgencybtn)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var backimg = findViewById<ImageView>(R.id.backimg)
+        var ll_back = findViewById<LinearLayout>(R.id.ll_back)
+        var crl_driverimg = findViewById<CircleImageView>(R.id.crl_driverimg)
+        activanumber = findViewById<TextView>(R.id.activanumber)
+        driver_name = findViewById<TextView>(R.id.driver_name)
+        dlnumber = findViewById<TextView>(R.id.dlnumber)
+        activanumber.setText(pref.getactivavehiclenumber())
+        driver_name.setText(pref.getdrivername())
+        dlnumber.setText(pref.getdl_number())
+        shareimg()
+        onBackPress()
 
-        backimg.setOnClickListener {
-            val intent = Intent(this, MapsActivity2::class.java)
-            startActivity(intent)
+        pref.getactivavehiclenumber().toString()
+        pref.getdrivername().toString()
+        pref.getdl_number().toString()
+
+
+        val bundle = intent.extras
+        if (bundle != null){
+            driver_name.text = "drivername  ${bundle.getString("drivername")}"
+            activanumber.text = "activa  ${bundle.getString("activavehiclenumber")}"
+            dlnumber.text = "dl_number  ${bundle.getString("dl_number")}"
         }
 
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
+
 
         emrgencybtn.setOnClickListener {
             startActivity(Intent(this, DriveRatingActivity::class.java))

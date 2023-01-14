@@ -20,6 +20,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.GoogleApiClient
@@ -31,9 +32,15 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentMoreFragment
+import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentRidesFragment
+import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
+import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
+import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
-import com.pearlorganisation.figgo.IOnBackPressed
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
@@ -45,9 +52,10 @@ import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 import java.util.*
 
 
-class DashBoard : AppCompatActivity() {
+class DashBoard : BaseClass() {
     lateinit var binding: ActivityDashBoardBinding
     lateinit var toggle: ActionBarDrawerToggle
+    lateinit var drawerLayout: DrawerLayout
     private var hasGps = false
     private var hasNetwork = false
     lateinit var cabCategoryAdapter: CabCategoryAdapter
@@ -73,31 +81,58 @@ class DashBoard : AppCompatActivity() {
     private val mRequest: Button? = null
     private val pickupLocation: LatLng? = null
     lateinit var navView : NavigationView
+    lateinit var prefManager: PrefManager
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       setContentView(R.layout.a_dashboard)
-//        val recyclerView: RecyclerView = findViewById(R.id.figgo_add_list)
-//        val recycler: RecyclerView = findViewById(R.id.cab_category_list)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
+        prefManager = PrefManager(this)
+        prefManager.setToken("949|vBiS1sR6b5AICFuOTyP7zrkHoNhqzEsz7wu4AsKA")
+
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
-
-        var rides = RidesBottom()
-        var more = RoundAndTourFragment()
+        var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
+        var rides =/* RidesBottom()*/ CurrentRidesFragment()
+        var more = /*RoundAndTourFragment()*/ CurrentMoreFragment()
         var support = SupportBottomNav()
         var navView = findViewById<NavigationView>(R.id.navView)
-
-
+        var shareimg = findViewById<ImageView>(R.id.shareimg)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
         drawerLayout.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle.syncState()
-        var layout = findViewById<ImageView>(R.id.menu_naviagtion)
+        shareimg()
+        backimg()
+        backtxt()
+
+
+        menu_naviagtion.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT)
+        }
 
 
         grantLocPer()
-
-
 
        var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)
         bottom.setOnItemSelectedListener {
@@ -115,10 +150,8 @@ class DashBoard : AppCompatActivity() {
 
 
                 R.id.more_b->{
-                    drawerLayout.openDrawer(Gravity.LEFT)
-                  //  navView.showContextMenu()
-            //setfragment(more)
-            true
+                    setfragment(more)
+                    true
 
         }
                 R.id.support_b->{
@@ -190,6 +223,16 @@ class DashBoard : AppCompatActivity() {
                     startActivity(Intent(this,LoginActivity::class.java))
                 }
 
+                R.id.term_condition -> {
+                    startActivity(Intent(this,TermAndConditionActivity::class.java))
+                }
+                R.id.cancellation_policy -> {
+                    startActivity(Intent(this,CancellationPolicy::class.java))
+                }
+                R.id.About_Figgo -> {
+                    startActivity(Intent(this,CurrentAboutActivity::class.java))
+                }
+
             }
             true
         }
@@ -222,10 +265,9 @@ class DashBoard : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
                 doubleBackToExitPressedOnce = false
             }, 2000)
-        } else{
+        } else {
             supportFragmentManager.popBackStack()
         }
-
     }
   /*  private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager = this@DashBoard.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -312,30 +354,13 @@ class DashBoard : AppCompatActivity() {
 
 
    private fun requestPermissions() {
-       ActivityCompat.requestPermissions(
-           this@DashBoard,
-           arrayOf(
-               android.Manifest.permission.ACCESS_COARSE_LOCATION,
-               android.Manifest.permission.ACCESS_FINE_LOCATION
-           ),
-           permissionId
-       )
+       ActivityCompat.requestPermissions(this@DashBoard,
+           arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION), permissionId)
    }
     private fun isLocationPermissionGranted(): Boolean {
-        return if (ActivityCompat.checkSelfPermission(
-                this@DashBoard,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this@DashBoard,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this@DashBoard,
-                arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
+        return if (ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this@DashBoard, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),
                 requestcodes
             )
             false
@@ -396,10 +421,7 @@ class DashBoard : AppCompatActivity() {
                 try {
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
-                    e.startResolutionForResult (
-                        this@DashBoard,
-                        REQUEST_CHECK_SETTINGS
-                    )
+                    e.startResolutionForResult (this@DashBoard, REQUEST_CHECK_SETTINGS)
 
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.

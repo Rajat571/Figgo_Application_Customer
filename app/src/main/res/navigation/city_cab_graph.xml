@@ -27,11 +27,12 @@
     </fragment>
 
 
-    <fragment
+   <fragment
         android:id="@+id/packagee"
         android:name="com.pearlorganisation.figgo.UI.Fragments.Package_cityCab"
         android:label="fragment_package_city_cab"
-        tools:layout="@layout/fragment_package_city_cab" />
+        tools:layout="@layout/package_work_progress" />
+
     <activity
         android:id="@+id/oneWay_Km_CountActivity"
         android:name="com.pearlorganisation.figgo.OneWay_Km_CountActivity"

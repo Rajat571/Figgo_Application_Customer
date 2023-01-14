@@ -78,6 +78,28 @@ class PayFragment : Fragment()  {
         pick_location = view.findViewById<TextView>(R.id.pick_location)
         msg = view.findViewById<EditText>(R.id.msg)
         pref = PrefManager(requireActivity())
+
+        var backtxt =view.findViewById<TextView>(R.id.backtxt)
+        var backimg =view.findViewById<ImageView>(R.id.backimg)
+        var shareimg = view.findViewById<ImageView>(R.id.shareimg)
+
+        backimg.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_payFragment_to_cabBookFragment)
+        }
+
+        backtxt.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_payFragment_to_cabBookFragment)
+        }
+
+        shareimg.setOnClickListener {
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
+            startActivity(Intent.createChooser(intent, "Invite Friends"))
+        }
+
+
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
@@ -95,8 +117,6 @@ class PayFragment : Fragment()  {
 
 
         pay_now.setOnClickListener {
-
-
 
             if (psg_name?.text.toString().equals("")){
                 Toast.makeText(requireActivity(), "Please type Passenger Name", Toast.LENGTH_LONG).show()
@@ -126,17 +146,13 @@ class PayFragment : Fragment()  {
         json.put("lng", "")
         json.put("pickup_address", "")
         json.put("landmark", "")
-        json.put("ride_id", pref.getRideId())
+        json.put("ride_id", pref.getride_id())
         if (msg?.text.toString().equals("")){
             msg?.text = null
         }
         json.put("additional_message ", msg?.text.toString())
 
-
-
-
-        val jsonOblect: JsonObjectRequest =
-            object : JsonObjectRequest(Method.POST, URL, json, object :
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
@@ -168,7 +184,7 @@ class PayFragment : Fragment()  {
                             Toast.makeText(getApplicationContext(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
                             e.printStackTrace()
                         }
-                        //  view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
+                          view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
 
 
 
@@ -335,9 +351,7 @@ class PayFragment : Fragment()  {
                    lng = place.latLng.longitude.toString()
 
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                val status = Autocomplete.getStatusFromIntent(
-                    data!!
-                )
+                val status = Autocomplete.getStatusFromIntent(data!!)
             } else if (resultCode == AppCompatActivity.RESULT_CANCELED) {
             }
         }

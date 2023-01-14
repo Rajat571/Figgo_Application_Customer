@@ -10,9 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.CabDetailsActivity
 
 
 class AdvanceCityAdapter(var context:Activity, var cablist: ArrayList<AdvanceCityCab>): Adapter<AdvanceCityAdapter.AdvanceCityHolder>() {
@@ -50,7 +50,7 @@ class AdvanceCityAdapter(var context:Activity, var cablist: ArrayList<AdvanceCit
                 8->holder.cab.setImageResource(R.drawable.ola_bike_active)
                 9->holder.cab.setImageResource(R.drawable.ola_bike_active)
             }
-         context.startActivity(Intent(context,CabDetailsActivity::class.java))
+         context.startActivity(Intent(context,MapsActivity1::class.java))
         }
     }
 

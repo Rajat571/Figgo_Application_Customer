@@ -8,7 +8,7 @@
     tools:context=".UI.Fragments.PayFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+   <!-- <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/backgrouund"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -25,7 +25,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <include layout="@layout/header_layout"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/choose_user"
