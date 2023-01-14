@@ -1,7 +1,6 @@
 package com.pearlorganisation.figgo.CurrentMap
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
@@ -68,8 +67,11 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         super.onCreate(savedInstanceState)
         binding = ActivityMaps1Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        shareimg()
+        onBackPress()
         var id = intent.getStringExtra("id")
         var ride_id = intent.getStringExtra("ride_id")
+        var driver_id = intent.getStringExtra("driver_id")
         pref  = PrefManager(this)
         var ll_accept = findViewById<LinearLayout>(R.id.ll_accept)
         val onewayvehiclelist = findViewById<RecyclerView>(R.id.onewayvehiclelist)
@@ -78,11 +80,8 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         var progress = findViewById<ProgressBar>(R.id.progress)
         var backtxt = findViewById<TextView>(R.id.backtxt)
 
-
         getcablist(id,ride_id)
-
-
-
+        /*getAccept()*/
 
 
         backtxt.setOnClickListener {
@@ -93,13 +92,7 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             startActivity(Intent(this,DashBoard::class.java))
         }
 
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
-            intent.setType("text/plain")
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
+
 
       /*  mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
         mList.add(OneWayListRatingVehicle("Activa - 2012","raingcountlist","ride_service_rating","Reject","Accept","min_price","vehicle_detail","year",""))
@@ -117,8 +110,8 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)*/
 
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+       // val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+      //  mapFragment.getMapAsync(this)
     }
 
     private fun getcablist(id: String?, ride_id: String?) {
@@ -154,8 +147,8 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val headers: MutableMap<String, String> = HashMap()
-                headers.put("Content-Type", "application/json; charset=UTF-8");
-                headers.put("Authorization", "Bearer " + pref.getToken());
+                headers.put("Content-Type", "application/json; charset=UTF-8")
+                headers.put("Authorization", "Bearer " + pref.getToken())
                 return headers
             }
         }
@@ -177,8 +170,8 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
 
         mMap.setOnMapClickListener(object :GoogleMap.OnMapClickListener {
             override fun onMapClick(latlng: LatLng) {
-                mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.clear()
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
                 val location = LatLng(latlng.latitude, latlng.longitude)
                 mMap.addMarker(MarkerOptions().position(location))
             }
@@ -240,8 +233,8 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val headers: MutableMap<String, String> = HashMap()
-                headers.put("Content-Type", "application/json; charset=UTF-8");
-                headers.put("Authorization", "Bearer " + pref.getToken());
+                headers.put("Content-Type", "application/json; charset=UTF-8")
+                headers.put("Authorization", "Bearer " + pref.getToken())
                 return headers
             }
         }
@@ -250,6 +243,53 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         queue.add(jsonOblect)
 
     }
+
+
+   /* private fun getAccept() {
+        val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
+        Log.d("SendData", "URL===" + URL)
+        val queue = Volley.newRequestQueue(this)
+        val json = JSONObject()
+        json.put("ride_id",pref.getride_id())
+        json.put("driver_id",pref.getdriver_id())
+        json.put("price",pref.getprice())
+        Log.d("SendData", "pref.getToken()===" + pref.getToken())
+        Log.d("SendData", "json===" + json)
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
+            Response.Listener<JSONObject?>               {
+            override fun onResponse(response: JSONObject?) {
+                Log.d("SendData", "response===" + response)
+                if (response != null) {
+                    val status = response.getString("status")
+                    if(status.equals("false")){
+                        Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                    }else{
+                        getnxtpage()
+
+
+                    }
+                }
+
+            }
+        }, object : Response.ErrorListener {
+            override fun onErrorResponse(error: VolleyError?) {
+                Log.d("SendData", "error===" + error)
+                Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+            }
+        }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers: MutableMap<String, String> = HashMap()
+                headers.put("Content-Type", "application/json; charset=UTF-8")
+                headers.put("Authorization", "Bearer " + pref.getToken())
+                return headers
+            }
+        }
+        jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
+
+        queue.add(jsonOblect)
+
+    }*/
 
     override fun onBackPressed() {
         super.onBackPressed()

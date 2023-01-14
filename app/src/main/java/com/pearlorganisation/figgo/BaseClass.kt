@@ -2,6 +2,7 @@ package com.pearlorganisation.figgo
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -19,13 +20,20 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.webkit.MimeTypeMap
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import java.io.ByteArrayOutputStream
+import java.util.*
 import java.util.jar.Manifest
 import java.util.regex.Pattern
+import java.lang.Class as Class1
 
 abstract class BaseClass  : AppCompatActivity(){
 
@@ -39,13 +47,11 @@ abstract class BaseClass  : AppCompatActivity(){
     protected var LogString: String? = null
     var STORAGE_PERMISSION_CODE = 1
     var session: Session? = null
-    var classname = "Login"
-    fun setBaseApcContextParent(
-        cnt: Context?,
-        ain: AppCompatActivity?,
-        lt: String?,
-        classname: String?
-    ) {
+   lateinit var shareimg:ImageView
+
+//    var backtxt = findViewById<TextView>(R.id.backtxt)*/
+  //  var classname = "Login"
+    fun setBaseApcContextParent(cnt: Context?, ain: AppCompatActivity?, lt: String?, classname: String?) {
         var classname = classname
         baseApcContext = cnt
         activityIn = ain
@@ -138,6 +144,41 @@ abstract class BaseClass  : AppCompatActivity(){
         } catch (e: Exception) {
             printLogs(LogTag, "unregisterBroadcast", "Exception " + e.message)
         }
+    }
+
+
+    fun shareimg(){
+        var  shareimg = findViewById<ImageView>(R.id.shareimg)
+        shareimg.setOnClickListener {
+
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
+            intent.setType("text/plain");
+            startActivity(Intent.createChooser(intent, "Invite Friends"));
+        }
+
+
+    }
+
+    fun onBackPress(){
+        var ll_back = findViewById<LinearLayout>(R.id.ll_back)
+        ll_back.setOnClickListener {
+      /*      val intent = Intent(to, from::class.java)
+            startActivity(intent)*/
+            finish()
+        }
+    }
+
+
+    fun backimg(){
+
+
+
+    }
+
+    fun backtxt(){
+
     }
 
     /* protected fun showProgress(show: Boolean) {

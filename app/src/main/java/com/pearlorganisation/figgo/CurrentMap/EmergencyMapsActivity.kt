@@ -1,9 +1,9 @@
 package com.pearlorganisation.figgo.CurrentMap
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -57,8 +57,7 @@ class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarke
         setContentView(binding.root)
         var emrgencybtn = findViewById<TextView>(R.id.emrgencybtn)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var backimg = findViewById<ImageView>(R.id.backimg)
-        var backtxt = findViewById<TextView>(R.id.backtxt)
+        var ll_back = findViewById<LinearLayout>(R.id.ll_back)
         var crl_driverimg = findViewById<CircleImageView>(R.id.crl_driverimg)
         activanumber = findViewById<TextView>(R.id.activanumber)
         driver_name = findViewById<TextView>(R.id.driver_name)
@@ -66,10 +65,8 @@ class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarke
         activanumber.setText(pref.getactivavehiclenumber())
         driver_name.setText(pref.getdrivername())
         dlnumber.setText(pref.getdl_number())
-
-
-
-
+        shareimg()
+        onBackPress()
 
         pref.getactivavehiclenumber().toString()
         pref.getdrivername().toString()
@@ -78,27 +75,12 @@ class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarke
 
         val bundle = intent.extras
         if (bundle != null){
-            driver_name.text = "drivername = ${bundle.getString("drivername")}"
-            activanumber.text = "activavehiclenumber = ${bundle.getString("activavehiclenumber")}"
-            dlnumber.text = "dl_number = ${bundle.getString("dl_number")}"
+            driver_name.text = "drivername  ${bundle.getString("drivername")}"
+            activanumber.text = "activa  ${bundle.getString("activavehiclenumber")}"
+            dlnumber.text = "dl_number  ${bundle.getString("dl_number")}"
         }
 
-        backtxt.setOnClickListener {
-            startActivity(Intent(this, MapsActivity2::class.java))
-        }
 
-        backimg.setOnClickListener {
-            val intent = Intent(this, MapsActivity2::class.java)
-            startActivity(intent)
-        }
-
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
 
         emrgencybtn.setOnClickListener {
             startActivity(Intent(this, DriveRatingActivity::class.java))

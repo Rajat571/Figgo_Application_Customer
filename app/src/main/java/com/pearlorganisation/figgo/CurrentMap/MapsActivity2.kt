@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.AuthFailureError
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
@@ -67,11 +67,10 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         binding = ActivityMaps2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         pref  = PrefManager(this)
-        var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var backimg = findViewById<ImageView>(R.id.backimg)
+        shareimg()
+        onBackPress()
+
         var accept = findViewById<TextView>(R.id.accept)
-        var backtxt = findViewById<TextView>(R.id.backtxt)
-        var mobilenumber = findViewById<TextView>(R.id.mobilenumber)
 
          activaimg = findViewById<ImageView>(R.id.activaimg)
          activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
@@ -92,28 +91,50 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             val intent = Intent(this, EmergencyMapsActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
+                val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
+                Log.d("SendData", "URL===" + URL)
+                val queue = Volley.newRequestQueue(this)
+                val json = JSONObject()
+                json.put("ride_id",pref.getride_id())
+                json.put("driver_id",pref.getdriver_id())
+                json.put("price",pref.getprice())
+                Log.d("SendData", "pref.getToken()===" + pref.getToken())
+                Log.d("SendData", "json===" + json)
+                val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
+                    Response.Listener<JSONObject?>               {
+                    override fun onResponse(response: JSONObject?) {
+                        Log.d("SendData", "response===" + response)
+                        if (response != null) {
+                            val status = response.getString("status")
+                            if(status.equals("false")){
+                                Toast.makeText(this@MapsActivity2, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                            }else{
 
 
-           /* startActivity(Intent(this, EmergencyMapsActivity::class.java))*/
+                            }
+                        }
 
-        }
+                    }
+                }, object : Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError?) {
+                        Log.d("SendData", "error===" + error)
+                        Toast.makeText(this@MapsActivity2, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                    }
+                }) {
+                    @Throws(AuthFailureError::class)
+                    override fun getHeaders(): Map<String, String> {
+                        val headers: MutableMap<String, String> = java.util.HashMap()
+                        headers.put("Content-Type", "application/json; charset=UTF-8")
+                        headers.put("Authorization", "Bearer " + pref.getToken())
+                        return headers
+                    }
+                }
+                jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
 
-        backtxt.setOnClickListener {
-            startActivity(Intent(this, MapsActivity1::class.java))
-        }
+                queue.add(jsonOblect)
 
-        backimg.setOnClickListener {
-            val intent = Intent(this, MapsActivity1::class.java)
-            startActivity(intent)
-        }
+            }
 
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
-            intent.setType("text/plain")
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -185,8 +206,8 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = HashMap()
-                    headers.put("Content-Type", "application/json; charset=UTF-8");
-                    headers.put("Authorization", "Bearer " + pref.getToken());
+                    headers.put("Content-Type", "application/json; charset=UTF-8")
+                    headers.put("Authorization", "Bearer " + pref.getToken())
                     return headers
                 }
             }

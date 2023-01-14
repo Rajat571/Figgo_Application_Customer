@@ -886,10 +886,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
             addresses = position?.let {
-                geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
+                geocoder.getFromLocation(it.latitude, it.longitude, 1)
             }!!
 
 

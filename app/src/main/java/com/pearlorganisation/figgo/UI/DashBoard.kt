@@ -122,14 +122,10 @@ class DashBoard : BaseClass() {
         drawerLayout.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle.syncState()
+        shareimg()
+        backimg()
+        backtxt()
 
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
-            intent.setType("text/plain")
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
 
         menu_naviagtion.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
@@ -425,10 +421,7 @@ class DashBoard : BaseClass() {
                 try {
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
-                    e.startResolutionForResult (
-                        this@DashBoard,
-                        REQUEST_CHECK_SETTINGS
-                    )
+                    e.startResolutionForResult (this@DashBoard, REQUEST_CHECK_SETTINGS)
 
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.
