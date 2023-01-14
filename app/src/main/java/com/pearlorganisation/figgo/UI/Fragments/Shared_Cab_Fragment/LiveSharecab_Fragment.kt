@@ -44,9 +44,9 @@ class LiveSharecab_Fragment : Fragment() {
         shareimg.setOnClickListener {
             var intent= Intent()
             intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
+            intent.setType("text/plain")
+            startActivity(Intent.createChooser(intent, "Invite Friends"))
         }
 
     }

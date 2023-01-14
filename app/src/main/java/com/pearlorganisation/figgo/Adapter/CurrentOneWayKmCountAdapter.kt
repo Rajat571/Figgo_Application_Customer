@@ -1,7 +1,9 @@
 package com.pearlorganisation.figgo.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +39,7 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CurrentOneWayKmCountAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CurrentOneWayKmCountAdapter.ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         pref = PrefManager(context)
         val OneWayListRatingVehicle = mList[position]
 
@@ -96,7 +98,6 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
 
             queue.add(jsonOblect)
 
-
         context.startActivity(Intent(context, EmergencyMapsActivity::class.java))
 
 
@@ -109,6 +110,8 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         pref.setride_id(OneWayListRatingVehicle.ride_id)
         pref.setdriver_id(OneWayListRatingVehicle.driver_id)
         pref.setprice(OneWayListRatingVehicle.price)
+
+
 
     }
 

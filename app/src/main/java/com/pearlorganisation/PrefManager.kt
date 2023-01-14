@@ -73,6 +73,18 @@ import android.content.SharedPreferences
 
 
 
+     fun setactivanumber(activanumber:String){
+         editor?.putString("activanumber",activanumber)
+         editor?.commit()
+     }
+
+     fun getactivanumber():String{
+         return pref?.getString("activanumber","null").toString()
+     }
+
+
+
+
 
 
      fun setOtp(otp:String){
