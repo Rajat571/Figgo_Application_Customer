@@ -76,6 +76,10 @@ class CabBookFragment : Fragment() {
         image = view.findViewById<ImageView>(R.id.image)
 
         pref = PrefManager(requireActivity())
+
+
+
+
         getCabBookData()
 
         book_other.setOnClickListener {
