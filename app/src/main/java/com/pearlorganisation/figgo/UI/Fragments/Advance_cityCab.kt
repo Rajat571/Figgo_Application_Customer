@@ -70,7 +70,7 @@ import java.util.*
 
 class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerDragListener,
-    GoogleMap.OnMapLongClickListener, GoogleMap.OnCameraMoveStartedListener,
+    GoogleMap.OnCameraMoveStartedListener,
     GoogleMap.OnCameraMoveListener,
     GoogleMap.OnCameraMoveCanceledListener,
     GoogleMap.OnCameraIdleListener,IOnBackPressed {
@@ -842,7 +842,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
         mMap!!.animateCamera(CameraUpdateFactory.zoomTo(10f))
         mMap!!.setOnMarkerDragListener(this)
-           mMap!!.setOnMapLongClickListener(this)
+         //  mMap!!.setOnMapLongClickListener(this)
 
     }
     @SuppressLint("MissingPermission")
@@ -862,16 +862,25 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                     val addresses: List<Address>
                     geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-                    addresses = lastLocation?.let {
-                        geocoder.getFromLocation(
-                            it.latitude,
-                            it.longitude, 1
-                        )
-                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-                    val address = addresses[0].getAddressLine(0)
-                    liveLoc?.setText(address)
+                    var strAdd : String? = null
+                    try {
+                        val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                        if (addresses != null) {
+                            val returnedAddress = addresses[0]
+                            val strReturnedAddress = java.lang.StringBuilder("")
+                            for (i in 0..returnedAddress.maxAddressLineIndex) {
+                                strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                            }
+                            strAdd = strReturnedAddress.toString()
+                            Log.w(" Current loction address", strReturnedAddress.toString())
+                        } else {
+                            Log.w(" Current loction address", "No Address returned!")
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Log.w(" Current loction address", "Canont get Address!")
+                    }
+                    liveLoc?.setText(strAdd)
 
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
@@ -886,16 +895,25 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                     val addresses: List<Address>
                     geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-                    addresses = lastLocation?.let {
-                        geocoder.getFromLocation(
-                            it.latitude,
-                            it.longitude, 1
-                        )
-                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-                    val address = addresses[0].getAddressLine(0)
-                    manualLoc?.setText(address)
+                    var strAdd : String? = null
+                    try {
+                        val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                        if (addresses != null) {
+                            val returnedAddress = addresses[0]
+                            val strReturnedAddress = java.lang.StringBuilder("")
+                            for (i in 0..returnedAddress.maxAddressLineIndex) {
+                                strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                            }
+                            strAdd = strReturnedAddress.toString()
+                            Log.w(" Current loction address", strReturnedAddress.toString())
+                        } else {
+                            Log.w(" Current loction address", "No Address returned!")
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Log.w(" Current loction address", "Canont get Address!")
+                    }
+                    manualLoc?.setText(strAdd)
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
                 }
@@ -966,7 +984,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         val position: LatLng = markerOptions.getPosition()
 
 
-        if (selects.equals("start")){
+       /* if (selects.equals("start")){
 
             to_lat = position.latitude
             to_lng = position.longitude
@@ -975,12 +993,12 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             val addresses: List<Address>
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-            addresses = position?.let {
+            addresses =
                 geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                    position.latitude,
+                    position.longitude,
+                    1
+                )!!// Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
 
             val address = addresses[0].getAddressLine(0)
@@ -997,18 +1015,27 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             val addresses: List<Address>
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-            addresses = position?.let {
-                geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-            val address = addresses[0].getAddressLine(0)
+            var strAdd : String? = null
+            try {
+                val addresses = geocoder.getFromLocation(position.latitude, position.longitude, 1)
+                if (addresses != null) {
+                    val returnedAddress = addresses[0]
+                    val strReturnedAddress = java.lang.StringBuilder("")
+                    for (i in 0..returnedAddress.maxAddressLineIndex) {
+                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    }
+                    strAdd = strReturnedAddress.toString()
+                    Log.w(" Current loction address", strReturnedAddress.toString())
+                } else {
+                    Log.w(" Current loction address", "No Address returned!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.w(" Current loction address", "Canont get Address!")
+            }
             manualLoc?.setText(address)
 
-        }
+        }*/
     }
     private val direction: Unit
 
@@ -1051,11 +1078,11 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         urlString.append(",")
         urlString.append(java.lang.Double.toString(destlog))
         urlString.append("&sensor=false&mode=driving&alternatives=true")
-        urlString.append("&key=AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU")
+        urlString.append("&key=AIzaSyCZT-YdJMsLTC2J6ssQeytY3zJfjeoIUVE")
         return urlString.toString()
     }//Calling the method drawPath to draw the path
 
-    override fun onMapLongClick(latLng: LatLng) {
+  /*  override fun onMapLongClick(latLng: LatLng) {
         //Clearing all the markers
         mMap!!.clear()
 
@@ -1066,7 +1093,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                 .position(latLng)
                 .draggable(true)
         )
-        if (selects.equals("start")){
+      /*  if (selects.equals("start")){
 
             to_lat = latLng.latitude
             to_lng = latLng.longitude
@@ -1074,17 +1101,27 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             val geocoder: Geocoder
             val addresses: List<Address>
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
+            var strAdd : String? = null
+            try {
+                val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+                if (addresses != null) {
+                    val returnedAddress = addresses[0]
+                    val strReturnedAddress = java.lang.StringBuilder("")
+                    for (i in 0..returnedAddress.maxAddressLineIndex) {
+                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    }
+                    strAdd = strReturnedAddress.toString()
+                    Log.w(" Current loction address", strReturnedAddress.toString())
+                } else {
+                    Log.w(" Current loction address", "No Address returned!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.w(" Current loction address", "Canont get Address!")
+            }
+          // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
-            addresses = latLng?.let {
-                geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-            val address = addresses[0].getAddressLine(0)
-            liveLoc?.setText(address)
+            liveLoc?.setText(strAdd)
 
 
         }else{
@@ -1096,21 +1133,29 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             val geocoder: Geocoder
             val addresses: List<Address>
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
+            var strAdd : String? = null
+            try {
+                val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+                if (addresses != null) {
+                    val returnedAddress = addresses[0]
+                    val strReturnedAddress = java.lang.StringBuilder("")
+                    for (i in 0..returnedAddress.maxAddressLineIndex) {
+                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    }
+                    strAdd = strReturnedAddress.toString()
+                    Log.w(" Current loction address", strReturnedAddress.toString())
+                } else {
+                    Log.w(" Current loction address", "No Address returned!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.w(" Current loction address", "Canont get Address!")
+            }
+            manualLoc?.setText(strAdd)
 
-            addresses = latLng?.let {
-                geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        }*/
 
-
-            val address = addresses[0].getAddressLine(0)
-            manualLoc?.setText(address)
-
-        }
-
-    }
+    }*/
 
     override fun onMarkerDragStart(marker: Marker) {
 
@@ -1124,20 +1169,30 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             to_lat = position.latitude
             to_lng = position.longitude
 
-            val geocoder: Geocoder
+            var geocoder: Geocoder
             val addresses: List<Address>
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-            addresses = position?.let {
-                geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
-
-            val address = addresses[0].getAddressLine(0)
-            liveLoc?.setText(address)
+            var strAdd : String? = null
+            try {
+                val addresses = geocoder.getFromLocation(position.latitude, position.longitude, 1)
+                if (addresses != null) {
+                    val returnedAddress = addresses[0]
+                    val strReturnedAddress = java.lang.StringBuilder("")
+                    for (i in 0..returnedAddress.maxAddressLineIndex) {
+                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    }
+                    strAdd = strReturnedAddress.toString()
+                    Log.w(" Current loction address", strReturnedAddress.toString())
+                } else {
+                    Log.w(" Current loction address", "No Address returned!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.w(" Current loction address",  e.printStackTrace().toString())
+            }
+            liveLoc?.setText(strAdd)
 
 
         }else{
@@ -1150,16 +1205,25 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             val addresses: List<Address>
             geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-            addresses = position?.let {
-                geocoder.getFromLocation(
-                    it.latitude,
-                    it.longitude, 1
-                )
-            }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-            val address = addresses[0].getAddressLine(0)
-            manualLoc?.setText(address)
+            var strAdd : String? = null
+            try {
+                val addresses = geocoder.getFromLocation(position.latitude, position.longitude, 1)
+                if (addresses != null) {
+                    val returnedAddress = addresses[0]
+                    val strReturnedAddress = java.lang.StringBuilder("")
+                    for (i in 0..returnedAddress.maxAddressLineIndex) {
+                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    }
+                    strAdd = strReturnedAddress.toString()
+                    Log.w(" Current loction address", strReturnedAddress.toString())
+                } else {
+                    Log.w(" Current loction address", "No Address returned!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.w(" Current loction address", "Canont get Address!")
+            }
+            manualLoc?.setText(strAdd)
 
         }
 }

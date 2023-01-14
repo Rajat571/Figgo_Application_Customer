@@ -106,8 +106,8 @@ class PayFragment : Fragment()  {
 
             }else {
 
-                getPayUNow()
-               // getPayNow();
+               // getPayUNow()
+                getPayNow();
             }
 
         }
@@ -148,12 +148,12 @@ class PayFragment : Fragment()  {
                         val amt = "1"
                         val amount = Math.round(amt.toFloat() * 100).toInt()
                         val checkout = Checkout()
-                        checkout.setKeyID("rzp_test_LrVNPY8Z5MQgNE")
+                        checkout.setKeyID("rzp_test_capDM1KlnUhj5f")
                         checkout.setImage(R.drawable.appicon)
                         val obj = JSONObject()
                         try {
-                            obj.put("name", "Geeks for Geeks")
-                            obj.put("description", "Test payment")
+                            obj.put("name", "Figgo")
+                            obj.put("description", "Payment")
                             obj.put("theme.color", "")
                             obj.put("send_sms_hash", true)
                             obj.put("allow_rotation", true)

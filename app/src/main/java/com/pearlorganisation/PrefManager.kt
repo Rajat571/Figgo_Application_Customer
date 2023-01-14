@@ -121,5 +121,11 @@ import android.content.SharedPreferences
      fun isValidLogin(): Boolean {
          return pref!!.getBoolean(IS_VALID_LOGIN, false)
      }
-
+     fun setNumber(number:String){
+         editor?.putString("number",number)
+         editor?.commit()
+     }
+     fun getNumber():String{
+         return pref?.getString("number","").toString()
+     }
 }

@@ -16,9 +16,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="api_key">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
+    <string name="api_key">AIzaSyCZT-YdJMsLTC2J6ssQeytY3zJfjeoIUVE</string>
 
-        <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
+        <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCZT-YdJMsLTC2J6ssQeytY3zJfjeoIUVE</string>
     <!-- check dummy data  -->
 
     <string name="skip">SKIP</string>
@@ -26,7 +26,7 @@
 
     <string name="slide_1_title">Welcome to Javatpoint!</string>
     <string name="slide_1_desc">Javatpoint is passionate to offer better technical content to the world.</string>
-
+    <string name="otp_text">An OTP has been sent to you for verification of\n your mobile number.\nPlease enter the OTP to proceed.</string>
     <string name="slide_2_title">Android</string>
     <string name="slide_2_desc">Android is a mobile operating system developed by Google.</string>
     <string name="title_activity_customer_menu">Customer_Menu</string>

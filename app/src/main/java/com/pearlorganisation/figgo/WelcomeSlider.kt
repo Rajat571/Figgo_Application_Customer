@@ -37,6 +37,7 @@ class WelcomeSlider : AppCompatActivity() {
 
         setContentView(R.layout.activity_welcome_slider)
         prefManager = PrefManager(this)
+       // prefManager!!.setToken("949|vBiS1sR6b5AICFuOTyP7zrkHoNhqzEsz7wu4AsKA")
         if (!prefManager!!.isFirstTimeLaunch()) {
             launchHomeScreen()
             finish()
