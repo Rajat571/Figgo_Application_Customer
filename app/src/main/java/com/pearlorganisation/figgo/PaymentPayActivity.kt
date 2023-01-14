@@ -77,7 +77,7 @@ class PaymentPayActivity : AppCompatActivity(), PaymentResultListener {
                 Toast.makeText(this@PaymentPayActivity, "Please type Passenger Name", Toast.LENGTH_LONG).show()
 
             }else if (psg_contact?.text.toString().equals("")){
-                Toast.makeText(this@PaymentPayActivity, "Please type Passenger Name", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@PaymentPayActivity, "Please type Passenger Contact", Toast.LENGTH_LONG).show()
 
             }else if (pick_address?.text.toString().equals("")){
                 Toast.makeText(this@PaymentPayActivity, "Please type Pick Up Address", Toast.LENGTH_LONG).show()
@@ -130,17 +130,19 @@ class PaymentPayActivity : AppCompatActivity(), PaymentResultListener {
                         val amt = "1"
                         val amount = Math.round(amt.toFloat() * 100).toInt()
                         val checkout = Checkout()
-                        checkout.setKeyID("Enter your key here")
+                        checkout.setKeyID("rzp_test_capDM1KlnUhj5f")
                         checkout.setImage(R.drawable.appicon)
                         val obj = JSONObject()
                         try {
                             obj.put("name", "Figgo")
-                            obj.put("description", "Test payment")
+                            obj.put("description", "Payment")
                             obj.put("theme.color", "")
                             obj.put("currency", "INR")
                             obj.put("amount", amount)
-                            obj.put("prefill.contact", "9284064503")
-                            obj.put("prefill.email", "chaitanyamunje@gmail.com")
+                            val preFill = JSONObject()
+                            preFill.put("email", "a@gmail.com")
+                            preFill.put("contact", "91" + "1234567098")
+                            obj.put("prefill", preFill)
                             checkout.open(this@PaymentPayActivity, obj)
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -193,7 +195,7 @@ class PaymentPayActivity : AppCompatActivity(), PaymentResultListener {
         }
     }
     override fun onPaymentSuccess(s: String?) {
-        Toast.makeText(this@PaymentPayActivity, "Payment is successful : " + s, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@PaymentPayActivity, "Payment is successfull : " + s, Toast.LENGTH_SHORT).show()
     }
     override fun onPaymentError(p0: Int, s: String?) {
         Toast.makeText(this@PaymentPayActivity, "Payment Failed due to error : " + s, Toast.LENGTH_SHORT).show()

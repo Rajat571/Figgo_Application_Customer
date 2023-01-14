@@ -2,13 +2,13 @@ package com.pearlorganisation.figgo.UI.Fragments
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,9 +19,14 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.payu.base.models.ErrorResponse
+import com.payu.base.models.PayUPaymentParams
+import com.payu.checkoutpro.PayUCheckoutPro
+import com.payu.checkoutpro.utils.PayUCheckoutProConstants
+import com.payu.ui.model.listeners.PayUCheckoutProListener
+import com.payu.ui.model.listeners.PayUHashGenerationListener
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.DashBoard
 import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
@@ -68,29 +73,13 @@ class CabBookFragment : Fragment() {
         to_loc = view.findViewById<TextView>(R.id.to_loc)
         from_loc = view.findViewById<TextView>(R.id.from_loc)
         fare = view.findViewById<TextView>(R.id.fare)
-        /*image = view.findViewById<ImageView>(R.id.image)*/
-        var backtxt =view.findViewById<TextView>(R.id.backtxt)
-        var backimg =view.findViewById<ImageView>(R.id.backimg)
-        var shareimg = view.findViewById<ImageView>(R.id.shareimg)
-
-        backimg.setOnClickListener {
-           Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_dashBoard)
-        }
-
-        backtxt.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_dashBoard)
-        }
-
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
-
+        image = view.findViewById<ImageView>(R.id.image)
 
         pref = PrefManager(requireActivity())
+
+
+
+
         getCabBookData()
 
         book_other.setOnClickListener {
@@ -103,32 +92,78 @@ class CabBookFragment : Fragment() {
         }
 
         book_self.setOnClickListener {
-            val amt = "1"
-            val amount = Math.round(amt.toFloat() * 100).toInt()
-            val checkout = Checkout()
-            checkout.setKeyID("rzp_test_LrVNPY8Z5MQgNE")
-            checkout.setImage(R.drawable.appicon)
-            val obj = JSONObject()
-            try {
-                obj.put("name", "Geeks for Geeks")
-                obj.put("description", "Test payment")
-                obj.put("theme.color", "")
-                obj.put("send_sms_hash", true)
-                obj.put("allow_rotation", true)
-                obj.put("currency", "INR")
-                obj.put("amount", amount)
-                val preFill = JSONObject()
-                preFill.put("email", "a@gmail.com")
-                preFill.put("contact", "91" + "1234567098")
-                obj.put("prefill", preFill)
-                checkout.open(requireActivity(), obj)
-            } catch (e: JSONException) {
-                Toast.makeText(requireActivity(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
-                e.printStackTrace()
-            }
-            //  view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
+
+            val payUPaymentParams = PayUPaymentParams.Builder()
+                .setAmount("1.0")
+                .setIsProduction(true)
+                .setKey("0MQaQP")
+                .setProductInfo("Test")
+                .setPhone("9999999999")
+                .setTransactionId(System.currentTimeMillis().toString())
+                .setFirstName("John")
+                .setEmail("John@gmail.com")
+                .setSurl("https://payu.response.firebaseapp.com/success")
+                .setFurl("https://payu.response.firebaseapp.com/failure")
+                //Optional, can contain any additional PG params
+                .build()
+            PayUCheckoutPro.open(
+                requireActivity(), payUPaymentParams,
+                object : PayUCheckoutProListener {
 
 
+                    override fun onPaymentSuccess(response: Any) {
+                        response as HashMap<*, *>
+                        val payUResponse = response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
+                        val merchantResponse = response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
+                    }
+
+
+                    override fun onPaymentFailure(response: Any) {
+                        response as HashMap<*, *>
+                        val payUResponse = response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
+                        val merchantResponse = response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
+                    }
+
+
+                    override fun onPaymentCancel(isTxnInitiated:Boolean) {
+                    }
+
+
+                    override fun onError(errorResponse: ErrorResponse) {
+                        val errorMessage: String
+                        if (errorResponse != null && errorResponse.errorMessage != null && errorResponse.errorMessage!!.isNotEmpty())
+                            errorMessage = errorResponse.errorMessage!!
+                        else {
+                            //   errorMessage = resources.getString(R.string.some_error_occurred)
+                        }
+                    }
+
+                    override fun setWebViewProperties(webView: WebView?, bank: Any?) {
+                        //For setting webview properties, if any. Check Customized Integration section for more details on this
+                    }
+
+                    override fun generateHash(
+                        valueMap: HashMap<String, String?>,
+                        hashGenerationListener: PayUHashGenerationListener
+                    ) {
+                        if ( valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_STRING)
+                            && valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_STRING) != null
+                            && valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_NAME)
+                            && valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_NAME) != null) {
+
+                            val hashData = valueMap[PayUCheckoutProConstants.CP_HASH_STRING]
+                            val hashName = valueMap[PayUCheckoutProConstants.CP_HASH_NAME]
+
+                            //Do not generate hash from local, it needs to be calculated from server side only. Here, hashString contains hash created from your server side.
+                            /* val hash: String? = hashString
+                             if (!TextUtils.isEmpty(hash)) {
+                                 val dataMap: HashMap<String, String?> = HashMap()
+                                 dataMap[hashName!!] = hash!!
+                                 hashGenerationListener.onHashGenerated(dataMap)
+                             }*/
+                        }
+                    }
+                })
 
         }
     }
@@ -139,8 +174,12 @@ class CabBookFragment : Fragment() {
         val URL ="https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
         val queue = Volley.newRequestQueue(requireContext())
         val json = JSONObject()
-        json.put("ride_id", pref.getride_id())
+        json.put("ride_id", pref.getRideId())
         json.put("vehicle_type_id", pref.getVehicleId())
+
+
+
+
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
