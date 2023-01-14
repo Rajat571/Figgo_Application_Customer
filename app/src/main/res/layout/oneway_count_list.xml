@@ -63,7 +63,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/raingcountlist"
+                    android:id="@+id/rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

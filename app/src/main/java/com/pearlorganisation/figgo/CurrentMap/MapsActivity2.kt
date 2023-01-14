@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.AuthFailureError
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
@@ -66,19 +66,18 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         super.onCreate(savedInstanceState)
         binding = ActivityMaps2Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        pref  = PrefManager(this)
-        var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var backimg = findViewById<ImageView>(R.id.backimg)
+        pref = PrefManager(this)
+        shareimg()
+        onBackPress()
+
         var accept = findViewById<TextView>(R.id.accept)
-        var backtxt = findViewById<TextView>(R.id.backtxt)
-        var mobilenumber = findViewById<TextView>(R.id.mobilenumber)
 
-         activaimg = findViewById<ImageView>(R.id.activaimg)
-         activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
-         drivername = findViewById<TextView>(R.id.drivername)
+        activaimg = findViewById<ImageView>(R.id.activaimg)
+        activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
+        drivername = findViewById<TextView>(R.id.drivername)
 
-         ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
-         dl_number = findViewById<TextView>(R.id.dl_number)
+        ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
+        dl_number = findViewById<TextView>(R.id.dl_number)
         driverimg = findViewById<ImageView>(R.id.driverimg)
 
 
@@ -94,31 +93,11 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             startActivity(intent)
 
 
-           /* startActivity(Intent(this, EmergencyMapsActivity::class.java))*/
-
+            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+            val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+            mapFragment.getMapAsync(this)
         }
-
-        backtxt.setOnClickListener {
-            startActivity(Intent(this, MapsActivity1::class.java))
-        }
-
-        backimg.setOnClickListener {
-            val intent = Intent(this, MapsActivity1::class.java)
-            startActivity(intent)
-        }
-
-        shareimg.setOnClickListener {
-            var intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
-            intent.setType("text/plain")
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
-        }
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
     }
 
 
@@ -185,8 +164,8 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = HashMap()
-                    headers.put("Content-Type", "application/json; charset=UTF-8");
-                    headers.put("Authorization", "Bearer " + pref.getToken());
+                    headers.put("Content-Type", "application/json; charset=UTF-8")
+                    headers.put("Authorization", "Bearer " + pref.getToken())
                     return headers
                 }
             }

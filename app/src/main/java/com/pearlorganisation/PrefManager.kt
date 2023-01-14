@@ -62,6 +62,19 @@ import android.content.SharedPreferences
          return pref?.getString("ride_id","null").toString()
      }
 
+     fun setprice(price:String){
+         editor?.putString("price",price)
+         editor?.commit()
+     }
+
+     fun getprice():String{
+         return pref?.getString("price","null").toString()
+     }
+
+
+
+
+
      fun setOtp(otp:String){
          editor?.putString("otp",otp)
          editor?.commit()

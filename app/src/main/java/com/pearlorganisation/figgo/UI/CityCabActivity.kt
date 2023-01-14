@@ -2,24 +2,17 @@ package com.pearlorganisation.figgo.UI
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
-import android.view.Menu
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.view.menu.MenuView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
-import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
-import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 
@@ -50,7 +43,9 @@ class CityCabActivity : BaseClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.drawer_screen2)
-
+        shareimg()
+        backimg()
+        backtxt()
         var shareimg=findViewById<ImageView>(R.id.shareimg)
         var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
@@ -82,7 +77,7 @@ class CityCabActivity : BaseClass() {
             intent.action= Intent.ACTION_SEND
             intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs")
             intent.setType("text/plain")
-            startActivity(Intent.createChooser(intent, "Invite Friends"));
+            startActivity(Intent.createChooser(intent, "Invite Friends"))
         }
 
         var window=window
