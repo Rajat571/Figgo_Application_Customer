@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 
@@ -20,6 +21,7 @@ class CityCabActivity : BaseClass() {
     private lateinit var navController: NavController
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
+    lateinit var pref: PrefManager
     override fun setLayoutXml() {
         TODO("Not yet implemented")
     }
@@ -50,6 +52,8 @@ class CityCabActivity : BaseClass() {
         var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         var navView = findViewById<NavigationView>(R.id.navView)
+
+        pref = PrefManager(this@CityCabActivity)
         menu_naviagtion.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
@@ -92,9 +96,13 @@ class CityCabActivity : BaseClass() {
 
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this,DashBoard::class.java))
-    }
 
+        if (pref.getCount().equals("vehicle")) {
+            startActivity(Intent(this@CityCabActivity, CityCabActivity::class.java))
+        } else {
+            super.onBackPressed()
+            startActivity(Intent(this, DashBoard::class.java))
+        }
+    }
 
 }

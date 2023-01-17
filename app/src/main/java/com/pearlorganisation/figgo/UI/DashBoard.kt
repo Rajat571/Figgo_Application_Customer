@@ -1,6 +1,8 @@
 package com.pearlorganisation.figgo.UI
 //Neeraj
 
+
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
@@ -11,16 +13,18 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Layout
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.GoogleApiClient
@@ -45,17 +49,19 @@ import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
-import com.pearlorganisation.figgo.UI.Fragments.OutStation.RoundAndTourFragment
-import com.pearlorganisation.figgo.UI.Fragments.RidesBottom
 import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 import java.util.*
 
 
+@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class DashBoard : BaseClass() {
     lateinit var binding: ActivityDashBoardBinding
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
+    lateinit var continu : Button
+    lateinit var main : LinearLayout
+    lateinit var perm : LinearLayout
     private var hasGps = false
     private var hasNetwork = false
     lateinit var cabCategoryAdapter: CabCategoryAdapter
@@ -71,6 +77,8 @@ class DashBoard : BaseClass() {
     private val permissionId = 2
     private val requestcodes = 2
     var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
+    var PERMISSIONS_CODE=2;
+
     var homeFrag = HomeDashboard()
     lateinit var locationManager: LocationManager
     private var mMap: GoogleMap? = null
@@ -108,7 +116,13 @@ class DashBoard : BaseClass() {
       setContentView(R.layout.a_dashboard)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         prefManager = PrefManager(this)
-        prefManager.setToken("949|vBiS1sR6b5AICFuOTyP7zrkHoNhqzEsz7wu4AsKA")
+
+        prefManager.setType("")
+        prefManager.setToLatL("")
+        prefManager.setToLngL("")
+        prefManager.setToLatM("")
+        prefManager.setToLngM("")
+        Log.d("token",prefManager.getToken())
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
@@ -119,6 +133,9 @@ class DashBoard : BaseClass() {
         var support = SupportBottomNav()
         var navView = findViewById<NavigationView>(R.id.navView)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
+         main = findViewById<LinearLayout>(R.id.main)
+        continu = findViewById<Button>(R.id.continu)
+        perm = findViewById<LinearLayout>(R.id.perm)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
         drawerLayout.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -131,7 +148,11 @@ class DashBoard : BaseClass() {
         menu_naviagtion.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
-
+        continu.setOnClickListener {
+           grantLocPer()
+            perm.isVisible = false
+            main.isVisible = true
+        }
 
         grantLocPer()
 
@@ -359,13 +380,21 @@ class DashBoard : BaseClass() {
    private fun requestPermissions() {
        ActivityCompat.requestPermissions(this@DashBoard,
            arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION), permissionId)
+
    }
     private fun isLocationPermissionGranted(): Boolean {
         return if (ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this@DashBoard, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),
-                requestcodes
-            )
+
+            ActivityCompat.requestPermissions(
+                this@DashBoard,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+
+
+           // ActivityCompat.requestPermissions(this@DashBoard, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),
+              //  requestcodes
+
             false
         } else {
             true
@@ -397,7 +426,11 @@ class DashBoard : BaseClass() {
             }
 
         } else {
-            requestPermissions()
+            ActivityCompat.requestPermissions(
+                this@DashBoard,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+
         }
     }
     fun checkLocationService() {
@@ -441,5 +474,32 @@ class DashBoard : BaseClass() {
             grantLocPer()
         }
     }
+    @SuppressLint("SuspiciousIndentation")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
+                                            grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            101-> {
+                if (grantResults.isNotEmpty() && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED) {
+                    if ((ContextCompat.checkSelfPermission(this@DashBoard,
+                            android.Manifest.permission.ACCESS_FINE_LOCATION) ===
+                                PackageManager.PERMISSION_GRANTED)) {
 
+
+
+                        main.isVisible = true
+                        perm.isVisible = false
+                           grantLocPer()
+
+                    }
+                } else {
+
+                    main.isVisible = false
+                    perm.isVisible = true
+                }
+                return
+            }
+        }
+    }
 }

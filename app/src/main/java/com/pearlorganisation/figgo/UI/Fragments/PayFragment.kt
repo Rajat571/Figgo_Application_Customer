@@ -142,16 +142,17 @@ class PayFragment : Fragment()  {
         val json = JSONObject()
         json.put("name", psg_name?.text.toString())
         json.put("contact", psg_contact?.text.toString())
-        json.put("lat", "")
-        json.put("lng", "")
-        json.put("pickup_address", "")
-        json.put("landmark", "")
+       // json.put("lat", "")
+       // json.put("lng", "")
+       // json.put("pickup_address", "")
+      //  json.put("landmark", "")
         json.put("ride_id", pref.getride_id())
         if (msg?.text.toString().equals("")){
             msg?.text = null
         }
         json.put("additional_message ", msg?.text.toString())
 
+        Log.d("rif",pref.getride_id())
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
@@ -184,7 +185,7 @@ class PayFragment : Fragment()  {
                             Toast.makeText(getApplicationContext(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
                             e.printStackTrace()
                         }
-                          view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
+                        //  view?.let { Navigation.findNavController(it).navigate(R.id.action_payFragment_to_paymentWayFragment) }
 
 
 
