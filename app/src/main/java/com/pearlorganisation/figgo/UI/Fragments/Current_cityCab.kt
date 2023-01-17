@@ -366,6 +366,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                         val headers: MutableMap<String, String> = HashMap()
                         headers.put("Content-Type", "application/json; charset=UTF-8")
                         headers.put("Authorization", "Bearer " + pref.getToken())
+                        headers.put("Accept", "application/vnd.api+json")
                         return headers
                     }
                 }
@@ -376,18 +377,15 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         if (isLocationPermissionGranted()){
-            if (hasGps) { locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F, gpsLocationListener)
-            }
+            if (hasGps) { locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F, gpsLocationListener) }
 
             if (hasNetwork) {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0F, networkLocationListener)
             }
 
 
-            val lastKnownLocationByGps =
-                locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            lastKnownLocationByGps?.let {
-                locationByGps = lastKnownLocationByGps
+            val lastKnownLocationByGps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            lastKnownLocationByGps?.let { locationByGps = lastKnownLocationByGps
             }
 
             val lastKnownLocationByNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
