@@ -214,4 +214,13 @@ import android.content.SharedPreferences
      }
 
 
+     fun setType(type:String){
+         editor?.putString("type",type)
+         editor?.commit()
+     }
+
+     fun getType():String{
+         return pref?.getString("type","null").toString()
+     }
+
 }

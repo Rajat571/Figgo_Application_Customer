@@ -64,15 +64,15 @@ class LoginActivity : AppCompatActivity(){
         pref = PrefManager(this)
         //  var email = findViewById<TextView>(R.id.email)
         //  var number = findViewById<TextView>(R.id.number)
-         input_number = findViewById<TextView>(R.id.input_number)
+        input_number = findViewById<TextView>(R.id.input_number)
 
 
         val continuetv = findViewById<TextView>(R.id.continuetv)
         var forgot_account = findViewById<TextView>(R.id.forgot_account)
         var google_login_button = findViewById<TextView>(R.id.google_login_button)
-         cc_number = findViewById<ConstraintLayout>(R.id.cc_number)
+        cc_number = findViewById<ConstraintLayout>(R.id.cc_number)
         otp_screen = findViewById<CardView>(R.id.otp_screen)
-         progress = findViewById<ProgressBar>(R.id.progress)
+        progress = findViewById<ProgressBar>(R.id.progress)
         enteredOTP = findViewById<EditText>(R.id.enteredOTP)
         otp_Verify_button = findViewById<Button>(R.id.otp_Verify_button)
         resend = findViewById<TextView>(R.id.resend)
@@ -173,50 +173,50 @@ class LoginActivity : AppCompatActivity(){
 
 
 
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-            // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-            if (requestCode == RC_SIGN_IN) {
-                // The Task returned from this call is always completed, no need to attach
-                // a listener.
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                handleSignInResult(task)
-            }
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
         }
+    }
 
 
-       private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-            try {
-                val account = completedTask.getResult(ApiException::class.java)
-                Log.d("Account ", "" + account.account)
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+            Log.d("Account ", "" + account.account)
 
-                pref.setAccountDetails(
-                    account.account.toString(),
-                    account.displayName.toString(),
-                    account.photoUrl.toString()
-                )
-                // prefManager.setToken("")
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Signed In :" + account.account.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-                if (pref.getMpin().equals("") || pref.getMpin().equals("null")) {
-                    startActivity(Intent(this,MPinGenerate::class.java))
-                } else {
-                    startActivity(Intent(this,DashBoard::class.java))
-                }
-
-                // Signed in successfully, show authenticated UI.
-                // updateUI(account)
-            } catch (e: ApiException) {
-                // The ApiException status code indicates the detailed failure reason.
-                // Please refer to the GoogleSignInStatusCodes class reference for more information.
-                Log.d("SignIN = ", "signInResult:failed code=" + e.statusCode)
-                //updateUI(null)
+            pref.setAccountDetails(
+                account.account.toString(),
+                account.displayName.toString(),
+                account.photoUrl.toString()
+            )
+            // prefManager.setToken("")
+            Toast.makeText(
+                this@LoginActivity,
+                "Signed In :" + account.account.toString(),
+                Toast.LENGTH_LONG
+            ).show()
+            if (pref.getMpin().equals("") || pref.getMpin().equals("null")) {
+                startActivity(Intent(this,MPinGenerate::class.java))
+            } else {
+                startActivity(Intent(this,DashBoard::class.java))
             }
+
+            // Signed in successfully, show authenticated UI.
+            // updateUI(account)
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.d("SignIN = ", "signInResult:failed code=" + e.statusCode)
+            //updateUI(null)
         }
+    }
     private fun login(){
         progress.isVisible  =true
         cc_number.isVisible = false
@@ -232,8 +232,7 @@ class LoginActivity : AppCompatActivity(){
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                        cc_number.isVisible = true
-                        progress.isVisible = false
+                        pref.setUserId(response.getJSONObject("user").getString("id"))
                         getotp()
                     }
 
@@ -245,11 +244,11 @@ class LoginActivity : AppCompatActivity(){
                     Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {
-                     @Throws(AuthFailureError::class)
+                @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = HashMap()
-                  //  headers["Authorization"] = "TOKEN" //put your token here
-                          headers.put("Accept", "application/vnd.api+json")
+                    //  headers["Authorization"] = "TOKEN" //put your token here
+                    headers.put("Accept", "application/vnd.api+json")
                     return headers
                 }
             }
@@ -261,7 +260,6 @@ class LoginActivity : AppCompatActivity(){
 
     }
     private fun getotp(){
-
         pref.setNumber(input_number.text.toString())
         val URL = "https://test.pearl-developer.com/figo/api/otp/send-otp"
         val queue = Volley.newRequestQueue(this@LoginActivity)
@@ -337,9 +335,7 @@ class LoginActivity : AppCompatActivity(){
                                     )
                                 )
                             } else {
-                                startActivity(
-                                    Intent(
-                                        this@LoginActivity,
+                                startActivity(Intent(this@LoginActivity,
                                         DashBoard::class.java
                                     )
                                 )
@@ -347,21 +343,10 @@ class LoginActivity : AppCompatActivity(){
 
 
                         } else {
-//                               val token = response.getString("token")
-//                               pref.setToken(token)
-//                               Toast.makeText(this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
-//                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
-//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               }else{
-//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               }
-//                               startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
-//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               }
-//                               else{
-//                                   startActivity(Intent(this@LoginActivity,DashBoard::class.java))
-//                               }
+                            val token = response.getString("token")
+                            pref.setToken(token)
+                            pref.isValidLogin()
+                            Toast.makeText(  this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this@LoginActivity, DashBoard::class.java))
                         }
 
@@ -376,6 +361,7 @@ class LoginActivity : AppCompatActivity(){
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = HashMap()
+                    headers.put("Content-Type", "application/json; charset=UTF-8");
                     headers.put("Accept", "application/vnd.api+json") //put your token here
                     return headers
                 }

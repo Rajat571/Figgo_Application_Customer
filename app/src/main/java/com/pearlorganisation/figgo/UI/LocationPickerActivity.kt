@@ -18,6 +18,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.*
@@ -28,11 +29,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.RideCityAdapter
 import com.pearlorganisation.figgo.Model.Data
@@ -98,6 +96,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
     private var imgCurrentloc: ImageView? = null
     private var locationPick = false
     private var type: String? = null
+    private var count: String? = ""
     private var rl_current_location: LinearLayout? = null
     lateinit var pref: PrefManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,6 +118,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
         addressline2 = findViewById(R.id.addressline2)
         citydetail = findViewById(R.id.citydetails)
         pref = PrefManager(this)
+        imgSearch?.isVisible = false
         try {
             startLocation = intent.getBooleanExtra("startLocation", false)
             type = intent.getStringExtra("type")
@@ -200,7 +200,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
             imgCurrentloc?.setVisibility(View.GONE)
             txtSelectLocation?.setVisibility(View.VISIBLE)
             moving_pointer?.setVisibility(View.GONE)
-            if (!Places.isInitialized()) {
+        /*    if (!Places.isInitialized()) {
                 Places.initialize(this@LocationPickerActivity, MapUtility.apiKey)
             }
             // Set the fields to specify which types of place data to return.
@@ -215,7 +215,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                 AutocompleteActivityMode.FULLSCREEN, fields
             ) //                        .setTypeFilter(TypeFilter.ADDRESS)
                 .build(this@LocationPickerActivity)
-            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE)
+            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE)*/
         })
 
 
@@ -225,16 +225,36 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
             // add data into intent and send back to Parent Activity
 
 
-            val intent = Intent(this, CityCabActivity::class.java)
-            i.putExtra("type", "1")
-            startActivity(intent)
+            if (addressline2?.text.toString().equals("")){
+                Toast.makeText(
+                    this,
+                    "Select Location First",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }else{
+
+                if (pref.getType().equals("1")) {
+                    pref.setToLatL(mLatitude.toString())
+                    pref.setToLngL(mLongitude.toString())
+                }else{
+                    pref.setToLatM(mLatitude.toString())
+                    pref.setToLngM(mLongitude.toString())
+                }
+                val intent = Intent(this, CityCabActivity::class.java)
+                startActivity(intent)
+            }
+
 
 
         })
 
         txt_showmap?.setOnClickListener(View.OnClickListener {
+
+            count = "map"
             locationPick = false
             this@LocationPickerActivity.showCurrentLocationOnMap(false)
+            imgSearch?.isVisible = true
             ll_history?.setVisibility(View.GONE)
             txt_showmap?.setVisibility(View.GONE)
             mapFrame?.setVisibility(View.VISIBLE)
@@ -323,7 +343,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                 mLatitude = place.latLng.latitude
                 mLongitude = place.latLng.longitude
                 place_id = place.id
-                place_url = place.websiteUri.toString()
+              //  place_url = place.websiteUri.toString()
                 addressline2!!.setText("" + userAddress)
                 //                addMarker();
 //                getAddressByGeoCodingLatLng();
@@ -826,7 +846,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
               if (locationByGps != null && locationByNetwork != null) {
              if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
                  
-                 if (type.equals("1")) {
+                 if (pref.getType().equals("1")) {
                      pref.setToLatL(locationByGps?.latitude.toString())
                      pref.setToLngL(locationByGps?.longitude.toString())
                  }else{
@@ -834,7 +854,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                      pref.setToLngM(locationByGps?.longitude.toString())
                  }
              }else{
-                 if (type.equals("1")) {
+                 if (pref.getType().equals("1")) {
                      pref.setToLatL(locationByNetwork?.latitude.toString())
                      pref.setToLngL(locationByNetwork?.longitude.toString())
                  }else{
@@ -849,7 +869,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                   } else {
 
 
-                      if (type.equals("1")) {
+                      if (pref.getType().equals("1")) {
                           pref.setToLatL(locationByNetwork?.latitude.toString())
                           pref.setToLngL(locationByNetwork?.longitude.toString())
                       }else{
@@ -864,6 +884,8 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
 
 
               }
+        val intent = Intent(this, CityCabActivity::class.java)
+        startActivity(intent)
     }
 
     val gpsLocationListener: LocationListener = object : LocationListener {
@@ -886,5 +908,19 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
     }
-
+    override fun onBackPressed() {
+        if (count.equals("map")) {
+            imgSearch?.isVisible = false
+            ll_history?.setVisibility(View.VISIBLE)
+            txt_showmap?.setVisibility(View.VISIBLE)
+            mapFrame?.setVisibility(View.GONE)
+            imgCurrentloc?.setVisibility(View.GONE)
+            txtSelectLocation?.setVisibility(View.GONE)
+            moving_pointer?.setVisibility(View.GONE)
+            rl_current_location?.setVisibility(View.VISIBLE)
+            count = ""
+        }else{
+            super.onBackPressed()
+        }
+    }
 }
