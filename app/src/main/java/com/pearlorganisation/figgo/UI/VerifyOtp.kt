@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
+import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
@@ -47,132 +48,14 @@ class VerifyOtp : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_verify_number)
         pref = PrefManager(this)
-        enteredOTP = findViewById<EditText>(R.id.enteredOTP)
-        otp_Verify_button = findViewById<Button>(R.id.otp_Verify_button)
-        resend = findViewById<TextView>(R.id.resend)
-        otp_Verify_button.setOnClickListener {
 
 
-            if (enteredOTP.text.toString().equals("") || enteredOTP.text.toString().equals("null")) {
-                Toast.makeText(
-                    this@VerifyOtp,
-                    "Enter Otp",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-            } else {
-                verifyOtp()
-            }
-        }
-
-        resend.setOnClickListener {
-
-            getotp()
-
-        }
-
-        startTimer()
-    }
-    private fun getotp(){
-        val URL = "https://test.pearl-developer.com/figo/api/otp/send-otp"
-        val queue = Volley.newRequestQueue(this@VerifyOtp)
-        val json = JSONObject()
-        json.put("type", "user")
-        json.put("type_id", pref.getUserId())
-        json.put("contact_no", pref.getNumber())
-        Log.d("SendData", "json===" + json)
-        val jsonOblect: JsonObjectRequest =
-            object : JsonObjectRequest(Method.POST, URL, json, object :
-                Response.Listener<JSONObject?> {
-                override fun onResponse(response: JSONObject?) {
-                    Log.d("SendData", "response===" + response)
-                    if (response != null) {
-                        if (pref.getToken().equals("") || pref.getToken().equals("null")) {
-
-                            //  val token = response.getString("token")
-                            //  pref.setToken(token)
-                            startTimer()
-                            pref.isValidLogin()
-                            Toast.makeText(
-                                this@VerifyOtp,
-                                "Otp Send Successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            //  Log.d("SendData", "token===" + token)
-                            //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                            /*  if (pref.getMpin().equals("")) {
-                                  startActivity(
-                                      Intent(
-                                          this@LoginActivity,
-                                          MPinGenerate::class.java
-                                      )
-                                  )
-                              } else {
-                                  startActivity(
-                                      Intent(
-                                          this@LoginActivity,
-                                          DashBoard::class.java
-                                      )
-                                  )
-                              }*/
-
-                        } else {
-//                               val token = response.getString("token")
-//                               pref.setToken(token)
-//                               Toast.makeText(this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
-//                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
-//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               }else{
-//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               }
-//                               startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               if(pref.getMpin().equals("") || pref.getMpin().equals("null")){
-//                                   startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-//                               }
-//                               else{
-//                                   startActivity(Intent(this@LoginActivity,DashBoard::class.java))
-//                               }
-                            startActivity(Intent(this@VerifyOtp, DashBoard::class.java))
-                        }
-
-                    }
-                    // Get your json response and convert it to whatever you want.
-                }
-            }, object : Response.ErrorListener {
-                override fun onErrorResponse(error: VolleyError?) {
-                    Toast.makeText(this@VerifyOtp, "Something went wrong!", Toast.LENGTH_LONG).show()
-                }
-            }) {
-                /*     @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers: MutableMap<String, String> = HashMap()
-                    headers["Authorization"] = "TOKEN" //put your token here
-                    return headers
-                }*/
-            }
-
-        queue.add(jsonOblect)
 
 
-        //startActivity(Intent(this,MPinGenerate::class.java))
-
+       // startTimer()
     }
 
 
-    fun startTimer() {
-
-        cTimer = object : CountDownTimer(60000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                resend.setText("seconds remaining: " + (millisUntilFinished / 1000).toString())
-            }
-
-            override fun onFinish() {
-                resend.setText("Re send OTP!")
-
-            }
-        }
-        cTimer.start()
-    }
 
     private fun verifyOtp(){
         val URL = " https://test.pearl-developer.com/figo/api/otp/check-otp"
@@ -244,12 +127,12 @@ class VerifyOtp : AppCompatActivity() {
                     Toast.makeText(this@VerifyOtp, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {
-                /*     @Throws(AuthFailureError::class)
+                     @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = HashMap()
-                    headers["Authorization"] = "TOKEN" //put your token here
+                         headers.put("Accept", "application/vnd.api+json") //put your token here
                     return headers
-                }*/
+                }
             }
 
         queue.add(jsonOblect)

@@ -168,7 +168,7 @@ class LocationDisActivity : FragmentActivity(), OnMapReadyCallback, GoogleApiCli
         urlString.append(",")
         urlString.append(java.lang.Double.toString(destlog))
         urlString.append("&sensor=false&mode=driving&alternatives=true")
-        urlString.append("&key=AIzaSyCZT-YdJMsLTC2J6ssQeytY3zJfjeoIUVE")
+        urlString.append("&key=AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU")
         return urlString.toString()
     }//Calling the method drawPath to draw the path
 

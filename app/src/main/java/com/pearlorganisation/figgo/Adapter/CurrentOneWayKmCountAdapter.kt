@@ -89,6 +89,7 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
                     val headers: MutableMap<String, String> = java.util.HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8")
                     headers.put("Authorization", "Bearer " + pref.getToken())
+                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }

@@ -13,6 +13,7 @@ import android.content.pm.PackageManager
 import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -59,9 +60,12 @@ import com.pearlorganisation.figgo.IOnBackPressed
 import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
+import com.pearlorganisation.figgo.UI.LocationPickerActivity
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
 import org.json.JSONObject
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -88,6 +92,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     var manualLoc: TextView? = null
     var liveLoc: TextView? = null
     var AUTOCOMPLETE_REQUEST_CODE = -1
+    private val ADDRESS_PICKER_REQUEST = 1
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val permissionId = 2
@@ -112,6 +117,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     var datetext: TextView? = null
     var timetext: TextView? = null
     var mapFragment: Fragment? = null
+    private var type: String? = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -174,8 +180,69 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         } else {
             TODO("VERSION.SDK_INT < O")
         }
+        type = requireActivity().intent.getStringExtra("type")
+        if (type.equals("1")){
+
+            to_lat = pref.getToLatL().toDouble()
+            to_lng = pref.getToLngL().toDouble()
+
+            var geocoder: Geocoder
+            val addresses: List<Address>
+            geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
 
+            var strAdd : String? = null
+            try {
+                val addresses = geocoder.getFromLocation(to_lat!!, to_lng!!, 1)
+                if (addresses != null) {
+                    val returnedAddress = addresses[0]
+                    val strReturnedAddress = java.lang.StringBuilder("")
+                    for (i in 0..returnedAddress.maxAddressLineIndex) {
+                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    }
+                    strAdd = strReturnedAddress.toString()
+                    Log.w(" Current loction address", strReturnedAddress.toString())
+                } else {
+                    Log.w(" Current loction address", "No Address returned!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.w(" Current loction address",  e.printStackTrace().toString())
+            }
+            liveLoc?.setText(strAdd)
+
+
+        }else if (type.equals("2")){
+
+            from_lat = pref.getToLatM().toDouble()
+            from_lng = pref.getToLngM().toDouble()
+
+
+            val geocoder: Geocoder
+            val addresses: List<Address>
+            geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+            var strAdd : String? = null
+            try {
+                val addresses = geocoder.getFromLocation(from_lat!!, from_lng!!, 1)
+                if (addresses != null) {
+                    val returnedAddress = addresses[0]
+                    val strReturnedAddress = java.lang.StringBuilder("")
+                    for (i in 0..returnedAddress.maxAddressLineIndex) {
+                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    }
+                    strAdd = strReturnedAddress.toString()
+                    Log.w(" Current loction address", strReturnedAddress.toString())
+                } else {
+                    Log.w(" Current loction address", "No Address returned!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.w(" Current loction address", "Canont get Address!")
+            }
+            manualLoc?.setText(strAdd)
+
+        }
         calenderimg.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
@@ -275,8 +342,11 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
 
         locLinear?.setOnClickListener {
-
-            val internet :Boolean = isOnline(requireActivity())
+            selects = "start"
+            val i = Intent(requireActivity(), LocationPickerActivity::class.java)
+            i.putExtra("type", "1")
+            startActivityForResult(i, ADDRESS_PICKER_REQUEST)
+         /*   val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
           //      mainBinding = ActivityMainBinding.inflate(layoutInflater)
             //    mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -314,7 +384,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             }else{
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
-            }
+            }*/
         }
 
         destLinear?.setOnClickListener {
@@ -433,6 +503,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8");
                     headers.put("Authorization", "Bearer " + pref.getToken());
+                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }
@@ -1078,7 +1149,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         urlString.append(",")
         urlString.append(java.lang.Double.toString(destlog))
         urlString.append("&sensor=false&mode=driving&alternatives=true")
-        urlString.append("&key=AIzaSyCZT-YdJMsLTC2J6ssQeytY3zJfjeoIUVE")
+        urlString.append("&key=AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU")
         return urlString.toString()
     }//Calling the method drawPath to draw the path
 
@@ -1227,4 +1298,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
         }
 }
+
+
 }

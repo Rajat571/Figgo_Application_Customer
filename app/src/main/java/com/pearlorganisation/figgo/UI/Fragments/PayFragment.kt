@@ -203,7 +203,8 @@ class PayFragment : Fragment()  {
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8");
-                    headers.put("Authorization", "Bearer " + pref.getToken());
+                    headers.put("Authorization", "Bearer " + pref.getToken())
+                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }
@@ -331,6 +332,7 @@ class PayFragment : Fragment()  {
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8");
                     headers.put("Authorization", "Bearer " + pref.getToken());
+                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }

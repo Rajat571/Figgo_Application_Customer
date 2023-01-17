@@ -73,7 +73,7 @@ class CabBookFragment : Fragment() {
         to_loc = view.findViewById<TextView>(R.id.to_loc)
         from_loc = view.findViewById<TextView>(R.id.from_loc)
         fare = view.findViewById<TextView>(R.id.fare)
-        image = view.findViewById<ImageView>(R.id.image)
+      //  image = view.findViewById<ImageView>(R.id.image)
 
         pref = PrefManager(requireActivity())
 
@@ -228,6 +228,7 @@ class CabBookFragment : Fragment() {
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8");
                     headers.put("Authorization", "Bearer " + pref.getToken());
+                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }

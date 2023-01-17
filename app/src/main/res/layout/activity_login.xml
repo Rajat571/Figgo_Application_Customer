@@ -198,6 +198,27 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/otp_screen"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
+
+            <include
+                layout="@layout/otp_verifyscreen"
+
+                android:visibility="visible" />
+        </androidx.cardview.widget.CardView>
+
+
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="50dp"
