@@ -128,4 +128,90 @@ import android.content.SharedPreferences
      fun getNumber():String{
          return pref?.getString("number","").toString()
      }
+
+
+     fun setride_id(ride_id:String){
+         editor?.putString("ride_id",ride_id)
+         editor?.commit()
+     }
+
+     fun getride_id():String{
+         return pref?.getString("ride_id","null").toString()
+     }
+
+     fun setdriver_id(driver_id:String){
+         editor?.putString("driver_id",driver_id)
+         editor?.commit()
+     }
+     fun setactivavehiclenumber(activavehiclenumber:String){
+         editor?.putString("activavehiclenumber",activavehiclenumber)
+         editor?.commit()
+     }
+     fun setdrivername(drivername:String){
+         editor?.putString("drivername",drivername)
+         editor?.commit()
+     }
+
+     fun getdrivername():String{
+         return pref?.getString("drivername","null").toString()
+     }
+
+     fun setdl_number(dl_number:String){
+         editor?.putString("dl_number",dl_number)
+         editor?.commit()
+     }
+
+     fun getdl_number():String{
+         return pref?.getString("dl_number","null").toString()
+     }
+     fun getactivavehiclenumber():String{
+         return pref?.getString("activavehiclenumber","null").toString()
+     }
+     fun getdriver_id(): String {
+         return pref?.getString("driver_id","driver_id").toString()
+
+     }
+     fun setprice(price:String){
+         editor?.putString("price",price)
+         editor?.commit()
+     }
+
+     fun getprice():String{
+         return pref?.getString("price","null").toString()
+     }
+
+     fun setToLatL(lat:String){
+         editor?.putString("lat_to_l",lat)
+         editor?.commit()
+     }
+
+     fun getToLatL():String{
+         return pref?.getString("lat_to_l","null").toString()
+     }
+     fun setToLngL(lat:String){
+         editor?.putString("lng_to_l",lat)
+         editor?.commit()
+     }
+
+     fun getToLngL():String{
+         return pref?.getString("lng_to_l","null").toString()
+     }
+     fun setToLngM(lat:String){
+         editor?.putString("lng_to_m",lat)
+         editor?.commit()
+     }
+
+     fun getToLngM():String{
+         return pref?.getString("lng_to_m","null").toString()
+     }
+     fun setToLatM(lat:String){
+         editor?.putString("lat_to_m",lat)
+         editor?.commit()
+     }
+
+     fun getToLatM():String{
+         return pref?.getString("lat_to_m","null").toString()
+     }
+
+
 }

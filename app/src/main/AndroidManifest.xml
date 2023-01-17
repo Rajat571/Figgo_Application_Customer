@@ -33,8 +33,13 @@
             android:name=".UI.VerifyOtp"
             android:exported="false"/>
 
+
         <activity
             android:name=".UI.LocationDisActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".UI.LocationPickerActivity"
             android:exported="false"/>
 
         <activity

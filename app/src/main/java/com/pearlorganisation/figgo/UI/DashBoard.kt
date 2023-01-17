@@ -86,6 +86,7 @@ class DashBoard : BaseClass() {
         TODO("Not yet implemented")
     }
 
+
     override fun initializeViews() {
         TODO("Not yet implemented")
     }
@@ -220,6 +221,8 @@ class DashBoard : BaseClass() {
                     Toast.makeText(this@DashBoard, "rides Clicked", Toast.LENGTH_SHORT).show()
                 }
                 R.id.Logout -> {
+                    prefManager.setToken("")
+                    prefManager.setMpin("")
                     startActivity(Intent(this,LoginActivity::class.java))
                 }
 

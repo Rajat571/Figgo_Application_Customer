@@ -376,6 +376,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                         val headers: MutableMap<String, String> = HashMap()
                         headers.put("Content-Type", "application/json; charset=UTF-8");
                         headers.put("Authorization", "Bearer " + pref.getToken());
+                        headers.put("Accept", "application/vnd.api+json");
                         return headers
                     }
                 }
@@ -651,13 +652,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         return true
     }
 
-    override fun openSomeActivityForResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
 
-    }
 
 
 
