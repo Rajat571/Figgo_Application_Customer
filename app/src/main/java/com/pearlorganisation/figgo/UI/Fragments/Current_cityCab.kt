@@ -325,7 +325,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         json.put("from_location_name", liveLoc?.text.toString())
         json.put("type","current_booking")
         Log.d("SendData", "json===" + json)
-        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object : Response.Listener<JSONObject?>               {
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
+                        Response.Listener<JSONObject?>               {
                     override fun onResponse(response: JSONObject?) {
                         Log.d("SendData", "response===" + response)
                         if (response != null) {
@@ -354,6 +355,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                                 ll_choose_vehicle?.isVisible  =true
                             }
                         }
+
                     }
                 }, object : Response.ErrorListener {
                     override fun onErrorResponse(error: VolleyError?) {
@@ -366,31 +368,90 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                         val headers: MutableMap<String, String> = HashMap()
                         headers.put("Content-Type", "application/json; charset=UTF-8")
                         headers.put("Authorization", "Bearer " + pref.getToken())
-                        headers.put("Accept", "application/vnd.api+json")
                         return headers
                     }
                 }
-        jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
+       /* jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))*/
         queue.add(jsonOblect)
 
     }
     @SuppressLint("MissingPermission")
     private fun getLocation() {
+
         if (isLocationPermissionGranted()){
-            if (hasGps) { locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F, gpsLocationListener) }
-
+            if (hasGps) { locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F,
+                    gpsLocationListener
+                )
+            }
+//------------------------------------------------------//
             if (hasNetwork) {
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0F, networkLocationListener)
+                locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    5000,
+                    0F,
+                    networkLocationListener
+                )
             }
 
 
-            val lastKnownLocationByGps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            lastKnownLocationByGps?.let { locationByGps = lastKnownLocationByGps
+            val lastKnownLocationByGps =
+                locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+            // locationByGps = getLastKnownLocation()
+            lastKnownLocationByGps?.let {
+                locationByGps = lastKnownLocationByGps
             }
+            //------------------------------------------------------//
+
 
             val lastKnownLocationByNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-            lastKnownLocationByNetwork?.let { locationByNetwork = lastKnownLocationByNetwork }
+            lastKnownLocationByNetwork?.let {
+                locationByNetwork = lastKnownLocationByNetwork
+            }
+//------------------------------------------------------//
+            //  if (locationByGps != null || locationByNetwork != null) {
+            /*  if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
+                  if (selects.equals("start")) {
 
+                      to_lat = locationByGps?.latitude.toString()
+                      to_lng = locationByGps?.longitude.toString()
+
+                      val geocoder: Geocoder
+                      val addresses: List<Address>
+                      geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+                      addresses = locationByGps?.let {
+                          geocoder.getFromLocation(
+                              it.latitude,
+                              it.longitude,1
+                          )
+                      }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+                      val address = addresses[0].getAddressLine(0)
+                      liveLoc?.setText(address)
+                  }else{
+
+                      from_lat = locationByGps?.latitude.toString()
+                      from_lng = locationByGps?.longitude.toString()
+
+                      val geocoder: Geocoder
+                      val addresses: List<Address>
+                      geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+                      addresses = locationByGps?.let {
+                          geocoder.getFromLocation(
+                              it.latitude,
+                              it.longitude,1
+                          )
+                      }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+                      val address = addresses[0].getAddressLine(0)
+                      manualLoc?.setText(address)
+                  }
+                  // use latitude and longitude as per your need
+              } else {*/
             if (locationByNetwork == null){
                 Toast.makeText(requireActivity(), "No Network", Toast.LENGTH_LONG).show()
 
@@ -404,8 +465,13 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     val addresses: List<Address>
                     geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-                    addresses = locationByNetwork?.let { geocoder.getFromLocation(it.latitude, it.longitude, 1)
-                    }!!
+                    addresses = locationByNetwork?.let {
+                        geocoder.getFromLocation(
+                            it.latitude,
+                            it.longitude, 1
+                        )
+                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
 
                     val address = addresses[0].getAddressLine(0)
                     liveLoc?.setText(address)
@@ -419,20 +485,79 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
                     addresses = locationByNetwork?.let {
-                        geocoder.getFromLocation(it.latitude, it.longitude, 1)
-                    }!!
+                        geocoder.getFromLocation(
+                            it.latitude,
+                            it.longitude, 1
+                        )
+                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
 
                     val address = addresses[0].getAddressLine(0)
                     manualLoc?.setText(address)
                 }
             }
-
+            // use latitude and longitude as per your need
+            // }
+            // }
         }else{
             requestPermissions()
         }
 
+
+        /* if (ActivityCompat.checkSelfPermission(
+                 requireActivity(),
+                 Manifest.permission.ACCESS_FINE_LOCATION
+             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                 requireActivity(),
+                 Manifest.permission.ACCESS_COARSE_LOCATION
+             ) != PackageManager.PERMISSION_GRANTED
+         ) {
+             // TODO: Consider calling
+             //    ActivityCompat#requestPermissions
+             // here to request the missing permissions, and then overriding
+             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+             //                                          int[] grantResults)
+             // to handle the case where the user grants the permission. See the documentation
+             // for ActivityCompat#requestPermissions for more details.
+             return
+         }else {
+             requestPermissions()
+         }checkLocationService
+         mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                     val location: Location? = task.result
+
+                     if (location != null) {
+                         val geocoder = Geocoder(requireActivity(), Locale.getDefault())
+                         val list: List<Address> =
+                             geocoder.getFromLocation(location.latitude, location.longitude, 1) as List<Address>
+                         mainBinding.apply {
+                             if (selects.equals("start")) {
+                                 //   tvLatitude.text = "Latitude\n${list[0].latitude}"
+                                  to_lat = "${list[0].latitude}"
+                                 to_lng = "${list[0].longitude}"
+                                 // tvCountryName.text = "Country Name\n${list[0].countryName}"
+                                 var location: String? = "${list[0].getAddressLine(0)}"
+                                 liveLoc!!.text = location?.replace("133", "")?.replace(",","")
+                                 //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
+                             }else{
+                                     from_lat  = "${list[0].latitude}"
+                                  from_lng = "${list[0].longitude}"
+
+
+                                 var location: String? = "${list[0].getAddressLine(0)}"
+                                 manualLoc!!.text = location?.replace("133", "")?.replace(",","")
+                                 //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
+                             }
+                         }
+                     }else{
+                         getLocation()
+                     }
+                 }*/
     }
+
+
+
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
