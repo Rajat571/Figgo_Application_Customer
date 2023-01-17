@@ -11,10 +11,7 @@ import com.pearlorganisation.figgo.R
 
 class LiveSharecab_Fragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_live_sharecab_, container, false)
     }
@@ -27,19 +24,7 @@ class LiveSharecab_Fragment : Fragment() {
 
         var shareimg=view.findViewById<ImageView>(R.id.shareimg)
 
-       /* whatsappicon.setOnClickListener {
-            val url = "https://api.whatsapp.com/send?phone=7505145405"
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(url)
-            startActivity(i)
-        }
-        callicon.setOnClickListener {
-            // val callIntent = Intent(Intent.ACTION_CALL)
-            val callIntent = Intent(Intent.ACTION_DIAL)
-            callIntent.data = Uri.parse("tel:+123")
-            callIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(callIntent)
-        }*/
+
 
         shareimg.setOnClickListener {
             var intent= Intent()

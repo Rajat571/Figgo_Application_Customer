@@ -17,10 +17,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.GoogleApiClient
@@ -45,7 +43,6 @@ import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
-import com.pearlorganisation.figgo.UI.Fragments.OutStation.RoundAndTourFragment
 import com.pearlorganisation.figgo.UI.Fragments.RidesBottom
 import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
@@ -64,13 +61,13 @@ class DashBoard : BaseClass() {
     var figgo_add_list=ArrayList<FiggoAdd>()
     var doubleBackToExitPressedOnce = false
     var count = 0
-    private lateinit var locationRequest: LocationRequest;
-    private val REQUEST_CHECK_SETTINGS: Int=101;
+    private lateinit var locationRequest: LocationRequest
+    private val REQUEST_CHECK_SETTINGS: Int=101
     var transaction_id :String ?= ""
     var backPressedTime: Long = 0
     private val permissionId = 2
     private val requestcodes = 2
-    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
+    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101
     var homeFrag = HomeDashboard()
     lateinit var locationManager: LocationManager
     private var mMap: GoogleMap? = null
@@ -107,7 +104,7 @@ class DashBoard : BaseClass() {
       setContentView(R.layout.a_dashboard)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         prefManager = PrefManager(this)
-        prefManager.setToken("949|vBiS1sR6b5AICFuOTyP7zrkHoNhqzEsz7wu4AsKA")
+
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
@@ -217,6 +214,7 @@ class DashBoard : BaseClass() {
                     Toast.makeText(this@DashBoard, "change_mpin Clicked", Toast.LENGTH_SHORT).show()
                 }
                 R.id.rides -> {
+
                     Toast.makeText(this@DashBoard, "rides Clicked", Toast.LENGTH_SHORT).show()
                 }
                 R.id.Logout -> {
@@ -315,8 +313,7 @@ class DashBoard : BaseClass() {
             if (isLocationEnabled()) {
                 setfragment(homeFrag)
             } else {
-                Toast.makeText(this@DashBoard, "Please turn on location", Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(this@DashBoard, "Please turn on location", Toast.LENGTH_LONG).show()
                 val intent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
             }
@@ -344,10 +341,6 @@ class DashBoard : BaseClass() {
                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {}
            }
        }
-
-
-
-
    }*/
 
 
@@ -361,8 +354,7 @@ class DashBoard : BaseClass() {
         return if (ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this@DashBoard, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION),
-                requestcodes
-            )
+                requestcodes)
             false
         } else {
             true
@@ -375,19 +367,10 @@ class DashBoard : BaseClass() {
 
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(
-                        this@DashBoard,
-                        android.Manifest.permission.ACCESS_FINE_LOCATION
-                    )
-                    == PackageManager.PERMISSION_GRANTED
-                ) {
+                if (ContextCompat.checkSelfPermission(this@DashBoard, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     checkLocationService()
                 } else {
-                    ActivityCompat.requestPermissions(
-                        this@DashBoard,
-                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
-                    );
+                    ActivityCompat.requestPermissions(this@DashBoard, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
                 }
             } else {
                 checkLocationService()
@@ -398,33 +381,27 @@ class DashBoard : BaseClass() {
         }
     }
     fun checkLocationService() {
+        locationRequest = LocationRequest.create()
+        locationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY)
+        locationRequest.setInterval(10 * 1000)
+        locationRequest.setFastestInterval(2 * 1000)
 
-        locationRequest = LocationRequest.create();
-        locationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(10 * 1000);
-        locationRequest.setFastestInterval(2 * 1000);
 
-
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
-        // builder.setAlwaysShow(true);
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         val client = LocationServices.getSettingsClient(this@DashBoard)
         val task = client.checkLocationSettings(builder.build())
         task.addOnSuccessListener(this@DashBoard){it->
-            it.locationSettingsStates;
+            it.locationSettingsStates
            setfragment(homeFrag)
         }
 
         task.addOnFailureListener(this@DashBoard) { e ->
             if (e is ResolvableApiException) {
-                // Location settings are not satisfied, but this can be fixed
-                // by showing the user a dialog.
                 try {
-                    // Show the dialog by calling startResolutionForResult(),
-                    // and check the result in onActivityResult().
                     e.startResolutionForResult (this@DashBoard, REQUEST_CHECK_SETTINGS)
 
                 } catch (sendEx: IntentSender.SendIntentException) {
-                    // Ignore the error.
+
                 }
 
             }

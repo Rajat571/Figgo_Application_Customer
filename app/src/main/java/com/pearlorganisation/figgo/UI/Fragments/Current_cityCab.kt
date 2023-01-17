@@ -20,7 +20,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -37,10 +36,8 @@ import com.android.volley.toolbox.Volley
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -53,18 +50,14 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
-import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
 import com.pearlorganisation.figgo.Adapter.CurrentVehicleAdapter
-import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.CurrentModel
 import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
 import org.json.JSONObject
-import java.net.URI.create
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -75,12 +68,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     GoogleMap.OnCameraMoveListener,
     GoogleMap.OnCameraMoveCanceledListener,GoogleMap.OnCameraIdleListener  {
 
-    private val REQUEST_CHECK_SETTINGS: Int=101;
+    private val REQUEST_CHECK_SETTINGS: Int=101
     private lateinit var mMap: GoogleMap
-    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
-    private lateinit var fusedLocationClient: FusedLocationProviderClient;
-    private lateinit var lastLocation: Location;
-    private lateinit var locationRequest: LocationRequest;
+    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var lastLocation: Location
+    private lateinit var locationRequest: LocationRequest
 
     lateinit var binding: FragmentCurrentCityCabBinding
     lateinit var currentVehicleAdapter: CurrentVehicleAdapter
@@ -101,10 +94,10 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     var from_location_name:String? = null
     var linear_des:String ? = " "
     var live_loc:String ? = " "
-    var selects : String ?= "";
+    var selects : String ?= ""
     lateinit var ll_location : LinearLayout
     lateinit var ll_choose_vehicle : LinearLayout
-    var press : String ?= "";
+    var press : String ?= ""
     var datetext: TextView? = null
     var timetext: TextView? = null
     var progress: ProgressBar? = null
@@ -185,8 +178,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = context?.let { it1 ->
-                DatePickerDialog(
-                        it1,
+                DatePickerDialog(it1,
                         { view, year, monthOfYear, dayOfMonth ->
                             val dat : String
                             if (monthOfYear < 9){
@@ -220,7 +212,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }
 
         manualLoc?.setOnClickListener {
-            press = "manual";
+            press = "manual"
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field).build(requireActivity())
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
@@ -228,7 +220,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
         liveLoc?.setOnClickListener {
 
-            press = "live";
+            press = "live"
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
                     .build(requireActivity())
@@ -333,8 +325,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         json.put("from_location_name", liveLoc?.text.toString())
         json.put("type","current_booking")
         Log.d("SendData", "json===" + json)
-        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
-                        Response.Listener<JSONObject?>               {
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object : Response.Listener<JSONObject?>               {
                     override fun onResponse(response: JSONObject?) {
                         Log.d("SendData", "response===" + response)
                         if (response != null) {
@@ -363,7 +354,6 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                                 ll_choose_vehicle?.isVisible  =true
                             }
                         }
-
                     }
                 }, object : Response.ErrorListener {
                     override fun onErrorResponse(error: VolleyError?) {
@@ -374,104 +364,35 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     @Throws(AuthFailureError::class)
                     override fun getHeaders(): Map<String, String> {
                         val headers: MutableMap<String, String> = HashMap()
-                        headers.put("Content-Type", "application/json; charset=UTF-8");
-                        headers.put("Authorization", "Bearer " + pref.getToken());
+                        headers.put("Content-Type", "application/json; charset=UTF-8")
+                        headers.put("Authorization", "Bearer " + pref.getToken())
                         return headers
                     }
                 }
         jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
-
         queue.add(jsonOblect)
 
     }
-
-
-
-
-
-
-
     @SuppressLint("MissingPermission")
     private fun getLocation() {
-
         if (isLocationPermissionGranted()){
-            if (hasGps) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    5000,
-                    0F,
-                    gpsLocationListener
-                )
+            if (hasGps) { locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F, gpsLocationListener)
             }
-//------------------------------------------------------//
+
             if (hasNetwork) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
-                    5000,
-                    0F,
-                    networkLocationListener
-                )
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0F, networkLocationListener)
             }
 
 
             val lastKnownLocationByGps =
                 locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-
-            // locationByGps = getLastKnownLocation()
             lastKnownLocationByGps?.let {
                 locationByGps = lastKnownLocationByGps
             }
-            //------------------------------------------------------//
-
 
             val lastKnownLocationByNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-            lastKnownLocationByNetwork?.let {
-                locationByNetwork = lastKnownLocationByNetwork
-            }
-//------------------------------------------------------//
-            //  if (locationByGps != null || locationByNetwork != null) {
-            /*  if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
-                  if (selects.equals("start")) {
+            lastKnownLocationByNetwork?.let { locationByNetwork = lastKnownLocationByNetwork }
 
-                      to_lat = locationByGps?.latitude.toString()
-                      to_lng = locationByGps?.longitude.toString()
-
-                      val geocoder: Geocoder
-                      val addresses: List<Address>
-                      geocoder = Geocoder(requireActivity(), Locale.getDefault())
-
-                      addresses = locationByGps?.let {
-                          geocoder.getFromLocation(
-                              it.latitude,
-                              it.longitude,1
-                          )
-                      }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-                      val address = addresses[0].getAddressLine(0)
-                      liveLoc?.setText(address)
-                  }else{
-
-                      from_lat = locationByGps?.latitude.toString()
-                      from_lng = locationByGps?.longitude.toString()
-
-                      val geocoder: Geocoder
-                      val addresses: List<Address>
-                      geocoder = Geocoder(requireActivity(), Locale.getDefault())
-
-                      addresses = locationByGps?.let {
-                          geocoder.getFromLocation(
-                              it.latitude,
-                              it.longitude,1
-                          )
-                      }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-                      val address = addresses[0].getAddressLine(0)
-                      manualLoc?.setText(address)
-                  }
-                  // use latitude and longitude as per your need
-              } else {*/
             if (locationByNetwork == null){
                 Toast.makeText(requireActivity(), "No Network", Toast.LENGTH_LONG).show()
 
@@ -485,13 +406,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     val addresses: List<Address>
                     geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-                    addresses = locationByNetwork?.let {
-                        geocoder.getFromLocation(
-                            it.latitude,
-                            it.longitude, 1
-                        )
-                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
+                    addresses = locationByNetwork?.let { geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                    }!!
 
                     val address = addresses[0].getAddressLine(0)
                     liveLoc?.setText(address)
@@ -505,79 +421,20 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
                     addresses = locationByNetwork?.let {
-                        geocoder.getFromLocation(
-                            it.latitude,
-                            it.longitude, 1
-                        )
-                    }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                        geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                    }!!
 
 
                     val address = addresses[0].getAddressLine(0)
                     manualLoc?.setText(address)
                 }
             }
-            // use latitude and longitude as per your need
-            // }
-            // }
+
         }else{
             requestPermissions()
         }
 
-
-        /* if (ActivityCompat.checkSelfPermission(
-                 requireActivity(),
-                 Manifest.permission.ACCESS_FINE_LOCATION
-             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                 requireActivity(),
-                 Manifest.permission.ACCESS_COARSE_LOCATION
-             ) != PackageManager.PERMISSION_GRANTED
-         ) {
-             // TODO: Consider calling
-             //    ActivityCompat#requestPermissions
-             // here to request the missing permissions, and then overriding
-             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-             //                                          int[] grantResults)
-             // to handle the case where the user grants the permission. See the documentation
-             // for ActivityCompat#requestPermissions for more details.
-             return
-         }else {
-             requestPermissions()
-         }checkLocationService
-         mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
-                     val location: Location? = task.result
-
-                     if (location != null) {
-                         val geocoder = Geocoder(requireActivity(), Locale.getDefault())
-                         val list: List<Address> =
-                             geocoder.getFromLocation(location.latitude, location.longitude, 1) as List<Address>
-                         mainBinding.apply {
-                             if (selects.equals("start")) {
-                                 //   tvLatitude.text = "Latitude\n${list[0].latitude}"
-                                  to_lat = "${list[0].latitude}"
-                                 to_lng = "${list[0].longitude}"
-                                 // tvCountryName.text = "Country Name\n${list[0].countryName}"
-                                 var location: String? = "${list[0].getAddressLine(0)}"
-                                 liveLoc!!.text = location?.replace("133", "")?.replace(",","")
-                                 //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
-                             }else{
-                                     from_lat  = "${list[0].latitude}"
-                                  from_lng = "${list[0].longitude}"
-
-
-                                 var location: String? = "${list[0].getAddressLine(0)}"
-                                 manualLoc!!.text = location?.replace("133", "")?.replace(",","")
-                                 //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
-                             }
-                         }
-                     }else{
-                         getLocation()
-                     }
-                 }*/
     }
-
-
-
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -727,10 +584,10 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
 
-            mMap.isMyLocationEnabled = true;
-            mMap.uiSettings.isMapToolbarEnabled = true;
-            mMap.uiSettings.isMyLocationButtonEnabled = true;
-            checkLocationService();
+            mMap.isMyLocationEnabled = true
+            mMap.uiSettings.isMapToolbarEnabled = true
+            mMap.uiSettings.isMyLocationButtonEnabled = true
+            checkLocationService()
         }
 
         mMap.setOnCameraMoveStartedListener (this)
@@ -743,10 +600,10 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         if (ContextCompat.checkSelfPermission(requireActivity(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-            mMap.isMyLocationEnabled=true;
-            mMap.uiSettings.isMapToolbarEnabled=true;
-            mMap.uiSettings.isMyLocationButtonEnabled=true;
-            checkLocationService();
+            mMap.isMyLocationEnabled=true
+            mMap.uiSettings.isMapToolbarEnabled=true
+            mMap.uiSettings.isMyLocationButtonEnabled=true
+            checkLocationService()
         }
     }
 
@@ -806,19 +663,19 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
     fun checkLocationService() {
 
-        locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(10 * 1000);
-        locationRequest.setFastestInterval(2 * 1000);
+        locationRequest = LocationRequest.create()
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+        locationRequest.setInterval(10 * 1000)
+        locationRequest.setFastestInterval(2 * 1000)
 
 
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         // builder.setAlwaysShow(true);
         val client = LocationServices.getSettingsClient(requireActivity())
         val task = client.checkLocationSettings(builder.build())
         task.addOnSuccessListener(requireActivity()) {it->
-            it.locationSettingsStates;
-            fetchCurrentLocation();
+            it.locationSettingsStates
+            fetchCurrentLocation()
         }
 
         task.addOnFailureListener(requireActivity()) { e ->
@@ -836,21 +693,21 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
 
     override fun onCameraMoveStarted(p0: Int) {
-        Log.v("Onmove start","Onmove "+p0);
+        Log.v("Onmove start","Onmove "+p0)
         mMap.clear()
     }
 
     override fun onCameraMove() {
 
-        Log.v("Onmove ","Onmove ");
+        Log.v("Onmove ","Onmove ")
     }
 
     override fun onCameraMoveCanceled() {
-        Log.v("Onmove cancel","Onmove ");
+        Log.v("Onmove cancel","Onmove ")
     }
 
     override fun onCameraIdle() {
-        Log.v("Onmove Idle","Onmove ");
+        Log.v("Onmove Idle","Onmove ")
         val markerOptions = MarkerOptions().position(mMap.cameraPosition.target)
 
         mMap.addMarker(markerOptions)
