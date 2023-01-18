@@ -5,10 +5,13 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.android.volley.AuthFailureError
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
@@ -41,6 +44,8 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
     var mobilenumber:TextView? = null
     var activaimg:ImageView? = null
     var  driverimg:ImageView? = null
+   lateinit var ll_main1:LinearLayout
+    lateinit var  ll_waiting:LinearLayout
     var  driver_id:String? = null
     var  ride_id:String? = null
     var ride_service_rating:RatingBar? = null
@@ -86,6 +91,8 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         activaimg = findViewById<ImageView>(R.id.activaimg)
         activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
         drivername = findViewById<TextView>(R.id.drivername)
+        ll_main1 = findViewById(R.id.ll_main1)
+        ll_waiting = findViewById(R.id.ll_waiting)
 
         ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
         dl_number = findViewById<TextView>(R.id.dl_number)
@@ -95,26 +102,42 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         getmaps()
 
         accept.setOnClickListener {
-            val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
-            // Log.d("SendData", "URL===" + URL)
-            val queue = Volley.newRequestQueue(this)
-            val json = JSONObject()
-            json.put("ride_id",pref.getRideId())
-            json.put("driver_id",driver_id)
-            json.put("price",pref.getprice())
-            Log.d("SendData", "pref.getToken()===" + pref.getToken())
-            Log.d("SendData", "json===" + json)
-            val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
-                Response.Listener<JSONObject?>               {
-                override fun onResponse(response: JSONObject?) {
-                    Log.d("SendData", "response===" + response)
-                    if (response != null) {
-                        val status = response.getString("status")
-                        if(status.equals("false")){
-                            Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                        }else{
-                            Toast.makeText(applicationContext, "Searching...", Toast.LENGTH_LONG).show()
-                           /* val bundle = Bundle()
+            if (ll_main1.isVisible) {
+                ll_main1.visibility = View.GONE
+                ll_waiting.visibility = View.VISIBLE
+
+
+                val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
+                // Log.d("SendData", "URL===" + URL)
+                val queue = Volley.newRequestQueue(this)
+                val json = JSONObject()
+                json.put("ride_id", pref.getRideId())
+                json.put("driver_id", driver_id)
+                json.put("price", pref.getprice())
+                Log.d("SendData", "pref.getToken()===" + pref.getToken())
+                Log.d("SendData", "json===" + json)
+                val jsonOblect: JsonObjectRequest =
+                    object : JsonObjectRequest(Method.POST, URL, json, object :
+                        Response.Listener<JSONObject?> {
+                        override fun onResponse(response: JSONObject?) {
+                            Log.d("SendData", "response===" + response)
+                            if (response != null) {
+                                val status = response.getString("status")
+                                if (status.equals("false")) {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "Something Went Wrong!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } else {
+//                            ll_waiting.visibility= View.VISIBLE
+//                            ll_main1.visibility = View.GONE
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "Searching...",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    /* val bundle = Bundle()
                             bundle.putString("drivername", "test driver")
                             bundle.putString("activavehiclenumber", "test vehicle number")
                             bundle.putString("dl_number", "test dlnumber")
@@ -122,32 +145,41 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                             intent.putExtras(bundle)
                             startActivity(intent)*/
 
+                                }
+                            }
+
+                        }
+                    }, object : Response.ErrorListener {
+                        override fun onErrorResponse(error: VolleyError?) {
+                            Log.d("SendData", "error===" + error)
+                            Toast.makeText(
+                                applicationContext,
+                                "Something Went Wrong!",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }) {
+                        @Throws(AuthFailureError::class)
+                        override fun getHeaders(): Map<String, String> {
+                            val headers: MutableMap<String, String> = java.util.HashMap()
+                            headers.put("Content-Type", "application/json; charset=UTF-8")
+                            headers.put("Authorization", "Bearer " + pref.getToken())
+                            headers.put("Accept", "application/vnd.api+json");
+                            return headers
                         }
                     }
+                jsonOblect.setRetryPolicy(
+                    DefaultRetryPolicy(
+                        10000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                    )
+                )
 
-                }
-            }, object : Response.ErrorListener {
-                override fun onErrorResponse(error: VolleyError?) {
-                    Log.d("SendData", "error===" + error)
-                    Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                }
-            }) {
-                @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers: MutableMap<String, String> = java.util.HashMap()
-                    headers.put("Content-Type", "application/json; charset=UTF-8")
-                    headers.put("Authorization", "Bearer " + pref.getToken())
-                    headers.put("Accept", "application/vnd.api+json");
-                    return headers
-                }
-            }
-            jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
-
-            queue.add(jsonOblect)
+                queue.add(jsonOblect)
 
 
-
-            /*val bundle = Bundle()
+                /*val bundle = Bundle()
             bundle.putString("drivername", drivername?.text.toString())
             bundle.putString("activavehiclenumber", activavehiclenumber?.text.toString())
             bundle.putString("dl_number", dl_number?.text.toString())
@@ -156,16 +188,16 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             startActivity(intent)*/
 
 
-            /*// Obtain the SupportMapFragment and get notified when the map is ready to be used.
+                /*// Obtain the SupportMapFragment and get notified when the map is ready to be used.
             val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
             mapFragment.getMapAsync(this)*/
-        }
+            }
 
-        reject_btn.setOnClickListener {
-            Toast.makeText(applicationContext, "Searching...", Toast.LENGTH_LONG).show()
+            reject_btn.setOnClickListener {
+                Toast.makeText(applicationContext, "Searching...", Toast.LENGTH_LONG).show()
+            }
         }
-
     }
 
 
