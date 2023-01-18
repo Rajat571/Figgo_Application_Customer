@@ -222,5 +222,47 @@ import android.content.SharedPreferences
      fun getType():String{
          return pref?.getString("type","null").toString()
      }
+     fun setTypeC(type:String){
+         editor?.putString("typeC",type)
+         editor?.commit()
+     }
 
-}
+     fun getTypeC():String{
+         return pref?.getString("typeC","null").toString()
+     }
+
+     fun setToLatLC(lat:String){
+         editor?.putString("lat_to_lc",lat)
+         editor?.commit()
+     }
+
+     fun getToLatLC():String{
+         return pref?.getString("lat_to_lc","null").toString()
+     }
+     fun setToLngLC(lat:String){
+         editor?.putString("lng_to_lc",lat)
+         editor?.commit()
+     }
+
+     fun getToLngLC():String{
+         return pref?.getString("lng_to_lc","null").toString()
+     }
+     fun setToLngMC(lat:String){
+         editor?.putString("lng_to_mc",lat)
+         editor?.commit()
+     }
+
+     fun getToLngMC():String{
+         return pref?.getString("lng_to_mc","null").toString()
+     }
+     fun setToLatMC(lat:String){
+         editor?.putString("lat_to_mc",lat)
+         editor?.commit()
+     }
+
+     fun getToLatMC():String{
+         return pref?.getString("lat_to_mc","null").toString()
+     }
+
+
+ }
