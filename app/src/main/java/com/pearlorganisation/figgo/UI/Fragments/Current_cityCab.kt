@@ -149,11 +149,11 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         var submit = view?.findViewById<Button>(R.id.submit)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         var advance_li = view?.findViewById<LinearLayout>(R.id.adLinear)
-        var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
+      //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
         var set = view?.findViewById<TextView>(R.id.img_marker)
         ll_choose_vehicle?.isVisible = false
 
-        map_li?.isVisible = false
+      //  map_li?.isVisible = false
         ll_choose_vehicle?.isVisible = false
         pref.setBookingNo("")
         pref.setOtp("")
@@ -165,7 +165,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }
         set?.setOnClickListener {
             advance_li?.isVisible = true
-            map_li?.isVisible = false
+          //  map_li?.isVisible = false
         }
         locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
