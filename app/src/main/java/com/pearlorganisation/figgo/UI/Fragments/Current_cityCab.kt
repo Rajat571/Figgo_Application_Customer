@@ -3,6 +3,7 @@ package com.pearlorganisation.figgo.UI.Fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
@@ -138,10 +139,10 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         var watchimg = view?.findViewById<LinearLayout>(R.id.watchimg)
         timetext = view?.findViewById<TextView>(R.id.timetext)
         ll_location = view?.findViewById<LinearLayout>(R.id.ll_location)!!
-       ll_choose_vehicle = view?.findViewById<LinearLayout>(R.id.ll_choose_vehicle)!!
+        ll_choose_vehicle = view?.findViewById<LinearLayout>(R.id.ll_choose_vehicle)!!
         manualLoc = view?.findViewById<TextView>(R.id.loc_manual)
         liveLoc = view?.findViewById<TextView>(R.id.live_loc)
-       /* nxtbtn = view.findViewById(R.id.nxtbtn)*/
+        /* nxtbtn = view.findViewById(R.id.nxtbtn)*/
         progress = view.findViewById<ProgressBar>(R.id.progress)
         val onewayvehiclelist = view.findViewById<RecyclerView>(R.id.onewayvehiclelist)
         var locLinear = view?.findViewById<LinearLayout>(R.id.linear_loc)
@@ -156,7 +157,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         ll_choose_vehicle?.isVisible = false
         pref.setBookingNo("")
         pref.setOtp("")
-        pref.setride_id("")
+        pref.setRideId("")
         pref.setVehicleId("")
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
@@ -211,19 +212,19 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             val day = c.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = context?.let { it1 ->
                 DatePickerDialog(
-                        it1,
-                        { view, year, monthOfYear, dayOfMonth ->
-                            val dat : String
-                            if (monthOfYear < 9){
-                                dat = (year.toString() + "-0" + (monthOfYear + 1) + "-" + dayOfMonth.toString())
-                            }else {
-                                dat = (year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString())
-                            }
-                            datetext?.setText(dat)
-                        },
-                        year,
-                        month,
-                        day
+                    it1,
+                    { view, year, monthOfYear, dayOfMonth ->
+                        val dat : String
+                        if (monthOfYear < 9){
+                            dat = (year.toString() + "-0" + (monthOfYear + 1) + "-" + dayOfMonth.toString())
+                        }else {
+                            dat = (year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString())
+                        }
+                        datetext?.setText(dat)
+                    },
+                    year,
+                    month,
+                    day
                 )
             }
 
@@ -256,7 +257,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             press = "live";
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
-                    .build(requireActivity())
+                .build(requireActivity())
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
         }
 
@@ -264,7 +265,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
         submit?.setOnClickListener {
             if (to_lat == ""){
-              //  startActivity(Intent(requireActivity(), OneWay_Km_CountActivity::class.java))
+                //  startActivity(Intent(requireActivity(), OneWay_Km_CountActivity::class.java))
                 Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
             }else if (from_lat == ""){
                 Toast.makeText(requireActivity(), "Please select Destination Address", Toast.LENGTH_LONG).show()
@@ -273,9 +274,9 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                 submitform()
             }
 
-           /* nxtbtn?.setOnClickListener {
-                startActivity(Intent(requireActivity(), MapsActivity1::class.java))
-                    *//*vehicle_type_id.setvehicle_type_id("vehicle_type_id")
+            /* nxtbtn?.setOnClickListener {
+                 startActivity(Intent(requireActivity(), MapsActivity1::class.java))
+                     *//*vehicle_type_id.setvehicle_type_id("vehicle_type_id")
                     ride_id.setride_id("ride_id")*//*
 
             }*/
@@ -347,12 +348,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }
 
 
-       /* cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
-        cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))*/
-     //   advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)
-     //   binding.currentCabList.adapter=advanceCityAdapter
+        /* cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
+         cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
+         cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
+         cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))*/
+        //   advanceCityAdapter=AdvanceCityAdapter(requireActivity(),cablist)
+        //   binding.currentCabList.adapter=advanceCityAdapter
 
     }
 
@@ -360,6 +361,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         progress?.isVisible = true
         ll_location?.isVisible = false
         ll_choose_vehicle?.isVisible  =false
+        val progressDialog = ProgressDialog(requireActivity())
+        progressDialog.show()
         val URL = "https://test.pearl-developer.com/figo/api/ride/create-city-ride"
         Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(requireContext())
@@ -375,52 +378,52 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         json.put("type","current_booking")
         Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
-                        Response.Listener<JSONObject?>               {
-                    override fun onResponse(response: JSONObject?) {
-                        Log.d("SendData", "response===" + response)
-                        if (response != null) {
-                            val status = response.getString("status")
-                            if(status.equals("false")){
-                                Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                            }else{
-                                val data = response.getJSONObject("data")
-                                val ride_id = data.getString("ride_id")
-                                pref.setride_id(ride_id)
-                                val vehicle_types = data.getJSONArray("vehicle_types")
-                                for (i in 0 until vehicle_types.length()){
-                                    val name = vehicle_types.getJSONObject(i).getString("name")
-                                    val image = vehicle_types.getJSONObject(i).getString("full_image")
-                                    val id = vehicle_types.getJSONObject(i).getString("id")
-                                    val min_price = vehicle_types.getJSONObject(i).getString("min_price")
-                                    val max_price = vehicle_types.getJSONObject(i).getString("max_price")
-                                    cablist.add(CurrentVehicleModel(name,image,ride_id,id, min_price,max_price))
-
-                                }
-                                currentVehicleAdapter= CurrentVehicleAdapter(requireActivity(),cablist)
-                               binding.recylerCabList.adapter=currentVehicleAdapter
-                               binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
-                                progress?.isVisible = false
-                                ll_location?.isVisible = false
-                                ll_choose_vehicle?.isVisible  =true
-                            }
-                        }
-
-                    }
-                }, object : Response.ErrorListener {
-                    override fun onErrorResponse(error: VolleyError?) {
-                        Log.d("SendData", "error===" + error)
+            Response.Listener<JSONObject?>               {
+            override fun onResponse(response: JSONObject?) {
+                Log.d("SendData", "response===" + response)
+                if (response != null) {
+                    val status = response.getString("status")
+                    if(status.equals("false")){
                         Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                    }
-                }) {
-                    @Throws(AuthFailureError::class)
-                    override fun getHeaders(): Map<String, String> {
-                        val headers: MutableMap<String, String> = HashMap()
-                        headers.put("Content-Type", "application/json; charset=UTF-8");
-                        headers.put("Authorization", "Bearer " + pref.getToken());
-                        headers.put("Accept", "application/vnd.api+json");
-                        return headers
+                    }else{
+                        progressDialog.hide()
+                        val data = response.getJSONObject("data")
+                        val ride_id = data.getString("ride_id")
+                        pref.setRideId(ride_id)
+                        val vehicle_types = data.getJSONArray("vehicle_types")
+                        for (i in 0 until vehicle_types.length()){
+                            val name = vehicle_types.getJSONObject(i).getString("name")
+                            val image = vehicle_types.getJSONObject(i).getString("full_image")
+                            val id = vehicle_types.getJSONObject(i).getString("id")
+                            val min_price = vehicle_types.getJSONObject(i).getString("min_price")
+                            val max_price = vehicle_types.getJSONObject(i).getString("max_price")
+                            cablist.add(CurrentVehicleModel(name,image,ride_id,id, min_price,max_price))
+
+                        }
+                        currentVehicleAdapter= CurrentVehicleAdapter(requireActivity(),cablist)
+                        binding.recylerCabList.adapter=currentVehicleAdapter
+                        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
+                        progress?.isVisible = false
+                        ll_location?.isVisible = false
+                        ll_choose_vehicle?.isVisible  =true
                     }
                 }
+
+            }
+        }, object : Response.ErrorListener {
+            override fun onErrorResponse(error: VolleyError?) {
+                Log.d("SendData", "error===" + error)
+                Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
+            }
+        }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers: MutableMap<String, String> = HashMap()
+                headers.put("Content-Type", "application/json; charset=UTF-8");
+                headers.put("Authorization", "Bearer " + pref.getToken());
+                return headers
+            }
+        }
         jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
 
         queue.add(jsonOblect)
@@ -678,7 +681,6 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
 
     override fun onBackPressed(): Boolean {
-
         ll_location?.isVisible = true
         ll_choose_vehicle?.isVisible  =false
 
@@ -686,15 +688,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
 
     override fun Any.onBackPressed(): Boolean {
-
-        ll_location?.isVisible = true
-        ll_choose_vehicle?.isVisible  =false
-
-        return true
+        TODO("Not yet implemented")
     }
-
-
-
 
 
     private fun requestPermissions() {

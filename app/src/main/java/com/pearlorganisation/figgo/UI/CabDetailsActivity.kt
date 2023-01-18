@@ -91,7 +91,7 @@ class CabDetailsActivity : BaseClass(), PaymentResultListener {
         val json = JSONObject()
         json.put("transaction_id", transaction_id.toString())
         json.put("payment_type", "card")
-        json.put("ride_id", pref.getride_id())
+        json.put("ride_id", pref.getRideId())
 
 
         Log.d("transac",transaction_id.toString())

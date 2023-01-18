@@ -56,9 +56,6 @@ class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarke
         binding = ActivityEmergencyMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var emrgencybtn = findViewById<TextView>(R.id.emrgencybtn)
-        var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var ll_back = findViewById<LinearLayout>(R.id.ll_back)
-        var crl_driverimg = findViewById<CircleImageView>(R.id.crl_driverimg)
         activanumber = findViewById<TextView>(R.id.activanumber)
         driver_name = findViewById<TextView>(R.id.driver_name)
         dlnumber = findViewById<TextView>(R.id.dlnumber)
@@ -75,9 +72,9 @@ class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarke
 
         val bundle = intent.extras
         if (bundle != null){
-            driver_name.text = "drivername  ${bundle.getString("drivername")}"
-            activanumber.text = "activa  ${bundle.getString("activavehiclenumber")}"
-            dlnumber.text = "dl_number  ${bundle.getString("dl_number")}"
+            driver_name.text = " ${bundle.getString("drivername")}"
+            activanumber.text = "${bundle.getString("activavehiclenumber")}"
+            dlnumber.text = "${bundle.getString("dl_number")}"
         }
 
 

@@ -181,6 +181,9 @@ abstract class BaseClass  : AppCompatActivity(){
 
     }
 
+
+
+
     /* protected fun showProgress(show: Boolean) {
          val ll_main: View = findViewById<View>(R.id.ll_main)
          val loader: View = findViewById<View>(R.id.loader)

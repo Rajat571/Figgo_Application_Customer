@@ -29,6 +29,8 @@
             android:name=".UI.MapsActivity"
             android:exported="false"/>
 
+        <activity android:name=".CurrentMap.EmergencyMapsActivity"
+            android:exported="false"/>
 
         <activity
             android:name=".UI.VerifyOtp"
@@ -57,6 +59,8 @@
         <activity
             android:name=".PaymentMethodActivity"
             android:exported="false" />
+        <activity android:name=".CurrentMap.MapsActivity2"
+            android:exported="false"/>
         <activity
             android:name=".PaymentPayActivity"
             android:exported="false" />
@@ -69,6 +73,8 @@
         <activity
             android:name=".DriveRatingActivity"
             android:exported="false" />
+        <activity android:name=".CurrentMap.MapsActivity1"
+            android:exported="false"/>
         <activity
             android:name=".EmergencyActivity"
             android:exported="false" />

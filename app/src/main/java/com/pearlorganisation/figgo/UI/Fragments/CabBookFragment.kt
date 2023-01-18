@@ -73,7 +73,7 @@ class CabBookFragment : Fragment() {
         to_loc = view.findViewById<TextView>(R.id.to_loc)
         from_loc = view.findViewById<TextView>(R.id.from_loc)
         fare = view.findViewById<TextView>(R.id.fare)
-      //  image = view.findViewById<ImageView>(R.id.image)
+    //    image = view.findViewById<ImageView>(R.id.image)
 
         pref = PrefManager(requireActivity())
 
@@ -86,7 +86,7 @@ class CabBookFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_payFragment)
 
 
-           // startActivity(Intent(requireActivity(), PaymentPayActivity::class.java))
+            // startActivity(Intent(requireActivity(), PaymentPayActivity::class.java))
 
 
         }
@@ -152,7 +152,7 @@ class CabBookFragment : Fragment() {
                         val from_location = response.getJSONObject("data").getJSONObject("ride").getJSONObject("from_location").getString("name")
 
 
-                      //  Picasso.get().load(full_image).into(image)
+                        //  Picasso.get().load(full_image).into(image)
                         created_at?.setText(createdAt)
                         updated_at?.setText(updatedAt)
                         dis1?.setText(distance)
@@ -180,7 +180,6 @@ class CabBookFragment : Fragment() {
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8");
                     headers.put("Authorization", "Bearer " + pref.getToken());
-                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }

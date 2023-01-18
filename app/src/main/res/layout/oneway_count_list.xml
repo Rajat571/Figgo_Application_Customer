@@ -26,22 +26,15 @@
 
                 <TextView
                     android:id="@+id/vehiclname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
                     android:text="Active-"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <TextView
-                    android:id="@+id/vehiclemodel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-black"
-                    android:text="-2012"
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
+
+
 
                 <TextView
                     android:id="@+id/vehicleprice"
@@ -92,6 +85,7 @@
                     android:layout_marginStart="@dimen/_25sdp"
                     android:backgroundTint="@color/colorcoffie"
                     android:text="Reject"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp" />
 
@@ -101,6 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_11sdp"
                     android:padding="6dp"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="@color/colorgreen"

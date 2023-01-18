@@ -47,7 +47,7 @@ class AdvanceCityDataAdapter(var context:Activity, var cablist:List<AdvanceCityC
 
         holder.itemView.setOnClickListener {
 
-           pref.setride_id(data.rideId)
+           pref.setRideId(data.rideId)
             pref.setVehicleId(data.vehicleId)
             row_index = position
             notifyDataSetChanged()

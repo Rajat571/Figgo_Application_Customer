@@ -2,13 +2,16 @@ package com.pearlorganisation.figgo.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
 import com.android.volley.DefaultRetryPolicy
@@ -41,23 +44,28 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         pref = PrefManager(context)
         val OneWayListRatingVehicle = mList[position]
 
-        holder.vehicleprice.text = mList.get(position).price
-        holder.vehiclname.text = mList.get(position).name
-        holder.vehiclemodel.text = mList.get(position).year
-        holder.rating.text = mList.get(position).rating
+        holder.vehicleprice.text = "Rs. "+mList.get(position).price
+        holder.vehiclname.text = mList.get(position).name+" "+mList.get(position).year
+        val rating = mList.get(position).rating
+        holder.rating.text = rating
+        holder.ride_service_rating.rating = rating.toFloat()
 
-        holder.itemView.setOnClickListener {
-            context.startActivity(Intent(context, MapsActivity2::class.java))
+
+
+        holder.ll_main.setOnClickListener {
+            context.startActivity(Intent(context, MapsActivity2::class.java)
+                .putExtra("ride_id",OneWayListRatingVehicle.ride_id)
+                .putExtra("driver_id",OneWayListRatingVehicle.driver_id))
         }
 
-        holder.acceptbutton.setOnClickListener {
-            Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()
+       /* holder.acceptbutton.setOnClickListener {
+           // Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()
 
             val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
            // Log.d("SendData", "URL===" + URL)
             val queue = Volley.newRequestQueue(context)
             val json = JSONObject()
-            json.put("ride_id",pref.getride_id())
+            json.put("ride_id",pref.getRideId())
             json.put("driver_id",pref.getdriver_id())
             json.put("price",pref.getprice())
             Log.d("SendData", "pref.getToken()===" + pref.getToken())
@@ -72,7 +80,13 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
                             Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()
                         }else{
 
-
+                            val bundle = Bundle()
+                            bundle.putString("drivername", "test driver")
+                            bundle.putString("activavehiclenumber", "test vehicle number")
+                            bundle.putString("dl_number", "test dlnumber")
+                            val intent = Intent(context, EmergencyMapsActivity::class.java)
+                            intent.putExtras(bundle)
+                            context.startActivity(intent)
 
                         }
                     }
@@ -105,9 +119,9 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
 
         holder.reject.setOnClickListener {
            Toast.makeText(context,"Rejected",Toast.LENGTH_SHORT).show()
-        }
+        }*/
 
-        pref.setride_id(OneWayListRatingVehicle.ride_id)
+        pref.setRideId(OneWayListRatingVehicle.ride_id)
         pref.setdriver_id(OneWayListRatingVehicle.driver_id)
         pref.setprice(OneWayListRatingVehicle.price)
 
@@ -119,9 +133,9 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView){
         var vehiclname:TextView = itemView.findViewById(R.id.vehiclname)
-        var vehiclemodel:TextView = itemView.findViewById(R.id.vehiclemodel)
         var vehicleprice:TextView = itemView.findViewById(R.id.vehicleprice)
         var acceptbutton:TextView = itemView.findViewById(R.id.acceptbutton)
+        var ride_service_rating:RatingBar = itemView.findViewById(R.id.ride_service_rating)
         var reject:TextView = itemView.findViewById(R.id.reject)
         val rating:TextView = itemView.findViewById(R.id.rating)
         val ll_main:LinearLayout = itemView.findViewById(R.id.ll_main)

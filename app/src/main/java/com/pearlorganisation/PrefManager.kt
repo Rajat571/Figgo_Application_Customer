@@ -69,7 +69,14 @@ import android.content.SharedPreferences
      fun getRideId():String{
          return pref?.getString("ride_id","null").toString()
      }
+     fun setprice(price:String){
+         editor?.putString("price",price)
+         editor?.commit()
+     }
 
+     fun getprice():String{
+         return pref?.getString("price","null").toString()
+     }
      fun setOtp(otp:String){
          editor?.putString("otp",otp)
          editor?.commit()
@@ -110,6 +117,45 @@ import android.content.SharedPreferences
      fun getVehicleId():String{
          return pref?.getString("vehicle_id","null").toString()
      }
+     fun setdriver_id(driver_id:String){
+         editor?.putString("driver_id",driver_id)
+         editor?.commit()
+     }
+
+     fun getdriver_id(): String {
+         return pref?.getString("driver_id","driver_id").toString()
+
+     }
+
+     fun setactivavehiclenumber(activavehiclenumber:String){
+         editor?.putString("activavehiclenumber",activavehiclenumber)
+         editor?.commit()
+     }
+
+     fun getactivavehiclenumber():String{
+         return pref?.getString("activavehiclenumber","null").toString()
+     }
+
+
+
+     fun setdrivername(drivername:String){
+         editor?.putString("drivername",drivername)
+         editor?.commit()
+     }
+
+     fun getdrivername():String{
+         return pref?.getString("drivername","null").toString()
+     }
+
+     fun setdl_number(dl_number:String){
+         editor?.putString("dl_number",dl_number)
+         editor?.commit()
+     }
+
+     fun getdl_number():String{
+         return pref?.getString("dl_number","null").toString()
+     }
+
 
      fun setUserId(userid:String){
          editor?.putString("userid",userid)
@@ -139,46 +185,7 @@ import android.content.SharedPreferences
          return pref?.getString("ride_id","null").toString()
      }
 
-     fun setdriver_id(driver_id:String){
-         editor?.putString("driver_id",driver_id)
-         editor?.commit()
-     }
-     fun setactivavehiclenumber(activavehiclenumber:String){
-         editor?.putString("activavehiclenumber",activavehiclenumber)
-         editor?.commit()
-     }
-     fun setdrivername(drivername:String){
-         editor?.putString("drivername",drivername)
-         editor?.commit()
-     }
 
-     fun getdrivername():String{
-         return pref?.getString("drivername","null").toString()
-     }
-
-     fun setdl_number(dl_number:String){
-         editor?.putString("dl_number",dl_number)
-         editor?.commit()
-     }
-
-     fun getdl_number():String{
-         return pref?.getString("dl_number","null").toString()
-     }
-     fun getactivavehiclenumber():String{
-         return pref?.getString("activavehiclenumber","null").toString()
-     }
-     fun getdriver_id(): String {
-         return pref?.getString("driver_id","driver_id").toString()
-
-     }
-     fun setprice(price:String){
-         editor?.putString("price",price)
-         editor?.commit()
-     }
-
-     fun getprice():String{
-         return pref?.getString("price","null").toString()
-     }
 
      fun setToLatL(lat:String){
          editor?.putString("lat_to_l",lat)

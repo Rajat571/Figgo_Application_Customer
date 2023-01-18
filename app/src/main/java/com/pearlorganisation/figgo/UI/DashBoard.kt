@@ -261,7 +261,9 @@ class DashBoard : BaseClass() {
                 R.id.About_Figgo -> {
                     startActivity(Intent(this,CurrentAboutActivity::class.java))
                 }
-
+                R.id.Logout -> {
+                    startActivity(Intent(this,CurrentAboutActivity::class.java))
+                }
             }
             true
         }
