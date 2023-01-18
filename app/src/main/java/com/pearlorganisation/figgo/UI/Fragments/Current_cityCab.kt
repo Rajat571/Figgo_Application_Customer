@@ -61,6 +61,8 @@ import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.CurrentModel
 import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UI.LocationPickerActivity
+import com.pearlorganisation.figgo.UI.LocationPickerActivityCurr
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
 import org.json.JSONObject
@@ -109,7 +111,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     var timetext: TextView? = null
     var progress: ProgressBar? = null
     var nxtbtn: Button? = null
-
+    private val ADDRESS_PICKER_REQUEST = 1
 
     private var currentLocation: Location? = null
     lateinit var locationManager: LocationManager
@@ -176,6 +178,29 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             datetext?.setText(currentDate)
             timetext?.setText(currentTime)
         } else {
+
+        }
+        if (pref.getTypeC().equals("1")){
+
+            getCurrentLoc()
+
+            if (pref.getToLatMC().equals("")){
+
+
+            }else{
+                getDestinationLoc()
+            }
+
+
+
+        }else if (pref.getTypeC().equals("2")){
+            if (pref.getToLatLC().equals("")){
+
+            }else{
+                getCurrentLoc()
+            }
+            getDestinationLoc()
+
 
         }
 
@@ -260,7 +285,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         locLinear?.setOnClickListener {
-            val internet :Boolean = isOnline(requireActivity())
+          /*  val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
                 mainBinding = ActivityMainBinding.inflate(layoutInflater)
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -280,13 +305,23 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
+            }*/
+            val internet :Boolean = isOnline(requireActivity())
+            if(internet == true) {
+                selects = "start"
+                pref.setTypeC("1")
+                val i = Intent(requireActivity(), LocationPickerActivityCurr::class.java)
+                startActivityForResult(i, ADDRESS_PICKER_REQUEST)
+            }else{
+                Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
+
             }
         }
 
         destLinear?.setOnClickListener {
             val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
-                mainBinding = ActivityMainBinding.inflate(layoutInflater)
+             /*   mainBinding = ActivityMainBinding.inflate(layoutInflater)
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
                 selects = "dest"
                 if (isLocationPermissionGranted()) {
@@ -298,11 +333,17 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
                 }else{
                     requestPermissions()
-                }
+                }*/
+                pref.setTypeC("2")
+                selects = "dest"
+                val i = Intent(requireActivity(), LocationPickerActivityCurr::class.java)
+                startActivityForResult(i, ADDRESS_PICKER_REQUEST)
             }else{
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
             }
+
+
         }
 
 
@@ -906,5 +947,66 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
         }
     }
+    private fun getCurrentLoc(){
+        to_lat = pref.getToLatLC()
+        to_lng = pref.getToLngLC()
 
+        var geocoder: Geocoder
+        val addresses: List<Address>
+        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+
+        var strAdd : String? = null
+        try {
+            val addresses = geocoder.getFromLocation(to_lat!!.toDouble(), to_lng!!.toDouble(), 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = java.lang.StringBuilder("")
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+                Log.w(" Current loction address", strReturnedAddress.toString())
+            } else {
+                Log.w(" Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.w(" Current loction address",  e.printStackTrace().toString())
+        }
+        liveLoc?.setText(strAdd)
+    }
+
+
+    private fun getDestinationLoc(){
+
+        from_lat = pref.getToLatMC()
+        from_lng = pref.getToLngMC()
+
+
+        val geocoder: Geocoder
+        val addresses: List<Address>
+        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+        var strAdd : String? = null
+        try {
+            val addresses = geocoder.getFromLocation(from_lat!!.toDouble(), from_lng!!.toDouble(), 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = java.lang.StringBuilder("")
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+                Log.w(" Current loction address", strReturnedAddress.toString())
+            } else {
+                Log.w(" Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.w(" Current loction address", "Canont get Address!")
+        }
+        manualLoc?.setText(strAdd)
+
+    }
 }

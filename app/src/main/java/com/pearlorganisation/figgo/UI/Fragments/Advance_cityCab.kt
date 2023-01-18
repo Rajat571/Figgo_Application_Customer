@@ -303,10 +303,16 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
 
         locLinear?.setOnClickListener {
+            val internet :Boolean = isOnline(requireActivity())
+            if(internet == true) {
             selects = "start"
             pref.setType("1")
             val i = Intent(requireActivity(), LocationPickerActivity::class.java)
             startActivityForResult(i, ADDRESS_PICKER_REQUEST)
+            }else{
+                Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
+
+            }
          /*   val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
           //      mainBinding = ActivityMainBinding.inflate(layoutInflater)
