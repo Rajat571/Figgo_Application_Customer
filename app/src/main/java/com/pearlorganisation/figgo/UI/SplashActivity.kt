@@ -14,6 +14,9 @@ class SplashActivity : AppCompatActivity() {
 
 
     var prefManager: PrefManager? = null
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val window=window
@@ -22,7 +25,13 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         prefManager = PrefManager(this)
         Handler().postDelayed({
-            startActivity(Intent(this, WelcomeSlider::class.java))
+
+          //  if(prefManager!!.isValid().equals("true")){
+
+             //   startActivity(Intent(this, DashBoard::class.java))
+           // }else{
+                startActivity(Intent(this, WelcomeSlider::class.java))
+        //    }
 
         },3000)
         var become_the_luxury=findViewById<TextView>(R.id.become_the_luxury)
@@ -30,5 +39,3 @@ class SplashActivity : AppCompatActivity() {
         become_the_luxury.startAnimation(slideAnimation)
     }
 }
-
-

@@ -30,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.pearlorganisation.Change_Mpin_Activity
 import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentMoreFragment
 import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentRidesFragment
 import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
@@ -104,7 +105,7 @@ class DashBoard : BaseClass() {
       setContentView(R.layout.a_dashboard)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         prefManager = PrefManager(this)
-
+       // prefManager.setToken("949|vBiS1sR6b5AICFuOTyP7zrkHoNhqzEsz7wu4AsKA")
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
@@ -144,7 +145,6 @@ class DashBoard : BaseClass() {
                     true
 
                 }
-
 
                 R.id.more_b->{
                     setfragment(more)
@@ -211,13 +211,14 @@ class DashBoard : BaseClass() {
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.change_mpin -> {
-                    Toast.makeText(this@DashBoard, "change_mpin Clicked", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this,Change_Mpin_Activity::class.java))
                 }
                 R.id.rides -> {
 
                     Toast.makeText(this@DashBoard, "rides Clicked", Toast.LENGTH_SHORT).show()
                 }
                 R.id.Logout -> {
+                    prefManager.setToken("")
                     startActivity(Intent(this,LoginActivity::class.java))
                 }
 
@@ -260,9 +261,7 @@ class DashBoard : BaseClass() {
             this.doubleBackToExitPressedOnce = true
             Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
 
-            Handler(Looper.getMainLooper()).postDelayed(Runnable {
-                doubleBackToExitPressedOnce = false
-            }, 2000)
+            Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
         } else {
             supportFragmentManager.popBackStack()
         }

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
 import com.android.volley.DefaultRetryPolicy
@@ -29,8 +30,12 @@ import org.json.JSONObject
 class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<CurrentOneWayKmCountAdapter.ViewHolder>() {
 
     lateinit var pref: PrefManager
-    
+
+
+
    /* var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null*/
+
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrentOneWayKmCountAdapter.ViewHolder {
@@ -53,10 +58,9 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         }
 
         holder.acceptbutton.setOnClickListener {
-            Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()
-
+            /*Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()*/
             val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
-           // Log.d("SendData", "URL===" + URL)
+            Log.d("SendData", "URL===" + URL)
             val queue = Volley.newRequestQueue(context)
             val json = JSONObject()
             json.put("ride_id",pref.getride_id())
@@ -65,21 +69,33 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
             Log.d("SendData", "pref.getToken()===" + pref.getToken())
             Log.d("SendData", "json===" + json)
             val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
-                Response.Listener<JSONObject?>               {
+                Response.Listener<JSONObject?> {
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
+                        /*val message = response.getString("message")*/
                         val status = response.getString("status")
+                        Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()
                         if(status.equals("false")){
-                            Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                            /*Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()*/
                         }else{
+                            val status = response.getString("status")
+                            val message = response.getString("message")
 
-
+                            context.startActivity(Intent(context,EmergencyMapsActivity::class.java)
+                                .putExtra("vehiclname",OneWayListRatingVehicle.name)
+                                .putExtra("vehicleprice",OneWayListRatingVehicle.price)
+                                .putExtra("vehiclemodel",OneWayListRatingVehicle.year))
 
                         }
                     }
 
                 }
+
+                private fun startActivity(intent: Intent) {
+
+                }
+
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
@@ -91,6 +107,7 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
                     val headers: MutableMap<String, String> = java.util.HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8")
                     headers.put("Authorization", "Bearer " + pref.getToken())
+                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }
@@ -111,6 +128,12 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         pref.setdriver_id(OneWayListRatingVehicle.driver_id)
         pref.setprice(OneWayListRatingVehicle.price)
 
+        pref.getvehiclname().toString()
+        pref.getvehiclemodel().toString()
+        pref.getvehicleprice().toString()
+
+
+
 
 
     }
@@ -118,6 +141,8 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
     override fun getItemCount(): Int {
         return mList.size
     }
+
+
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView){
         var vehiclname:TextView = itemView.findViewById(R.id.vehiclname)

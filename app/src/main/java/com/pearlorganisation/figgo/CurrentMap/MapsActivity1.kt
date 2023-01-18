@@ -149,6 +149,7 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 val headers: MutableMap<String, String> = HashMap()
                 headers.put("Content-Type", "application/json; charset=UTF-8")
                 headers.put("Authorization", "Bearer " + pref.getToken())
+                headers.put("Accept", "application/vnd.api+json");
                 return headers
             }
         }
@@ -188,8 +189,6 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
         json.put("ride_id",pref.getride_id())
-        /*json.put("ride_id","33")*/
-      //  json.put("type","current_booking")
        Log.d("SendData", "pref.getToken()===" + pref.getToken())
        Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
@@ -199,6 +198,7 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 if (response != null) {
                     val status = response.getString("status")
                     if (response != null) {
+
                         val cabs = response.getJSONObject("data").getJSONArray("cabs")
                         val ride = response.getJSONObject("data").getJSONObject("ride").getString("id")
 
@@ -235,6 +235,7 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 val headers: MutableMap<String, String> = HashMap()
                 headers.put("Content-Type", "application/json; charset=UTF-8")
                 headers.put("Authorization", "Bearer " + pref.getToken())
+                headers.put("Accept", "application/vnd.api+json");
                 return headers
             }
         }
@@ -260,10 +261,14 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             override fun onResponse(response: JSONObject?) {
                 Log.d("SendData", "response===" + response)
                 if (response != null) {
+                    *//*val message = response.getString("message")*//*
                     val status = response.getString("status")
+                    Toast.makeText(this@MapsActivity1,"Accepted Driver",Toast.LENGTH_SHORT).show()
                     if(status.equals("false")){
-                        Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                        *//*Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()*//*
                     }else{
+                        val status = response.getString("status")
+                        val message = response.getString("message")
                         getnxtpage()
 
 

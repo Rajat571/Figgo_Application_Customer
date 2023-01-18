@@ -17,56 +17,53 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Figgo"
         tools:targetApi="31">
         <activity
-            android:name=".CabBookActivity"
+            android:name=".WaitingLayout"
+            android:exported="false" />
+        <activity android:name="com.pearlorganisation.Driver_Rating_Activity1"
+            android:exported="false"/>
+        <activity
+            android:name=".WaitingScreenLayout"
             android:exported="false" />
         <activity
-            android:name=".CancellationPolicy"
+            android:name=".Waiting_Layout"
             android:exported="false" />
         <activity
-            android:name=".TermAndConditionActivity"
+            android:name=".Change_Mpin_Activity"
             android:exported="false" />
         <activity
-            android:name=".CurrentAboutActivity"
+            android:name=".Driver_Rating_Activity1"
             android:exported="false" />
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
 
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU" />
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".EmergencyMapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_emergency_maps" />
-        <activity
-            android:name=".CurrentMap.EmergencyMapsActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.pearlorganisation.DrawerItemActivity.CancellationPolicy"
-            android:exported="false" />
-        <activity
-            android:name="com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity"
+            android:name=".UI.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".CurrentMap.MapsActivity1"
             android:exported="false" />
         <activity
             android:name=".CurrentMap.MapsActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".CurrentMap.EmergencyMapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Change_Mpin_Activity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UI.VerifyOtp"
+            android:exported="false" />
+        <activity
+            android:name=".UI.LocationDisActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.LocationPickerActivity"
             android:exported="false" />
         <activity
             android:name=".StudenAddActivity"
@@ -79,6 +76,9 @@
             android:exported="false" />
         <activity
             android:name=".PaymentPayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CabBookActivity"
             android:exported="false" />
         <activity
             android:name=".OneWayBookingActivity"
@@ -99,7 +99,7 @@
             android:name=".FreedomOutstationActivity"
             android:exported="false" />
         <activity
-            android:name="com.pearlorganisation.RoundAndTourActivity"
+            android:name=".RoundAndTourActivity"
             android:exported="false" />
         <activity
             android:name=".One_Way_OutStationActivity"
@@ -211,7 +211,7 @@
 
         <activity
             android:name="com.razorpay.CheckoutActivity"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

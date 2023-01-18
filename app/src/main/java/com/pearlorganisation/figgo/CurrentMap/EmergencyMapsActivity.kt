@@ -13,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.pearlorganisation.Driver_Rating_Activity1
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.DriveRatingActivity
@@ -77,13 +78,16 @@ class EmergencyMapsActivity : BaseClass(), OnMapReadyCallback ,GoogleMap.OnMarke
         if (bundle != null){
             driver_name.text = "drivername  ${bundle.getString("drivername")}"
             activanumber.text = "activa  ${bundle.getString("activavehiclenumber")}"
-            dlnumber.text = "dl_number  ${bundle.getString("dl_number")}"
+            dlnumber.text = "dlNumber  ${bundle.getString("dlNumber")}"
         }
+        val driver_name = intent.getStringExtra("driver_name")
+        val activanumber = intent.getStringExtra("activanumber")
+        val dlnumber = intent.getStringExtra("dlnumber")
 
 
 
         emrgencybtn.setOnClickListener {
-            startActivity(Intent(this, DriveRatingActivity::class.java))
+            startActivity(Intent(this, Driver_Rating_Activity1::class.java))
         }
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment

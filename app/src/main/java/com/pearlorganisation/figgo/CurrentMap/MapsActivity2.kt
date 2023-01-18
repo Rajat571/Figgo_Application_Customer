@@ -74,9 +74,9 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         activaimg = findViewById<ImageView>(R.id.activaimg)
         activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
         drivername = findViewById<TextView>(R.id.drivername)
+        dl_number = findViewById<TextView>(R.id.dl_number)
 
         ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
-        dl_number = findViewById<TextView>(R.id.dl_number)
         driverimg = findViewById<ImageView>(R.id.driverimg)
 
 
@@ -86,13 +86,12 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             val bundle = Bundle()
             bundle.putString("drivername", drivername?.text.toString())
             bundle.putString("activavehiclenumber", activavehiclenumber?.text.toString())
-            bundle.putString("dl_number", dl_number?.text.toString())
+            bundle.putString("dlNumber", dl_number?.text.toString())
             val intent = Intent(this, EmergencyMapsActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
 
 
-            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
             val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
             mapFragment.getMapAsync(this)
@@ -119,6 +118,7 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
         json.put("driver_id", pref.getdriver_id())
+        json.put("ride_id",pref.getride_id())
         Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object : Response.Listener<JSONObject?>{
                 @SuppressLint("SuspiciousIndentation")
@@ -126,6 +126,7 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                     Log.d("SendData", "response===" + response)
 
                     if (response != null) {
+
                         progressDialog.hide()
                         val dataobject = response.getJSONObject("data")
                         val driverObject = dataobject.getJSONObject("driver")
@@ -165,6 +166,7 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8")
                     headers.put("Authorization", "Bearer " + pref.getToken())
+                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }

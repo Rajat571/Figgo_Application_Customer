@@ -7,5 +7,7 @@ interface IOnBackPressed {
         permissions: Array<String?>,
         grantResults: IntArray
     )
+
+    fun Any.onBackPressed(): Boolean
 }
 

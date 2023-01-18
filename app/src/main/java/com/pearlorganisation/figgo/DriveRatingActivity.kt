@@ -36,8 +36,9 @@ class DriveRatingActivity : BaseClass() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        shareimg()
-        onBackPress()
+        /*shareimg()
+        onBackPress()*/
+        setContentView(R.layout.activity_drive_rating)
         var submitrating = findViewById<TextView>(R.id.submitraing)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var ll_back = findViewById<LinearLayout>(R.id.ll_back)

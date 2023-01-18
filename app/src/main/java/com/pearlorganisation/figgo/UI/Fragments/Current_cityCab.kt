@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -36,8 +37,10 @@ import com.android.volley.toolbox.Volley
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -50,14 +53,18 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.Adapter.AdvanceCityDataAdapter
 import com.pearlorganisation.figgo.Adapter.CurrentVehicleAdapter
+import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
 import com.pearlorganisation.figgo.IOnBackPressed
+import com.pearlorganisation.figgo.Model.AdvanceCityCab
 import com.pearlorganisation.figgo.Model.CurrentModel
 import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
 import org.json.JSONObject
+import java.net.URI.create
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -68,12 +75,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     GoogleMap.OnCameraMoveListener,
     GoogleMap.OnCameraMoveCanceledListener,GoogleMap.OnCameraIdleListener  {
 
-    private val REQUEST_CHECK_SETTINGS: Int=101
+    private val REQUEST_CHECK_SETTINGS: Int=101;
     private lateinit var mMap: GoogleMap
-    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var lastLocation: Location
-    private lateinit var locationRequest: LocationRequest
+    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
+    private lateinit var fusedLocationClient: FusedLocationProviderClient;
+    private lateinit var lastLocation: Location;
+    private lateinit var locationRequest: LocationRequest;
 
     lateinit var binding: FragmentCurrentCityCabBinding
     lateinit var currentVehicleAdapter: CurrentVehicleAdapter
@@ -94,10 +101,10 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     var from_location_name:String? = null
     var linear_des:String ? = " "
     var live_loc:String ? = " "
-    var selects : String ?= ""
+    var selects : String ?= "";
     lateinit var ll_location : LinearLayout
     lateinit var ll_choose_vehicle : LinearLayout
-    var press : String ?= ""
+    var press : String ?= "";
     var datetext: TextView? = null
     var timetext: TextView? = null
     var progress: ProgressBar? = null
@@ -178,7 +185,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = context?.let { it1 ->
-                DatePickerDialog(it1,
+                DatePickerDialog(
+                        it1,
                         { view, year, monthOfYear, dayOfMonth ->
                             val dat : String
                             if (monthOfYear < 9){
@@ -212,7 +220,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }
 
         manualLoc?.setOnClickListener {
-            press = "manual"
+            press = "manual";
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field).build(requireActivity())
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
@@ -220,7 +228,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
         liveLoc?.setOnClickListener {
 
-            press = "live"
+            press = "live";
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
                     .build(requireActivity())
@@ -366,20 +374,27 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     @Throws(AuthFailureError::class)
                     override fun getHeaders(): Map<String, String> {
                         val headers: MutableMap<String, String> = HashMap()
-                        headers.put("Content-Type", "application/json; charset=UTF-8")
-                        headers.put("Authorization", "Bearer " + pref.getToken())
+                        headers.put("Content-Type", "application/json; charset=UTF-8");
+                        headers.put("Authorization", "Bearer " + pref.getToken());
+                        headers.put("Accept", "application/vnd.api+json");
                         return headers
                     }
                 }
-       /* jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))*/
+        jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
+
         queue.add(jsonOblect)
 
     }
+
     @SuppressLint("MissingPermission")
     private fun getLocation() {
 
         if (isLocationPermissionGranted()){
-            if (hasGps) { locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F,
+            if (hasGps) {
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    5000,
+                    0F,
                     gpsLocationListener
                 )
             }
@@ -389,8 +404,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     LocationManager.NETWORK_PROVIDER,
                     5000,
                     0F,
-                    networkLocationListener
-                )
+                    networkLocationListener)
             }
 
 
@@ -623,6 +637,16 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         return true
     }
 
+    override fun Any.onBackPressed(): Boolean {
+
+        ll_location?.isVisible = true
+        ll_choose_vehicle?.isVisible  =false
+
+        return true
+    }
+
+
+
 
 
     private fun requestPermissions() {
@@ -707,10 +731,10 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
 
-            mMap.isMyLocationEnabled = true
-            mMap.uiSettings.isMapToolbarEnabled = true
-            mMap.uiSettings.isMyLocationButtonEnabled = true
-            checkLocationService()
+            mMap.isMyLocationEnabled = true;
+            mMap.uiSettings.isMapToolbarEnabled = true;
+            mMap.uiSettings.isMyLocationButtonEnabled = true;
+            checkLocationService();
         }
 
         mMap.setOnCameraMoveStartedListener (this)
@@ -723,10 +747,10 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         if (ContextCompat.checkSelfPermission(requireActivity(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-            mMap.isMyLocationEnabled=true
-            mMap.uiSettings.isMapToolbarEnabled=true
-            mMap.uiSettings.isMyLocationButtonEnabled=true
-            checkLocationService()
+            mMap.isMyLocationEnabled=true;
+            mMap.uiSettings.isMapToolbarEnabled=true;
+            mMap.uiSettings.isMyLocationButtonEnabled=true;
+            checkLocationService();
         }
     }
 
@@ -786,19 +810,19 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
     fun checkLocationService() {
 
-        locationRequest = LocationRequest.create()
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-        locationRequest.setInterval(10 * 1000)
-        locationRequest.setFastestInterval(2 * 1000)
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(10 * 1000);
+        locationRequest.setFastestInterval(2 * 1000);
 
 
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
         // builder.setAlwaysShow(true);
         val client = LocationServices.getSettingsClient(requireActivity())
         val task = client.checkLocationSettings(builder.build())
         task.addOnSuccessListener(requireActivity()) {it->
-            it.locationSettingsStates
-            fetchCurrentLocation()
+            it.locationSettingsStates;
+            fetchCurrentLocation();
         }
 
         task.addOnFailureListener(requireActivity()) { e ->
@@ -816,21 +840,21 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
 
     override fun onCameraMoveStarted(p0: Int) {
-        Log.v("Onmove start","Onmove "+p0)
+        Log.v("Onmove start","Onmove "+p0);
         mMap.clear()
     }
 
     override fun onCameraMove() {
 
-        Log.v("Onmove ","Onmove ")
+        Log.v("Onmove ","Onmove ");
     }
 
     override fun onCameraMoveCanceled() {
-        Log.v("Onmove cancel","Onmove ")
+        Log.v("Onmove cancel","Onmove ");
     }
 
     override fun onCameraIdle() {
-        Log.v("Onmove Idle","Onmove ")
+        Log.v("Onmove Idle","Onmove ");
         val markerOptions = MarkerOptions().position(mMap.cameraPosition.target)
 
         mMap.addMarker(markerOptions)

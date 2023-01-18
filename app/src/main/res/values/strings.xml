@@ -20,13 +20,14 @@
 
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
     <!-- check dummy data  -->
-
+    <string name="google_api_key" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
+    <string name="google_app_id" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
 
     <string name="slide_1_title">Welcome to Javatpoint!</string>
     <string name="slide_1_desc">Javatpoint is passionate to offer better technical content to the world.</string>
-
+    <string name="otp_text">An OTP has been sent to you for verification of\n your mobile number.\nPlease enter the OTP to proceed.</string>
     <string name="slide_2_title">Android</string>
     <string name="slide_2_desc">Android is a mobile operating system developed by Google.</string>
     <string name="title_activity_customer_menu">Customer_Menu</string>
@@ -36,6 +37,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="edittext_hint">"Click here to edit address location"</string>
 
     <string name="Change_MPIN">Change MPIN</string>
     <string name="Rides">Rides</string>
