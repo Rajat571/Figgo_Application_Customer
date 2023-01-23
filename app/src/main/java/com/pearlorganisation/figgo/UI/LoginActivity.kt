@@ -2,6 +2,7 @@ package com.pearlorganisation.figgo.UI
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 
 import android.content.Intent
 import android.graphics.Color
@@ -302,6 +303,8 @@ class LoginActivity : AppCompatActivity(){
     }
 
     private fun verifyOtp(){
+        val progressDialog = ProgressDialog(this)
+        progressDialog.show()
         val URL = " https://test.pearl-developer.com/figo/api/otp/check-otp"
         val queue = Volley.newRequestQueue(this@LoginActivity)
         val json = JSONObject()
@@ -315,6 +318,7 @@ class LoginActivity : AppCompatActivity(){
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
+                        progressDialog.hide()
                         if (pref.getToken().equals("") || pref.getToken().equals("null")) {
 
                             val token = response.getString("token")
@@ -355,6 +359,7 @@ class LoginActivity : AppCompatActivity(){
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
+                    progressDialog.hide()
                     Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {
