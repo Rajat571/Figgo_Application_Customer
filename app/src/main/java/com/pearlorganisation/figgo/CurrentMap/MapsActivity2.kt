@@ -25,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.pearlorganisation.Current_Driver_Details_List
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
@@ -99,13 +100,14 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         driverimg = findViewById<ImageView>(R.id.driverimg)
 
 
+
+
         getmaps()
 
         accept.setOnClickListener {
             if (ll_main1.isVisible) {
                 ll_main1.visibility = View.GONE
                 ll_waiting.visibility = View.VISIBLE
-
                 val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
                 // Log.d("SendData", "URL===" + URL)
                 val queue = Volley.newRequestQueue(this)
@@ -123,19 +125,12 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                             if (response != null) {
                                 val status = response.getString("status")
                                 if (status.equals("false")) {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "Something Went Wrong!",
-                                        Toast.LENGTH_LONG
-                                    ).show()
+                                    Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_LONG).show()
                                 } else {
+
 //                            ll_waiting.visibility= View.VISIBLE
 //                            ll_main1.visibility = View.GONE
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "Searching...",
-                                        Toast.LENGTH_LONG
-                                    ).show()
+                                    Toast.makeText(applicationContext, "Searching...", Toast.LENGTH_LONG).show()
                                     /* val bundle = Bundle()
                             bundle.putString("drivername", "test driver")
                             bundle.putString("activavehiclenumber", "test vehicle number")
@@ -151,11 +146,7 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                     }, object : Response.ErrorListener {
                         override fun onErrorResponse(error: VolleyError?) {
                             Log.d("SendData", "error===" + error)
-                            Toast.makeText(
-                                applicationContext,
-                                "Something Went Wrong!",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_LONG).show()
                         }
                     }) {
                         @Throws(AuthFailureError::class)
@@ -167,13 +158,8 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                             return headers
                         }
                     }
-                jsonOblect.setRetryPolicy(
-                    DefaultRetryPolicy(
-                        10000,
-                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-                    )
-                )
+
+                jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
 
                 queue.add(jsonOblect)
 
@@ -194,6 +180,7 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             }
 
             reject_btn.setOnClickListener {
+                startActivity(Intent(this@MapsActivity2,Current_Driver_Details_List::class.java))
                 Toast.makeText(applicationContext, "Searching...", Toast.LENGTH_LONG).show()
             }
         }
