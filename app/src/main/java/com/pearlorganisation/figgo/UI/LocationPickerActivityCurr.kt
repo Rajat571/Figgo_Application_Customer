@@ -965,6 +965,7 @@ class LocationPickerActivityCurr :AppCompatActivity(), OnMapReadyCallback, RideC
             count = ""
         }else{
             super.onBackPressed()
+            startActivity(Intent(this, DashBoard::class.java))
         }
     }
 }

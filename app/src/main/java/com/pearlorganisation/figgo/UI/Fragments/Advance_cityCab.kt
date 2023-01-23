@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
@@ -130,6 +131,12 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         pref = PrefManager(requireActivity())
+        if (pref.getTypeC().equals("1") || pref.getTypeC().equals("2")){
+
+            Navigation.findNavController(view).navigate(R.id.current)
+
+        }
+
         var calenderimg = view.findViewById<LinearLayout>(R.id.calenderimg)
          datetext = view.findViewById<TextView>(R.id.datetext)
         var watchimg = view?.findViewById<LinearLayout>(R.id.watchimg)
@@ -143,12 +150,12 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         var next = view?.findViewById<Button>(R.id.next)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         var advance_li = view?.findViewById<LinearLayout>(R.id.adLinear)
-        var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
+      //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
         var set = view?.findViewById<TextView>(R.id.img_marker)
 
 
 
-        map_li?.isVisible = false
+        //map_li?.isVisible = false
         ll_choose_vehicle?.isVisible = false
         pref.setCount("location")
         pref.setBookingNo("")
@@ -163,7 +170,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         set?.setOnClickListener {
             mMap!!.clear()
             advance_li?.isVisible = true
-            map_li?.isVisible = false
+           // map_li?.isVisible = false
 
 
         }
