@@ -31,7 +31,7 @@ class BookingAmountAdapter (var context: Context,private val mList1: List<Bookin
         holder.driverchangepurple.text = BookingAmountList.driverchangepurple
 
         holder.amountpurple.setOnClickListener {
-            context.startActivity(Intent(context, VehicleBookActivity::class.java))
+            context.startActivity(Intent(context, Current_Cab_DetailsActivity::class.java))
 
         }
 

@@ -13,16 +13,35 @@ import com.pearlorganisation.figgo.UI.CityCabActivity
 
 class DriveRatingActivity : BaseClass() {
 
+
+lateinit var submitrating:TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setLayoutXml()
+        initializeViews()
+        initializeClickListners()
+        initializeInputs()
+        initializeLabels()
+
+    }
     override fun setLayoutXml() {
-        TODO("Not yet implemented")
+        setContentView(R.layout.activity_drive_rating)
     }
 
     override fun initializeViews() {
-        TODO("Not yet implemented")
+         submitrating = findViewById<TextView>(R.id.submitraing)
+        var shareimg = findViewById<ImageView>(R.id.shareimg)
+        var ll_back = findViewById<LinearLayout>(R.id.ll_back)
     }
 
     override fun initializeClickListners() {
-        TODO("Not yet implemented")
+        shareimg()
+        onBackPress()
+        submitrating.setOnClickListener {
+            startActivity(Intent(this,CityCabActivity::class.java))
+        }
+
     }
 
     override fun initializeInputs() {
@@ -31,23 +50,5 @@ class DriveRatingActivity : BaseClass() {
 
     override fun initializeLabels() {
         TODO("Not yet implemented")
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /*shareimg()
-        onBackPress()*/
-        setContentView(R.layout.activity_drive_rating)
-        var submitrating = findViewById<TextView>(R.id.submitraing)
-        var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var ll_back = findViewById<LinearLayout>(R.id.ll_back)
-
-
-
-
-        submitrating.setOnClickListener {
-            startActivity(Intent(this,CityCabActivity::class.java))
-        }
     }
 }

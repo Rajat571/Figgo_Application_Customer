@@ -42,7 +42,7 @@ class OneWayBookingActivity : AppCompatActivity() {
         }
 
         one_way.setOnClickListener {
-            startActivity(Intent(this, VehicleBookActivity::class.java))
+            startActivity(Intent(this, Current_Cab_DetailsActivity::class.java))
         }
 
         var recyclerView = findViewById<RecyclerView>(R.id.recyclerviewbookingamount)

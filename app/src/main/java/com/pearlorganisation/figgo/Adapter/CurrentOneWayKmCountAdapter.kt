@@ -1,6 +1,5 @@
 package com.pearlorganisation.figgo.Adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
@@ -23,6 +23,7 @@ import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
+import com.pearlorganisation.figgo.Current_Cab_DetailsActivity
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
 import org.json.JSONObject
@@ -30,12 +31,8 @@ import org.json.JSONObject
 class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<CurrentOneWayKmCountAdapter.ViewHolder>() {
 
     lateinit var pref: PrefManager
-
-
-
+    
    /* var onItemClick : ((OneWayListRatingVehicle) -> Unit)? = null*/
-
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrentOneWayKmCountAdapter.ViewHolder {
@@ -44,58 +41,58 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CurrentOneWayKmCountAdapter.ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(holder: CurrentOneWayKmCountAdapter.ViewHolder, position: Int) {
         pref = PrefManager(context)
         val OneWayListRatingVehicle = mList[position]
 
-        holder.vehicleprice.text = mList.get(position).price
-        holder.vehiclname.text = mList.get(position).name
-        holder.vehiclemodel.text = mList.get(position).year
-        holder.rating.text = mList.get(position).rating
+        holder.vehicleprice.text = "Rs. "+mList.get(position).price
+        holder.vehiclname.text = mList.get(position).name+" "+mList.get(position).year
+        val rating = mList.get(position).rating
+        holder.rating.text = rating
+        holder.ride_service_rating.rating = rating.toFloat()
 
-        holder.itemView.setOnClickListener {
-            context.startActivity(Intent(context, MapsActivity2::class.java))
+
+
+        holder.ll_main.setOnClickListener {
+            context.startActivity(Intent(context, Current_Cab_DetailsActivity::class.java)
+                .putExtra("ride_id",OneWayListRatingVehicle.ride_id)
+                .putExtra("driver_id",OneWayListRatingVehicle.driver_id))
         }
 
-        holder.acceptbutton.setOnClickListener {
-            /*Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()*/
+       /* holder.acceptbutton.setOnClickListener {
+           // Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()
+
             val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
-            Log.d("SendData", "URL===" + URL)
+           // Log.d("SendData", "URL===" + URL)
             val queue = Volley.newRequestQueue(context)
             val json = JSONObject()
-            json.put("ride_id",pref.getride_id())
+            json.put("ride_id",pref.getRideId())
             json.put("driver_id",pref.getdriver_id())
             json.put("price",pref.getprice())
             Log.d("SendData", "pref.getToken()===" + pref.getToken())
             Log.d("SendData", "json===" + json)
             val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
-                Response.Listener<JSONObject?> {
+                Response.Listener<JSONObject?>               {
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                        /*val message = response.getString("message")*/
                         val status = response.getString("status")
-                        Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()
                         if(status.equals("false")){
-                            /*Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()*/
+                            Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()
                         }else{
-                            val status = response.getString("status")
-                            val message = response.getString("message")
 
-                            context.startActivity(Intent(context,EmergencyMapsActivity::class.java)
-                                .putExtra("vehiclname",OneWayListRatingVehicle.name)
-                                .putExtra("vehicleprice",OneWayListRatingVehicle.price)
-                                .putExtra("vehiclemodel",OneWayListRatingVehicle.year))
+                            val bundle = Bundle()
+                            bundle.putString("drivername", "test driver")
+                            bundle.putString("activavehiclenumber", "test vehicle number")
+                            bundle.putString("dl_number", "test dlnumber")
+                            val intent = Intent(context, EmergencyMapsActivity::class.java)
+                            intent.putExtras(bundle)
+                            context.startActivity(intent)
 
                         }
                     }
 
                 }
-
-                private fun startActivity(intent: Intent) {
-
-                }
-
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
@@ -115,6 +112,7 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
 
             queue.add(jsonOblect)
 
+
         context.startActivity(Intent(context, EmergencyMapsActivity::class.java))
 
 
@@ -122,19 +120,11 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
 
         holder.reject.setOnClickListener {
            Toast.makeText(context,"Rejected",Toast.LENGTH_SHORT).show()
-        }
+        }*/
 
-        pref.setride_id(OneWayListRatingVehicle.ride_id)
+        pref.setRideId(OneWayListRatingVehicle.ride_id)
         pref.setdriver_id(OneWayListRatingVehicle.driver_id)
         pref.setprice(OneWayListRatingVehicle.price)
-
-        pref.getvehiclname().toString()
-        pref.getvehiclemodel().toString()
-        pref.getvehicleprice().toString()
-
-
-
-
 
     }
 
@@ -142,13 +132,11 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         return mList.size
     }
 
-
-
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView){
         var vehiclname:TextView = itemView.findViewById(R.id.vehiclname)
-        var vehiclemodel:TextView = itemView.findViewById(R.id.vehiclemodel)
         var vehicleprice:TextView = itemView.findViewById(R.id.vehicleprice)
         var acceptbutton:TextView = itemView.findViewById(R.id.acceptbutton)
+        var ride_service_rating:RatingBar = itemView.findViewById(R.id.ride_service_rating)
         var reject:TextView = itemView.findViewById(R.id.reject)
         val rating:TextView = itemView.findViewById(R.id.rating)
         val ll_main:LinearLayout = itemView.findViewById(R.id.ll_main)

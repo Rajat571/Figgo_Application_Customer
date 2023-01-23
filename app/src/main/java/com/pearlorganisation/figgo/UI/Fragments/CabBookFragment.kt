@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
@@ -54,11 +55,8 @@ class CabBookFragment : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.fragment_cab_book, container, false)
     }
 
@@ -73,8 +71,8 @@ class CabBookFragment : Fragment() {
         to_loc = view.findViewById<TextView>(R.id.to_loc)
         from_loc = view.findViewById<TextView>(R.id.from_loc)
         fare = view.findViewById<TextView>(R.id.fare)
-      //  image = view.findViewById<ImageView>(R.id.image)
-
+        var ll_back = view.findViewById<LinearLayout>(R.id.ll_back)
+        var shareimg = view.findViewById<ImageView>(R.id.shareimg)
         pref = PrefManager(requireActivity())
 
 
@@ -82,89 +80,50 @@ class CabBookFragment : Fragment() {
 
         getCabBookData()
 
+        ll_back.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_dashBoard)
+        }
+
+        shareimg.setOnClickListener {
+
+        }
+
         book_other.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_payFragment)
 
 
-           // startActivity(Intent(requireActivity(), PaymentPayActivity::class.java))
+            // startActivity(Intent(requireActivity(), PaymentPayActivity::class.java))
 
 
         }
 
         book_self.setOnClickListener {
-            val payUPaymentParams = PayUPaymentParams.Builder()
-                .setAmount("1.0")
-                .setIsProduction(true)
-                .setKey("0MQaQP")
-                .setProductInfo("Test")
-                .setPhone("9999999999")
-                .setTransactionId(System.currentTimeMillis().toString())
-                .setFirstName("John")
-                .setEmail("John@gmail.com")
-                .setSurl("https://payu.response.firebaseapp.com/success")
-                .setFurl("https://payu.response.firebaseapp.com/failure")
-                //Optional, can contain any additional PG params
-                .build()
-            PayUCheckoutPro.open(
-                requireActivity(), payUPaymentParams,
-                object : PayUCheckoutProListener {
 
-
-                    override fun onPaymentSuccess(response: Any) {
-                        response as HashMap<*, *>
-                        val payUResponse = response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
-                        val merchantResponse = response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
+            val amt = "1"
+            val amount = Math.round(amt.toFloat() * 100).toInt()
+            val checkout = Checkout()
+            checkout.setKeyID("rzp_test_capDM1KlnUhj5f")
+            checkout.setImage(R.drawable.appicon)
+            val obj = JSONObject()
+            try {
+                obj.put("name", "Figgo")
+                obj.put("description", "Payment")
+                obj.put("theme.color", "")
+                obj.put("send_sms_hash", true)
+                obj.put("allow_rotation", true)
+                obj.put("currency", "INR")
+                obj.put("amount", amount)
+                val preFill = JSONObject()
+                preFill.put("email", "a@gmail.com")
+                preFill.put("contact", "91" + "1234567098")
+                obj.put("prefill", preFill)
+                checkout.open(requireActivity(), obj)
+            } catch (e: JSONException) {
+                Toast.makeText(requireActivity(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
+                e.printStackTrace()
+            }
                     }
 
-
-                    override fun onPaymentFailure(response: Any) {
-                        response as HashMap<*, *>
-                        val payUResponse = response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
-                        val merchantResponse = response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
-                    }
-
-
-                    override fun onPaymentCancel(isTxnInitiated:Boolean) {
-                    }
-
-
-                    override fun onError(errorResponse: ErrorResponse) {
-                        val errorMessage: String
-                        if (errorResponse != null && errorResponse.errorMessage != null && errorResponse.errorMessage!!.isNotEmpty())
-                            errorMessage = errorResponse.errorMessage!!
-                        else {
-                            //   errorMessage = resources.getString(R.string.some_error_occurred)
-                        }
-                    }
-
-                    override fun setWebViewProperties(webView: WebView?, bank: Any?) {
-                        //For setting webview properties, if any. Check Customized Integration section for more details on this
-                    }
-
-                    override fun generateHash(
-                        valueMap: HashMap<String, String?>,
-                        hashGenerationListener: PayUHashGenerationListener
-                    ) {
-                        if ( valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_STRING)
-                            && valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_STRING) != null
-                            && valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_NAME)
-                            && valueMap.containsKey(PayUCheckoutProConstants.CP_HASH_NAME) != null) {
-
-                            val hashData = valueMap[PayUCheckoutProConstants.CP_HASH_STRING]
-                            val hashName = valueMap[PayUCheckoutProConstants.CP_HASH_NAME]
-
-                            //Do not generate hash from local, it needs to be calculated from server side only. Here, hashString contains hash created from your server side.
-                            /* val hash: String? = hashString
-                             if (!TextUtils.isEmpty(hash)) {
-                                 val dataMap: HashMap<String, String?> = HashMap()
-                                 dataMap[hashName!!] = hash!!
-                                 hashGenerationListener.onHashGenerated(dataMap)
-                             }*/
-                        }
-                    }
-                })
-
-        }
     }
 
     private fun getCabBookData() {
@@ -195,7 +154,7 @@ class CabBookFragment : Fragment() {
                         val from_location = response.getJSONObject("data").getJSONObject("ride").getJSONObject("from_location").getString("name")
 
 
-                      //  Picasso.get().load(full_image).into(image)
+                        //  Picasso.get().load(full_image).into(image)
                         created_at?.setText(createdAt)
                         updated_at?.setText(updatedAt)
                         dis1?.setText(distance)
@@ -205,8 +164,6 @@ class CabBookFragment : Fragment() {
                         fare?.setText("Approx.. fare Rs. "+ min_price +" to "+ max_price +",\n                for this ride\nwithout waiting  parking charge\nFinal Price is differ from Approx. "
 
                         )
-
-
                     }
                     // Get your json response and convert it to whatever you want.
                 }
@@ -223,7 +180,6 @@ class CabBookFragment : Fragment() {
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8");
                     headers.put("Authorization", "Bearer " + pref.getToken());
-                    headers.put("Accept", "application/vnd.api+json");
                     return headers
                 }
             }

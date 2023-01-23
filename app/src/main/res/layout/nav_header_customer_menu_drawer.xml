@@ -6,11 +6,12 @@
     android:layout_height="@dimen/_135sdp"
     android:background="@color/colormenutransparent"
     android:orientation="horizontal"
+    android:id="@+id/ll_editprofile"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     tools:ignore="MissingDefaultResource">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
@@ -26,14 +27,16 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_rajsharma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
-            android:text="Raj Sharma"
+            android:text=" "
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
 
         <TextView
+            android:id="@+id/tv_mobilenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
@@ -43,12 +46,12 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_gmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="sans-serif-black"
-            android:text="mm@gmail.com"
+            android:text=" "
             android:textColor="@color/black" />
 
     </LinearLayout>

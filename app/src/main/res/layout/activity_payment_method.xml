@@ -47,6 +47,18 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_nxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:text="NextScreen"
+            android:textSize="@dimen/_14sdp" />
+
     </androidx.cardview.widget.CardView>
 
     <ImageView

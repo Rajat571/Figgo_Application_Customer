@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,23 +20,56 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
-            android:name=".WaitingLayout"
-            android:exported="false" />
-        <activity android:name="com.pearlorganisation.Driver_Rating_Activity1"
-            android:exported="false"/>
-        <activity
-            android:name=".WaitingScreenLayout"
+            android:name=".Current_Driver_Details_List"
             android:exported="false" />
         <activity
-            android:name=".Waiting_Layout"
+            android:name=".DrawerSupportActivity"
             android:exported="false" />
         <activity
-            android:name=".Change_Mpin_Activity"
+            android:name=".DrawerSupportActivity"
             android:exported="false" />
         <activity
-            android:name=".Driver_Rating_Activity1"
+            android:name=".DrawerItemActivity.TermAndConditionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DrawerItemActivity.CancellationPolicy"
+            android:exported="false" />
+        <activity
+            android:name=".DrawerItemActivity.CurrentAboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Edit_Profile_Activity"
+            android:exported="false" />
+        <!--
+        <activity
+            android:name=".Edit_Profile_Activity"
+            android:exported="false" />
+        -->
+        <activity
+            android:name=".Edit_Profile_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".DrawerItemActivity.CurrentAboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DrawerItemActivity.CancellationPolicy"
+            android:exported="false" />
+        <activity
+            android:name=".DrawerItemActivity.TermAndConditionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Current_Cab_DetailsActivity"
             android:exported="false" />
 
+        <activity android:name="com.pearlorganisation.Current_Driver_Details_List"
+            android:exported="false"/>
+
+
+        <!--
+<activity
+            android:name=".EditProfileActivity"
+            android:exported="false"/>
+        -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
@@ -44,18 +78,8 @@
             android:name=".UI.MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".CurrentMap.MapsActivity1"
-            android:exported="false" />
-        <activity
-            android:name=".CurrentMap.MapsActivity2"
-            android:exported="false" />
-        <activity
             android:name=".CurrentMap.EmergencyMapsActivity"
             android:exported="false" />
-        <activity
-            android:name=".Change_Mpin_Activity"
-            android:exported="false" />
-
         <activity
             android:name=".UI.VerifyOtp"
             android:exported="false" />
@@ -64,6 +88,9 @@
             android:exported="false" />
         <activity
             android:name=".UI.LocationPickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.LocationPickerActivityCurr"
             android:exported="false" />
         <activity
             android:name=".StudenAddActivity"
@@ -75,11 +102,16 @@
             android:name=".PaymentMethodActivity"
             android:exported="false" />
         <activity
-            android:name=".PaymentPayActivity"
+            android:name=".CurrentMap.MapsActivity2"
             android:exported="false" />
         <activity
+            android:name=".PaymentPayActivity"
+            android:exported="false" />
+        <!--
+<activity
             android:name=".CabBookActivity"
             android:exported="false" />
+        -->
         <activity
             android:name=".OneWayBookingActivity"
             android:exported="false" />
@@ -87,32 +119,44 @@
             android:name=".DriveRatingActivity"
             android:exported="false" />
         <activity
-            android:name=".EmergencyActivity"
+            android:name=".CurrentMap.MapsActivity1"
             android:exported="false" />
         <activity
+            android:name=".EmergencyActivity"
+            android:exported="false" />
+        <!--
+ <activity
             android:name=".TotalDistance_Count_Km_Activity"
             android:exported="false" />
+        -->
         <activity
             android:name=".OneWay_Km_CountActivity"
             android:exported="false" />
         <activity
             android:name=".FreedomOutstationActivity"
             android:exported="false" />
-        <activity
+        <!--
+  <activity
             android:name=".RoundAndTourActivity"
             android:exported="false" />
+        -->
         <activity
             android:name=".One_Way_OutStationActivity"
             android:exported="false" />
-        <activity
+        <!--
+ <activity
             android:name=".CustomerMenuDrawerActivity"
             android:exported="false"
             android:label="@string/title_activity_customer_menu_drawer"
             android:theme="@style/Theme.Figgo.NoActionBar" />
-        <activity
+        -->
+        <!--
+ <activity
             android:name=".HomeActivity"
             android:exported="false" />
-        <activity
+        -->
+        <!--
+<activity
             android:name=".Customer_Menu_Drawer"
             android:exported="false"
             android:label="@string/title_activity_customer_menu_drawer"
@@ -122,6 +166,7 @@
             android:exported="false"
             android:label="@string/title_activity_customer_menu"
             android:theme="@style/Theme.Figgo.NoActionBar" />
+        -->
         <activity
             android:name=".UI.MPinGenerate"
             android:exported="false">
@@ -169,13 +214,15 @@
         <activity
             android:name=".WelcomeSlider"
             android:exported="false" />
-        <activity
+        <!--
+<activity
             android:name=".UI.WelcomeActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        -->
         <activity
             android:name=".UI.SplashActivity"
             android:exported="true">

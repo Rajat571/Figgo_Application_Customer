@@ -42,6 +42,9 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
     lateinit var ride : String
     lateinit var year : String
     lateinit var rating : String
+
+
+
     override fun setLayoutXml() {
         TODO("Not yet implemented")
     }
@@ -84,13 +87,13 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         /*getAccept()*/
 
 
-        backtxt.setOnClickListener {
+       /* backtxt.setOnClickListener {
             startActivity(Intent(this,DashBoard::class.java))
         }
 
         backimg.setOnClickListener {
             startActivity(Intent(this,DashBoard::class.java))
-        }
+        }*/
 
 
 
@@ -188,7 +191,9 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
        Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
-        json.put("ride_id",pref.getride_id())
+        json.put("ride_id",pref.getRideId())
+        /*json.put("ride_id","33")*/
+      //  json.put("type","current_booking")
        Log.d("SendData", "pref.getToken()===" + pref.getToken())
        Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
@@ -197,31 +202,27 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 Log.d("SendData", "response===" + response)
                 if (response != null) {
                     val status = response.getString("status")
-                    if (response != null) {
+                    val cabs = response.getJSONObject("data").getJSONArray("cabs")
+                    val ride = response.getJSONObject("data").getJSONObject("ride").getString("id")
 
-                        val cabs = response.getJSONObject("data").getJSONArray("cabs")
-                        val ride = response.getJSONObject("data").getJSONObject("ride").getString("id")
+                    for(p2 in 0 until cabs.length()) {
+                        val data=response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2)
+                        cab_name=data.getString( "cab")
+                        pricestring=data.getString( "price")
+                          val cab_driversArray = data.getJSONArray("cab_drivers")
+                       for (i in 0 until cab_driversArray.length()){
 
-                        for(p2 in 0 until cabs.length()) {
-                            val data=response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2)
-                            cab_name=data.getString( "cab")
-                            pricestring=data.getString( "price")
-                              val cab_driversArray = data.getJSONArray("cab_drivers")
-                           for (i in 0 until cab_driversArray.length()){
+                           val jsonObject = cab_driversArray.getJSONObject(i)
+                           driver_id =    jsonObject.getString("driver_id")
+                         year =    jsonObject.getString("year")
+                          rating=  jsonObject.getJSONObject("driver").getString("rating_avg")
+                           mList.add(OneWayListRatingVehicle(driver_id,cab_name,year,pricestring, rating,ride,))
 
-                               val jsonObject = cab_driversArray.getJSONObject(i)
-                               driver_id =    jsonObject.getString("driver_id")
-                             year =    jsonObject.getString("year")
-                              rating=  jsonObject.getJSONObject("driver").getString("rating_avg")
-
-                           }
-                            mList.add(OneWayListRatingVehicle(driver_id,cab_name,year,pricestring, rating,ride,))
-
-                        }
-                        currentOneWayKmCountAdapter = CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
-                        binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)
-                        binding.onewayvehiclelist.adapter=currentOneWayKmCountAdapter
+                       }
                     }
+                    currentOneWayKmCountAdapter = CurrentOneWayKmCountAdapter(this@MapsActivity1,mList)
+                    binding.onewayvehiclelist.layoutManager=LinearLayoutManager(this@MapsActivity1)
+                    binding.onewayvehiclelist.adapter=currentOneWayKmCountAdapter
                 }
             }
         }, object : Response.ErrorListener {
@@ -261,14 +262,10 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             override fun onResponse(response: JSONObject?) {
                 Log.d("SendData", "response===" + response)
                 if (response != null) {
-                    *//*val message = response.getString("message")*//*
                     val status = response.getString("status")
-                    Toast.makeText(this@MapsActivity1,"Accepted Driver",Toast.LENGTH_SHORT).show()
                     if(status.equals("false")){
-                        *//*Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()*//*
+                        Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
                     }else{
-                        val status = response.getString("status")
-                        val message = response.getString("message")
                         getnxtpage()
 
 

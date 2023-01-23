@@ -35,20 +35,18 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
+        android:padding="@dimen/_8sdp"
         android:hint="Enter OTP"
         android:id="@+id/enteredOTP"
         android:layout_marginVertical="@dimen/_10sdp"
-        android:background="@drawable/edittext"
-        />
+        android:background="@drawable/edittext" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="V E R I F Y"
         android:id="@+id/otp_Verify_button"
         android:textColor="@color/white"
-        android:backgroundTint="#236A8B"
-        />
+        android:backgroundTint="#236A8B"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,8 +55,10 @@
         android:textColor="#585D5D"
         android:textStyle="bold"
         android:id="@+id/resend"
-        android:layout_marginBottom="30dp"
-        />
+        android:layout_marginBottom="30dp"/>
+
+
+
 
 
 </LinearLayout>

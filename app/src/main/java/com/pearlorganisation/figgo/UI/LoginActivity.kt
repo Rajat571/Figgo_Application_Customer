@@ -81,11 +81,7 @@ class LoginActivity : AppCompatActivity(){
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            REQUEST_LOCATION
-        )
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION)
         // mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
         //    .addOnConnectionFailedListener(this).build()
 
@@ -139,11 +135,7 @@ class LoginActivity : AppCompatActivity(){
 
 
             if (enteredOTP.text.toString().equals("") || enteredOTP.text.toString().equals("null")) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Enter Otp",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@LoginActivity, "Enter Otp", Toast.LENGTH_SHORT).show()
 
             } else {
                 verifyOtp()
@@ -194,14 +186,10 @@ class LoginActivity : AppCompatActivity(){
             pref.setAccountDetails(
                 account.account.toString(),
                 account.displayName.toString(),
-                account.photoUrl.toString()
-            )
+                account.photoUrl.toString())
             // prefManager.setToken("")
-            Toast.makeText(
-                this@LoginActivity,
-                "Signed In :" + account.account.toString(),
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(this@LoginActivity, "Signed In :" + account.account.toString(), Toast.LENGTH_LONG).show()
+
             if (pref.getMpin().equals("") || pref.getMpin().equals("null")) {
                 startActivity(Intent(this,MPinGenerate::class.java))
             } else {
@@ -232,10 +220,13 @@ class LoginActivity : AppCompatActivity(){
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
+
                         pref.setUserId(response.getJSONObject("user").getString("id"))
+                        pref.settv_mobilenumber(response.getJSONObject("user").getString("contact_no"))
+                        pref.settv_rajsharma(response.getJSONObject("user").getString("name"))
+                        pref.settv_gmail(response.getJSONObject("user").getString("email"))
                         getotp()
                     }
-
 
                     // Get your json response and convert it to whatever you want.
                 }
@@ -268,18 +259,18 @@ class LoginActivity : AppCompatActivity(){
         json.put("type_id", pref.getUserId())
         json.put("contact_no", input_number.text.toString())
         Log.d("SendData", "json===" + json)
-        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
+        val jsonOblect: JsonObjectRequest =
+            object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?> {
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
-
                     if (response != null) {
                         progress.isVisible  =false
                         cc_number.isVisible = false
                         otp_screen.isVisible = true
                         startTimer()
                     }
-
+                    // Get your json response and convert it to whatever you want.
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
@@ -320,7 +311,11 @@ class LoginActivity : AppCompatActivity(){
                             val token = response.getString("token")
                             pref.setToken(token)
                             pref.isValidLogin()
-                            Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Login Successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             //  Log.d("SendData", "token===" + token)
                             //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
                             if (pref.getMpin().equals("")) {
@@ -332,16 +327,16 @@ class LoginActivity : AppCompatActivity(){
                                 )
                             } else {
                                 startActivity(Intent(this@LoginActivity,
-                                    DashBoard::class.java
-                                )
+                                        DashBoard::class.java
+                                    )
                                 )
                             }
 
 
                         } else {
-                        //    val token = response.getString("token")
-                          //  pref.setToken(token)
-                            //pref.isValidLogin()
+                            val token = response.getString("token")
+                            pref.setToken(token)
+                            pref.isValidLogin()
                             Toast.makeText(  this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this@LoginActivity, DashBoard::class.java))
                         }

@@ -181,6 +181,9 @@ abstract class BaseClass  : AppCompatActivity(){
 
     }
 
+
+
+
     /* protected fun showProgress(show: Boolean) {
          val ll_main: View = findViewById<View>(R.id.ll_main)
          val loader: View = findViewById<View>(R.id.loader)
@@ -267,6 +270,8 @@ abstract class BaseClass  : AppCompatActivity(){
         }
 
     }
+
+
 
     fun validateAddress1(inputUser: EditText): Boolean {
         val address: String = inputUser.getText().toString().trim { it <= ' ' }

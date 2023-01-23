@@ -72,7 +72,14 @@ import android.content.SharedPreferences
      fun getRideId():String{
          return pref?.getString("ride_id","null").toString()
      }
+     fun setprice(price:String){
+         editor?.putString("price",price)
+         editor?.commit()
+     }
 
+     fun getprice():String{
+         return pref?.getString("price","null").toString()
+     }
      fun setOtp(otp:String){
          editor?.putString("otp",otp)
          editor?.commit()
@@ -113,43 +120,27 @@ import android.content.SharedPreferences
      fun getVehicleId():String{
          return pref?.getString("vehicle_id","null").toString()
      }
-
-     fun setUserId(userid:String){
-         editor?.putString("userid",userid)
-         editor?.commit()
-     }
-     fun getUserId():String{
-         return pref?.getString("userid","").toString()
-     }
-     fun isValidLogin(): Boolean {
-         return pref!!.getBoolean(IS_VALID_LOGIN, false)
-     }
-     fun setNumber(number:String){
-         editor?.putString("number",number)
-         editor?.commit()
-     }
-     fun getNumber():String{
-         return pref?.getString("number","").toString()
-     }
-
-
-     fun setride_id(ride_id:String){
-         editor?.putString("ride_id",ride_id)
-         editor?.commit()
-     }
-
-     fun getride_id():String{
-         return pref?.getString("ride_id","null").toString()
-     }
-
      fun setdriver_id(driver_id:String){
          editor?.putString("driver_id",driver_id)
          editor?.commit()
      }
+
+     fun getdriver_id(): String {
+         return pref?.getString("driver_id","driver_id").toString()
+
+     }
+
      fun setactivavehiclenumber(activavehiclenumber:String){
          editor?.putString("activavehiclenumber",activavehiclenumber)
          editor?.commit()
      }
+
+     fun getactivavehiclenumber():String{
+         return pref?.getString("activavehiclenumber","null").toString()
+     }
+
+
+
      fun setdrivername(drivername:String){
          editor?.putString("drivername",drivername)
          editor?.commit()
@@ -202,21 +193,37 @@ import android.content.SharedPreferences
      fun getdl_number():String{
          return pref?.getString("dl_number","null").toString()
      }
-     fun getactivavehiclenumber():String{
-         return pref?.getString("activavehiclenumber","null").toString()
-     }
-     fun getdriver_id(): String {
-         return pref?.getString("driver_id","driver_id").toString()
 
+
+     fun setUserId(userid:String){
+         editor?.putString("userid",userid)
+         editor?.commit()
      }
-     fun setprice(price:String){
-         editor?.putString("price",price)
+     fun getUserId():String{
+         return pref?.getString("userid","").toString()
+     }
+     fun isValidLogin(): Boolean {
+         return pref!!.getBoolean(IS_VALID_LOGIN, false)
+     }
+     fun setNumber(number:String){
+         editor?.putString("number",number)
+         editor?.commit()
+     }
+     fun getNumber():String{
+         return pref?.getString("number","").toString()
+     }
+
+
+     fun setride_id(ride_id:String){
+         editor?.putString("ride_id",ride_id)
          editor?.commit()
      }
 
-     fun getprice():String{
-         return pref?.getString("price","null").toString()
+     fun getride_id():String{
+         return pref?.getString("ride_id","null").toString()
      }
+
+
 
      fun setToLatL(lat:String){
          editor?.putString("lat_to_l",lat)
@@ -252,4 +259,110 @@ import android.content.SharedPreferences
      }
 
 
-}
+     fun setType(type:String){
+         editor?.putString("type",type)
+         editor?.commit()
+     }
+
+     fun getType():String{
+         return pref?.getString("type","null").toString()
+     }
+     fun setTypeC(type:String){
+         editor?.putString("typeC",type)
+         editor?.commit()
+     }
+
+     fun getTypeC():String{
+         return pref?.getString("typeC","null").toString()
+     }
+
+     fun setToLatLC(lat:String){
+         editor?.putString("lat_to_lc",lat)
+         editor?.commit()
+     }
+
+     fun getToLatLC():String{
+         return pref?.getString("lat_to_lc","null").toString()
+     }
+     fun setToLngLC(lat:String){
+         editor?.putString("lng_to_lc",lat)
+         editor?.commit()
+     }
+     fun getToLngLC():String{
+         return pref?.getString("lng_to_lc","null").toString()
+     }
+
+    /* fun settv_rajsharma(){
+
+     }*/
+
+
+     fun settv_rajsharma(tv_rajsharma:String) {
+         editor?.putString("tv_rajsharma",tv_rajsharma)
+         editor?.commit()
+     }
+
+     fun gettv_rajsharma():String{
+         return pref?.getString("tv_rajsharma"," ").toString()
+     }
+
+
+     fun settv_mobilenumber(tv_mobilenumber:String) {
+         editor?.putString("tv_mobilenumber",tv_mobilenumber)
+         editor?.commit()
+     }
+
+
+     fun gettv_mobilenumber():String{
+         return pref?.getString("tv_mobilenumber","null").toString()
+     }
+
+     fun settv_gmail(tv_gmail:String) {
+         editor?.putString("tv_gmail",tv_gmail)
+         editor?.commit()
+     }
+
+     fun gettv_gmail():String{
+         return pref?.getString("tv_gmail"," ").toString()
+     }
+
+     fun setiv_imageView(iv_imageView:String) {
+         editor?.putString("iv_imageView",iv_imageView)
+         editor?.commit()
+     }
+
+     fun getiv_imageView():String{
+         return pref?.getString("iv_imageView",getiv_imageView()).toString()
+     }
+
+
+
+     fun setToLngMC(lat:String){
+         editor?.putString("lng_to_mc",lat)
+         editor?.commit()
+     }
+
+     fun getToLngMC():String{
+         return pref?.getString("lng_to_mc","null").toString()
+     }
+     fun setToLatMC(lat:String){
+         editor?.putString("lat_to_mc",lat)
+         editor?.commit()
+     }
+
+     fun getToLatMC():String{
+         return pref?.getString("lat_to_mc","null").toString()
+     }
+
+     fun setgetRegistrationToken(getRegistrationToken:String){
+         editor?.commit()
+         editor?.putString("getRegistrationToken",getRegistrationToken)
+     }
+
+     fun getRegistrationToken(): Any {
+         return pref?.getString("getRegistrationToken","null").toString()
+
+     }
+
+
+ }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
 
 class PaymentMethodActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +14,11 @@ class PaymentMethodActivity : AppCompatActivity() {
         var nextpage = findViewById<TextView>(R.id.nextpage)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
+        var tv_nxt = findViewById<TextView>(R.id.tv_nxt)
+
+        tv_nxt.setOnClickListener {
+            startActivity(Intent(this,EmergencyMapsActivity::class.java))
+        }
 
         backimg.setOnClickListener {
             val intent = Intent(this, PaymentPayActivity::class.java)

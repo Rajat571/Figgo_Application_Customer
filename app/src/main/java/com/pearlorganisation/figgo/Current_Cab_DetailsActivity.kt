@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
 import com.pearlorganisation.figgo.Model.VehicleBookPayList
 
-class VehicleBookActivity : AppCompatActivity() {
+class Current_Cab_DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.vehiclebookactivity)
+        setContentView(R.layout.current_cab_details_activity)
         var book_now = findViewById<TextView>(R.id.book_now)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
@@ -32,7 +33,7 @@ class VehicleBookActivity : AppCompatActivity() {
         }
 
         book_now.setOnClickListener {
-           startActivity(Intent(this,PaymentPayActivity::class.java))
+           startActivity(Intent(this,MapsActivity2::class.java))
         }
 
     }

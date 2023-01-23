@@ -181,67 +181,27 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         } else {
             TODO("VERSION.SDK_INT < O")
         }
-        type = requireActivity().intent.getStringExtra("type")
-        if (type.equals("1")){
+        if (pref.getType().equals("1")){
 
-            to_lat = pref.getToLatL().toDouble()
-            to_lng = pref.getToLngL().toDouble()
+          getCurrentLoc()
 
-            var geocoder: Geocoder
-            val addresses: List<Address>
-            geocoder = Geocoder(requireActivity(), Locale.getDefault())
+            if (pref.getToLatM().equals("")){
 
 
-            var strAdd : String? = null
-            try {
-                val addresses = geocoder.getFromLocation(to_lat!!, to_lng!!, 1)
-                if (addresses != null) {
-                    val returnedAddress = addresses[0]
-                    val strReturnedAddress = java.lang.StringBuilder("")
-                    for (i in 0..returnedAddress.maxAddressLineIndex) {
-                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
-                    }
-                    strAdd = strReturnedAddress.toString()
-                    Log.w(" Current loction address", strReturnedAddress.toString())
-                } else {
-                    Log.w(" Current loction address", "No Address returned!")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.w(" Current loction address",  e.printStackTrace().toString())
+            }else{
+                getDestinationLoc()
             }
-            liveLoc?.setText(strAdd)
 
 
-        }else if (type.equals("2")){
 
-            from_lat = pref.getToLatM().toDouble()
-            from_lng = pref.getToLngM().toDouble()
+        }else if (pref.getType().equals("2")){
+            if (pref.getToLatL().equals("")){
 
-
-            val geocoder: Geocoder
-            val addresses: List<Address>
-            geocoder = Geocoder(requireActivity(), Locale.getDefault())
-
-            var strAdd : String? = null
-            try {
-                val addresses = geocoder.getFromLocation(from_lat!!, from_lng!!, 1)
-                if (addresses != null) {
-                    val returnedAddress = addresses[0]
-                    val strReturnedAddress = java.lang.StringBuilder("")
-                    for (i in 0..returnedAddress.maxAddressLineIndex) {
-                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
-                    }
-                    strAdd = strReturnedAddress.toString()
-                    Log.w(" Current loction address", strReturnedAddress.toString())
-                } else {
-                    Log.w(" Current loction address", "No Address returned!")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.w(" Current loction address", "Canont get Address!")
+            }else{
+                getCurrentLoc()
             }
-            manualLoc?.setText(strAdd)
+            getDestinationLoc()
+
 
         }
         calenderimg.setOnClickListener {
@@ -308,9 +268,9 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
 
 
-            if (to_lat.toString() == ""){
+            if (liveLoc?.text.toString().equals("")){
                 Toast.makeText(requireActivity(), "Please select Start Address", Toast.LENGTH_LONG).show()
-            }else if (from_lat.toString() == ""){
+            }else if (manualLoc?.text.toString().equals("")){
                 Toast.makeText(requireActivity(), "Please select Destination Address", Toast.LENGTH_LONG).show()
 
             }else {
@@ -332,7 +292,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
 
 
-       // binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
+
       //  cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
        // cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
@@ -343,10 +303,16 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
 
         locLinear?.setOnClickListener {
+            val internet :Boolean = isOnline(requireActivity())
+            if(internet == true) {
             selects = "start"
+            pref.setType("1")
             val i = Intent(requireActivity(), LocationPickerActivity::class.java)
-            i.putExtra("type", "1")
             startActivityForResult(i, ADDRESS_PICKER_REQUEST)
+            }else{
+                Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
+
+            }
          /*   val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
           //      mainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -392,9 +358,11 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
             val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
-
+                pref.setType("2")
                 selects = "dest"
-                if (isLocationPermissionGranted()) {
+                val i = Intent(requireActivity(), LocationPickerActivity::class.java)
+                startActivityForResult(i, ADDRESS_PICKER_REQUEST)
+              /*  if (isLocationPermissionGranted()) {
                     advance_li?.isVisible = false
                     map_li?.isVisible = true
 
@@ -423,7 +391,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
                 }else{
                     requestPermissions()
-                }
+                }*/
             }else{
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
@@ -481,6 +449,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                         }
 
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
+                        binding.recylerCabList.layoutManager= GridLayoutManager(context,3)
                         binding.recylerCabList.adapter=advanceCityAdapter
                         binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
 
@@ -1296,5 +1265,66 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         }
 }
 
+    private fun getCurrentLoc(){
+        to_lat = pref.getToLatL().toDouble()
+        to_lng = pref.getToLngL().toDouble()
 
+        var geocoder: Geocoder
+        val addresses: List<Address>
+        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+
+        var strAdd : String? = null
+        try {
+            val addresses = geocoder.getFromLocation(to_lat!!, to_lng!!, 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = java.lang.StringBuilder("")
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+                Log.w(" Current loction address", strReturnedAddress.toString())
+            } else {
+                Log.w(" Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.w(" Current loction address",  e.printStackTrace().toString())
+        }
+        liveLoc?.setText(strAdd)
+    }
+
+
+    private fun getDestinationLoc(){
+
+        from_lat = pref.getToLatM().toDouble()
+        from_lng = pref.getToLngM().toDouble()
+
+
+        val geocoder: Geocoder
+        val addresses: List<Address>
+        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+
+        var strAdd : String? = null
+        try {
+            val addresses = geocoder.getFromLocation(from_lat!!, from_lng!!, 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = java.lang.StringBuilder("")
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+                Log.w(" Current loction address", strReturnedAddress.toString())
+            } else {
+                Log.w(" Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.w(" Current loction address", "Canont get Address!")
+        }
+        manualLoc?.setText(strAdd)
+
+    }
 }
