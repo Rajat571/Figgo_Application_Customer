@@ -91,6 +91,7 @@ class HomeDashboard : Fragment() {
         cab_category_list.add(CabCategory(R.drawable.fadebus,"Micro Bus"))
         cab_category_list.add(CabCategory(R.drawable.fademore,"More"))
         rcv_cardoffer.layoutManager= GridLayoutManager(requireContext(),3)
+
         cardoffer_list.add(CurrentVehicle_itemListAdapter(R.drawable.citycab,"City-Cab"))
         cardoffer_list.add(CurrentVehicle_itemListAdapter(R.drawable.outstationcab,"Outstation"))
         cardoffer_list.add(CurrentVehicle_itemListAdapter(R.drawable.fadesharecab,"Share-Cab"))

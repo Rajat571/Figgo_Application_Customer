@@ -36,6 +36,12 @@ class SearchDriver : BaseClass() {
         var tv_click = findViewById<TextView>(R.id.tv_click)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
+
         shareimg()
         onBackPress()
 

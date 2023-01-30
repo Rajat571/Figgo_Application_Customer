@@ -7,7 +7,7 @@
     android:background="@color/colornavyblue"
     tools:context="com.pearlorganisation.SearchDriver">
 
-<include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
     <TextView
         android:id="@+id/textView"

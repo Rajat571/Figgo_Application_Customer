@@ -40,15 +40,7 @@
 
             </LinearLayout>
 
-          <!--  <TextView
-                android:id="@+id/live_loc"
-                android:background="@drawable/out_line_box"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_gravity="center"
-                android:padding="9dp"
-                android:layout_height="wrap_content"
-                android:hint="Current location"/>-->
+
 
             <TextView
                 android:id="@+id/tv1"
@@ -90,10 +82,10 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_120sdp"
+                            android:layout_height="@dimen/_140sdp"
                             android:layout_gravity="center"
                             android:layout_marginTop="12dp"
-                            android:paddingHorizontal="8dp"
+                            android:paddingHorizontal="6dp"
                             android:background="@drawable/semi_back"
                             android:orientation="horizontal">
 
@@ -101,8 +93,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:layout_marginStart="9dp"
     android:layout_weight="1"
     android:orientation="vertical">
+
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -117,14 +111,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Figgo Always With You"
-                                android:layout_marginStart="13dp"
+                                android:layout_marginTop="-12dp"
+                                android:layout_marginStart="8dp"
                                 android:textColor="@color/colornavyblue"
                                 android:textSize="@dimen/_12sdp"/>
 </LinearLayout>
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_weight="1"
-                                android:layout_height="@dimen/_120sdp"
+                                android:layout_height="@dimen/_140sdp"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:scaleType="fitXY"
                                 android:src="@drawable/newdesigngirmimg" />
@@ -162,6 +157,7 @@
                         android:src="@drawable/girldashboard_img"/>
 
                     <LinearLayout
+                        android:id="@+id/ll_orderbooking"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -204,6 +200,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_offeranddiscount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -245,6 +242,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_figgorewards"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -288,6 +286,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_editprofile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -329,6 +328,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_referandearn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -370,6 +370,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_helpsupport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -411,6 +412,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_faqs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -452,6 +454,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_ratesus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -494,6 +497,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_feedsback"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -521,7 +525,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 app:fontFamily="sans-serif-black"
-                                android:text="Sends Feddback"
+                                android:text="Sends Feeddback"
                                 android:textSize="16sp"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -536,6 +540,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_termsconditions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -578,6 +583,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/ll_cancelationpolicy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="60dp"
@@ -619,26 +625,6 @@
 
                     </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-                    <!-- <ImageView
-                     android:id="@+id/girlimage"
-                     android:layout_width="match_parent"
-                     android:layout_height="200dp"
-                     android:layout_marginHorizontal="8dp"
-                     android:scaleType="centerCrop"
-                     android:src="@drawable/girl"
-                     app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintHorizontal_bias="0.5"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@+id/backgrouund" />-->
 
 
                 </LinearLayout>

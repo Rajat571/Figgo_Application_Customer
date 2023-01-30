@@ -7,7 +7,7 @@
     android:background="@color/colorlightblue"
     tools:context=".UI.Fragments.PaymentWayFragment">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
    <!-- <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/backgrouund"

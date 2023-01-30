@@ -50,6 +50,9 @@ abstract class BaseClass  : AppCompatActivity(){
     var session: Session? = null
    lateinit var shareimg:ImageView
 
+   lateinit var iv_back:ImageView
+   lateinit var iv_bellicon:ImageView
+
 //    var backtxt = findViewById<TextView>(R.id.backtxt)*/
   //  var classname = "Login"
     fun setBaseApcContextParent(cnt: Context?, ain: AppCompatActivity?, lt: String?, classname: String?) {
@@ -171,9 +174,23 @@ abstract class BaseClass  : AppCompatActivity(){
         }
     }
 
+    fun iv_back(){
+        /*var iv_back = findViewById<ImageView>(R.id.iv_back)*/
+        iv_back.setOnClickListener {
+            finish()
+
+    }
+        fun iv_bellicon(){
+            var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+            iv_bellicon.setOnClickListener {
+                finish()
+            }
+        }
+
 
     fun backimg(){
 
+        }
 
 
     }

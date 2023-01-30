@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".OneWayBookingActivity">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
         <LinearLayout
             android:id="@+id/linearLayout2"

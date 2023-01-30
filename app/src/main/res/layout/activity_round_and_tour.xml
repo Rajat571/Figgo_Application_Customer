@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context="com.pearlorganisation.RoundAndTourActivity">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
     <LinearLayout
         android:layout_width="match_parent"

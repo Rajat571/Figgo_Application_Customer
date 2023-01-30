@@ -8,7 +8,7 @@
     android:background="@color/colorlightblue"
     tools:context="com.pearlorganisation.Current_Driver_Details_List">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

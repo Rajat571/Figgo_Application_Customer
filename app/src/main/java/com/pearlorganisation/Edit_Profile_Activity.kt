@@ -1,7 +1,9 @@
 package com.pearlorganisation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 
@@ -29,6 +31,12 @@ class Edit_Profile_Activity : BaseClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this,NotificationBellIconActivity::class.java))
+        }
+
         shareimg()
         onBackPress()
 

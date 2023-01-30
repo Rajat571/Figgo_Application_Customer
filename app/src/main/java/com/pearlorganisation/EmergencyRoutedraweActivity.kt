@@ -1,6 +1,7 @@
 package com.pearlorganisation
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -10,6 +11,8 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -27,13 +30,14 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
 import com.google.gson.Gson
 import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.DriveRatingActivity
 import com.pearlorganisation.figgo.R
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
 
 
-class EmergencyRoutedraweActivity : AppCompatActivity(), OnMapReadyCallback {
+class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback {
 
 
     private var mMap: GoogleMap? = null
@@ -47,8 +51,25 @@ class EmergencyRoutedraweActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var fusedLocationProviderClient:FusedLocationProviderClient
     lateinit var context:Context
     val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION:Int=1001
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
 
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
 
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -56,6 +77,19 @@ class EmergencyRoutedraweActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emergency_routedrawe)
         geocoder= Geocoder(this)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+        var tv_emrgencybtn = findViewById<TextView>(R.id.tv_emrgencybtn)
+        shareimg()
+        onBackPress()
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
+
+        tv_emrgencybtn.setOnClickListener {
+            startActivity(Intent(this, DriveRatingActivity::class.java))
+        }
+
 
 
 

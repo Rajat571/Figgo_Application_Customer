@@ -28,53 +28,6 @@
 
                 <include layout="@layout/header_layout"/>
 
-            <!--    <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/change_profile_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/change_profile_pic_image"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:src="@drawable/ic_baseline_account_circle_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginHorizontal="@dimen/_1sdp"
-                        android:src="@drawable/ic_camera_black"
-                        app:layout_constraintBottom_toBottomOf="@+id/change_profile_pic_image"
-                        app:layout_constraintEnd_toEndOf="@+id/change_profile_pic_image" />
-                </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-              <!--  <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginVertical="@dimen/_15sdp">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/appicon"
-                        android:layout_marginHorizontal="@dimen/_5sdp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Figgo Sipahi"
-                        android:textSize="@dimen/_15sdp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black" />
-
-                </LinearLayout>-->
-
 
 
             </LinearLayout>
@@ -82,13 +35,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical"
+                android:background="@drawable/out_line_box"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <EditText
+                    android:id="@+id/update_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:layout_marginTop="6dp"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+                <!--<TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -101,20 +66,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:id="@+id/update_name"
-                    android:padding="@dimen/_7sdp" />
+                    android:padding="@dimen/_7sdp" />-->
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical"
+                android:background="@drawable/out_line_box"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <EditText
+                    android:id="@+id/update_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:layout_marginTop="6dp"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+               <!-- <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -127,19 +103,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:id="@+id/update_state"
-                    android:padding="@dimen/_7sdp" />
+
+                    android:padding="@dimen/_7sdp" />-->
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical"
+                android:background="@drawable/out_line_box"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <EditText
+                    android:id="@+id/update_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:layout_marginTop="6dp"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+               <!-- <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -152,19 +141,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:id="@+id/update_city"
-                    android:padding="@dimen/_7sdp" />
+
+                    android:padding="@dimen/_7sdp" />-->
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical"
+                android:background="@drawable/out_line_box"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <EditText
+                    android:id="@+id/update_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile No."
+                    android:layout_marginTop="6dp"
+                    android:inputType="number"
+                    android:background="@null"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+
+                <!--<TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -178,18 +181,33 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:id="@+id/update_number"
-                    android:padding="@dimen/_7sdp" />
+                    android:padding="@dimen/_7sdp" />-->
 
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical"
+                android:background="@drawable/out_line_box"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <EditText
+                    android:id="@+id/update_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email ID"
+                    android:layout_marginTop="6dp"
+                    android:inputType="number"
+                    android:background="@null"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+
+             <!--   <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -202,8 +220,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:id="@+id/update_email"
-                    android:padding="@dimen/_7sdp" />
+
+                    android:padding="@dimen/_7sdp" />-->
 
             </LinearLayout>
 

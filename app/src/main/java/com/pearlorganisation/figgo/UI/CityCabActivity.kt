@@ -20,6 +20,7 @@ import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
 import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
 import com.pearlorganisation.DrawerSupportActivity
 import com.pearlorganisation.Edit_Profile_Activity
+import com.pearlorganisation.NotificationBellIconActivity
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
@@ -54,7 +55,6 @@ class CityCabActivity : BaseClass() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.drawer_screen2)
         prefManager = PrefManager(this)
-        shareimg()
         var shareimg=findViewById<ImageView>(R.id.shareimg)
         val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
@@ -66,24 +66,33 @@ class CityCabActivity : BaseClass() {
         var tv_gmail = navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_gmail)
         var iv_imageView = navigationView.getHeaderView(0).findViewById<ImageView>(R.id.iv_imageView)
 
-      /*  tv_rajsharma.text=prefManager.gettv_rajsharma()
-        tv_gmail.text=prefManager.gettv_gmail()
-        */
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
+
+        shareimg()
+        onBackPress()
+
+
+
         tv_mobilenumber.text=prefManager.gettv_mobilenumber()
         iv_imageView.setImageResource(R.drawable.girl)
 
         prefManager = PrefManager(this@CityCabActivity)
-        menu_naviagtion.setOnClickListener {
+
+      /*  menu_naviagtion.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
-        }
+        }*/
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.Change_MPIN, R.string.Rides)
         drawerLayout.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        menu_naviagtion.setOnClickListener {
-            drawerLayout.openDrawer(Gravity.LEFT)
-        }
+       /* menu_naviagtion.setOnClickListener {
+           startActivity(Intent(this,DashBoard::class.java))
+        }*/
 
 
         lleditprofile.setOnClickListener {

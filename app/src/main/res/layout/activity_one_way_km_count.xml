@@ -8,7 +8,7 @@
     android:background="@color/colorlightblue"
     tools:context=".OneWay_Km_CountActivity">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
 
     <LinearLayout

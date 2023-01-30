@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_170sdp"
+    android:layout_height="50dp"
     android:orientation="vertical"
     android:background="@drawable/bottomradius_background">
 
     <LinearLayout
-        android:layout_marginTop="@dimen/_3sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -23,7 +22,7 @@
             android:layout_height="@dimen/_28sdp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/ic_arrow_back"/>
+            android:src="@drawable/ic_baseline_arrow_back_24"/>
 
         <TextView
             android:id="@+id/backtxt"
@@ -37,10 +36,12 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/iv_bellicon"
             android:layout_width="@dimen/_180sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_height="@dimen/_22sdp"
             android:layout_gravity="center"
-            android:src="@drawable/bell_icon"/>
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/notification_whiteimg"/>
 
         <ImageView
             android:id="@+id/shareimg"
@@ -48,15 +49,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-          android:padding="@dimen/_5sdp"
+          android:padding="@dimen/_3sdp"
             android:src="@drawable/ic_baseline_share_24"/>
     </LinearLayout>
 
-        <ImageView
+       <!-- <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_4sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/girl"/>
+            android:src="@drawable/girl"/>-->
 
     </LinearLayout>

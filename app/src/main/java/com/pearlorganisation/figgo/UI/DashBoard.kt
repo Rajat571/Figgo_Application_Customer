@@ -184,6 +184,17 @@ class DashBoard : BaseClass(){
         val textView = findViewById<TextView>(R.id.tv1)
         var iv_user = findViewById<ImageView>(R.id.iv_user)
         var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+        var ll_cancelationpolicy = findViewById<LinearLayout>(R.id.ll_cancelationpolicy)
+        var ll_termsconditions = findViewById<LinearLayout>(R.id.ll_termsconditions)
+        var ll_helpsupport = findViewById<LinearLayout>(R.id.ll_helpsupport)
+        var ll_editprofile = findViewById<LinearLayout>(R.id.ll_editprofile)
+        var ll_orderbooking = findViewById<LinearLayout>(R.id.ll_orderbooking)
+        var ll_offeranddiscount = findViewById<LinearLayout>(R.id.ll_offeranddiscount)
+        var ll_figgorewards = findViewById<LinearLayout>(R.id.ll_figgorewards)
+        var ll_referandearn = findViewById<LinearLayout>(R.id.ll_referandearn)
+        var ll_faqs = findViewById<LinearLayout>(R.id.ll_faqs)
+        var ll_ratesus = findViewById<LinearLayout>(R.id.ll_ratesus)
+        var ll_feedsback = findViewById<LinearLayout>(R.id.ll_feedsback)
 
 /*
         liveLoc = findViewById<TextView>(R.id.live_loc)
@@ -253,6 +264,42 @@ class DashBoard : BaseClass(){
             startActivity(Intent(this,NotificationBellIconActivity::class.java))
         }
 
+        ll_editprofile.setOnClickListener {
+            startActivity(Intent(this,Edit_Profile_Activity::class.java))
+        }
+
+        ll_orderbooking.setOnClickListener {
+            Toast.makeText(this, "Order and booking", Toast.LENGTH_LONG).show()
+        }
+
+        ll_offeranddiscount.setOnClickListener {
+            Toast.makeText(this, "Order and discount", Toast.LENGTH_LONG).show()
+        }
+
+        ll_figgorewards.setOnClickListener {
+            Toast.makeText(this, "Figgo rewards", Toast.LENGTH_LONG).show()
+        }
+
+        ll_referandearn.setOnClickListener {
+            Toast.makeText(this, "Refers and earn", Toast.LENGTH_LONG).show()
+        }
+
+        ll_faqs.setOnClickListener {
+            Toast.makeText(this, "Faqs", Toast.LENGTH_LONG).show()
+        }
+
+        ll_ratesus.setOnClickListener {
+            Toast.makeText(this, "Please give me rating", Toast.LENGTH_LONG).show()
+        }
+
+        ll_feedsback.setOnClickListener {
+            Toast.makeText(this, "Please give me feed back", Toast.LENGTH_LONG).show()
+        }
+
+
+
+
+
 
 
      /*   menu_naviagtion.setOnClickListener {
@@ -264,6 +311,15 @@ class DashBoard : BaseClass(){
         lleditprofile.setOnClickListener {
             startActivity(Intent(this,Edit_Profile_Activity::class.java))
         }
+
+        ll_cancelationpolicy.setOnClickListener {
+            startActivity(Intent(this,CancellationPolicy::class.java))
+        }
+
+        ll_termsconditions.setOnClickListener {
+            startActivity(Intent(this,TermAndConditionActivity::class.java))
+        }
+
 
 
        /* liveLoc?.setOnClickListener {

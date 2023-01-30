@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_cabBookFragment_to_dashBoard"
             app:destination="@id/dashBoard" />
+        <action
+            android:id="@+id/action_cabBookFragment_to_notificationBellIconActivity"
+            app:destination="@id/notificationBellIconActivity" />
     </fragment>
 
     <fragment
@@ -71,5 +74,9 @@
         android:name="com.pearlorganisation.figgo.UI.DashBoard"
         android:label="a_dashboard"
         tools:layout="@layout/a_dashboard" />
+    <activity
+        android:id="@+id/notificationBellIconActivity"
+        android:name="com.pearlorganisation.NotificationBellIconActivity"
+        android:label="NotificationBellIconActivity" />
 
 </navigation>

@@ -2,6 +2,7 @@ package com.pearlorganisation.figgo.UI.Fragments
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -73,19 +74,26 @@ class CabBookFragment : Fragment() {
         fare = view.findViewById<TextView>(R.id.fare)
         var ll_back = view.findViewById<LinearLayout>(R.id.ll_back)
         var shareimg = view.findViewById<ImageView>(R.id.shareimg)
+        var iv_bellicon = view.findViewById<ImageView>(R.id.iv_bellicon)
         pref = PrefManager(requireActivity())
 
-
-
-
         getCabBookData()
+
+        iv_bellicon.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_notificationBellIconActivity)
+
+        }
 
         ll_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_dashBoard)
         }
 
         shareimg.setOnClickListener {
-
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
+            intent.setType("text/plain");
+            startActivity(Intent.createChooser(intent, "Invite Friends"))
         }
 
         book_other.setOnClickListener {
