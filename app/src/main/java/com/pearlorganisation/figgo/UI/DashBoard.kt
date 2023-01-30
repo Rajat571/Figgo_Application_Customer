@@ -13,6 +13,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+
+
+
+
+
+
 import android.text.Layout
 import android.util.Log
 import android.view.Gravity
