@@ -18,7 +18,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="api_key">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
 
-        <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
     <!-- check dummy data  -->
     <string name="google_api_key" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
     <string name="google_app_id" translatable="false">AIzaSyCbd3JqvfSx0p74kYfhRTXE7LZghirSDoU</string>
@@ -58,4 +58,5 @@
     <string name="title_activity_maps1">MapsActivity1</string>
     <string name="title_activity_maps2">MapsActivity2</string>
     <string name="title_activity_emergency_maps">EmergencyMapsActivity</string>
+    <string name="title_activity_emergency_routedrawe">EmergencyRoutedraweActivity</string>
 </resources>

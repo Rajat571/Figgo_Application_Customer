@@ -18,38 +18,52 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
-
         tools:targetApi="31">
+
+        <activity
+            android:name=".DashBoard_NewChange"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name="com.pearlorganisation.NotificationBellIconActivity"
+            android:exported="false"/>
+        <activity android:name="com.pearlorganisation.Edit_Profile_Activity"
+            android:exported="false"/>
+        <activity android:name="com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity"
+            android:exported="false"/>
+        <activity android:name="com.pearlorganisation.DrawerItemActivity.CancellationPolicy"
+            android:exported="false"/>
+        <activity android:name="com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity"
+            android:exported="false"/>
+        <activity android:name="com.pearlorganisation.Current_Driver_Details_List"
+            android:exported="false"/>
+        <activity android:name="com.pearlorganisation.SearchDriver"
+            android:exported="false"/>
+        <activity android:name="com.pearlorganisation.EmergencyRoutedraweActivity"
+            android:exported="false"/>
 
         <activity
             android:name=".UI.MapsActivity"
-            android:exported="false"/>
-
-        <activity android:name=".CurrentMap.EmergencyMapsActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
+        <activity
+            android:name=".CurrentMap.EmergencyMapsActivity"
+            android:exported="false" />
         <activity
             android:name=".UI.VerifyOtp"
-            android:exported="false"/>
-
-
+            android:exported="false" />
         <activity
             android:name=".UI.LocationDisActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".UI.LocationPickerActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".UI.LocationPickerActivityCurr"
-            android:exported="false"/>
-
-
+            android:exported="false"
+            android:noHistory="false" />
         <activity
             android:name=".StudenAddActivity"
             android:exported="false" />
@@ -59,8 +73,9 @@
         <activity
             android:name=".PaymentMethodActivity"
             android:exported="false" />
-        <activity android:name=".CurrentMap.MapsActivity2"
-            android:exported="false"/>
+        <activity
+            android:name=".CurrentMap.MapsActivity2"
+            android:exported="false" />
         <activity
             android:name=".PaymentPayActivity"
             android:exported="false" />
@@ -73,8 +88,9 @@
         <activity
             android:name=".DriveRatingActivity"
             android:exported="false" />
-        <activity android:name=".CurrentMap.MapsActivity1"
-            android:exported="false"/>
+        <activity
+            android:name=".CurrentMap.MapsActivity1"
+            android:exported="false" />
         <activity
             android:name=".EmergencyActivity"
             android:exported="false" />
@@ -88,13 +104,11 @@
             android:name=".FreedomOutstationActivity"
             android:exported="false" />
         <activity
-            android:name="com.pearlorganisation.RoundAndTourActivity"
+            android:name=".RoundAndTourActivity"
             android:exported="false" />
         <activity
             android:name=".One_Way_OutStationActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".CustomerMenuDrawerActivity"
             android:exported="false"
@@ -167,6 +181,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".UI.SplashActivity"
             android:exported="true">
@@ -191,30 +206,30 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        
-        <receiver
-            android:exported="false"
-            android:name="com.razorpay.RzpTokenReceiver">
-            <intent-filter>
-                <action android:name="rzp.device_token.share"/>
-            </intent-filter>
 
+        <receiver
+            android:name="com.razorpay.RzpTokenReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="rzp.device_token.share" />
+            </intent-filter>
         </receiver>
+
         <activity
             android:name="com.razorpay.CheckoutActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <data
                     android:host="rzp.io"
-                    android:scheme="io.rzp"/>
+                    android:scheme="io.rzp" />
             </intent-filter>
-
         </activity>
+
         <meta-data
             android:name="com.razorpay.plugin.googlepay_all"
             android:value="com.razorpay.RzpGpayMerge" />
-
     </application>
 
 </manifest>

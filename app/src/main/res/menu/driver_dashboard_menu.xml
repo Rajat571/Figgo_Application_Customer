@@ -4,10 +4,10 @@
         android:title="Home"/>
 
     <item android:id="@+id/rides_b"
-        android:title="Rides"/>
+        android:title="History"/>
 
     <item android:id="@+id/more_b"
-        android:title="More"/>
+        android:title="Offer"/>
 
     <item android:id="@+id/support_b"
         android:title="Support"/>

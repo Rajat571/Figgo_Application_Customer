@@ -35,6 +35,7 @@
             android:textColor="@color/white"
             android:text="Back" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="@dimen/_180sdp"
             android:layout_height="@dimen/_28sdp"

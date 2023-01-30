@@ -63,7 +63,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'androidx.games:games-activity:1.2.2'
     implementation 'androidx.test:core-ktx:1.5.0'
-   // implementation 'com.google.android.gms:play-services-appindex:16.1.0'
+    // implementation 'com.google.android.gms:play-services-appindex:16.1.0'
     implementation 'com.google.firebase:firebase-appindexing:20.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -97,14 +97,18 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     androidTestImplementation 'androidx.test:core-ktx:1.5.0'
 
-      implementation 'com.razorpay:checkout:1.6.4'
+    implementation 'com.razorpay:checkout:1.6.4'
 
     implementation 'in.payu:payu-checkout-pro:1.8.2'
+    implementation 'com.google.android.libraries.places:places:3.0.0'
+
+   
 
 
-  //implementation 'com.google.android.gms:play-services:12.0.1'
-  //  implementation 'com.google.maps.android:android-maps-utils:2.4.1'
-  // implementation 'com.google.maps.android:android-maps-utils:3.0.0'
 
-   // implementation 'com.android.support:multidex:2.0.1'
+    //implementation 'com.google.android.gms:play-services:12.0.1'
+    //  implementation 'com.google.maps.android:android-maps-utils:2.4.1'
+    // implementation 'com.google.maps.android:android-maps-utils:3.0.0'
+
+    // implementation 'com.android.support:multidex:2.0.1'
 }

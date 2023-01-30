@@ -82,11 +82,7 @@ class LoginActivity : AppCompatActivity(){
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            REQUEST_LOCATION
-        )
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION)
         // mGoogleApiClient = GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this)
         //    .addOnConnectionFailedListener(this).build()
 
@@ -137,15 +133,8 @@ class LoginActivity : AppCompatActivity(){
 
         }
         otp_Verify_button.setOnClickListener {
-
-
             if (enteredOTP.text.toString().equals("") || enteredOTP.text.toString().equals("null")) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Enter Otp",
-                    Toast.LENGTH_SHORT
-                ).show()
-
+                Toast.makeText(this@LoginActivity, "Enter Otp", Toast.LENGTH_SHORT).show()
             } else {
                 verifyOtp()
             }
@@ -157,7 +146,6 @@ class LoginActivity : AppCompatActivity(){
         }
     }
     fun startTimer() {
-
         cTimer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 resend.setText("seconds remaining: " +"00:"+ (millisUntilFinished / 1000).toString())
@@ -170,9 +158,6 @@ class LoginActivity : AppCompatActivity(){
         }
         cTimer.start()
     }
-
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -195,14 +180,10 @@ class LoginActivity : AppCompatActivity(){
             pref.setAccountDetails(
                 account.account.toString(),
                 account.displayName.toString(),
-                account.photoUrl.toString()
-            )
+                account.photoUrl.toString())
             // prefManager.setToken("")
-            Toast.makeText(
-                this@LoginActivity,
-                "Signed In :" + account.account.toString(),
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(this@LoginActivity, "Signed In :" + account.account.toString(), Toast.LENGTH_LONG).show()
+
             if (pref.getMpin().equals("") || pref.getMpin().equals("null")) {
                 startActivity(Intent(this,MPinGenerate::class.java))
             } else {
@@ -234,9 +215,11 @@ class LoginActivity : AppCompatActivity(){
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
                         pref.setUserId(response.getJSONObject("user").getString("id"))
+                        pref.settv_mobilenumber(response.getJSONObject("user").getString("contact_no"))
+                        pref.settv_rajsharma(response.getJSONObject("user").getString("name"))
+                        pref.settv_gmail(response.getJSONObject("user").getString("email"))
                         getotp()
                     }
-
 
                     // Get your json response and convert it to whatever you want.
                 }
@@ -260,6 +243,7 @@ class LoginActivity : AppCompatActivity(){
         //startActivity(Intent(this,MPinGenerate::class.java))
 
     }
+
     private fun getotp(){
         pref.setNumber(input_number.text.toString())
         val URL = "https://test.pearl-developer.com/figo/api/otp/send-otp"

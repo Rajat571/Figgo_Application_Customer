@@ -40,9 +40,9 @@
         tools:layout="@layout/activity_one_way_km_count" />
     <activity
         android:id="@+id/vehicleBookActivity"
-        android:name="com.pearlorganisation.figgo.VehicleBookActivity"
+        android:name="com.pearlorganisation.figgo.Current_Cab_DetailsActivity"
         android:label="vehiclebookactivity"
-        tools:layout="@layout/vehiclebookactivity" />
+        tools:layout="@layout/current_cab_details_activity" />
 
 
 </navigation>

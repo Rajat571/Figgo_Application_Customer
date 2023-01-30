@@ -16,26 +16,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/main"
-
-
         android:layout_height="match_parent">
 
-    <include layout="@layout/activity_dash_board"/>
+
+        <include layout="@layout/activity_dash_board" />
+
 
     </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/perm"
-            android:visibility="gone"
-           >
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:src="@drawable/map"
-                 />
+                android:src="@drawable/map" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

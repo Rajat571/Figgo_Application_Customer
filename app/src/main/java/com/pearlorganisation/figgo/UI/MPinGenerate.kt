@@ -33,7 +33,5 @@ class MPinGenerate : AppCompatActivity() {
             startActivity(Intent(this,DashBoard::class.java))
         }
 
-
-
     }
 }

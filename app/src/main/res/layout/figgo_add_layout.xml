@@ -10,11 +10,10 @@
 
     <ImageView
         android:id="@+id/figgo_add"
-        android:layout_width="220dp"
-        android:layout_height="135dp"
+        android:layout_width="270dp"
+        android:layout_height="185dp"
         android:layout_gravity="center"
-        android:padding="4dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/figgoadd" />
 
 </androidx.cardview.widget.CardView>

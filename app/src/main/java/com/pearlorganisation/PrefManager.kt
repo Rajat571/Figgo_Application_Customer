@@ -52,6 +52,9 @@ import android.content.SharedPreferences
          return pref?.getString("mpin","").toString()
      }
 
+
+
+
      fun setToken(token:String){
          editor?.putString("token",token)
          editor?.commit()
@@ -146,6 +149,41 @@ import android.content.SharedPreferences
      fun getdrivername():String{
          return pref?.getString("drivername","null").toString()
      }
+
+
+
+
+     fun setvehiclname(vehiclname:String){
+         editor?.putString("vehiclname",vehiclname)
+         editor?.commit()
+     }
+
+     fun getvehiclname():String{
+         return pref?.getString("vehiclname","null").toString()
+     }
+
+     fun setvehicleprice(vehicleprice:String){
+         editor?.putString("vehicleprice",vehicleprice)
+         editor?.commit()
+     }
+
+     fun getvehicleprice():String{
+         return pref?.getString("vehicleprice","null").toString()
+     }
+
+     fun setvehiclemodel(vehiclemodel:String){
+         editor?.putString("vehiclemodel",vehiclemodel)
+         editor?.commit()
+     }
+
+     fun getvehiclemodel():String{
+         return pref?.getString("vehiclemodel","null").toString()
+     }
+
+
+
+
+
 
      fun setdl_number(dl_number:String){
          editor?.putString("dl_number",dl_number)
@@ -250,10 +288,55 @@ import android.content.SharedPreferences
          editor?.putString("lng_to_lc",lat)
          editor?.commit()
      }
-
      fun getToLngLC():String{
          return pref?.getString("lng_to_lc","null").toString()
      }
+
+    /* fun settv_rajsharma(){
+
+     }*/
+
+
+     fun settv_rajsharma(tv_rajsharma:String) {
+         editor?.putString("tv_rajsharma",tv_rajsharma)
+         editor?.commit()
+     }
+
+     fun gettv_rajsharma():String{
+         return pref?.getString("tv_rajsharma"," ").toString()
+     }
+
+
+     fun settv_mobilenumber(tv_mobilenumber:String) {
+         editor?.putString("tv_mobilenumber",tv_mobilenumber)
+         editor?.commit()
+     }
+
+
+     fun gettv_mobilenumber():String{
+         return pref?.getString("tv_mobilenumber","null").toString()
+     }
+
+     fun settv_gmail(tv_gmail:String) {
+         editor?.putString("tv_gmail",tv_gmail)
+         editor?.commit()
+     }
+
+     fun gettv_gmail():String{
+         return pref?.getString("tv_gmail"," ").toString()
+     }
+
+     fun setiv_imageView(iv_imageView:String) {
+         editor?.putString("iv_imageView",iv_imageView)
+         editor?.commit()
+     }
+
+     fun getiv_imageView():String{
+         return pref?.getString("iv_imageView",getiv_imageView()).toString()
+     }
+
+
+
      fun setToLngMC(lat:String){
          editor?.putString("lng_to_mc",lat)
          editor?.commit()
@@ -271,5 +354,22 @@ import android.content.SharedPreferences
          return pref?.getString("lat_to_mc","null").toString()
      }
 
+     fun setgetRegistrationToken(getRegistrationToken:String){
+         editor?.commit()
+         editor?.putString("getRegistrationToken",getRegistrationToken)
+     }
+
+     fun getRegistrationToken(): Any {
+         return pref?.getString("getRegistrationToken","null").toString()
+
+     }
+     fun setReqRideId(type:String){
+         editor?.putString("req_ride_id",type)
+         editor?.commit()
+     }
+
+     fun getReqRideId():String{
+         return pref?.getString("req_ride_id","null").toString()
+     }
 
  }

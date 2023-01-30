@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="2dp"
+    android:paddingHorizontal="1dp"
+    android:paddingBottom="1dp"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_lnr"
+        android:background="@color/colorbluedashboard"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="65dp"
+            android:layout_height="50dp"
+            android:background="@drawable/semi_curve"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:src="@drawable/flight"
+                android:id="@+id/cab_category" />
+        </LinearLayout>
+        <TextView
+            android:gravity="center"
+            android:textAlignment="center"
+            android:id="@+id/cab_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City Cab"
+            android:textSize="10sp"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:textColor="#56698F" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -23,6 +23,7 @@ import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
+import com.pearlorganisation.figgo.Current_Cab_DetailsActivity
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
 import org.json.JSONObject
@@ -53,7 +54,7 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
 
 
         holder.ll_main.setOnClickListener {
-            context.startActivity(Intent(context, MapsActivity2::class.java)
+            context.startActivity(Intent(context, Current_Cab_DetailsActivity::class.java)
                 .putExtra("ride_id",OneWayListRatingVehicle.ride_id)
                 .putExtra("driver_id",OneWayListRatingVehicle.driver_id))
         }

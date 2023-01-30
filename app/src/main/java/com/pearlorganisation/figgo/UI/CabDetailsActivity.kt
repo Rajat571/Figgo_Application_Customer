@@ -71,7 +71,6 @@ class CabDetailsActivity : BaseClass(), PaymentResultListener {
 
               try {
                  transaction_id = s
-
                   getOtp()
               } catch (e: Exception) {
                   Log.e(TAG, "Exception in onPaymentSuccess", e)
@@ -92,8 +91,6 @@ class CabDetailsActivity : BaseClass(), PaymentResultListener {
         json.put("transaction_id", transaction_id.toString())
         json.put("payment_type", "card")
         json.put("ride_id", pref.getRideId())
-
-
         Log.d("transac",transaction_id.toString())
         Log.d("rides",pref.getride_id())
         val jsonOblect: JsonObjectRequest =

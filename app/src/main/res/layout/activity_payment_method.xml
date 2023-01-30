@@ -47,6 +47,19 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_nxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Click Here"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:padding="5dp"
+            android:background="@color/colorRed" />
+
     </androidx.cardview.widget.CardView>
 
     <ImageView

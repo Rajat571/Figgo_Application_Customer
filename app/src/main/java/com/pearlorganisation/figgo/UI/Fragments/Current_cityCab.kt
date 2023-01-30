@@ -78,12 +78,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     GoogleMap.OnCameraMoveListener,
     GoogleMap.OnCameraMoveCanceledListener,GoogleMap.OnCameraIdleListener  {
 
-    private val REQUEST_CHECK_SETTINGS: Int=101;
+    private val REQUEST_CHECK_SETTINGS: Int=101
     private lateinit var mMap: GoogleMap
-    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
+    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101
     private lateinit var fusedLocationClient: FusedLocationProviderClient;
-    private lateinit var lastLocation: Location;
-    private lateinit var locationRequest: LocationRequest;
+    private lateinit var lastLocation: Location
+    private lateinit var locationRequest: LocationRequest
 
     lateinit var binding: FragmentCurrentCityCabBinding
     lateinit var currentVehicleAdapter: CurrentVehicleAdapter
@@ -400,7 +400,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                             cablist.add(CurrentVehicleModel(name,image,ride_id,id, min_price,max_price))
 
                         }
-                        currentVehicleAdapter= CurrentVehicleAdapter(requireActivity(),cablist)
+                        currentVehicleAdapter= CurrentVehicleAdapter(requireContext() as Activity,cablist)
                         binding.recylerCabList.adapter=currentVehicleAdapter
                         binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
                         progress?.isVisible = false
@@ -430,12 +430,6 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
     }
 
-
-
-
-
-
-
     @SuppressLint("MissingPermission")
     private fun getLocation() {
 
@@ -454,8 +448,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     LocationManager.NETWORK_PROVIDER,
                     5000,
                     0F,
-                    networkLocationListener
-                )
+                    networkLocationListener)
             }
 
 
@@ -851,6 +844,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             }
         }
     }
+
     fun checkLocationService() {
 
         locationRequest = LocationRequest.create();

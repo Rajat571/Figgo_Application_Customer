@@ -13,7 +13,6 @@ import android.content.pm.PackageManager
 import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -36,7 +35,6 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.google.android.gms.appindexing.AppIndex
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
@@ -47,7 +45,6 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -63,11 +60,9 @@ import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.pearlorganisation.figgo.UI.LocationPickerActivity
-import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
 import org.json.JSONObject
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -103,7 +98,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     var to_lng :Double ?= 0.0
     var from_lng :Double ?= 0.0
     lateinit var pref: PrefManager
-    var selects : String ?= "";
+    var selects : String ?= ""
     lateinit var ll_location : LinearLayout
     lateinit var ll_choose_vehicle : LinearLayout
     var  myLocation : LatLng ?= null
@@ -150,19 +145,17 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         var next = view?.findViewById<Button>(R.id.next)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         var advance_li = view?.findViewById<LinearLayout>(R.id.adLinear)
-      //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
         var set = view?.findViewById<TextView>(R.id.img_marker)
 
-
-
-        //map_li?.isVisible = false
         ll_choose_vehicle?.isVisible = false
         pref.setCount("location")
         pref.setBookingNo("")
         pref.setOtp("")
         pref.setRideId("")
         pref.setVehicleId("")
+
         val apiKey = getString(R.string.api_key)
+
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
         }
@@ -171,7 +164,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             mMap!!.clear()
             advance_li?.isVisible = true
            // map_li?.isVisible = false
-
 
         }
 
@@ -188,19 +180,13 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         } else {
             TODO("VERSION.SDK_INT < O")
         }
+
         if (pref.getType().equals("1")){
-
           getCurrentLoc()
-
             if (pref.getToLatM().equals("")){
-
-
             }else{
                 getDestinationLoc()
             }
-
-
-
         }else if (pref.getType().equals("2")){
             if (pref.getToLatL().equals("")){
 
@@ -208,9 +194,9 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                 getCurrentLoc()
             }
             getDestinationLoc()
-
-
         }
+
+
         calenderimg.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
@@ -253,9 +239,9 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             }
 
         }
-        manualLoc?.setOnClickListener {
 
-            press = "manual";
+        manualLoc?.setOnClickListener {
+            press = "manual"
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS,Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
                 .build(requireActivity())
@@ -285,28 +271,10 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             }
 
         }
+
         next?.setOnClickListener {
-
-
-
                 startActivity(Intent(requireActivity(), CabDetailsActivity::class.java))
-
-
-
         }
-
-
-
-
-
-
-      //  cablist.add(AdvanceCityCab(R.drawable.figgo_auto,"75-100"))
-       // cablist.add(AdvanceCityCab(R.drawable.figgo_bike,"45-65"))
-       // cablist.add(AdvanceCityCab(R.drawable.figgo_e_rick,"25-40"))
-      //  cablist.add(AdvanceCityCab(R.drawable.figgo_lux,"125-400"))
-       // cablist.add(AdvanceCityCab(R.drawable.ola_mini,"256-420"))
-
-      // getLocation()
 
 
         locLinear?.setOnClickListener {
@@ -320,45 +288,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
             }
-         /*   val internet :Boolean = isOnline(requireActivity())
-            if(internet == true) {
-          //      mainBinding = ActivityMainBinding.inflate(layoutInflater)
-            //    mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-                selects = "start"
-                if (isLocationPermissionGranted()) {
 
-                    advance_li?.isVisible = false
-                    map_li?.isVisible = true
-                    locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-                    hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-//------------------------------------------------------//
-                    hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-                    mainBinding = ActivityMainBinding.inflate(layoutInflater)
-                    mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-                    var mapFragment = getChildFragmentManager()
-                        .findFragmentById(R.id.map) as SupportMapFragment
-
-                    mapFragment!!.getMapAsync(this)
-
-
-                    googleApiClient = GoogleApiClient.Builder(requireActivity())
-                        .addConnectionCallbacks(this)
-                        .addOnConnectionFailedListener(this)
-                        .addApi(LocationServices.API)
-
-                        .addApi(AppIndex.API).build()
-
-
-                    getLocation()
-                    // startActivity(Intent(requireActivity(), MapsActivity::class.java))
-                }else{
-                    requestPermissions()
-                }
-            }else{
-                Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
-
-            }*/
         }
 
         destLinear?.setOnClickListener {
@@ -369,36 +299,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                 selects = "dest"
                 val i = Intent(requireActivity(), LocationPickerActivity::class.java)
                 startActivityForResult(i, ADDRESS_PICKER_REQUEST)
-              /*  if (isLocationPermissionGranted()) {
-                    advance_li?.isVisible = false
-                    map_li?.isVisible = true
 
-                    locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-                    hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-//------------------------------------------------------//
-                    hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-                    mainBinding = ActivityMainBinding.inflate(layoutInflater)
-                    mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-                    var mapFragment = getChildFragmentManager()
-                        .findFragmentById(R.id.map) as SupportMapFragment
-
-                    mapFragment!!.getMapAsync(this)
-
-
-                    googleApiClient = GoogleApiClient.Builder(requireActivity())
-                        .addConnectionCallbacks(this)
-                        .addOnConnectionFailedListener(this)
-                        .addApi(LocationServices.API)
-
-                        .addApi(AppIndex.API).build()
-
-
-                    getLocation()
-
-                }else{
-                    requestPermissions()
-                }*/
             }else{
                 Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
@@ -426,12 +327,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         json.put("type", "advance_booking")
         json.put("to_location_name", manualLoc?.text.toString())
         json.put("from_location_name", liveLoc?.text.toString())
-
-
-
-
-        val jsonOblect: JsonObjectRequest =
-            object : JsonObjectRequest(Method.POST, URL, json, object :
+        val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
@@ -463,6 +359,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                         advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
                         binding.recylerCabList.layoutManager= GridLayoutManager(context,3)
                         binding.recylerCabList.adapter=advanceCityAdapter
+                        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
 
                     }
                     // Get your json response and convert it to whatever you want.
@@ -490,46 +387,17 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     }
 
 
-    //moving the map to location
-//Creating a location object
-    //Getting current location
-  /*  private val currentLocation: Unit
-        private get() {
-            mMap!!.clear()
-            //Creating a location object
-            @SuppressLint("MissingPermission") val location =
-                LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
-            if (location != null) {
-                //Getting longitude and latitude
-                to_lng = location.longitude
-                to_lat = location.latitude
 
-               // myLocation(latitude.toDouble(),longitude.toDouble())
-                //moving the map to location
-                moveMap()
-            }
-        }*/
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
-
         if (isLocationPermissionGranted()) {
             if (hasGps) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    5000,
-                    0F,
-                    gpsLocationListener
-                )
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F, gpsLocationListener)
             }
 //------------------------------------------------------//
             if (hasNetwork) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
-                    5000,
-                    0F,
-                    networkLocationListener
-                )
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0F, networkLocationListener)
             }
 
 
@@ -540,150 +408,34 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             lastKnownLocationByGps?.let {
                 locationByGps = lastKnownLocationByGps
             }
-            //------------------------------------------------------//
 
-
-            val lastKnownLocationByNetwork =
-                locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            val lastKnownLocationByNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
             lastKnownLocationByNetwork?.let {
                 locationByNetwork = lastKnownLocationByNetwork
             }
-//------------------------------------------------------//
-            //  if (locationByGps != null || locationByNetwork != null) {
-            /*  if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
-                    if (selects.equals("start")) {
-
-                        to_lat = locationByGps?.latitude.toString()
-                        to_lng = locationByGps?.longitude.toString()
-
-                        val geocoder: Geocoder
-                        val addresses: List<Address>
-                        geocoder = Geocoder(requireActivity(), Locale.getDefault())
-
-                        addresses = locationByGps?.let {
-                            geocoder.getFromLocation(
-                                it.latitude,
-                                it.longitude,1
-                            )
-                        }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-                        val address = addresses[0].getAddressLine(0)
-                        liveLoc?.setText(address)
-                    }else{
-
-                        from_lat = locationByGps?.latitude.toString()
-                        from_lng = locationByGps?.longitude.toString()
-
-                        val geocoder: Geocoder
-                        val addresses: List<Address>
-                        geocoder = Geocoder(requireActivity(), Locale.getDefault())
-
-                        addresses = locationByGps?.let {
-                            geocoder.getFromLocation(
-                                it.latitude,
-                                it.longitude,1
-                            )
-                        }!! // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-                        val address = addresses[0].getAddressLine(0)
-                        manualLoc?.setText(address)
-                    }
-                    // use latitude and longitude as per your need
-                } else {*/
             if (locationByNetwork == null) {
                 Toast.makeText(requireActivity(), "No Network", Toast.LENGTH_LONG).show()
 
             } else {
 
 
-
                     to_lat = locationByNetwork?.latitude
                     to_lng = locationByNetwork?.longitude
-
-
 
                     direction
 
             }
-            // use latitude and longitude as per your need
-            // }
-            // }
+
         } else {
             requestPermissions()
         }
     }
 
-       /* if (ActivityCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }else {
-            requestPermissions()
-        }checkLocationService
-        mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
-                    val location: Location? = task.result
 
-                    if (location != null) {
-                        val geocoder = Geocoder(requireActivity(), Locale.getDefault())
-                        val list: List<Address> =
-                            geocoder.getFromLocation(location.latitude, location.longitude, 1) as List<Address>
-                        mainBinding.apply {
-                            if (selects.equals("start")) {
-                                //   tvLatitude.text = "Latitude\n${list[0].latitude}"
-                                 to_lat = "${list[0].latitude}"
-                                to_lng = "${list[0].longitude}"
-                                // tvCountryName.text = "Country Name\n${list[0].countryName}"
-                                var location: String? = "${list[0].getAddressLine(0)}"
-                                liveLoc!!.text = location?.replace("133", "")?.replace(",","")
-                                //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
-                            }else{
-                                    from_lat  = "${list[0].latitude}"
-                                 from_lng = "${list[0].longitude}"
-
-
-                                var location: String? = "${list[0].getAddressLine(0)}"
-                                manualLoc!!.text = location?.replace("133", "")?.replace(",","")
-                                //tvAddress.text = "Address\n${list[0].getAddressLine(0)}"
-                            }
-                        }
-                    }else{
-                        getLocation()
-                    }
-                }
-            }*/
-
-    //Function to move the map
     private fun moveMap() {
-        //Creating a LatLng Object to store Coordinates
         val latLng = LatLng(to_lat!!, to_lng!!)
-
-
-        //Adding marker to map
-        mMap!!.addMarker(
-            MarkerOptions()
-                .position(latLng) //setting position
-                .draggable(true) //Making the marker draggable
-                .title("Current Location")
-        ) //Adding a title
-
-        //Moving the camera
+        mMap!!.addMarker(MarkerOptions().position(latLng)) //Adding a title
         mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-
-        //Animating the camera
         mMap!!.animateCamera(CameraUpdateFactory.zoomTo(15f))
     }
 
@@ -705,15 +457,13 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                     liveLoc!!.setText(place.address)
                 }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                val status = Autocomplete.getStatusFromIntent(
-                    data!!
-                )
+                val status = Autocomplete.getStatusFromIntent(data!!)
             } else if (resultCode == AppCompatActivity.RESULT_CANCELED) {
             }
         }else if (requestCode == REQUEST_CHECK_SETTINGS) {
             if (resultCode == Activity.RESULT_OK) {
                 val result = data!!.getStringExtra("result")
-                fetchCurrentLocation();
+                fetchCurrentLocation()
             }
             else if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -759,41 +509,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
         return true
     }
-  /*  override fun onStart() {
-        googleApiClient!!.connect()
-        super.onStart()
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        val viewAction = Action.newAction(
-            Action.TYPE_VIEW,  // TODO: choose an action type.
-            "Maps Page",  // TODO: Define a title for the content shown.
-            // TODO: If you have web page content that matches this app activity's content,
-            // make sure this auto-generated web page URL is correct.
-            // Otherwise, set the URL to null.
-            Uri.parse("http://host/path"),  // TODO: Make sure this auto-generated app deep link URI is correct.
-            Uri.parse("android-app://com.pearlorganisation.figgo/http/host/path")
-        )
-        AppIndex.AppIndexApi.start(googleApiClient, viewAction)
-
-    }
-
-    override fun onStop() {
-        googleApiClient!!.disconnect()
-        super.onStop()
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        val viewAction = Action.newAction(
-            Action.TYPE_VIEW,  // TODO: choose an action type.
-            "Maps Page",  // TODO: Define a title for the content shown.
-            // TODO: If you have web page content that matches this app activity's content,
-            // make sure this auto-generated web page URL is correct.
-            // Otherwise, set the URL to null.
-            Uri.parse("http://host/path"),  // TODO: Make sure this auto-generated app deep link URI is correct.
-            Uri.parse("android-app://com.pearlorganisation.figgo/http/host/path")
-        )
-        AppIndex.AppIndexApi.end(googleApiClient, viewAction)
-    }//Getting longitude and latitude*/
-
 
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
@@ -837,7 +552,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             override fun onProviderDisabled(provider: String) {}
 
     }
-    //------------------------------------------------------//
+
     val networkLocationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             locationByNetwork= location
@@ -969,6 +684,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             }
         }
     }
+
     fun checkLocationService() {
 
         locationRequest = LocationRequest.create();
@@ -1010,6 +726,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
     override fun onConnectionSuspended(i: Int) {}
     override fun onConnectionFailed(connectionResult: ConnectionResult) {}
+
     override fun onCameraMoveStarted(p0: Int) {
         Log.v("Onmove start","Onmove "+p0);
         mMap.clear()
@@ -1032,58 +749,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         val position: LatLng = markerOptions.getPosition()
 
 
-       /* if (selects.equals("start")){
-
-            to_lat = position.latitude
-            to_lng = position.longitude
-
-            val geocoder: Geocoder
-            val addresses: List<Address>
-            geocoder = Geocoder(requireActivity(), Locale.getDefault())
-
-            addresses =
-                geocoder.getFromLocation(
-                    position.latitude,
-                    position.longitude,
-                    1
-                )!!// Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-
-            val address = addresses[0].getAddressLine(0)
-            liveLoc?.setText(address)
-
-
-        }else{
-
-            from_lat = position.latitude
-            from_lng = position.longitude
-
-
-            val geocoder: Geocoder
-            val addresses: List<Address>
-            geocoder = Geocoder(requireActivity(), Locale.getDefault())
-
-            var strAdd : String? = null
-            try {
-                val addresses = geocoder.getFromLocation(position.latitude, position.longitude, 1)
-                if (addresses != null) {
-                    val returnedAddress = addresses[0]
-                    val strReturnedAddress = java.lang.StringBuilder("")
-                    for (i in 0..returnedAddress.maxAddressLineIndex) {
-                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
-                    }
-                    strAdd = strReturnedAddress.toString()
-                    Log.w(" Current loction address", strReturnedAddress.toString())
-                } else {
-                    Log.w(" Current loction address", "No Address returned!")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.w(" Current loction address", "Canont get Address!")
-            }
-            manualLoc?.setText(address)
-
-        }*/
     }
     private val direction: Unit
 
@@ -1130,80 +795,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         return urlString.toString()
     }//Calling the method drawPath to draw the path
 
-  /*  override fun onMapLongClick(latLng: LatLng) {
-        //Clearing all the markers
-        mMap!!.clear()
 
-
-        //Adding a new marker to the current pressed position
-        mMap!!.addMarker(
-            MarkerOptions()
-                .position(latLng)
-                .draggable(true)
-        )
-      /*  if (selects.equals("start")){
-
-            to_lat = latLng.latitude
-            to_lng = latLng.longitude
-
-            val geocoder: Geocoder
-            val addresses: List<Address>
-            geocoder = Geocoder(requireActivity(), Locale.getDefault())
-            var strAdd : String? = null
-            try {
-                val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-                if (addresses != null) {
-                    val returnedAddress = addresses[0]
-                    val strReturnedAddress = java.lang.StringBuilder("")
-                    for (i in 0..returnedAddress.maxAddressLineIndex) {
-                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
-                    }
-                    strAdd = strReturnedAddress.toString()
-                    Log.w(" Current loction address", strReturnedAddress.toString())
-                } else {
-                    Log.w(" Current loction address", "No Address returned!")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.w(" Current loction address", "Canont get Address!")
-            }
-          // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-            liveLoc?.setText(strAdd)
-
-
-        }else{
-
-            from_lat = latLng.latitude
-            from_lng = latLng.longitude
-
-
-            val geocoder: Geocoder
-            val addresses: List<Address>
-            geocoder = Geocoder(requireActivity(), Locale.getDefault())
-            var strAdd : String? = null
-            try {
-                val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-                if (addresses != null) {
-                    val returnedAddress = addresses[0]
-                    val strReturnedAddress = java.lang.StringBuilder("")
-                    for (i in 0..returnedAddress.maxAddressLineIndex) {
-                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
-                    }
-                    strAdd = strReturnedAddress.toString()
-                    Log.w(" Current loction address", strReturnedAddress.toString())
-                } else {
-                    Log.w(" Current loction address", "No Address returned!")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.w(" Current loction address", "Canont get Address!")
-            }
-            manualLoc?.setText(strAdd)
-
-        }*/
-
-    }*/
 
     override fun onMarkerDragStart(marker: Marker) {
 
@@ -1311,7 +903,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
         from_lat = pref.getToLatM().toDouble()
         from_lng = pref.getToLngM().toDouble()
-
 
         val geocoder: Geocoder
         val addresses: List<Address>

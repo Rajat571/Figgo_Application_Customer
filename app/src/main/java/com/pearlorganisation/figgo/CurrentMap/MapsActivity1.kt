@@ -70,6 +70,8 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         super.onCreate(savedInstanceState)
         binding = ActivityMaps1Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        var shareimg = findViewById<ImageView>(R.id.shareimg)
+        var backimg = findViewById<ImageView>(R.id.backimg)
         shareimg()
         onBackPress()
         var id = intent.getStringExtra("id")
@@ -78,8 +80,6 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         pref  = PrefManager(this)
         var ll_accept = findViewById<LinearLayout>(R.id.ll_accept)
         val onewayvehiclelist = findViewById<RecyclerView>(R.id.onewayvehiclelist)
-        var shareimg = findViewById<ImageView>(R.id.shareimg)
-        var backimg = findViewById<ImageView>(R.id.backimg)
         var progress = findViewById<ProgressBar>(R.id.progress)
         var backtxt = findViewById<TextView>(R.id.backtxt)
 
@@ -87,13 +87,13 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         /*getAccept()*/
 
 
-        backtxt.setOnClickListener {
+       /* backtxt.setOnClickListener {
             startActivity(Intent(this,DashBoard::class.java))
         }
 
         backimg.setOnClickListener {
             startActivity(Intent(this,DashBoard::class.java))
-        }
+        }*/
 
 
 
@@ -204,7 +204,6 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                     val status = response.getString("status")
                     val cabs = response.getJSONObject("data").getJSONArray("cabs")
                     val ride = response.getJSONObject("data").getJSONObject("ride").getString("id")
-
                     for(p2 in 0 until cabs.length()) {
                         val data=response.getJSONObject("data").getJSONArray("cabs").getJSONObject(p2)
                         cab_name=data.getString( "cab")

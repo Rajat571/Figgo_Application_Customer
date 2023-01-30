@@ -10,11 +10,11 @@ class CurrentAboutActivity : BaseClass() {
     private lateinit var webView: WebView
 
     override fun setLayoutXml() {
-        setContentView(R.layout.activity_current_about)
+
     }
 
     override fun initializeViews() {
-        webView = findViewById<WebView>(R.id.webabout)
+
     }
 
     override fun initializeClickListners() {
@@ -31,6 +31,8 @@ class CurrentAboutActivity : BaseClass() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_current_about)
+        webView = findViewById<WebView>(R.id.webabout)
 
 
 

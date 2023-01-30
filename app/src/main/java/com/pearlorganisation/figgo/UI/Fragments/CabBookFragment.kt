@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
@@ -54,11 +55,8 @@ class CabBookFragment : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.fragment_cab_book, container, false)
     }
 
@@ -73,14 +71,22 @@ class CabBookFragment : Fragment() {
         to_loc = view.findViewById<TextView>(R.id.to_loc)
         from_loc = view.findViewById<TextView>(R.id.from_loc)
         fare = view.findViewById<TextView>(R.id.fare)
-    //    image = view.findViewById<ImageView>(R.id.image)
-
+        var ll_back = view.findViewById<LinearLayout>(R.id.ll_back)
+        var shareimg = view.findViewById<ImageView>(R.id.shareimg)
         pref = PrefManager(requireActivity())
 
 
 
 
         getCabBookData()
+
+        ll_back.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_dashBoard)
+        }
+
+        shareimg.setOnClickListener {
+
+        }
 
         book_other.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_payFragment)
@@ -92,7 +98,6 @@ class CabBookFragment : Fragment() {
         }
 
         book_self.setOnClickListener {
-
             val amt = "1"
             val amount = Math.round(amt.toFloat() * 100).toInt()
             val checkout = Checkout()
@@ -116,7 +121,8 @@ class CabBookFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
                 e.printStackTrace()
             }
-                    }
+
+        }
 
     }
 
@@ -128,10 +134,6 @@ class CabBookFragment : Fragment() {
         val json = JSONObject()
         json.put("ride_id", pref.getRideId())
         json.put("vehicle_type_id", pref.getVehicleId())
-
-
-
-
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
@@ -162,8 +164,6 @@ class CabBookFragment : Fragment() {
                         fare?.setText("Approx.. fare Rs. "+ min_price +" to "+ max_price +",\n                for this ride\nwithout waiting  parking charge\nFinal Price is differ from Approx. "
 
                         )
-
-
                     }
                     // Get your json response and convert it to whatever you want.
                 }
