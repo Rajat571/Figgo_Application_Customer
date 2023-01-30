@@ -98,7 +98,6 @@ class CabBookFragment : Fragment() {
         }
 
         book_self.setOnClickListener {
-
             val amt = "1"
             val amount = Math.round(amt.toFloat() * 100).toInt()
             val checkout = Checkout()
@@ -122,7 +121,8 @@ class CabBookFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Error in payment: " + e.message, Toast.LENGTH_SHORT).show();
                 e.printStackTrace()
             }
-                    }
+
+        }
 
     }
 

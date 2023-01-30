@@ -363,6 +363,13 @@ import android.content.SharedPreferences
          return pref?.getString("getRegistrationToken","null").toString()
 
      }
+     fun setReqRideId(type:String){
+         editor?.putString("req_ride_id",type)
+         editor?.commit()
+     }
 
+     fun getReqRideId():String{
+         return pref?.getString("req_ride_id","null").toString()
+     }
 
  }

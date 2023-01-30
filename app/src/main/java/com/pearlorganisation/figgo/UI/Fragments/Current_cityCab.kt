@@ -78,12 +78,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     GoogleMap.OnCameraMoveListener,
     GoogleMap.OnCameraMoveCanceledListener,GoogleMap.OnCameraIdleListener  {
 
-    private val REQUEST_CHECK_SETTINGS: Int=101;
+    private val REQUEST_CHECK_SETTINGS: Int=101
     private lateinit var mMap: GoogleMap
-    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101;
+    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101
     private lateinit var fusedLocationClient: FusedLocationProviderClient;
-    private lateinit var lastLocation: Location;
-    private lateinit var locationRequest: LocationRequest;
+    private lateinit var lastLocation: Location
+    private lateinit var locationRequest: LocationRequest
 
     lateinit var binding: FragmentCurrentCityCabBinding
     lateinit var currentVehicleAdapter: CurrentVehicleAdapter
@@ -149,11 +149,11 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         var submit = view?.findViewById<Button>(R.id.submit)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         var advance_li = view?.findViewById<LinearLayout>(R.id.adLinear)
-        var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
+      //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
         var set = view?.findViewById<TextView>(R.id.img_marker)
         ll_choose_vehicle?.isVisible = false
 
-        map_li?.isVisible = false
+      //  map_li?.isVisible = false
         ll_choose_vehicle?.isVisible = false
         pref.setBookingNo("")
         pref.setOtp("")
@@ -165,7 +165,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }
         set?.setOnClickListener {
             advance_li?.isVisible = true
-            map_li?.isVisible = false
+          //  map_li?.isVisible = false
         }
         locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -400,7 +400,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                             cablist.add(CurrentVehicleModel(name,image,ride_id,id, min_price,max_price))
 
                         }
-                        currentVehicleAdapter= CurrentVehicleAdapter(requireActivity(),cablist)
+                        currentVehicleAdapter= CurrentVehicleAdapter(requireContext() as Activity,cablist)
                         binding.recylerCabList.adapter=currentVehicleAdapter
                         binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
                         progress?.isVisible = false
@@ -844,6 +844,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             }
         }
     }
+
     fun checkLocationService() {
 
         locationRequest = LocationRequest.create();

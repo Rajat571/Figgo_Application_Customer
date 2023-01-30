@@ -13,11 +13,11 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/choose_user"
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="560dp"
         android:layout_marginStart="@dimen/_18sdp"
         android:layout_marginEnd="@dimen/_18sdp"
         android:visibility="visible"
-        android:layout_marginTop="-65dp"
+        android:layout_marginTop="-115dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.590">
 
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/activanumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,88 +35,225 @@
             android:fontFamily="sans-serif-black"
             android:textColor="@color/black"
             android:text="Activa - CH-01-2015"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_13sdp" />-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <!--<de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/crl_driverimg"
             android:layout_width="@dimen/_45sdp"
             android:layout_height="@dimen/_45sdp"
             android:background="@drawable/bg_circle_black"
             android:src="@drawable/girl_img"
             app:civ_border_width="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_45sdp"
-            android:layout_marginStart="@dimen/_12sdp"/>
+            android:layout_marginTop="@dimen/_65sdp"
+            android:layout_marginStart="@dimen/_12sdp"/>-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/driver_name"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            app:cardElevation="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/_6sdp"
+            app:cardMaxElevation="@dimen/_6sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/iv_vehicleimg"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:background="@drawable/bg_circle_black"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:src="@drawable/blueactiva_img" />
+
+
+                <TextView
+                    android:id="@+id/tv_vehiclenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_22sdp"
+                    android:text="Activa - CH-01-2015"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/crl_driverimg"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_65sdp"
+                android:layout_marginTop="@dimen/_69sdp"
+                android:background="@drawable/bg_circle_black"
+                android:src="@drawable/girl_img"
+                app:civ_border_width="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_12sdp"/>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_35sdp"
-                android:text="Ravi Singh"
-                android:layout_marginStart="@dimen/_66sdp"/>
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_34sdp"
+                android:layout_marginTop="@dimen/_26sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/iv_drivername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Ravi Singh"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
+                <RatingBar
+                    android:id="@+id/ride_service_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:max="5"
+                    android:numStars="5"
+                    style="?android:attr/ratingBarStyleSmall"/>
+
+                <TextView
+                    android:id="@+id/tv_dl_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="DL. No. Cgdjn9857imvc"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp" />
+            </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/dlnumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DL. No. Cgdjn9857imvc"
-                android:layout_marginStart="@dimen/_66sdp"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/black"/>
-        </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-39dp"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="290dp"
-                tools:context=".CurrentMap.MapsActivity1" />
+            <TextView
+                android:id="@+id/tv_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="2"
+                android:layout_margin="@dimen/_6sdp"
+                android:background="@color/coloryellowlight"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="5654"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+
+            <ImageView
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_call_24" />
+
+            <TextView
+                android:id="@+id/tv_emrgencybtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/_6sdp"
+                android:background="@color/colorRed"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="Emergency"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+
+
 
 
         </LinearLayout>
 
-        <LinearLayout
+          <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="bottom"
+           android:orientation="vertical">
+
+           <fragment
+               android:id="@+id/map"
+               android:name="com.google.android.gms.maps.SupportMapFragment"
+               android:layout_width="match_parent"
+               android:layout_height="290dp"
+               tools:context=".CurrentMap.MapsActivity1" />
+
+
+       </LinearLayout>
+
+
+
+
+       <!-- <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_53sdp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/sqaureoutline_bg_yellow"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-            <TextView
+            &lt;!&ndash;<TextView
                 android:id="@+id/emrgencybtn"
-                android:layout_width="@dimen/_102sdp"
-                android:layout_height="@dimen/_31sdp"
-                android:layout_gravity="center"
+                android:layout_width="@dimen/_85sdp"
+                android:layout_height="wrap_content"
                 android:text="Emergency"
+                android:layout_weight="1"
+                android:padding="@dimen/_6sdp"
+                android:backgroundTint="@color/colorRed"
+                android:background="@drawable/sqaureoutline_bg_yellow"
                 android:gravity="center"
-                android:background="@color/colorRed"
-                android:textColor="@color/white" />
+                android:textColor="@color/white" />&ndash;&gt;
 
-        </LinearLayout>
+           &lt;!&ndash; <TextView
+                android:id="@+id/tv_otp"
+                android:layout_width="@dimen/_85sdp"
+                android:layout_height="wrap_content"
+                android:text="5654"
+                android:layout_weight="1"
+                android:padding="@dimen/_6sdp"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/_9sdp"
+                android:textSize="@dimen/_13sdp"
+                android:layout_gravity="center"
+                android:background="@color/black"
+                android:textColor="@color/white" />&ndash;&gt;
 
-        <TextView
+
+
+        </LinearLayout>-->
+
+
+
+       <!-- <TextView
+            android:id="@+id/tv_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
-            android:layout_marginBottom="@dimen/_33sdp"
+            android:layout_marginBottom="@dimen/_48sdp"
             android:text="Click Here only Major Issue,other wise punished"
-            android:textColor="@color/colorRed" />
+            android:textColor="@color/colorRed" />-->
+
+
+
+
 
     </androidx.cardview.widget.CardView>
 

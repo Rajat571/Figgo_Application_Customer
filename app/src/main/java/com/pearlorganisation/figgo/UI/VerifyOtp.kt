@@ -52,7 +52,7 @@ class VerifyOtp : AppCompatActivity() {
 
 
 
-       // startTimer()
+        // startTimer()
     }
 
 
@@ -73,8 +73,8 @@ class VerifyOtp : AppCompatActivity() {
                     if (response != null) {
                         if (pref.getToken().equals("") || pref.getToken().equals("null")) {
 
-                              val token = response.getString("token")
-                              pref.setToken(token)
+                            val token = response.getString("token")
+                            pref.setToken(token)
                             pref.isValidLogin()
                             Toast.makeText(
                                 this@VerifyOtp,
@@ -83,21 +83,21 @@ class VerifyOtp : AppCompatActivity() {
                             ).show()
                             //  Log.d("SendData", "token===" + token)
                             //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                              if (pref.getMpin().equals("")) {
-                                  startActivity(
-                                      Intent(
-                                          this@VerifyOtp,
-                                          MPinGenerate::class.java
-                                      )
-                                  )
-                              } else {
-                                  startActivity(
-                                      Intent(
-                                          this@VerifyOtp,
-                                          DashBoard::class.java
-                                      )
-                                  )
-                              }
+                            if (pref.getMpin().equals("")) {
+                                startActivity(
+                                    Intent(
+                                        this@VerifyOtp,
+                                        MPinGenerate::class.java
+                                    )
+                                )
+                            } else {
+                                startActivity(
+                                    Intent(
+                                        this@VerifyOtp,
+                                        DashBoard::class.java
+                                    )
+                                )
+                            }
 
 
                         } else {
@@ -127,10 +127,10 @@ class VerifyOtp : AppCompatActivity() {
                     Toast.makeText(this@VerifyOtp, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {
-                     @Throws(AuthFailureError::class)
+                @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = HashMap()
-                         headers.put("Accept", "application/vnd.api+json") //put your token here
+                    headers.put("Accept", "application/vnd.api+json") //put your token here
                     return headers
                 }
             }

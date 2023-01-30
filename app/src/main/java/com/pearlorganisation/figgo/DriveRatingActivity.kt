@@ -45,10 +45,10 @@ lateinit var submitrating:TextView
     }
 
     override fun initializeInputs() {
-        TODO("Not yet implemented")
+
     }
 
     override fun initializeLabels() {
-        TODO("Not yet implemented")
+      
     }
 }

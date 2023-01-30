@@ -17,6 +17,7 @@
         app:cardElevation="@dimen/_6sdp"
         android:layout_margin="@dimen/_12sdp"
         android:backgroundTint="@color/colornavyblue">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +25,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_vehicleimg"
+                android:id="@+id/activaimg"
                 android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_65sdp"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -32,7 +33,7 @@
 
 
             <TextView
-                android:id="@+id/tv_vehiclenumber"
+                android:id="@+id/activavehiclenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -53,29 +54,30 @@
             app:cardCornerRadius="@dimen/_6sdp"
             app:cardMaxElevation="@dimen/_6sdp">
 
-            <ImageView
-                android:id="@+id/iv_driverimg"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/driverimg"
                 android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_65sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginBottom="@dimen/_12sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/girl_img" />
+                android:layout_marginTop="@dimen/_26sdp"
+                android:gravity="center"
+                android:background="@drawable/bg_circle_black"
+                android:src="@drawable/girl_img"
+                app:civ_border_width="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_12sdp"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_23sdp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/iv_drivername"
+                    android:id="@+id/drivername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_32sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:fontFamily="sans-serif-black"
-                    android:padding="@dimen/_5sdp"
                     android:text="Ravi Singh"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp" />
@@ -84,21 +86,18 @@
                     android:id="@+id/ride_service_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:max="5"
-                    android:layout_marginStart="@dimen/_32sdp"
                     android:numStars="5"
-                    android:scaleX=".5"
-                    android:scaleY=".5"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    style="?android:attr/ratingBarStyleSmall"/>
 
                 <TextView
-                    android:id="@+id/tv_dl_number"
+                    android:id="@+id/dl_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_32sdp"
-                    android:padding="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:text="DL. No. Cgdjn9857imvc"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp" />

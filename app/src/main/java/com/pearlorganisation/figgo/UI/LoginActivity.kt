@@ -2,6 +2,7 @@ package com.pearlorganisation.figgo.UI
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 
 import android.content.Intent
 import android.graphics.Color
@@ -132,11 +133,8 @@ class LoginActivity : AppCompatActivity(){
 
         }
         otp_Verify_button.setOnClickListener {
-
-
             if (enteredOTP.text.toString().equals("") || enteredOTP.text.toString().equals("null")) {
                 Toast.makeText(this@LoginActivity, "Enter Otp", Toast.LENGTH_SHORT).show()
-
             } else {
                 verifyOtp()
             }
@@ -148,7 +146,6 @@ class LoginActivity : AppCompatActivity(){
         }
     }
     fun startTimer() {
-
         cTimer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 resend.setText("seconds remaining: " +"00:"+ (millisUntilFinished / 1000).toString())
@@ -161,9 +158,6 @@ class LoginActivity : AppCompatActivity(){
         }
         cTimer.start()
     }
-
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -220,7 +214,6 @@ class LoginActivity : AppCompatActivity(){
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-
                         pref.setUserId(response.getJSONObject("user").getString("id"))
                         pref.settv_mobilenumber(response.getJSONObject("user").getString("contact_no"))
                         pref.settv_rajsharma(response.getJSONObject("user").getString("name"))
@@ -250,6 +243,7 @@ class LoginActivity : AppCompatActivity(){
         //startActivity(Intent(this,MPinGenerate::class.java))
 
     }
+
     private fun getotp(){
         pref.setNumber(input_number.text.toString())
         val URL = "https://test.pearl-developer.com/figo/api/otp/send-otp"
@@ -293,6 +287,8 @@ class LoginActivity : AppCompatActivity(){
     }
 
     private fun verifyOtp(){
+        val progressDialog = ProgressDialog(this)
+        progressDialog.show()
         val URL = " https://test.pearl-developer.com/figo/api/otp/check-otp"
         val queue = Volley.newRequestQueue(this@LoginActivity)
         val json = JSONObject()
@@ -306,6 +302,7 @@ class LoginActivity : AppCompatActivity(){
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
+                        progressDialog.hide()
                         if (pref.getToken().equals("") || pref.getToken().equals("null")) {
 
                             val token = response.getString("token")
@@ -346,6 +343,7 @@ class LoginActivity : AppCompatActivity(){
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
+                    progressDialog.hide()
                     Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {

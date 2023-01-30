@@ -8,12 +8,6 @@
     android:background="@color/colorlightblue"
     tools:context=".CurrentMap.MapsActivity2">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/header_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
@@ -26,6 +20,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <include
+            android:id="@+id/include"
+            layout="@layout/header_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <LinearLayout
@@ -55,12 +55,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="horizontal">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/activaimg"
-                android:layout_width="@dimen/_75sdp"
-                android:layout_height="@dimen/_75sdp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:src="@drawable/blueactiva_img" />
 
@@ -77,13 +78,24 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
 
+            <!--  <TextView
+              android:id="@+id/emergencyexit"
+              android:layout_marginStart="@dimen/_12sdp"
+              android:layout_width="wrap_content"
+              android:layout_height="@dimen/_25sdp"
+              android:fontFamily="sans-serif-black"
+              android:text="Emergency Exit"
+              android:gravity="center"
+              android:background="@color/colorgreen"
+              android:layout_gravity="center"
+              android:textColor="@color/black"
+              android:textSize="@dimen/_12sdp" />-->
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-1dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -116,7 +128,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/_32sdp"
                         android:fontFamily="sans-serif-black"
                         android:padding="@dimen/_5sdp"
                         android:text="Ravi Singh"
@@ -161,7 +172,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include">
+        >
 
 
         <pl.droidsonroids.gif.GifImageView
@@ -180,6 +191,14 @@
             android:textSize="16sp" />
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/textTimer"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -187,6 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
+        android:id="@+id/ll_bottom"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -206,7 +226,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/call" />
+            android:src="@drawable/call"
+            tools:ignore="ImageContrastCheck" />
 
 
         <TextView
@@ -239,7 +260,6 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_gravity="bottom"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/bottombuttonbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:src="@drawable/figgofooter"/>
