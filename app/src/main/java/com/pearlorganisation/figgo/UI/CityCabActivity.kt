@@ -109,7 +109,7 @@ class CityCabActivity : BaseClass() {
                 }
                 R.id.Logout -> {
                     prefManager.setToken("")
-                    prefManager.setMpin("")
+                  //  prefManager.setMpin("")
                     startActivity(Intent(this,LoginActivity::class.java))
                 }
 

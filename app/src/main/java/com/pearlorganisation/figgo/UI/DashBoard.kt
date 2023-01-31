@@ -2,13 +2,13 @@ package com.pearlorganisation.figgo.UI
 //Neeraj
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Location
-import android.location.LocationManager
+import android.location.*
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -181,7 +181,6 @@ class DashBoard : BaseClass(){
          main = findViewById<LinearLayout>(R.id.main)
         continu = findViewById<Button>(R.id.continu)
         perm = findViewById<LinearLayout>(R.id.perm)
-        val textView = findViewById<TextView>(R.id.tv1)
         var iv_user = findViewById<ImageView>(R.id.iv_user)
         var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
         var ll_cancelationpolicy = findViewById<LinearLayout>(R.id.ll_cancelationpolicy)
@@ -195,55 +194,17 @@ class DashBoard : BaseClass(){
         var ll_faqs = findViewById<LinearLayout>(R.id.ll_faqs)
         var ll_ratesus = findViewById<LinearLayout>(R.id.ll_ratesus)
         var ll_feedsback = findViewById<LinearLayout>(R.id.ll_feedsback)
-
+        var img_webview = findViewById<ImageView>(R.id.iv_webview)
+         liveLoc = findViewById<TextView>(R.id.live_loc)
+        locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 /*
         liveLoc = findViewById<TextView>(R.id.live_loc)
 */
 
 
-        val ai: ApplicationInfo = applicationContext.packageManager
-            .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)
-        val value = ai.metaData["api_key"]
-        val apiKey = getString(R.string.api_key)
-
-        if (!Places.isInitialized()) {
-            Places.initialize(applicationContext, apiKey)
-        }
-
-        val autocompleteSupportFragment1 = supportFragmentManager.findFragmentById(R.id.autocomplete_fragment1) as AutocompleteSupportFragment?
-
-        autocompleteSupportFragment1!!.setPlaceFields(
-            listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHONE_NUMBER, Place.Field.LAT_LNG, Place.Field.OPENING_HOURS, Place.Field.RATING, Place.Field.USER_RATINGS_TOTAL))
 
 
-        autocompleteSupportFragment1.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-
-                val address = place.address
-                val name = place.name
-               /* val phone = place.phoneNumber
-                val latlng = place.latLng
-                val latitude = latlng?.latitude
-                val longitude = latlng?.longitude*/
-
-                val isOpenStatus : String = if(place.isOpen == true){
-                    "Open"
-                } else {
-                    "Closed"
-                }
-
-              /*  val rating = place.rating
-                val userRatings = place.userRatingsTotal*/
-
-               /* textView.text = "Name: $name \nAddress: $address\nIs open: $isOpenStatus \n" */
-            }
-
-            override fun onError(status: Status) {
-                Toast.makeText(applicationContext,"Some error occurred", Toast.LENGTH_SHORT).show()
-            }
-        })
-
-
+    getLocation()
 
 
        /* tv_rajsharma.text=prefManager.gettv_rajsharma()*/
@@ -288,15 +249,17 @@ class DashBoard : BaseClass(){
             Toast.makeText(this, "Faqs", Toast.LENGTH_LONG).show()
         }
 
-        ll_ratesus.setOnClickListener {
-            Toast.makeText(this, "Please give me rating", Toast.LENGTH_LONG).show()
-        }
 
+        img_webview.setOnClickListener {
+            startActivity(Intent(this,GoogleWebview::class.java))
+        }
         ll_feedsback.setOnClickListener {
             Toast.makeText(this, "Please give me feed back", Toast.LENGTH_LONG).show()
         }
 
-
+        ll_ratesus.setOnClickListener {
+            startActivity(Intent(this,GoogleWebview::class.java))
+        }
 
 
 
@@ -338,19 +301,25 @@ class DashBoard : BaseClass(){
         }
 
 
-
         grantLocPer()
 
        var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)
+        var home_top = findViewById<LinearLayout>(R.id.home_top)
+        var home_bottom = findViewById<LinearLayout>(R.id.homebottom)
         bottom.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home_b->{
                     setfragment(homeFrag)
+                    home_top.visibility=View.VISIBLE
+                    home_bottom.visibility=View.VISIBLE
+
                     true
 
                 }
                 R.id.rides_b->{
                     setfragment(rides)
+                    home_top.visibility=View.GONE
+                    home_bottom.visibility=View.GONE
                     true
 
                 }
@@ -358,11 +327,15 @@ class DashBoard : BaseClass(){
 
                 R.id.more_b->{
                     setfragment(more)
+                    home_top.visibility=View.GONE
+                    home_bottom.visibility=View.GONE
                     true
 
         }
                 R.id.support_b->{
             setfragment(support)
+                    home_top.visibility=View.GONE
+                    home_bottom.visibility=View.GONE
             true
 
 
@@ -387,7 +360,7 @@ class DashBoard : BaseClass(){
                 }
                 R.id.Logout -> {
                     prefManager.setToken("")
-                    prefManager.setMpin("")
+                   // prefManager.setMpin("")
                     startActivity(Intent(this,LoginActivity::class.java))
                 }
 
@@ -597,5 +570,122 @@ class DashBoard : BaseClass(){
 
     }
 
+    val gpsLocationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            locationByGps = location
+        }
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
+
+    }
+    //------------------------------------------------------//
+    val networkLocationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            locationByNetwork= location
+            // locationByNetwork= location
+        }
+
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
+    }
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+
+
+        if (hasGps) {
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                5000,
+                0F,
+                gpsLocationListener
+            )
+        }
+//------------------------------------------------------//
+        if (hasNetwork) {
+            locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                5000,
+                0F,
+                networkLocationListener
+            )
+        }
+
+
+        val lastKnownLocationByGps =
+            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+        // locationByGps = getLastKnownLocation()
+        lastKnownLocationByGps?.let {
+            locationByGps = lastKnownLocationByGps
+        }
+        //------------------------------------------------------//
+
+
+        val lastKnownLocationByNetwork =
+            locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        lastKnownLocationByNetwork?.let {
+            locationByNetwork = lastKnownLocationByNetwork
+        }
+//------------------------------------------------------//
+        if (locationByGps != null && locationByNetwork != null) {
+            if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
+
+
+                    to_lat = locationByGps?.latitude.toString()
+                    to_lng = locationByGps?.longitude.toString()
+
+            }else{
+
+                to_lat = locationByNetwork?.latitude.toString()
+                    to_lng = locationByNetwork?.longitude.toString()
+
+            }
+        }else {
+            if (locationByNetwork == null) {
+                Toast.makeText(this, "No Network", Toast.LENGTH_LONG).show()
+
+            } else {
+
+
+
+                to_lat = locationByNetwork?.latitude.toString()
+                to_lng = locationByNetwork?.longitude.toString()
+
+
+            }
+            // use latitude and longitude as per your need
+            // }
+            // }
+
+
+        }
+        var geocoder: Geocoder
+        val addresses: List<Address>
+        geocoder = Geocoder(this, Locale.getDefault())
+
+
+        var strAdd : String? = null
+        try {
+            val addresses = geocoder.getFromLocation(to_lat!!.toDouble(), to_lng!!.toDouble(), 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = java.lang.StringBuilder("")
+               /* for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }*/
+                val cityState = returnedAddress.locality +","+returnedAddress.adminArea;
+                strAdd = cityState
+                Log.w(" Current loction address", strReturnedAddress.toString())
+            } else {
+                Log.w(" Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.w(" Current loction address",  e.printStackTrace().toString())
+        }
+        liveLoc?.setText(strAdd)
+    }
 
 }

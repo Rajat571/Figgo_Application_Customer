@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pearlorganisation.HomeFragmentReplace">
+
+    <LinearLayout
+        android:id="@+id/backgrouund"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/layout"
+        tools:ignore="MissingConstraints,NotSibling">
+
+        <FrameLayout
+            android:id="@+id/framedash"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/_6sdp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_2sdp"
+            app:layout_constraintBottom_toTopOf="@+id/car"
+            app:layout_constraintTop_toBottomOf="@+id/layout" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -373,8 +373,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         json.put("to_lng", to_lng)
         json.put("from_lat", from_lat)
         json.put("from_lng", from_lng)
-        json.put("to_location_name", manualLoc?.text.toString())
-        json.put("from_location_name", liveLoc?.text.toString())
+        json.put("to_location_name", liveLoc?.text.toString())
+        json.put("from_location_name", manualLoc?.text.toString())
         json.put("type","current_booking")
         Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
