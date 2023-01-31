@@ -109,8 +109,7 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Curren
 
 
     private fun searchDriver(rideId: String) {
-        context.startActivity(Intent(context,SearchDriver::class.java))
-
+        /*context.startActivity(Intent(context,SearchDriver::class.java))*/
         val URL = "https://test.pearl-developer.com/figo/api/ride/searching-driver"
         Log.d("searchDriver", "json===" +URL )
         val queue = Volley.newRequestQueue(context)
@@ -121,14 +120,14 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Curren
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                       /* val searching_status = response.getString("searching_status")*/
-                        /*Log.d("SendData", "searching_status===" + searching_status)*/
-                      /*  if (searching_status.equals("1")){
+                        val searching_status = response.getString("searching_status")
+                        Log.d("SendData", "searching_status===" + searching_status)
+                        if (searching_status.equals("1")){
                             progressDialog.hide()
                            context.startActivity(Intent(context, SearchDriver::class.java))
                         } else{
                             Toast.makeText(context, "Unable to search driver...", Toast.LENGTH_LONG).show()
-                        }*/
+                        }
                     }
                 }
             }, object : Response.ErrorListener {
@@ -141,7 +140,7 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Curren
                     val headers: MutableMap<String, String> = HashMap()
                     headers.put("Content-Type", "application/json; charset=UTF-8")
                     headers.put("Authorization", "Bearer " + pref.getToken())
-                    headers.put("Accept", "application/vnd.api+json"); //put your token here
+                    headers.put("Accept", "application/vnd.api+json") //put your token here
                     return headers
                 }
             }

@@ -60,11 +60,8 @@ class CityCabActivity : BaseClass() {
         var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
         val navigationView = findViewById<View>(R.id.navView) as NavigationView
         var navView = findViewById<NavigationView>(R.id.navView)
-        var  lleditprofile = navigationView.getHeaderView(0).findViewById<View>(R.id.ll_editprofile)
-        var tv_rajsharma = navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_rajsharma)
-        var tv_mobilenumber = navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_mobilenumber)
-        var tv_gmail = navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_gmail)
-        var iv_imageView = navigationView.getHeaderView(0).findViewById<ImageView>(R.id.iv_imageView)
+
+
 
         var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
 
@@ -77,8 +74,7 @@ class CityCabActivity : BaseClass() {
 
 
 
-        tv_mobilenumber.text=prefManager.gettv_mobilenumber()
-        iv_imageView.setImageResource(R.drawable.girl)
+
 
         prefManager = PrefManager(this@CityCabActivity)
 
@@ -95,40 +91,9 @@ class CityCabActivity : BaseClass() {
         }*/
 
 
-        lleditprofile.setOnClickListener {
-            startActivity(Intent(this, Edit_Profile_Activity::class.java))
-        }
 
-        navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.change_mpin -> {
-                    Toast.makeText(this, "change_mpin Clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.rides -> {
-                    Toast.makeText(this, "rides Clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.Logout -> {
-                    prefManager.setToken("")
-                    prefManager.setMpin("")
-                    startActivity(Intent(this,LoginActivity::class.java))
-                }
 
-                R.id.term_condition -> {
-                    startActivity(Intent(this, TermAndConditionActivity::class.java))
-                }
-                R.id.cancellation_policy -> {
-                    startActivity(Intent(this, CancellationPolicy::class.java))
-                }
-                R.id.About_Figgo -> {
-                    startActivity(Intent(this, CurrentAboutActivity::class.java))
-                }
-                R.id.Support -> {
-                    startActivity(Intent(this, DrawerSupportActivity::class.java))
-                }
 
-            }
-            true
-        }
 
 
        /* callicon.setOnClickListener {

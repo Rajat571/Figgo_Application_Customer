@@ -250,7 +250,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
         liveLoc?.setOnClickListener {
 
-            press = "live";
+            press = "live"
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS,Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
                 .build(requireActivity())
@@ -325,8 +325,8 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         json.put("from_lat", from_lat)
         json.put("from_lng", from_lng)
         json.put("type", "advance_booking")
-        json.put("to_location_name", manualLoc?.text.toString())
-        json.put("from_location_name", liveLoc?.text.toString())
+        json.put("to_location_name", liveLoc?.text.toString())
+        json.put("from_location_name", manualLoc?.text.toString())
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
