@@ -180,20 +180,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             TODO("VERSION.SDK_INT < O")
         }
 
-        if (pref.getType().equals("1")){
-          getCurrentLoc()
-            if (pref.getToLatM().equals("")){
-            }else{
-                getDestinationLoc()
-            }
-        }else if (pref.getType().equals("2")){
-            if (pref.getToLatL().equals("")){
 
-            }else{
-                getCurrentLoc()
-            }
-            getDestinationLoc()
-        }
 
 
         calenderimg.setOnClickListener {
@@ -928,6 +915,50 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             Log.w(" Current loction address", "Canont get Address!")
         }
         manualLoc?.setText(strAdd)
+
+    }
+    override fun onResume() {
+        super.onResume()
+        if (pref.getType().equals("1")){
+
+            if(pref.getToLatL().equals("")){
+
+            }else {
+                getCurrentLoc()
+
+            }
+            if (pref.getToLatM().equals("")){
+
+
+            }else {
+                if (pref.getToLatM().equals("")) {
+
+                } else {
+                    getDestinationLoc()
+                }
+            }
+
+
+        }else if (pref.getType().equals("2")){
+            if (pref.getToLatL().equals("")){
+
+            }else{
+                if(pref.getToLatL().equals("")){
+
+                }else {
+                    getCurrentLoc()
+
+                }
+            }
+            if (pref.getToLatM().equals("")) {
+
+            } else {
+                getDestinationLoc()
+            }
+
+
+        }
+
 
     }
 

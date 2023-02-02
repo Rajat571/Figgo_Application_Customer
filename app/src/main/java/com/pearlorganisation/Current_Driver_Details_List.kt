@@ -25,6 +25,7 @@ import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
 import com.pearlorganisation.figgo.PaymentMethodActivity
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.squareup.picasso.Picasso
@@ -114,8 +115,8 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
                 obj.put("currency", "INR")
                 obj.put("amount", amount)
                 val preFill = JSONObject()
-                preFill.put("email", "a@gmail.com")
-                preFill.put("contact", "91" + "1234567098")
+                preFill.put("email", "support@figgocabs.com")
+                preFill.put("contact", "91" + "9715597855")
                 obj.put("prefill", preFill)
                 checkout.open(this, obj)
             } catch (e: JSONException) {
@@ -141,6 +142,11 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
         Toast.makeText(this, "Payment failed$i", Toast.LENGTH_SHORT).show()
 
     }
+
+
+
+
+
 
     private fun getOtp() {
         val progressDialog = ProgressDialog(this)
@@ -176,9 +182,11 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
+                    progressDialog.hide()
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(this@Current_Driver_Details_List, "Something went wrong!", Toast.LENGTH_LONG).show()
+                   // Toast.makeText(this@Current_Driver_Details_List, "Something went wrong!", Toast.LENGTH_LONG).show()
 
+                    MapUtility.showDialog(error.toString(),this@Current_Driver_Details_List)
                 }
             }) {
 

@@ -64,6 +64,7 @@ import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.LocationPickerActivity
 import com.pearlorganisation.figgo.UI.LocationPickerActivityCurr
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
 import org.json.JSONObject
@@ -181,29 +182,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         } else {
 
         }
-        if (pref.getTypeC().equals("1")){
 
-            getCurrentLoc()
-
-            if (pref.getToLatMC().equals("")){
-
-
-            }else{
-                getDestinationLoc()
-            }
-
-
-
-        }else if (pref.getTypeC().equals("2")){
-            if (pref.getToLatLC().equals("")){
-
-            }else{
-                getCurrentLoc()
-            }
-            getDestinationLoc()
-
-
-        }
 
         calenderimg.setOnClickListener {
             val c = Calendar.getInstance()
@@ -413,7 +392,9 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }, object : Response.ErrorListener {
             override fun onErrorResponse(error: VolleyError?) {
                 Log.d("SendData", "error===" + error)
-                Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                progressDialog.hide()
+                MapUtility.showDialog(error.toString(),requireActivity())
+                //Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
             }
         }) {
             @Throws(AuthFailureError::class)
@@ -998,4 +979,44 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         manualLoc?.setText(strAdd)
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (pref.getTypeC().equals("1")){
+
+            if (pref.getToLatLC().equals("")){
+
+            }else {
+                getCurrentLoc()
+            }
+            if (pref.getToLatMC().equals("")){
+
+
+            }else{
+                if (pref.getToLatMC().equals("")){
+
+                }else {
+                    getDestinationLoc()
+                }
+            }
+
+        }else if (pref.getTypeC().equals("2")){
+            if (pref.getToLatLC().equals("")){
+
+            }else{
+                if (pref.getToLatLC().equals("")){
+
+                }else {
+                    getCurrentLoc()
+                }
+            }
+            if (pref.getToLatMC().equals("")){
+
+            }else {
+                getDestinationLoc()
+            }
+
+        }
+    }
+
 }

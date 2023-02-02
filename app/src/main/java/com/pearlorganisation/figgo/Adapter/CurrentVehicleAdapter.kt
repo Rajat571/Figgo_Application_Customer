@@ -22,6 +22,7 @@ import com.pearlorganisation.PrefManager
 import com.pearlorganisation.SearchDriver
 import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
@@ -79,18 +80,23 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Curren
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
+                        progressDialog.hide()
                         val status = response.getString("status")
                         if(status.equals("false")){
                             Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()
                         }else{
-                            searchDriver(data.ride_id)
+                            context.startActivity(Intent(context,SearchDriver::class.java))
                        }
                     }
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                  //  Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                    progressDialog.hide()
+                    MapUtility.showDialog(error.toString(),context)
+
+
                 }
             }) {
                 @Throws(AuthFailureError::class)
@@ -108,47 +114,6 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Curren
     }
 
 
-    private fun searchDriver(rideId: String) {
-        context.startActivity(Intent(context,SearchDriver::class.java))
-
-        val URL = "https://test.pearl-developer.com/figo/api/ride/searching-driver"
-        Log.d("searchDriver", "json===" +URL )
-        val queue = Volley.newRequestQueue(context)
-        val json = JSONObject()
-        json.put("ride_id" ,rideId)
-        Log.d("SendData", "json===" +json )
-        val jsonOblect: JsonObjectRequest =  object : JsonObjectRequest(Method.POST, URL, json, object : Response.Listener<JSONObject?> {
-                override fun onResponse(response: JSONObject?) {
-                    Log.d("SendData", "response===" + response)
-                    if (response != null) {
-                       /* val searching_status = response.getString("searching_status")*/
-                        /*Log.d("SendData", "searching_status===" + searching_status)*/
-                      /*  if (searching_status.equals("1")){
-                            progressDialog.hide()
-                           context.startActivity(Intent(context, SearchDriver::class.java))
-                        } else{
-                            Toast.makeText(context, "Unable to search driver...", Toast.LENGTH_LONG).show()
-                        }*/
-                    }
-                }
-            }, object : Response.ErrorListener {
-                override fun onErrorResponse(error: VolleyError?) {
-                   /* Toast.makeText(context, "Something went wrong!"+error, Toast.LENGTH_LONG).show()*/
-                }
-            }) {
-                @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers: MutableMap<String, String> = HashMap()
-                    headers.put("Content-Type", "application/json; charset=UTF-8")
-                    headers.put("Authorization", "Bearer " + pref.getToken())
-                    headers.put("Accept", "application/vnd.api+json") //put your token here
-                    return headers
-                }
-            }
-
-        queue.add(jsonOblect)
-
-    }
 
 
     override fun getItemCount(): Int {

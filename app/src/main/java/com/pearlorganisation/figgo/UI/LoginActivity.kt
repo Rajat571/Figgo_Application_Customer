@@ -34,6 +34,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UTIL.MapUtility
 
 import org.json.JSONObject
 
@@ -225,7 +226,8 @@ class LoginActivity : AppCompatActivity(){
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
-                    Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
+                    MapUtility.showDialog(error.toString(),this@LoginActivity)
+                    //Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {
                 @Throws(AuthFailureError::class)
@@ -268,7 +270,9 @@ class LoginActivity : AppCompatActivity(){
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
-                    Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
+                  //  Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
+
+                    MapUtility.showDialog(error.toString(),this@LoginActivity)
                 }
             }) {
                 @SuppressLint("SuspiciousIndentation")
@@ -344,7 +348,8 @@ class LoginActivity : AppCompatActivity(){
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     progressDialog.hide()
-                    Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
+                    MapUtility.showDialog(error.toString(),this@LoginActivity)
+                  //  Toast.makeText(this@LoginActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {
                 @Throws(AuthFailureError::class)

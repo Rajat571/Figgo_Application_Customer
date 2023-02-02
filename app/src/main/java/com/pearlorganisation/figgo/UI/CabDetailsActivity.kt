@@ -20,6 +20,7 @@ import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject
 import java.util.*
@@ -117,8 +118,9 @@ class CabDetailsActivity : BaseClass(), PaymentResultListener {
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(this@CabDetailsActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
-
+                    progressDialog.hide()
+                    //Toast.makeText(this@CabDetailsActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
+                    MapUtility.showDialog(error.toString(),this@CabDetailsActivity)
                 }
             }) {
 

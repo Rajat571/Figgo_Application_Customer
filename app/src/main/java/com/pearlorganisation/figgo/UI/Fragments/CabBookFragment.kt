@@ -30,6 +30,7 @@ import com.payu.ui.model.listeners.PayUHashGenerationListener
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import org.json.JSONException
@@ -121,8 +122,8 @@ class CabBookFragment : Fragment() {
                 obj.put("currency", "INR")
                 obj.put("amount", amount)
                 val preFill = JSONObject()
-                preFill.put("email", "a@gmail.com")
-                preFill.put("contact", "91" + "1234567098")
+                preFill.put("email", "support@figgocabs.com")
+                preFill.put("contact", "91" + "9715597855")
                 obj.put("prefill", preFill)
                 checkout.open(requireActivity(), obj)
             } catch (e: JSONException) {
@@ -178,7 +179,10 @@ class CabBookFragment : Fragment() {
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
+                    progressDialog.hide()
+
+                    MapUtility.showDialog(error.toString(),requireActivity())
+                  //  Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
 
                 }
             }) {
