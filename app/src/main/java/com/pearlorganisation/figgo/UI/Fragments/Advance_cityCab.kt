@@ -1,10 +1,7 @@
 package com.pearlorganisation.figgo.UI.Fragments
 //Neeraj
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.ProgressDialog
-import android.app.TimePickerDialog
+import android.app.*
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
@@ -19,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +58,7 @@ import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.pearlorganisation.figgo.UI.LocationPickerActivity
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
 import org.json.JSONObject
@@ -367,7 +366,9 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
+                    progressDialog.hide()
+                    MapUtility.showDialog(error.toString(),requireActivity())
+                    //Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
 
                 }
             }) {
@@ -929,4 +930,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         manualLoc?.setText(strAdd)
 
     }
+
+
 }

@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
-import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.*
@@ -18,7 +17,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -26,35 +24,27 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentMoreFragment
 import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentRidesFragment
 import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
-import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
 import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
-import com.pearlorganisation.DrawerSupportActivity
 import com.pearlorganisation.Edit_Profile_Activity
 import com.pearlorganisation.NotificationBellIconActivity
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
 import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.BottomItemFragment.HistoryFragment
 import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
@@ -69,7 +59,7 @@ class DashBoard : BaseClass(){
 
     lateinit var binding: ActivityDashBoardBinding
     lateinit var toggle: ActionBarDrawerToggle
-  /*  lateinit var drawerLayout: DrawerLayout*/
+    lateinit var drawerLayout: DrawerLayout
     lateinit var textView:TextView
     private val REQUEST_CHECK_SETTINGS: Int=101
     private lateinit var mMap: GoogleMap
@@ -87,6 +77,9 @@ class DashBoard : BaseClass(){
     private var locationByGps: Location? = null
     private var locationByNetwork: Location? = null
     private var lastKnownLocationByGps: Location? = null
+
+
+    /*lateinit var customerMenuDrawerBinding: NavHeaderCustomerMenuDrawerBinding*/
     lateinit var continu : Button
     lateinit var main : LinearLayout
     lateinit var perm : LinearLayout
@@ -159,13 +152,14 @@ class DashBoard : BaseClass(){
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
-      /*  val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout*/
+       /* val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout*/
         var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
         val navigationView = findViewById<View>(R.id.navView) as NavigationView
 
 
 
-        var rides =/* RidesBottom()*/ CurrentRidesFragment()
+
+        var rides =/* RidesBottom()*/ /*CurrentRidesFragment()*/ HistoryFragment()
         var more = /*RoundAndTourFragment()*/ CurrentMoreFragment()
         var support = SupportBottomNav()
         var navView = findViewById<NavigationView>(R.id.navView)
@@ -174,6 +168,7 @@ class DashBoard : BaseClass(){
         continu = findViewById<Button>(R.id.continu)
         perm = findViewById<LinearLayout>(R.id.perm)
         var iv_user = findViewById<ImageView>(R.id.iv_user)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
         var ll_cancelationpolicy = findViewById<LinearLayout>(R.id.ll_cancelationpolicy)
         var ll_termsconditions = findViewById<LinearLayout>(R.id.ll_termsconditions)
         var ll_helpsupport = findViewById<LinearLayout>(R.id.ll_helpsupport)
@@ -185,13 +180,10 @@ class DashBoard : BaseClass(){
         var ll_faqs = findViewById<LinearLayout>(R.id.ll_faqs)
         var ll_ratesus = findViewById<LinearLayout>(R.id.ll_ratesus)
         var ll_feedsback = findViewById<LinearLayout>(R.id.ll_feedsback)
-        var ll_logout = findViewById<LinearLayout>(R.id.ll_logout)
         var img_webview = findViewById<ImageView>(R.id.iv_webview)
          liveLoc = findViewById<TextView>(R.id.live_loc)
-        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
-
+        var ll_logout = findViewById<LinearLayout>(R.id.ll_logout)
         locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
 /*
         liveLoc = findViewById<TextView>(R.id.live_loc)
 */
@@ -204,12 +196,11 @@ class DashBoard : BaseClass(){
 
 
 
-
-       /* toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
+     /*   toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
         drawerLayout.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toggle.syncState()*/
-
+        toggle.syncState()
+*/
         iv_user.setOnClickListener {
             startActivity(Intent(this,Edit_Profile_Activity::class.java))
         }
@@ -641,10 +632,11 @@ class DashBoard : BaseClass(){
             if (addresses != null) {
                 val returnedAddress = addresses[0]
                 val strReturnedAddress = java.lang.StringBuilder("")
-                for (i in 0..returnedAddress.maxAddressLineIndex) {
+               /* for (i in 0..returnedAddress.maxAddressLineIndex) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
-                }
-                strAdd = strReturnedAddress.toString()
+                }*/
+                val cityState = returnedAddress.locality +","+returnedAddress.adminArea;
+                strAdd = cityState
                 Log.w(" Current loction address", strReturnedAddress.toString())
             } else {
                 Log.w(" Current loction address", "No Address returned!")

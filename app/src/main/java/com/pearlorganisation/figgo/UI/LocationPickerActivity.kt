@@ -141,9 +141,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                 HistoryAdd(
                     cursor.getString(cursor.getColumnIndex(DBHelper.ADDRESS)),
                     cursor.getString(cursor.getColumnIndex(DBHelper.LAT)),
-                    cursor.getString(cursor.getColumnIndex(DBHelper.LNG))
-                )
-            )
+                    cursor.getString(cursor.getColumnIndex(DBHelper.LNG))))
 
 
             // moving our cursor to next
@@ -153,21 +151,22 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                     HistoryAdd(
                         cursor.getString(cursor.getColumnIndex(DBHelper.ADDRESS)),
                         cursor.getString(cursor.getColumnIndex(DBHelper.LAT)),
-                        cursor.getString(cursor.getColumnIndex(DBHelper.LNG))
-                    )
-                )
+                        cursor.getString(cursor.getColumnIndex(DBHelper.LNG))))
 
             }
 
             // at last we close our cursor
             cursor.close()
         }
+
         if (historyAddList.size > 0) {
             historyAddAdapter = HistoryAdapter(this@LocationPickerActivity, historyAddList)
             recycler_history.layoutManager = GridLayoutManager(this@LocationPickerActivity, 1)
             recycler_history.adapter = historyAddAdapter
 
         }
+
+
         pref = PrefManager(this)
         imgSearch?.isVisible = false
         try {

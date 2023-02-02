@@ -94,6 +94,8 @@ class HomeDashboard : Fragment() {
                     )
                 } else if ((figgoAddList.layoutManager as LinearLayoutManager)!!.findFirstCompletelyVisibleItemPosition() < figgoAddAdapter!!.itemCount - 1) {
                     figgoAddList.layoutManager!!.smoothScrollToPosition(figgoAddList, RecyclerView.State(), 0)
+                }else{
+                    figgoAddList.smoothScrollToPosition(0);
                 }
             }
         },0, 2000)
@@ -161,6 +163,8 @@ class HomeDashboard : Fragment() {
                     )
                 } else if ((recyclerview_offerlist.layoutManager as LinearLayoutManager)!!.findFirstCompletelyVisibleItemPosition() < cardofferAdpter!!.itemCount - 1) {
                     recyclerview_offerlist.layoutManager!!.smoothScrollToPosition(recyclerview_offerlist, RecyclerView.State(), 0)
+                }else{
+                    recyclerview_offerlist.smoothScrollToPosition(0);
                 }
             }
         },0, 2000)

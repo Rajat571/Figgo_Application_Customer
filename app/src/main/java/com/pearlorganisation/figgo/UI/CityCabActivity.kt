@@ -56,7 +56,7 @@ class CityCabActivity : BaseClass() {
         setContentView(R.layout.drawer_screen2)
         prefManager = PrefManager(this)
         var shareimg=findViewById<ImageView>(R.id.shareimg)
-        val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+       /* val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout*/
         var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
         val navigationView = findViewById<View>(R.id.navView) as NavigationView
         var navView = findViewById<NavigationView>(R.id.navView)
@@ -82,17 +82,13 @@ class CityCabActivity : BaseClass() {
             drawerLayout.openDrawer(Gravity.LEFT)
         }*/
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.Change_MPIN, R.string.Rides)
+      /*  toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.Change_MPIN, R.string.Rides)
         drawerLayout.addDrawerListener(toggle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)*/
 
        /* menu_naviagtion.setOnClickListener {
            startActivity(Intent(this,DashBoard::class.java))
         }*/
-
-
-
-
 
 
 

@@ -21,6 +21,9 @@ import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.pearlorganisation.figgo.R
 import java.lang.Exception
 
@@ -79,4 +82,20 @@ object MapUtility {
             e.printStackTrace()
         }
     }
+    fun showDialog(title: String,requireActivity :Activity) {
+        val dialog = Dialog(requireActivity)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_layout)
+        val body = dialog.findViewById(R.id.error) as TextView
+        body.text = title
+        val yesBtn = dialog.findViewById(R.id.ok) as Button
+        yesBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+        val window: Window? = dialog.getWindow()
+        window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    }
+
 }

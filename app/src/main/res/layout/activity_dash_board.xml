@@ -36,11 +36,12 @@
                 android:id="@+id/live_loc"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
-                android:visibility="visible"
                 android:layout_marginTop="-12dp"
+                android:visibility="visible"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/dashboard_white_searchbar"
+                android:padding="9dp"
                 android:layout_height="wrap_content"
                 android:hint="Current location"/>
 
@@ -80,7 +81,13 @@
 
 
 
-
+                 <!--       <LinearLayout
+                            android:id="@+id/backgrouund"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toBottomOf="@id/layout"
+                            tools:ignore="MissingConstraints">-->
                         <include
                             layout="@layout/layouthometop"
                             android:visibility="visible"
