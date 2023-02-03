@@ -125,11 +125,11 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         pref = PrefManager(requireActivity())
-        if (pref.getTypeC().equals("1") || pref.getTypeC().equals("2")){
+       /* if (pref.getTypeC().equals("1") || pref.getTypeC().equals("2")){
 
             Navigation.findNavController(view).navigate(R.id.current)
 
-        }
+        }*/
 
         var calenderimg = view.findViewById<LinearLayout>(R.id.calenderimg)
          datetext = view.findViewById<TextView>(R.id.datetext)
@@ -152,6 +152,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         pref.setOtp("")
         pref.setRideId("")
         pref.setVehicleId("")
+        pref.setTypeC("")
 
         val apiKey = getString(R.string.api_key)
 

@@ -160,6 +160,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         pref.setOtp("")
         pref.setRideId("")
         pref.setVehicleId("")
+        pref.setType("")
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)

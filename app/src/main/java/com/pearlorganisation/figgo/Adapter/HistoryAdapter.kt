@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pearlorganisation.PrefManager
@@ -17,6 +18,7 @@ import com.pearlorganisation.figgo.Model.HistoryAdd
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.squareup.picasso.Picasso
+import kotlin.math.ln
 
 
 class HistoryAdapter(var context:Activity, var historyList:List<HistoryAdd>): Adapter<HistoryAdapter.HistoryHolder>() {
@@ -40,6 +42,30 @@ class HistoryAdapter(var context:Activity, var historyList:List<HistoryAdd>): Ad
      var data=historyList[position]
       //  holder.cab.setImageResource(data.cab)
         holder.address.text=data.address
+        holder.address?.setOnClickListener {
+          if (pref.getType().equals("1")){
+              pref.setToLatL(data.lat)
+              pref.setToLngL(data.lng)
+
+          }else  if (pref.getType().equals("2")){
+               pref.setToLatM(data.lat)
+               pref.setToLngM(data.lng)
+
+          }else if (pref.getTypeC().equals("1")){
+              pref.setToLatLC(data.lat)
+              pref.setToLngLC(data.lat)
+
+
+          }else  if (pref.getTypeC().equals("2")){
+              pref.setToLatMC(data.lat)
+              pref.setToLngMC(data.lng)
+
+
+          }
+            context.finish()
+
+
+        }
 
 
 
