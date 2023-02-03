@@ -250,22 +250,22 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
             imgCurrentloc?.setVisibility(View.GONE)
             txtSelectLocation?.setVisibility(View.VISIBLE)
             moving_pointer?.setVisibility(View.GONE)
-        /*    if (!Places.isInitialized()) {
-                Places.initialize(this@LocationPickerActivity, MapUtility.apiKey)
-            }
-            // Set the fields to specify which types of place data to return.
-            val fields = Arrays.asList(
-                Place.Field.ID,
-                Place.Field.ADDRESS,
-                Place.Field.NAME,
-                Place.Field.LAT_LNG
-            )
-            // Start the autocomplete intent.
-            val intent = Autocomplete.IntentBuilder(
-                AutocompleteActivityMode.FULLSCREEN, fields
-            ) //                        .setTypeFilter(TypeFilter.ADDRESS)
-                .build(this@LocationPickerActivity)
-            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE)*/
+            /*    if (!Places.isInitialized()) {
+                    Places.initialize(this@LocationPickerActivity, MapUtility.apiKey)
+                }
+                // Set the fields to specify which types of place data to return.
+                val fields = Arrays.asList(
+                    Place.Field.ID,
+                    Place.Field.ADDRESS,
+                    Place.Field.NAME,
+                    Place.Field.LAT_LNG
+                )
+                // Start the autocomplete intent.
+                val intent = Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.FULLSCREEN, fields
+                ) //                        .setTypeFilter(TypeFilter.ADDRESS)
+                    .build(this@LocationPickerActivity)
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE)*/
         })
 
 
@@ -289,16 +289,15 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                     pref.setToLatL(mLatitude.toString())
                     pref.setToLngL(mLongitude.toString())
                     db.addAddress(addressline2?.text.toString(),mLatitude.toString(),mLongitude.toString())
-                   // historyAddList.add(HistoryAdd(addressline2?.text.toString(),mLatitude.toString(),mLongitude.toString()))
+                    // historyAddList.add(HistoryAdd(addressline2?.text.toString(),mLatitude.toString(),mLongitude.toString()))
                 }else{
                     pref.setToLatM(mLatitude.toString())
                     pref.setToLngM(mLongitude.toString())
                     db.addAddress(addressline2?.text.toString(),mLatitude.toString(),mLongitude.toString())
-                  //  historyAddList.add(HistoryAdd(addressline2?.text.toString(),mLatitude.toString(),mLongitude.toString()))
+                    //  historyAddList.add(HistoryAdd(addressline2?.text.toString(),mLatitude.toString(),mLongitude.toString()))
 
                 }
-                val intent = Intent(this, CityCabActivity::class.java)
-                startActivity(intent)
+                finish()
             }
 
 
@@ -321,7 +320,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
         })
 
         rl_current_location?.setOnClickListener(View.OnClickListener {
-           getLocation()
+            getLocation()
 
         })
 
@@ -355,11 +354,11 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                 }
             })
 
-       /* arrayList = ArrayList()
-        rideHistoryAdapter = RideCityAdapter(this, arrayList, this, type)
-        recycler_history.layoutManager = LinearLayoutManager(this)
-        recycler_history.adapter = rideHistoryAdapter*/
-       // getHistory()
+        /* arrayList = ArrayList()
+         rideHistoryAdapter = RideCityAdapter(this, arrayList, this, type)
+         recycler_history.layoutManager = LinearLayoutManager(this)
+         recycler_history.adapter = rideHistoryAdapter*/
+        // getHistory()
 
 
 
@@ -385,7 +384,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                 mLatitude = place.latLng.latitude
                 mLongitude = place.latLng.longitude
                 place_id = place.id
-              //  place_url = place.websiteUri.toString()
+                //  place_url = place.websiteUri.toString()
                 addressline2!!.setText("" + userAddress)
                 //                addMarker();
 //                getAddressByGeoCodingLatLng();
@@ -416,40 +415,40 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
     }
     private fun showCurrentLocationOnMap(isDirectionClicked: Boolean) {
 
-            @SuppressLint("MissingPermission") val lastLocation =
-                fusedLocationProviderClient!!.lastLocation
-            lastLocation.addOnSuccessListener(
-                this
-            ) { location ->
-                if (location != null) {
-                    mMap!!.clear()
-                    if (isDirectionClicked) {
-                        currentLatitude = location.latitude
-                        currentLongitude = location.longitude
-                        //Go to Map for Directions
-                        val intent = Intent(
-                            Intent.ACTION_VIEW, Uri.parse(
-                                "http://maps.google.com/maps?saddr=$currentLatitude, $currentLongitude&daddr=$mLatitude, $mLongitude"
-                            )
+        @SuppressLint("MissingPermission") val lastLocation =
+            fusedLocationProviderClient!!.lastLocation
+        lastLocation.addOnSuccessListener(
+            this
+        ) { location ->
+            if (location != null) {
+                mMap!!.clear()
+                if (isDirectionClicked) {
+                    currentLatitude = location.latitude
+                    currentLongitude = location.longitude
+                    //Go to Map for Directions
+                    val intent = Intent(
+                        Intent.ACTION_VIEW, Uri.parse(
+                            "http://maps.google.com/maps?saddr=$currentLatitude, $currentLongitude&daddr=$mLatitude, $mLongitude"
                         )
-                        this@LocationPickerActivity.startActivity(intent)
-                    } else {
-                        //Go to Current Location
-                        mLatitude = location.latitude
-                        mLongitude = location.longitude
-                        this@LocationPickerActivity.getAddressByGeoCodingLatLng()
-                    }
+                    )
+                    this@LocationPickerActivity.startActivity(intent)
+                } else {
+                    //Go to Current Location
+                    mLatitude = location.latitude
+                    mLongitude = location.longitude
+                    this@LocationPickerActivity.getAddressByGeoCodingLatLng()
                 }
             }
-            lastLocation.addOnFailureListener { //If perm provided then gps not enabled
-                //                getSettingsLocation();
-                Toast.makeText(
-                    this@LocationPickerActivity,
-                    "Location Not Availabe",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            }
+        }
+        lastLocation.addOnFailureListener { //If perm provided then gps not enabled
+            //                getSettingsLocation();
+            Toast.makeText(
+                this@LocationPickerActivity,
+                "Location Not Availabe",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        }
 
     }
     fun resizeMapIcons(iconName: String?, width: Int, height: Int): Bitmap? {
@@ -595,7 +594,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
             this@LocationPickerActivity.getAddressByGeoCodingLatLng()
         })
 
-            doAfterPermissionProvided = 1
+        doAfterPermissionProvided = 1
 
     }
     private fun startParsingAddressToShow() {
@@ -801,16 +800,16 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
         }
 
         // setting address into different components
-            override fun onPostExecute(userAddress: Bundle?) {
-                super.onPostExecute(userAddress)
-                this@LocationPickerActivity.userAddress = userAddress!!.getString("addressline2").toString()
-                userCity = userAddress.getString("city")!!
-                userState = userAddress.getString("state")!!
-                userPostalCode = userAddress.getString("postalcode")!!
-                userCountry = userAddress.getString("country")!!
-                userAddressline2 = userAddress.getString("addressline2")!!
-                MapUtility.hideProgress()
-                addMarker()
+        override fun onPostExecute(userAddress: Bundle?) {
+            super.onPostExecute(userAddress)
+            this@LocationPickerActivity.userAddress = userAddress!!.getString("addressline2").toString()
+            userCity = userAddress.getString("city")!!
+            userState = userAddress.getString("state")!!
+            userPostalCode = userAddress.getString("postalcode")!!
+            userCountry = userAddress.getString("country")!!
+            userAddressline2 = userAddress.getString("addressline2")!!
+            MapUtility.hideProgress()
+            addMarker()
         }
     }
 
@@ -849,85 +848,88 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
     @SuppressLint("MissingPermission")
     private fun getLocation() {
 
-        
-            if (hasGps) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    5000,
-                    0F,
-                    gpsLocationListener
-                )
-            }
+
+        if (hasGps) {
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                5000,
+                0F,
+                gpsLocationListener
+            )
+        }
 //------------------------------------------------------//
-            if (hasNetwork) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
-                    5000,
-                    0F,
-                    networkLocationListener
-                )
-            }
+        if (hasNetwork) {
+            locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                5000,
+                0F,
+                networkLocationListener
+            )
+        }
 
 
-            val lastKnownLocationByGps =
-                locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        val lastKnownLocationByGps =
+            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
 
-            // locationByGps = getLastKnownLocation()
-            lastKnownLocationByGps?.let {
-                locationByGps = lastKnownLocationByGps
-            }
-            //------------------------------------------------------//
+        // locationByGps = getLastKnownLocation()
+        lastKnownLocationByGps?.let {
+            locationByGps = lastKnownLocationByGps
+        }
+        //------------------------------------------------------//
 
 
-            val lastKnownLocationByNetwork =
-                locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-            lastKnownLocationByNetwork?.let {
-                locationByNetwork = lastKnownLocationByNetwork
-            }
+        val lastKnownLocationByNetwork =
+            locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        lastKnownLocationByNetwork?.let {
+            locationByNetwork = lastKnownLocationByNetwork
+        }
 //------------------------------------------------------//
-              if (locationByGps != null && locationByNetwork != null) {
-             if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
-                 
-                 if (pref.getType().equals("1")) {
-                     pref.setToLatL(locationByGps?.latitude.toString())
-                     pref.setToLngL(locationByGps?.longitude.toString())
-                 }else{
-                     pref.setToLatM(locationByGps?.latitude.toString())
-                     pref.setToLngM(locationByGps?.longitude.toString())
-                 }
-             }else{
-                 if (pref.getType().equals("1")) {
-                     pref.setToLatL(locationByNetwork?.latitude.toString())
-                     pref.setToLngL(locationByNetwork?.longitude.toString())
-                 }else{
-                     pref.setToLatM(locationByNetwork?.latitude.toString())
-                     pref.setToLngM(locationByNetwork?.longitude.toString())
-                 }
-             }
-              }else {
-                  if (locationByNetwork == null) {
-                      Toast.makeText(this@LocationPickerActivity, "No Network", Toast.LENGTH_LONG).show()
+        if (locationByGps != null && locationByNetwork != null) {
+            if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
 
-                  } else {
+                if (pref.getType().equals("1")) {
+                    pref.setToLatL(locationByGps?.latitude.toString())
+                    pref.setToLngL(locationByGps?.longitude.toString())
+                }else{
+                    pref.setToLatM(locationByGps?.latitude.toString())
+                    pref.setToLngM(locationByGps?.longitude.toString())
+                }
+                finish()
+            }else{
+                if (pref.getType().equals("1")) {
+                    pref.setToLatL(locationByNetwork?.latitude.toString())
+                    pref.setToLngL(locationByNetwork?.longitude.toString())
+                }else{
+                    pref.setToLatM(locationByNetwork?.latitude.toString())
+                    pref.setToLngM(locationByNetwork?.longitude.toString())
+                }
+                finish()
 
+            }
 
-                      if (pref.getType().equals("1")) {
-                          pref.setToLatL(locationByNetwork?.latitude.toString())
-                          pref.setToLngL(locationByNetwork?.longitude.toString())
-                      }else{
-                          pref.setToLatM(locationByNetwork?.latitude.toString())
-                          pref.setToLngM(locationByNetwork?.longitude.toString())
-                      }
+        }else {
+            if (locationByNetwork == null) {
+                Toast.makeText(this@LocationPickerActivity, "No Network", Toast.LENGTH_LONG).show()
 
-                  }
-                  // use latitude and longitude as per your need
-                  // }
-                  // }
+            } else {
 
 
-              }
-        val intent = Intent(this, CityCabActivity::class.java)
-        startActivity(intent)
+                if (pref.getType().equals("1")) {
+                    pref.setToLatL(locationByNetwork?.latitude.toString())
+                    pref.setToLngL(locationByNetwork?.longitude.toString())
+                }else{
+                    pref.setToLatM(locationByNetwork?.latitude.toString())
+                    pref.setToLngM(locationByNetwork?.longitude.toString())
+                }
+                finish()
+            }
+            // use latitude and longitude as per your need
+            // }
+            // }
+
+
+        }
+
     }
 
     val gpsLocationListener: LocationListener = object : LocationListener {
@@ -951,6 +953,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
         override fun onProviderDisabled(provider: String) {}
     }
     override fun onBackPressed() {
+
         if (count.equals("map")) {
             imgSearch?.isVisible = false
             ll_history?.setVisibility(View.VISIBLE)

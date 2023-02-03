@@ -64,6 +64,7 @@ import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.LocationPickerActivity
 import com.pearlorganisation.figgo.UI.LocationPickerActivityCurr
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
 import org.json.JSONObject
@@ -146,7 +147,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         progress = view.findViewById<ProgressBar>(R.id.progress)
         val onewayvehiclelist = view.findViewById<RecyclerView>(R.id.onewayvehiclelist)
         var locLinear = view?.findViewById<LinearLayout>(R.id.linear_loc)
-        var submit = view?.findViewById<Button>(R.id.submit)
+        var submit = view?.findViewById<Button>(R.id.submitC)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         var advance_li = view?.findViewById<LinearLayout>(R.id.adLinear)
       //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
@@ -181,29 +182,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         } else {
 
         }
-        if (pref.getTypeC().equals("1")){
 
-            getCurrentLoc()
-
-            if (pref.getToLatMC().equals("")){
-
-
-            }else{
-                getDestinationLoc()
-            }
-
-
-
-        }else if (pref.getTypeC().equals("2")){
-            if (pref.getToLatLC().equals("")){
-
-            }else{
-                getCurrentLoc()
-            }
-            getDestinationLoc()
-
-
-        }
 
         calenderimg.setOnClickListener {
             val c = Calendar.getInstance()
@@ -382,11 +361,33 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             override fun onResponse(response: JSONObject?) {
                 Log.d("SendData", "response===" + response)
                 if (response != null) {
-                    val status = response.getString("status")
+                    if (response != null) {
+
+                        progressDialog.hide()
+                        ll_location?.isVisible = false
+                        ll_choose_vehicle?.isVisible  =true
+                        pref.setCount("vehicle")
+
+                        val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
+                        val ride_id = response.getJSONObject("data").getString("ride_id")
+
+                        for(p2 in 0 until size) {
+
+                            val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
+                            val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
+                            val driver_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
+                            val min_price = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
+                            val max_price = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")
+
+                            cablist.add(CurrentVehicleModel(name,image,ride_id,driver_id, min_price,max_price))
+
+                    /*val status = response.getString("status")
                     if(status.equals("false")){
                         Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
                     }else{
                         progressDialog.hide()
+
+
                         val data = response.getJSONObject("data")
                         val ride_id = data.getString("ride_id")
                         pref.setRideId(ride_id)
@@ -396,10 +397,15 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                             val image = vehicle_types.getJSONObject(i).getString("full_image")
                             val id = vehicle_types.getJSONObject(i).getString("id")
                             val min_price = vehicle_types.getJSONObject(i).getString("min_price")
-                            val max_price = vehicle_types.getJSONObject(i).getString("max_price")
-                            cablist.add(CurrentVehicleModel(name,image,ride_id,id, min_price,max_price))
+                            val max_price = vehicle_types.getJSONObject(i).getString("max_price")*/
+
+
+
+
 
                         }
+
+
                         currentVehicleAdapter= CurrentVehicleAdapter(requireContext() as Activity,cablist)
                         binding.recylerCabList.adapter=currentVehicleAdapter
                         binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
@@ -413,7 +419,9 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }, object : Response.ErrorListener {
             override fun onErrorResponse(error: VolleyError?) {
                 Log.d("SendData", "error===" + error)
-                Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                progressDialog.hide()
+                MapUtility.showDialog(error.toString(),requireActivity())
+                //Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
             }
         }) {
             @Throws(AuthFailureError::class)
@@ -997,6 +1005,45 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         }
         manualLoc?.setText(strAdd)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (pref.getTypeC().equals("1")){
+
+            if (pref.getToLatLC().equals("")){
+
+            }else {
+                getCurrentLoc()
+            }
+            if (pref.getToLatMC().equals("")){
+
+
+            }else{
+                if (pref.getToLatMC().equals("")){
+
+                }else {
+                    getDestinationLoc()
+                }
+            }
+
+        }else if (pref.getTypeC().equals("2")){
+            if (pref.getToLatLC().equals("")){
+
+            }else{
+                if (pref.getToLatLC().equals("")){
+
+                }else {
+                    getCurrentLoc()
+                }
+            }
+            if (pref.getToLatMC().equals("")){
+
+            }else {
+                getDestinationLoc()
+            }
+
+        }
     }
 
 }

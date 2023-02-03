@@ -169,6 +169,7 @@ abstract class BaseClass  : AppCompatActivity(){
         var ll_back = findViewById<LinearLayout>(R.id.ll_back)
         ll_back.setOnClickListener {
 
+
             finish()
         }
     }

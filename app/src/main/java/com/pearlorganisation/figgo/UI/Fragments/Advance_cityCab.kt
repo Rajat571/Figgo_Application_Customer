@@ -180,20 +180,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             TODO("VERSION.SDK_INT < O")
         }
 
-        if (pref.getType().equals("1")){
-          getCurrentLoc()
-            if (pref.getToLatM().equals("")){
-            }else{
-                getDestinationLoc()
-            }
-        }else if (pref.getType().equals("2")){
-            if (pref.getToLatL().equals("")){
 
-            }else{
-                getCurrentLoc()
-            }
-            getDestinationLoc()
-        }
 
 
         calenderimg.setOnClickListener {
@@ -346,8 +333,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
                             val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
                             val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-
-
                             val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
                             val min = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
                             val max = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")
@@ -388,8 +373,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     }
 
 
-
-
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         if (isLocationPermissionGranted()) {
@@ -405,7 +388,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             val lastKnownLocationByGps =
                 locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
 
-            // locationByGps = getLastKnownLocation()
+
             lastKnownLocationByGps?.let {
                 locationByGps = lastKnownLocationByGps
             }
@@ -928,6 +911,50 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             Log.w(" Current loction address", "Canont get Address!")
         }
         manualLoc?.setText(strAdd)
+
+    }
+    override fun onResume() {
+        super.onResume()
+        if (pref.getType().equals("1")){
+
+            if(pref.getToLatL().equals("")){
+
+            }else {
+                getCurrentLoc()
+
+            }
+            if (pref.getToLatM().equals("")){
+
+
+            }else {
+                if (pref.getToLatM().equals("")) {
+
+                } else {
+                    getDestinationLoc()
+                }
+            }
+
+
+        }else if (pref.getType().equals("2")){
+            if (pref.getToLatL().equals("")){
+
+            }else{
+                if(pref.getToLatL().equals("")){
+
+                }else {
+                    getCurrentLoc()
+
+                }
+            }
+            if (pref.getToLatM().equals("")) {
+
+            } else {
+                getDestinationLoc()
+            }
+
+
+        }
+
 
     }
 

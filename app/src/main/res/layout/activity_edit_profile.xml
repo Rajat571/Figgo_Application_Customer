@@ -33,6 +33,40 @@
             </LinearLayout>
 
 
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/upload_img_gradient">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:id="@+id/profile"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/profile"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/camera"
+                        android:id="@+id/select_profile"
+                        android:layout_alignEnd="@+id/profile"
+                        android:layout_marginTop="80dp"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -47,9 +81,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="6dp"
                     android:inputType="text"
                     android:background="@null"
+                    android:textStyle="bold"
                     android:textSize="12sp"
                     android:textColor="@color/black"/>
 
@@ -79,7 +115,7 @@
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp">
 
-                <EditText
+                <Spinner
                     android:id="@+id/update_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,7 +123,7 @@
                     android:layout_marginTop="6dp"
                     android:inputType="text"
                     android:background="@null"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/black"/>
 
                <!-- <TextView
@@ -117,15 +153,15 @@
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp">
 
-                <EditText
+                <Spinner
                     android:id="@+id/update_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="City"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="5dp"
                     android:inputType="text"
                     android:background="@null"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/black"/>
 
                <!-- <TextView
@@ -160,10 +196,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Mobile No."
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="6dp"
                     android:inputType="number"
                     android:background="@null"
                     android:textSize="12sp"
+                    android:textStyle="bold"
                     android:textColor="@color/black"/>
 
 
@@ -200,7 +238,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email ID"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="6dp"
+                    android:textStyle="bold"
                     android:inputType="number"
                     android:background="@null"
                     android:textSize="12sp"

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorlightblue"
-    tools:context="com.pearlorganisation.Current_Driver_Details_List">
+    android:layout_height="wrap_content">
 
-    <include layout="@layout/headerbackwithnotification"/>
-
-    <!--<androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_205sdp"
+        android:layout_margin="@dimen/_12sdp"
+        android:backgroundTint="@color/colornavyblue"
         app:cardCornerRadius="@dimen/_6sdp"
         app:cardElevation="@dimen/_6sdp"
-        android:layout_margin="@dimen/_12sdp"
-        android:backgroundTint="@color/colornavyblue">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,33 +36,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textStyle="bold"
                 android:layout_marginStart="@dimen/_22sdp"
                 android:text="Activa - CH-01-2015"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_110sdp"
-            app:cardElevation="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_6sdp"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_6sdp"
             app:cardCornerRadius="@dimen/_6sdp"
+            app:cardElevation="@dimen/_6sdp"
             app:cardMaxElevation="@dimen/_6sdp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/driverimg"
                 android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_65sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_26sdp"
-                android:gravity="center"
                 android:background="@drawable/bg_circle_black"
+                android:gravity="center"
                 android:src="@drawable/girl_img"
-                app:civ_border_width="@dimen/_1sdp"
-                android:layout_marginStart="@dimen/_12sdp"/>
+                app:civ_border_width="@dimen/_1sdp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,25 +83,24 @@
 
                 <RatingBar
                     android:id="@+id/ride_service_rating"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:max="5"
-                    android:numStars="5"
-                    style="?android:attr/ratingBarStyleSmall"/>
+                    android:numStars="5" />
 
                 <TextView
                     android:id="@+id/dl_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:text="DL. No. Cgdjn9857imvc"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp" />
             </LinearLayout>
-
 
 
         </androidx.cardview.widget.CardView>
@@ -113,12 +111,13 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/_3sdp"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_reject_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
                 android:layout_margin="@dimen/_6sdp"
+                android:layout_weight="3"
                 android:background="@color/colorRed"
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
@@ -130,9 +129,9 @@
                 android:id="@+id/tv_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_6sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_weight="3"
-                android:layout_margin="@dimen/_6sdp"
                 android:background="@color/coloryellowlight"
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
@@ -142,8 +141,5 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>-->
-
-
-
-</LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
