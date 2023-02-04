@@ -320,12 +320,8 @@ class LoginActivity : AppCompatActivity(){
                             //  Log.d("SendData", "token===" + token)
                             //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
                             if (pref.getMpin().equals("")) {
-                                startActivity(
-                                    Intent(
-                                        this@LoginActivity,
-                                        MPinGenerate::class.java
-                                    )
-                                )
+                                startActivity(Intent(this@LoginActivity,
+                                        MPinGenerate::class.java))
                             } else {
                                 startActivity(Intent(this@LoginActivity,
                                         DashBoard::class.java

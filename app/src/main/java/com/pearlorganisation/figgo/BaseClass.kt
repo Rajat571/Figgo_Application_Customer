@@ -168,8 +168,7 @@ abstract class BaseClass  : AppCompatActivity(){
     fun onBackPress(){
         var ll_back = findViewById<LinearLayout>(R.id.ll_back)
         ll_back.setOnClickListener {
-      /*      val intent = Intent(to, from::class.java)
-            startActivity(intent)*/
+
             finish()
         }
     }

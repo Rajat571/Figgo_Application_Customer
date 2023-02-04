@@ -113,7 +113,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     var datetext: TextView? = null
     var timetext: TextView? = null
     var mapFragment: Fragment? = null
-    private var type: String? = ""
+    private var onResu: String? = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -440,10 +440,12 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                     manualLoc!!.setText(place.address)
                     from_lat = place.latLng.latitude
                     from_lng = place.latLng.longitude
+                    onResu = "false"
                 }else if (press.equals("live")){
                     to_lat = place.latLng.latitude
                     to_lng = place.latLng.longitude
                     liveLoc!!.setText(place.address)
+                    onResu = "false"
                 }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 val status = Autocomplete.getStatusFromIntent(data!!)
@@ -920,46 +922,50 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     }
     override fun onResume() {
         super.onResume()
-        if (pref.getType().equals("1")){
+        if (onResu.equals("false")){
+            onResu = ""
+        }
+        else {
+            if (pref.getType().equals("1")) {
 
-            if(pref.getToLatL().equals("")){
+                if (pref.getToLatL().equals("")) {
 
-            }else {
-                getCurrentLoc()
+                } else {
+                    getCurrentLoc()
 
-            }
-            if (pref.getToLatM().equals("")){
+                }
+                if (pref.getToLatM().equals("")) {
 
 
-            }else {
+                } else {
+                    if (pref.getToLatM().equals("")) {
+
+                    } else {
+                        getDestinationLoc()
+                    }
+                }
+
+
+            } else if (pref.getType().equals("2")) {
+                if (pref.getToLatL().equals("")) {
+
+                } else {
+                    if (pref.getToLatL().equals("")) {
+
+                    } else {
+                        getCurrentLoc()
+
+                    }
+                }
                 if (pref.getToLatM().equals("")) {
 
                 } else {
                     getDestinationLoc()
                 }
+
+
             }
-
-
-        }else if (pref.getType().equals("2")){
-            if (pref.getToLatL().equals("")){
-
-            }else{
-                if(pref.getToLatL().equals("")){
-
-                }else {
-                    getCurrentLoc()
-
-                }
-            }
-            if (pref.getToLatM().equals("")) {
-
-            } else {
-                getDestinationLoc()
-            }
-
-
         }
-
 
     }
 

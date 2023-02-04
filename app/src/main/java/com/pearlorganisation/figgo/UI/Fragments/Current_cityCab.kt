@@ -124,7 +124,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     private var locationByGps: Location? = null
     private var locationByNetwork: Location? = null
     private var lastKnownLocationByGps: Location? = null
-
+    private var onResu: String? = ""
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -609,10 +609,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     manualLoc!!.setText(place.address)
                     from_lat = place.latLng.latitude.toString()
                     from_lng = place.latLng.longitude.toString()
+                    onResu = "false"
                 }else if (press.equals("live")){
                     to_lat = place.latLng.latitude.toString()
                     to_lng = place.latLng.longitude.toString()
                     liveLoc!!.setText(place.address)
+                    onResu = "false"
                 }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 val status = Autocomplete.getStatusFromIntent(
@@ -983,40 +985,47 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
     override fun onResume() {
         super.onResume()
-        if (pref.getTypeC().equals("1")){
 
-            if (pref.getToLatLC().equals("")){
-
-            }else {
-                getCurrentLoc()
-            }
-            if (pref.getToLatMC().equals("")){
+        if (onResu.equals("false")){
+            onResu = ""
+        }else{
 
 
-            }else{
-                if (pref.getToLatMC().equals("")){
+            if (pref.getTypeC().equals("1")) {
 
-                }else {
-                    getDestinationLoc()
-                }
-            }
+                if (pref.getToLatLC().equals("")) {
 
-        }else if (pref.getTypeC().equals("2")){
-            if (pref.getToLatLC().equals("")){
-
-            }else{
-                if (pref.getToLatLC().equals("")){
-
-                }else {
+                } else {
                     getCurrentLoc()
                 }
-            }
-            if (pref.getToLatMC().equals("")){
+                if (pref.getToLatMC().equals("")) {
 
-            }else {
-                getDestinationLoc()
-            }
 
+                } else {
+                    if (pref.getToLatMC().equals("")) {
+
+                    } else {
+                        getDestinationLoc()
+                    }
+                }
+
+            } else if (pref.getTypeC().equals("2")) {
+                if (pref.getToLatLC().equals("")) {
+
+                } else {
+                    if (pref.getToLatLC().equals("")) {
+
+                    } else {
+                        getCurrentLoc()
+                    }
+                }
+                if (pref.getToLatMC().equals("")) {
+
+                } else {
+                    getDestinationLoc()
+                }
+
+            }
         }
     }
 

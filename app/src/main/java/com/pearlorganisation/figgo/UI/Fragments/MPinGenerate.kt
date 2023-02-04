@@ -33,7 +33,7 @@ class MPinGenerate : Fragment() {
         var mPin = view.findViewById<EditText>(R.id.mPin)
         var confirm_mpin = view.findViewById<EditText>(R.id.confirm_mpin)
         mPin.requestFocus()
-        mPin.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mPin.setInputType(InputType.TYPE_CLASS_NUMBER)
         var pref = PrefManager(requireContext())
         var mpin = view.findViewById<EditText>(R.id.mPin)
         //var confirm = view.findViewById<EditText>(R.id.confirm_mpin)
@@ -44,7 +44,6 @@ class MPinGenerate : Fragment() {
             Toast.makeText(requireContext(), "PIN not match", Toast.LENGTH_SHORT).show()
         }
         binding.continuetv.setOnClickListener {
-
 
             startActivity(Intent(context, DashBoard::class.java))
 

@@ -13,6 +13,8 @@ import android.location.LocationListener
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -43,6 +45,7 @@ import com.release.gfg1.DBHelper
 import java.io.IOException
 import java.util.*
 import java.util.regex.Pattern
+
 
 class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityAdapter.ItemListener {
     private val REQUEST_CHECK_SETTINGS = 2
@@ -101,7 +104,9 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
     private var locationPick = false
     private var type: String? = null
     private var count: String? = ""
+    private var address: String? = ""
     private var rl_current_location: LinearLayout? = null
+    private var edt_search: EditText? = null
     lateinit var pref: PrefManager
     lateinit var historyAddAdapter: HistoryAdapter
     var historyAddList=ArrayList<HistoryAdd>()
@@ -121,10 +126,33 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
         val recycler_history = findViewById<RecyclerView>(R.id.recycler_history)
         txt_showmap = findViewById(R.id.txt_show_map)
         moving_pointer = findViewById(R.id.moving_pointer)
-
+        edt_search = findViewById<EditText>(R.id.edt_search)
         imgSearch = findViewById(R.id.imgSearch)
         addressline2 = findViewById(R.id.addressline2)
         citydetail = findViewById(R.id.citydetails)
+
+
+
+        edt_search?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                // TODO Auto-generated method stub
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // TODO Auto-generated method stub
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+
+
+            }
+        })
+
+
+
+
+
 
         val db = DBHelper(this@LocationPickerActivity, null)
 
@@ -141,9 +169,7 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                 HistoryAdd(
                     cursor.getString(cursor.getColumnIndex(DBHelper.ADDRESS)),
                     cursor.getString(cursor.getColumnIndex(DBHelper.LAT)),
-                    cursor.getString(cursor.getColumnIndex(DBHelper.LNG))
-                )
-            )
+                    cursor.getString(cursor.getColumnIndex(DBHelper.LNG))))
 
 
             // moving our cursor to next
@@ -153,21 +179,22 @@ class LocationPickerActivity :AppCompatActivity(), OnMapReadyCallback, RideCityA
                     HistoryAdd(
                         cursor.getString(cursor.getColumnIndex(DBHelper.ADDRESS)),
                         cursor.getString(cursor.getColumnIndex(DBHelper.LAT)),
-                        cursor.getString(cursor.getColumnIndex(DBHelper.LNG))
-                    )
-                )
+                        cursor.getString(cursor.getColumnIndex(DBHelper.LNG))))
 
             }
 
             // at last we close our cursor
             cursor.close()
         }
+
         if (historyAddList.size > 0) {
             historyAddAdapter = HistoryAdapter(this@LocationPickerActivity, historyAddList)
             recycler_history.layoutManager = GridLayoutManager(this@LocationPickerActivity, 1)
             recycler_history.adapter = historyAddAdapter
 
         }
+
+
         pref = PrefManager(this)
         imgSearch?.isVisible = false
         try {

@@ -30,7 +30,7 @@ return ViewHolder(view)
         return data.size
     }
 }
-class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
+open class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 var date = itemView.findViewById<TextView>(R.id.date)
 var from = itemView.findViewById<TextView>(R.id.from);
     var to = itemView.findViewById<TextView>(R.id.to)

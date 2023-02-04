@@ -53,7 +53,7 @@ class HistoryAdapter(var context:Activity, var historyList:List<HistoryAdd>): Ad
 
           }else if (pref.getTypeC().equals("1")){
               pref.setToLatLC(data.lat)
-              pref.setToLngLC(data.lat)
+              pref.setToLngLC(data.lng)
 
 
           }else  if (pref.getTypeC().equals("2")){
