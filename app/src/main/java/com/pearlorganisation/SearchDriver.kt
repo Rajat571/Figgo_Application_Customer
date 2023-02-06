@@ -90,6 +90,7 @@ class SearchDriver : BaseClass() , PaymentResultListener {
         var ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
          dl_number = findViewById<TextView>(R.id.dl_number)
 
+
         driver_id = intent.getStringExtra("driver_id")
         ride_id = intent.getStringExtra("ride_id")
         pref = PrefManager(this)
@@ -219,6 +220,8 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                               drivername?.setText(name)
                               dl_number?.setText(dlnumber)
                             activavehiclenumber?.setText(v_number)
+
+                           /* startActivity(Intent(this,EmergencyRoutedraweActivity::class.java))*/
 
                          /*   if(!full_image.equals("")){
                                 Picasso.get().load(full_image).placeholder(R.drawable.girl_img).into(driverimg)

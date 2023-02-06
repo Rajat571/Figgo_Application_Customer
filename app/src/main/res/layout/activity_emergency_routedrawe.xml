@@ -42,7 +42,7 @@
 
 
                 <ImageView
-                    android:id="@+id/iv_vehicleimg"
+                    android:id="@+id/iv_activaimg"
                     android:layout_width="@dimen/_65sdp"
                     android:layout_height="@dimen/_65sdp"
                     android:background="@drawable/bg_circle_black"
@@ -51,12 +51,12 @@
 
 
                 <TextView
-                    android:id="@+id/tv_vehiclenumber"
+                    android:id="@+id/tv_activanumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:layout_marginStart="@dimen/_22sdp"
+                    android:layout_marginStart="@dimen/_32sdp"
                     android:text="Activa - CH-01-2015"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
@@ -82,7 +82,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/iv_drivername"
+                    android:id="@+id/tv_drivername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"

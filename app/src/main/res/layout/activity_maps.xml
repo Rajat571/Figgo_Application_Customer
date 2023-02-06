@@ -21,6 +21,5 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Set"
-        android:textSize="14dp"
-        />
+        android:textSize="14dp"/>
 </RelativeLayout>

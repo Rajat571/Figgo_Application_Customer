@@ -1,5 +1,6 @@
 package com.pearlorganisation
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -10,12 +11,19 @@ import android.location.LocationRequest
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.AuthFailureError
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -32,15 +40,18 @@ import com.google.gson.Gson
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.DriveRatingActivity
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import okhttp3.OkHttpClient
 import okhttp3.Request
-
+import org.json.JSONObject
 
 
 class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback {
 
 
     private var mMap: GoogleMap? = null
+    lateinit var progressDialog:ProgressDialog
+    lateinit var pref:PrefManager
      var destination:MarkerOptions? = null
     private var originLatitude: Double = 28.5021359
     private var originLongitude: Double = 77.4054901
@@ -48,6 +59,11 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback {
     private var destinationLongitude: Double = 77.3932163
     lateinit var geocoder:Geocoder
     var Access_Location_Request_Code:Int=1001
+    var iv_activaimg:ImageView? = null
+     var tv_activanumber:TextView? = null
+    var tv_drivername:TextView?=null
+    var tv_dl_number:TextView? = null
+
     lateinit var fusedLocationProviderClient:FusedLocationProviderClient
     lateinit var context:Context
     val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION:Int=1001
@@ -77,10 +93,16 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emergency_routedrawe)
         geocoder= Geocoder(this)
+        pref = PrefManager(this)
         var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
         var tv_emrgencybtn = findViewById<TextView>(R.id.tv_emrgencybtn)
+        tv_drivername = findViewById<TextView>(R.id.tv_drivername)
+        tv_dl_number = findViewById<TextView>(R.id.tv_dl_number)
+        tv_activanumber = findViewById(R.id.tv_activanumber)
         shareimg()
         onBackPress()
+
+        getdriverdetails()
 
         iv_bellicon.setOnClickListener {
             startActivity(Intent(this, NotificationBellIconActivity::class.java))
@@ -249,6 +271,76 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback {
         mMap.clear()
         mMap.addMarker(MarkerOptions().position(originLocation))
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(originLocation, 18F))*/
+    }
+
+    private fun getdriverdetails() {
+        val progressDialog = ProgressDialog(this)
+        progressDialog.show()
+        val URL ="https://test.pearl-developer.com/figo/api/ride/check-ride-request-status"
+        Log.d("searchDriver", "json===" +URL )
+        Log.d("SendData87", pref.getride_id() )
+        val queue = Volley.newRequestQueue(this)
+        val json = JSONObject()
+        //json.put("ride_id", pref.getride_id())
+        json.put("ride_id", "1070")
+        val jsonOblect: JsonObjectRequest =
+            object : JsonObjectRequest(Method.POST, URL, json,
+                Response.Listener<JSONObject?> { response ->
+                    if (response != null) {
+
+                        Log.d("Ride Status", "response===" + response)
+                        progressDialog.hide()
+                        val status = response.getJSONObject("data").getString("status")
+
+                        if (status.equals("true")){
+                            val data = response.getJSONObject("data").getJSONObject("ride_driver").getString("name")
+                            val name = response.getJSONObject("data").getJSONObject("ride_driver").getString("name")
+                            val dlnumber = response.getJSONObject("data").getJSONObject("ride_driver").getString("dl_number")
+                            val v_number = response.getJSONObject("data").getJSONObject("ride_driver").getJSONObject("cab").getString("v_number")
+                            /*val name1 = response.getJSONObject("data").getJSONObject("cab_details").getString("name")*/
+
+                            val rating_avg = response.getJSONObject("data").getJSONObject("ride_driver").getString("rating_avg")
+
+                            tv_drivername?.setText(name)
+                            tv_dl_number?.setText(dlnumber)
+                            tv_activanumber?.setText(v_number)
+
+                            /*   if(!full_image.equals("")){
+                                   Picasso.get().load(full_image).placeholder(R.drawable.girl_img).into(driverimg)
+                               }*/
+
+                            /* if(!taxi_image.equals("")){
+                                 Picasso.get().load(taxi_image).placeholder(R.drawable.blueactiva_img).into(activaimg)
+                             }*/
+
+
+                        }else if (status.equals("false")){
+                            //  Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show()
+                        }
+
+                    }
+                }, object : Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError?) {
+                        progressDialog.hide()
+                        Log.d("SendData", "error===" + error)
+                        //
+
+                        MapUtility.showDialog(error.toString(),this@EmergencyRoutedraweActivity)
+                    }
+                }) {
+
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers: MutableMap<String, String> = java.util.HashMap()
+                    headers.put("Content-Type", "application/json; charset=UTF-8");
+                    headers.put("Authorization", "Bearer " + pref.getToken());
+                    headers.put("Accept", "application/vnd.api+json");
+                    return headers
+                }
+            }
+
+        queue.add(jsonOblect)
+
     }
 
 

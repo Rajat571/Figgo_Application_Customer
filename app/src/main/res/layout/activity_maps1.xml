@@ -19,32 +19,62 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_440sdp"
+            android:layout_height="@dimen/_420sdp"
             app:cardCornerRadius="@dimen/_6sdp"
             app:cardMaxElevation="@dimen/_6sdp"
             app:cardElevation="@dimen/_6sdp"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp">
 
-
-
-
-
             <LinearLayout
+                android:id="@+id/ll_nxtpage"
+                android:layout_width="126dp"
+                android:layout_height="75dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_52sdp"
+                android:layout_marginStart="@dimen/_52sdp"
+                android:layout_marginEnd="@dimen/_52sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_oneway"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/coloryellow"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/arrow_right" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_21sdp"
+                    android:background="@color/colorcoffie"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="one way"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+
+
+
+
+         <!--   <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
 
 
-              <!--      <fragment
+              &lt;!&ndash;      <fragment
                         android:id="@+id/map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="270dp"
                         android:visibility="gone"
                         android:layout_marginBottom="20dp"
-                        tools:context=".CurrentMap.MapsActivity1" />-->
+                        tools:context=".CurrentMap.MapsActivity1" />&ndash;&gt;
 
 
                 <LinearLayout
@@ -60,7 +90,7 @@
                         android:orientation="vertical" />
 
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <!-- <TextView
                  android:id="@+id/nextscreen"

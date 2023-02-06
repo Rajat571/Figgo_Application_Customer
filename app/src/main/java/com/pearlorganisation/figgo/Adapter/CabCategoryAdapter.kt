@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Model.CabCategory
-import com.pearlorganisation.figgo.One_Way_OutStationActivity
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.CityCabActivity
 import com.pearlorganisation.figgo.UI.Shared_cab_Activity
 
 class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCategory>): Adapter<CabCategoryAdapter.CabCategoryHolder>() {

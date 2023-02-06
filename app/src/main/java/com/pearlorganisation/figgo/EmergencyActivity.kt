@@ -4,9 +4,32 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.pearlorganisation.Driver_Rating_Activity1
+import com.pearlorganisation.NotificationBellIconActivity
 
-class EmergencyActivity : AppCompatActivity() {
+class EmergencyActivity : BaseClass() {
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emergency)
@@ -14,11 +37,21 @@ class EmergencyActivity : AppCompatActivity() {
 
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
+        var ll_emergency = findViewById<LinearLayout>(R.id.ll_emergency)
 
-      /*  backimg.setOnClickListener {
-            val intent = Intent(this, VehicleAboutActivity::class.java)
-            startActivity(intent)
-        }*/
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+        shareimg()
+        onBackPress()
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
+
+        ll_emergency.setOnClickListener {
+            startActivity(Intent(this,Driver_Rating_Activity1::class.java))
+        }
+
+
 
         shareimg.setOnClickListener {
             var intent= Intent()

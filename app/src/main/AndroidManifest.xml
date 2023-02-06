@@ -24,6 +24,12 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
+            android:name=".OneWayTourbookingScreen"
+            android:exported="false" />
+        <activity
+            android:name=".ThankyouDriveRating"
+            android:exported="false" />
+        <activity
             android:name=".HistoryMapsActivity"
             android:exported="false" />
         <activity

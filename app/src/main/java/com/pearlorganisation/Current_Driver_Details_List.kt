@@ -83,12 +83,13 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
         var activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
         var driverimg = findViewById<CircleImageView>(R.id.driverimg)
         var drivername = findViewById<TextView>(R.id.drivername)
-        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+
         var ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
         var dl_number = findViewById<TextView>(R.id.dl_number)
         driver_id = intent.getStringExtra("driver_id")
         ride_id = intent.getStringExtra("ride_id")
         pref = PrefManager(this)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
         shareimg()
         onBackPress()
 
