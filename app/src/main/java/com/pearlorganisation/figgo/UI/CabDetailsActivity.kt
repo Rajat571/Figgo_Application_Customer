@@ -30,7 +30,7 @@ class CabDetailsActivity : BaseClass(), PaymentResultListener {
     lateinit var nav_controller: NavController
     var transaction_id :String ?= ""
     var thankyouScreenFragment = ThankyouScreenFragment()
-    lateinit var pref: PrefManager
+   override lateinit var pref: PrefManager
     override fun setLayoutXml() {
         TODO("Not yet implemented")
     }

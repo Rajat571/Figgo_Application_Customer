@@ -372,4 +372,22 @@ import android.content.SharedPreferences
          return pref?.getString("req_ride_id","null").toString()
      }
 
+     fun setSearchBack(type:String){
+         editor?.putString("back_s",type)
+         editor?.commit()
+     }
+
+     fun getSearchBack():String{
+         return pref?.getString("back_s","null").toString()
+     }
+
+     fun setPrice(type:String){
+         editor?.putString("price",type)
+         editor?.commit()
+     }
+
+     fun getPrice():String{
+         return pref?.getString("price","null").toString()
+     }
+
  }

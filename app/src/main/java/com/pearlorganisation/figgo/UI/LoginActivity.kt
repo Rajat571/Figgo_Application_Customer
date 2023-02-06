@@ -58,7 +58,10 @@ class LoginActivity : AppCompatActivity(){
     lateinit var otp_Verify_button: Button
     lateinit var progress: ProgressBar
     lateinit var cTimer : CountDownTimer
-
+    lateinit var txt_mpin : TextView
+    lateinit var login_mpin : CardView
+    lateinit var btn_login_mpin : TextView
+    lateinit var mPin : EditText
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +81,11 @@ class LoginActivity : AppCompatActivity(){
         enteredOTP = findViewById<EditText>(R.id.enteredOTP)
         otp_Verify_button = findViewById<Button>(R.id.otp_Verify_button)
         resend = findViewById<TextView>(R.id.resend)
+        login_mpin = findViewById<CardView>(R.id.c_mpin)
+        btn_login_mpin = findViewById<TextView>(R.id.btn_login_mpin)
+
+        txt_mpin = findViewById<TextView>(R.id.txtMpin)
+        mPin = findViewById<EditText>(R.id.mPin)
         var window = window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
 
@@ -133,6 +141,34 @@ class LoginActivity : AppCompatActivity(){
             //getotp()
 
         }
+
+        txt_mpin.setOnClickListener {
+
+            //var mobile_num=binding.inputNumber.text.toString()
+
+            cc_number.isVisible = false
+            login_mpin.isVisible = true
+            //getotp()
+
+        }
+
+        btn_login_mpin.setOnClickListener {
+
+          if (mPin.text.toString().equals("")){
+              Toast.makeText(this@LoginActivity, "Enter MPIN", Toast.LENGTH_SHORT).show()
+
+          }else{
+              if (mPin.text.toString().length < 4){
+                  Toast.makeText(this@LoginActivity, "Required 4 Digit", Toast.LENGTH_SHORT).show()
+
+              }else{
+                  if (pref.getMpin().equals(mPin.text.toString())){
+                      startActivity(Intent(this,DashBoard::class.java))
+                  }
+              }
+          }
+
+        }
         otp_Verify_button.setOnClickListener {
             if (enteredOTP.text.toString().equals("") || enteredOTP.text.toString().equals("null")) {
                 Toast.makeText(this@LoginActivity, "Enter Otp", Toast.LENGTH_SHORT).show()
@@ -171,6 +207,9 @@ class LoginActivity : AppCompatActivity(){
             handleSignInResult(task)
         }
     }
+
+
+
 
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {

@@ -36,7 +36,7 @@ import java.util.HashMap
 
 class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
     var transaction_id :String ?= ""
-    lateinit var pref: PrefManager
+   override lateinit var pref: PrefManager
     var  driver_id:String? = null
     var  ride_id:String? = null
     var toLat:String = ""

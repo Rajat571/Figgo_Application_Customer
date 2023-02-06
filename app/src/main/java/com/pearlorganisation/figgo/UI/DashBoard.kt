@@ -148,6 +148,7 @@ class DashBoard : BaseClass(){
         prefManager.setToLngLC("")
         prefManager.setToLatMC("")
         prefManager.setToLngMC("")
+        pref.setSearchBack("")
         Log.d("token",prefManager.getToken())
 
         var window=window

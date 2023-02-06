@@ -25,7 +25,7 @@ import java.util.HashMap
 
 class PaymentMethodActivity : BaseClass(), PaymentResultListener {
     var transaction_id :String ?= ""
-    lateinit var pref: PrefManager
+    override lateinit var pref: PrefManager
 
     override fun setLayoutXml() {
         TODO("Not yet implemented")

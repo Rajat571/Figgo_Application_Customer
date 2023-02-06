@@ -388,6 +388,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
                     dl_number?.setText(dlNumber)
                     ride_service_rating?.rating = rating.toFloat()
 
+
                     if(!driver_image.equals("")){
                         Picasso.get().load(driver_image).placeholder(R.drawable.girl_img).into(driverimg)
                     }
