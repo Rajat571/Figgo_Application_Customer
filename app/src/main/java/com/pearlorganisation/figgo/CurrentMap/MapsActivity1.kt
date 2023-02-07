@@ -16,6 +16,7 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.pearlorganisation.NotificationBellIconActivity
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.CurrentOneWayKmCountAdapter
 import com.pearlorganisation.figgo.BaseClass
@@ -79,11 +80,25 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         var driver_id = intent.getStringExtra("driver_id")
         pref  = PrefManager(this)
         var ll_accept = findViewById<LinearLayout>(R.id.ll_accept)
-        val onewayvehiclelist = findViewById<RecyclerView>(R.id.onewayvehiclelist)
+       /* val onewayvehiclelist = findViewById<RecyclerView>(R.id.onewayvehiclelist)*/
         var progress = findViewById<ProgressBar>(R.id.progress)
         var backtxt = findViewById<TextView>(R.id.backtxt)
+        var ll_nxtpage = findViewById<LinearLayout>(R.id.ll_nxtpage)
+
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+        shareimg()
+        onBackPress()
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
 
         getcablist(id,ride_id)
+
+
+        ll_nxtpage.setOnClickListener {
+            startActivity(Intent(this,MapsActivity2::class.java))
+        }
         /*getAccept()*/
 
 
@@ -134,7 +149,7 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                     if(status.equals("false")){
                         Toast.makeText(this@MapsActivity1, "Something Went Wrong!", Toast.LENGTH_LONG).show()
                     }else{
-                        getnxtpage()
+                      /*  getnxtpage()*/
                       //  Toast.makeText(this@MapsActivity1, "true", Toast.LENGTH_LONG).show()
 
                     }
@@ -186,13 +201,13 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         TODO("Not yet implemented")
     }
 
-   private fun getnxtpage() {
+  /* private fun getnxtpage() {
         val URL = "https://test.pearl-developer.com/figo/api/ride/get-nearby-drivers"
        Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
         json.put("ride_id",pref.getRideId())
-        /*json.put("ride_id","33")*/
+        *//*json.put("ride_id","33")*//*
       //  json.put("type","current_booking")
        Log.d("SendData", "pref.getToken()===" + pref.getToken())
        Log.d("SendData", "json===" + json)
@@ -243,7 +258,7 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
 
         queue.add(jsonOblect)
 
-    }
+    }*/
 
 
    /* private fun getAccept() {

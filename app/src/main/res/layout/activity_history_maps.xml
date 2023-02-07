@@ -15,11 +15,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="match_parent"
         app:cardElevation="6dp"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:layout_marginEnd="@dimen/_6sdp"
+      android:layout_margin="10dp"
         android:background="@color/white"
         app:cardMaxElevation="@dimen/_6sdp"
         app:cardCornerRadius="@dimen/_6sdp">
@@ -27,56 +25,129 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/_14sdp"
-                android:textColor="@color/black"
-                android:text="# 123"
-                android:layout_marginStart="@dimen/_6sdp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_14sdp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:text="Complete"
-                android:layout_marginStart="@dimen/_6sdp"/>
+            android:orientation="vertical"
+            android:layout_margin="5dp">
 
-        </LinearLayout>
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_14sdp"
-                android:textColor="@color/black"
-                android:text="Harish"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginStart="@dimen/_6sdp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:textColor="@color/black"
-                android:text="Dehradun"
-                android:layout_marginStart="@dimen/_6sdp"/>
+                android:orientation="horizontal">
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/black"
+                    android:text="# 12345"
+                    android:layout_marginStart="@dimen/_6sdp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/green"
+                    android:text="Completed"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/black"
+                    android:text="2/5/2023"
+                    android:layout_marginStart="@dimen/_16sdp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginEnd="@dimen/_13sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/black"
+                    android:text="12:25"
+                    android:layout_marginStart="@dimen/_6sdp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:textColor="@color/black"
-                android:text="Delhi"
-                android:layout_marginStart="@dimen/_6sdp"/>
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/black"
+                        android:text="Harish" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/black"
+                        android:text="Dehradun"
+                       />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/black"
+                        android:text="Delhi" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/black"
+                            android:text="Swift"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:layout_marginStart="5dp"
+                            android:textColor="@color/black"
+                            android:text="UP 22 BH 6567 " />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_weight="1">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/girl_img"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
 
 
         </LinearLayout>

@@ -48,7 +48,7 @@ class CardView_Offer_Adapter(var context: Activity, var cardoffer_list: ArrayLis
                 1->{
                     holder.cab_name.setTextColor(Color.WHITE)
                     holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
-                    /*holder.cab_category.setImageResource(R.drawable.intracity)*/
+                  /*  holder.cab_category.setImageResource(R.drawable.intracity)*/
                     context.startActivity(Intent(context,Shared_cab_Activity::class.java))
                 }
                 2->{

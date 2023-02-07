@@ -21,6 +21,7 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_way_km_count)
+
         var ll_accept = findViewById<LinearLayout>(R.id.ll_accept)
         val recyclerview = findViewById<RecyclerView>(R.id.onewayvehiclelist)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
@@ -84,7 +85,6 @@ class OneWay_Km_CountActivity : AppCompatActivity() {
                         val ride_id = data.getString("ride_id")
                         val vehicle_types = data.getJSONArray("vehicle_types")
                         for (i in 0 until vehicle_types.length()){
-
 
                             val name = vehicle_types.getJSONObject(i).getString("name")
                             val image = vehicle_types.getJSONObject(i).getString("full_image")

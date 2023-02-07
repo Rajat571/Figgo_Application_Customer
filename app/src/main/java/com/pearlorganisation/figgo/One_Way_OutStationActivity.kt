@@ -1,6 +1,7 @@
 package com.pearlorganisation.figgo
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
+import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 
 
 class One_Way_OutStationActivity : AppCompatActivity() {
@@ -32,7 +34,9 @@ class One_Way_OutStationActivity : AppCompatActivity() {
         var submitoutstation = findViewById<LinearLayout>(R.id.submitoutstation)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
-        var work_progress = findViewById<ImageView>(R.id.work_progress)
+       /* var ll_submitfeedom = findViewById<LinearLayout>(R.id.ll_submitfeedom)
+        var ll_submitroundtour = findViewById<LinearLayout>(R.id.ll_submitroundtour)*/
+
 
        /* backimg.setOnClickListener {
             val intent = Intent(this, HomeDashboard::class.java)
@@ -43,13 +47,19 @@ class One_Way_OutStationActivity : AppCompatActivity() {
             var intent= Intent()
             intent.action= Intent.ACTION_SEND
             intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
-            intent.setType("text/plain");
+            intent.setType("text/plain")
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }*/
 
-       /* submitoutstation.setOnClickListener {
-            startActivity(Intent(this,OneWay_Km_CountActivity::class.java))
+        submitoutstation.setOnClickListener {
+            startActivity(Intent(this,MapsActivity1::class.java))
+        }
+
+       /* ll_submitroundtour.setOnClickListener {
+            startActivity(Intent(this,MapsActivity1::class.java))
         }*/
+
+
 
 
 

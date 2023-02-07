@@ -13,7 +13,6 @@
         android:text="History"
         android:textColor="@color/black"
         android:textSize="@dimen/_16sdp"
-        android:padding="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_6sdp"/>
 
     <include layout="@layout/historybottomscreen"/>

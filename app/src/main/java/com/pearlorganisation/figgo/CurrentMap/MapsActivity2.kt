@@ -24,7 +24,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.pearlorganisation.NotificationBellIconActivity
 import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.databinding.ActivityMaps2Binding
 import com.squareup.picasso.Picasso
@@ -35,7 +37,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
+class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMaps2Binding
@@ -67,6 +69,26 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     var pontos: List<LatLng> = java.util.ArrayList()
     var polyline: Polyline? = null
     lateinit var cTimer : CountDownTimer
+    override fun setLayoutXml() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeViews() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeClickListners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeInputs() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeLabels() {
+        TODO("Not yet implemented")
+    }
+
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +110,18 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
         dl_number = findViewById<TextView>(R.id.dl_number)
         driverimg = findViewById<ImageView>(R.id.driverimg)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+        shareimg()
+        onBackPress()
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
+
+        accept.setOnClickListener {
+            startActivity(Intent(this,EmergencyMapsActivity::class.java))
+        }
+
         //  kmsTxt = findViewById<TextView>(R.id.kms)
         txtTimer = findViewById<TextView>(R.id.textTimer)
         val mapFragment = supportFragmentManager
@@ -95,40 +129,42 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         mapFragment!!.getMapAsync(this)
 
 
-        accept.setOnClickListener {
+
+
+     /*   accept.setOnClickListener {
             if (ll_main1.isVisible) {
-                ll_main1.visibility = View.GONE
+               *//* ll_main1.visibility = View.GONE
                 ll_bottom.visibility = View.GONE
-                ll_waiting.visibility = View.VISIBLE
+                ll_waiting.visibility = View.VISIBLE*//*
 
-                page = "wait"
-
-
-                getAccept()
+              *//*  page = "wait"*//*
 
 
-                /*val bundle = Bundle()
+
+
+
+                *//*val bundle = Bundle()
             bundle.putString("drivername", drivername?.text.toString())
             bundle.putString("activavehiclenumber", activavehiclenumber?.text.toString())
             bundle.putString("dl_number", dl_number?.text.toString())
             val intent = Intent(this, EmergencyMapsActivity::class.java)
             intent.putExtras(bundle)
-            startActivity(intent)*/
+            startActivity(intent)*//*
 
 
-                /*// Obtain the SupportMapFragment and get notified when the map is ready to be used.
+                // Obtain the SupportMapFragment and get notified when the map is ready to be used.
             val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
-            mapFragment.getMapAsync(this)*/
+            mapFragment.getMapAsync(this)
             }
 
             reject_btn.setOnClickListener {
                 Toast.makeText(applicationContext, "Searching...", Toast.LENGTH_LONG).show()
             }
-        }
+        }*/
     }
 
-    private fun getAccept(){
+  /*  private fun getAccept(){
         val URL = "https://test.pearl-developer.com/figo/api/ride/select-driver"
         // Log.d("SendData", "URL===" + URL)
         val queue = Volley.newRequestQueue(this)
@@ -168,13 +204,13 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
                             startTimer1()
 
 
-                            /* val bundle = Bundle()
+                            *//* val bundle = Bundle()
                     bundle.putString("drivername", "test driver")
                     bundle.putString("activavehiclenumber", "test vehicle number")
                     bundle.putString("dl_number", "test dlnumber")
                     val intent = Intent(applicationContext, EmergencyMapsActivity::class.java)
                     intent.putExtras(bundle)
-                    startActivity(intent)*/
+                    startActivity(intent)*//*
 
                         }
                     }
@@ -201,7 +237,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
             }
         jsonOblect.setRetryPolicy(DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))
         queue.add(jsonOblect)
-    }
+    }*/
 
 
 
@@ -337,7 +373,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        getmaps()
+       /* getmaps()*/
         // val myLocation = LatLng(30.302810, 78.012234)
         //  mMap.addMarker(MarkerOptions().position(myLocation).title("Marker in Sydney"))
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
@@ -347,7 +383,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         TODO("Not yet implemented")
     }
 
-    private fun getmaps() {
+   /* private fun getmaps() {
         val progressDialog = ProgressDialog(this)
         progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/get-driver"
@@ -447,7 +483,8 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
         queue.add(jsonOblect)
 
-    }
+    }*/
+
     fun startTimer() {
 
         cTimer = object : CountDownTimer(50000, 1000) {
@@ -471,7 +508,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
             override fun onFinish() {
 
-                getAccept()
+               /* getAccept()*/
 
             }
         }

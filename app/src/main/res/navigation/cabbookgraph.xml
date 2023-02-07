@@ -13,13 +13,16 @@
         <action
             android:id="@+id/action_cabBookFragment_to_payFragment"
             app:destination="@id/payFragment" />
+
         <action
             android:id="@+id/action_cabBookFragment_to_dashBoard"
             app:destination="@id/dashBoard" />
+
         <action
             android:id="@+id/action_cabBookFragment_to_notificationBellIconActivity"
             app:destination="@id/notificationBellIconActivity" />
     </fragment>
+
 
     <fragment
         android:id="@+id/payFragment"
@@ -59,7 +62,7 @@
         android:id="@+id/vehicleNumberFragment"
         android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.VehicleNumberFragment"
         android:label="fragment_vehicle_number"
-        tools:layout="@layout/fragment_vehicle_number" >
+        tools:layout="@layout/fragment_vehicle_number">
         <action
             android:id="@+id/action_vehicleNumberFragment_to_thankyou_Rating_Fragment"
             app:destination="@id/thankyou_Rating_Fragment" />
