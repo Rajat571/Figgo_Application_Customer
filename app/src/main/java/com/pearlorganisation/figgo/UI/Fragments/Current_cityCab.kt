@@ -173,16 +173,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val currentDate = LocalDateTime.now().format(formatter)
-            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
-            val currentTime = LocalDateTime.now().format(formated)
-            datetext?.setText(currentDate)
-            timetext?.setText(currentTime)
-        } else {
 
-        }
 
 
         calenderimg.setOnClickListener {
@@ -338,6 +329,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
 
     private fun submitform() {
+
+
+        pref.setToLatLC(to_lat.toString())
+     pref.setToLngLC(to_lng.toString())
+         pref.setToLatMC(from_lat.toString())
+          pref.setToLngMC(from_lng.toString())
         progress?.isVisible = true
         ll_location?.isVisible = false
         ll_choose_vehicle?.isVisible  =false
@@ -1012,6 +1009,16 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
 
     override fun onResume() {
         super.onResume()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val currentDate = LocalDateTime.now().format(formatter)
+            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
+            val currentTime = LocalDateTime.now().format(formated)
+            datetext?.setText(currentDate)
+            timetext?.setText(currentTime)
+        } else {
+
+        }
         pref.setSearchBack("")
         if (onResu.equals("false")){
             onResu = ""

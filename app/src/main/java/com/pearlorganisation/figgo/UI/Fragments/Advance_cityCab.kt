@@ -169,17 +169,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
 
 
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val currentDate = LocalDateTime.now().format(formatter)
-            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
-            val currentTime = LocalDateTime.now().format(formated)
 
-           datetext?.setText(currentDate)
-           timetext?.setText(currentTime)
-        } else {
-            TODO("VERSION.SDK_INT < O")
-        }
 
 
 
@@ -918,6 +908,19 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     }
     override fun onResume() {
         super.onResume()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val currentDate = LocalDateTime.now().format(formatter)
+            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
+            val currentTime = LocalDateTime.now().format(formated)
+
+            datetext?.setText(currentDate)
+            timetext?.setText(currentTime)
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
         if (onResu.equals("false")){
             onResu = ""
         }

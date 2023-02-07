@@ -32,7 +32,7 @@ import org.json.JSONObject
 
 
 class SearchDriver : BaseClass() , PaymentResultListener {
-     override lateinit var pref: PrefManager
+    lateinit var pref: PrefManager
     lateinit var progressDialog:ProgressDialog
     lateinit var cTimer : CountDownTimer
      var count :Int = 0
@@ -42,9 +42,10 @@ class SearchDriver : BaseClass() , PaymentResultListener {
     var  ride_id:String? = null
     var toLat:String = ""
     lateinit var driverlayout:ConstraintLayout
-    var toLong:String = ""
-    var fromLat:String = ""
-    var fromLong:String = ""
+    var v_number:String = ""
+    var prices:String = ""
+    var name:String = ""
+    var dlnumber:String = ""
     var activavehiclenumber:TextView? = null
     var dl_number:TextView? = null
     var drivername:TextView? = null
@@ -212,13 +213,12 @@ class SearchDriver : BaseClass() , PaymentResultListener {
         val json = JSONObject()
 
 
-       // json.put("ride_id", pref.getride_id())
-       json.put("ride_id", "1070")
+        json.put("ride_id", pref.getride_id())
+       //json.put("ride_id", "1070")
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json,
                 Response.Listener<JSONObject?> { response ->
                     if (response != null) {
-
                         driverlayout.visibility= View.VISIBLE
                         x=1
                         Log.d("Ride Status", "response===" + response)
@@ -231,10 +231,10 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                             }
                             ll_search?.isVisible = false
                             ll_details?.isVisible = true
-                            val prices = response.getJSONObject("data").getString("price")
-                             val name = response.getJSONObject("data").getJSONObject("ride_driver").getString("name")
-                             val dlnumber = response.getJSONObject("data").getJSONObject("ride_driver").getString("dl_number")
-                           val v_number = response.getJSONObject("data").getJSONObject("ride_driver").getJSONObject("cab").getString("v_number")
+                             prices = response.getJSONObject("data").getString("price")
+                            name = response.getJSONObject("data").getJSONObject("ride_driver").getString("name")
+                              dlnumber = response.getJSONObject("data").getJSONObject("ride_driver").getString("dl_number")
+                            v_number = response.getJSONObject("data").getJSONObject("ride_driver").getJSONObject("cab").getString("v_number")
                            /*val name1 = response.getJSONObject("data").getJSONObject("cab_details").getString("name")*/
                             pref.setReqRideId(response.getJSONObject("data").getString("id"))
                                val rating_avg = response.getJSONObject("data").getJSONObject("ride_driver").getString("rating_avg")
@@ -330,9 +330,9 @@ class SearchDriver : BaseClass() , PaymentResultListener {
         cTimer.start()
     }
     private fun getUpdatePayment() {
-        val progressDialog = ProgressDialog(this)
-        progressDialog.show()
-        val URL ="https://test.pearl-developer.com/figo/api/ride/accept-current-city-ride"
+      //  val progressDialog = ProgressDialog(this)
+      //  progressDialog.show()
+        val URL ="https://test.pearl-developer.com/figo/api/ride/update-city-ride-payment-status"
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
         json.put("transaction_id", transaction_id.toString())
@@ -348,7 +348,7 @@ class SearchDriver : BaseClass() , PaymentResultListener {
 
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                        progressDialog.hide()
+                      //  progressDialog.hide()
                         val status = response.getString("status")
                         if (status.equals("true")){
                            getAcceptRide()
@@ -360,14 +360,16 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
-                    progressDialog.hide()
-                    Log.d("SendData", "error===" + error)
+                  //  progressDialog.hide()
+                    Log.d("SendDataE", "error===" + error)
                     // Toast.makeText(this@Current_Driver_Details_List, "Something went wrong!", Toast.LENGTH_LONG).show()
 
 
                     MapUtility.showDialog(error.toString(),this@SearchDriver)
                 }
             }) {
+
+
 
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
@@ -385,15 +387,15 @@ class SearchDriver : BaseClass() , PaymentResultListener {
 
 
     private fun getAcceptRide() {
-        val progressDialog = ProgressDialog(this)
-        progressDialog.show()
+       // val progressDialog = ProgressDialog(this)
+      //  progressDialog.show()
         val URL ="https://test.pearl-developer.com/figo/api/ride/accept-current-city-ride"
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
         json.put("ride_request_id", pref.getReqRideId())
-        json.put("ride_id", pref.getRideId())
-        Log.d("transac",transaction_id.toString())
-        Log.d("rides",pref.getride_id())
+        json.put("ride_id", pref.getride_id())
+      //  Log.d("transac",transaction_id.toString())
+      //  Log.d("rides",pref.getride_id())
         val jsonOblect: JsonObjectRequest =
             object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
@@ -402,10 +404,18 @@ class SearchDriver : BaseClass() , PaymentResultListener {
 
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                        progressDialog.hide()
-                        val status = response.getString("status")
+                       val status = response.getString("status")
                         if (status.equals("true")){
-                            startActivity(Intent(this@SearchDriver,EmergencyRoutedraweActivity::class.java))
+
+                            val intent = Intent(this@SearchDriver,EmergencyRoutedraweActivity::class.java)
+                            intent.putExtra("name",name)
+                            intent.putExtra("dl_number",dlnumber)
+                            intent.putExtra("veh_number",v_number)
+                            intent.putExtra("price",prices)
+
+                            startActivity(intent)
+
+                            //startActivity(Intent(this@SearchDriver,EmergencyRoutedraweActivity::class.java))
                         }else{
 
                         }
@@ -414,7 +424,7 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
-                    progressDialog.hide()
+                   // progressDialog.hide()
                     Log.d("SendData", "error===" + error)
                     // Toast.makeText(this@Current_Driver_Details_List, "Something went wrong!", Toast.LENGTH_LONG).show()
 

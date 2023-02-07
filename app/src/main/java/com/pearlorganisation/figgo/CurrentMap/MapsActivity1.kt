@@ -31,7 +31,7 @@ class MapsActivity1 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMaps1Binding
     lateinit var currentOneWayKmCountAdapter: CurrentOneWayKmCountAdapter
-    override lateinit var pref: PrefManager
+     lateinit var pref: PrefManager
     lateinit var latLng: LatLng
     val mList = ArrayList<OneWayListRatingVehicle>()
     lateinit var fragment: SupportMapFragment

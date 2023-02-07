@@ -148,7 +148,7 @@ class DashBoard : BaseClass(){
         prefManager.setToLngLC("")
         prefManager.setToLatMC("")
         prefManager.setToLngMC("")
-        pref.setSearchBack("")
+        prefManager.setSearchBack("")
         Log.d("token",prefManager.getToken())
 
         var window=window
@@ -192,7 +192,6 @@ class DashBoard : BaseClass(){
 
 
 
-    getLocation()
 
 
 
@@ -247,6 +246,7 @@ class DashBoard : BaseClass(){
         }
 
         ll_logout.setOnClickListener {
+            prefManager.setToken("")
             startActivity(Intent(this,LoginActivity::class.java))
         }
 
@@ -493,6 +493,8 @@ class DashBoard : BaseClass(){
         }
         if (resultCode == -1) {
            setfragment(homeFrag)
+            getLocation()
+
         } else {
             grantLocPer()
         }
@@ -518,8 +520,14 @@ class DashBoard : BaseClass(){
                         perm.isVisible = false
                            grantLocPer()
 
+                    }else{
+                        ActivityCompat.requestPermissions(
+                            this@DashBoard,
+                            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),
+                            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
                     }
                 } else {
+
 
                     main.isVisible = false
                     perm.isVisible = true

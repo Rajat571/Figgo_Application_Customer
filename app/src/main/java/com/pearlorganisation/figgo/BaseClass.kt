@@ -35,7 +35,7 @@ import java.util.regex.Pattern
 import java.lang.Class as Class1
 
 abstract class BaseClass  : AppCompatActivity(){
-    open lateinit var pref: PrefManager
+   // open lateinit var pref: PrefManager
 
     protected var versionNew: String? = null
     protected var versionName: String? = null
@@ -168,7 +168,7 @@ abstract class BaseClass  : AppCompatActivity(){
         var ll_back = findViewById<LinearLayout>(R.id.ll_back)
         ll_back.setOnClickListener {
 
-            pref = PrefManager(this)
+           /* pref = PrefManager(this)
             if(pref.getSearchBack().equals("1")){
                 val dialog = Dialog(this)
                 dialog.setCancelable(false)
@@ -191,7 +191,8 @@ abstract class BaseClass  : AppCompatActivity(){
                 window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             }else {
                 finish()
-            }
+            }*/
+            finish()
         }
     }
 
