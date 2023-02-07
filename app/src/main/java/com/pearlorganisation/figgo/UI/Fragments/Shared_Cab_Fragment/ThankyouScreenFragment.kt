@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.test.core.app.ApplicationProvider
@@ -40,11 +37,7 @@ class ThankyouScreenFragment : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_thankyou_screen, container, false)
     }
 
@@ -56,10 +49,9 @@ class ThankyouScreenFragment : Fragment() {
         booking_id = view.findViewById<TextView>(R.id.booking_id)
         otpText = view.findViewById<TextView>(R.id.otp)
         pref = PrefManager(requireActivity())
-
-        var backtxt =view.findViewById<TextView>(R.id.backtxt)
-        var backimg =view.findViewById<ImageView>(R.id.backimg)
         var shareimg = view.findViewById<ImageView>(R.id.shareimg)
+        var ll_back = view.findViewById<LinearLayout>(R.id.ll_back)
+
         otpText?.setText("Otp -"+pref.getOtp()+"")
         booking_id?.setText("Booking No -"+pref.getBookingNo()+"")
 
@@ -71,14 +63,12 @@ class ThankyouScreenFragment : Fragment() {
             intent.setType("text/plain")
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
-        backimg.setOnClickListener {
 
-            startActivity(Intent(requireActivity(), DashBoard::class.java))
-
-        }
-        backtxt.setOnClickListener {
+        ll_back.setOnClickListener {
             startActivity(Intent(requireActivity(), DashBoard::class.java))
         }
+
+
 
 
         next_button.setOnClickListener {

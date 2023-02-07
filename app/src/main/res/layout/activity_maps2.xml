@@ -99,6 +99,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -207,6 +208,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/ll_bottom"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">

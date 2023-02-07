@@ -34,8 +34,8 @@ class One_Way_OutStationActivity : AppCompatActivity() {
         var submitoutstation = findViewById<LinearLayout>(R.id.submitoutstation)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var backimg = findViewById<ImageView>(R.id.backimg)
-        var ll_submitfeedom = findViewById<LinearLayout>(R.id.ll_submitfeedom)
-        var ll_submitroundtour = findViewById<LinearLayout>(R.id.ll_submitroundtour)
+       /* var ll_submitfeedom = findViewById<LinearLayout>(R.id.ll_submitfeedom)
+        var ll_submitroundtour = findViewById<LinearLayout>(R.id.ll_submitroundtour)*/
 
 
        /* backimg.setOnClickListener {
@@ -55,9 +55,9 @@ class One_Way_OutStationActivity : AppCompatActivity() {
             startActivity(Intent(this,MapsActivity1::class.java))
         }
 
-        ll_submitroundtour.setOnClickListener {
+       /* ll_submitroundtour.setOnClickListener {
             startActivity(Intent(this,MapsActivity1::class.java))
-        }
+        }*/
 
 
 
