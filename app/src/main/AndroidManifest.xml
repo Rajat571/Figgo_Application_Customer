@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +23,15 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         tools:targetApi="31">
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
         <activity
             android:name=".DashBoard_NewChange"
             android:exported="false" />
@@ -27,24 +39,36 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
+<activity android:name="com.pearlorganisation.HomeFragmentReplace"
+    android:exported="false"/>
 
-        <activity android:name="com.pearlorganisation.NotificationBellIconActivity"
+       <activity android:name="com.pearlorganisation.HelpAndSupportActivity"
+           android:exported="false"/>
+        <activity android:name=".HistoryMapsActivity"
             android:exported="false"/>
+
         <activity android:name="com.pearlorganisation.Edit_Profile_Activity"
             android:exported="false"/>
+
+      <activity android:name="com.pearlorganisation.NotificationBellIconActivity"
+          android:exported="false"/>
+      <activity android:name="com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity"
+          android:exported="false"/>
         <activity android:name="com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity"
             android:exported="false"/>
-        <activity android:name="com.pearlorganisation.DrawerItemActivity.CancellationPolicy"
-            android:exported="false"/>
-        <activity android:name="com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity"
-            android:exported="false"/>
-        <activity android:name="com.pearlorganisation.Current_Driver_Details_List"
-            android:exported="false"/>
-        <activity android:name="com.pearlorganisation.SearchDriver"
-            android:exported="false"/>
+
+       <activity android:name="com.pearlorganisation.DrawerItemActivity.CancellationPolicy"
+           android:exported="false"/>
+      <activity android:name="com.pearlorganisation.Current_Driver_Details_List"
+          android:exported="false"/>
         <activity android:name="com.pearlorganisation.EmergencyRoutedraweActivity"
             android:exported="false"/>
 
+        <activity android:name="com.pearlorganisation.SearchDriver"
+            android:exported="false"/>
+        <activity
+            android:name=".UI.GoogleWebview"
+            android:exported="false" />
         <activity
             android:name=".UI.MapsActivity"
             android:exported="false" />
@@ -181,7 +205,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".UI.SplashActivity"
             android:exported="true">

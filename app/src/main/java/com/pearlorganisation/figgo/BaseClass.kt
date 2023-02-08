@@ -3,6 +3,7 @@ package com.pearlorganisation.figgo
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -19,14 +20,12 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.webkit.MimeTypeMap
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
 import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
 import java.io.ByteArrayOutputStream
@@ -36,7 +35,7 @@ import java.util.regex.Pattern
 import java.lang.Class as Class1
 
 abstract class BaseClass  : AppCompatActivity(){
-
+   // open lateinit var pref: PrefManager
 
     protected var versionNew: String? = null
     protected var versionName: String? = null
@@ -49,6 +48,9 @@ abstract class BaseClass  : AppCompatActivity(){
     var STORAGE_PERMISSION_CODE = 1
     var session: Session? = null
    lateinit var shareimg:ImageView
+
+   lateinit var iv_back:ImageView
+   lateinit var iv_bellicon:ImageView
 
 //    var backtxt = findViewById<TextView>(R.id.backtxt)*/
   //  var classname = "Login"
@@ -165,15 +167,51 @@ abstract class BaseClass  : AppCompatActivity(){
     fun onBackPress(){
         var ll_back = findViewById<LinearLayout>(R.id.ll_back)
         ll_back.setOnClickListener {
-      /*      val intent = Intent(to, from::class.java)
-            startActivity(intent)*/
+
+           /* pref = PrefManager(this)
+            if(pref.getSearchBack().equals("1")){
+                val dialog = Dialog(this)
+                dialog.setCancelable(false)
+                dialog.setContentView(R.layout.serach_driver_dialog)
+                val body = dialog.findViewById(R.id.error) as TextView
+
+                val yesBtn = dialog.findViewById(R.id.ok) as Button
+                val canBtn = dialog.findViewById(R.id.cancel) as Button
+                yesBtn.setOnClickListener {
+                    pref.setSearchBack("")
+                    finish()
+                }
+
+                canBtn.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                dialog.show()
+                val window: Window? = dialog.getWindow()
+                window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            }else {
+                finish()
+            }*/
             finish()
         }
     }
 
+    fun iv_back(){
+        /*var iv_back = findViewById<ImageView>(R.id.iv_back)*/
+        iv_back.setOnClickListener {
+
+    }
+        fun iv_bellicon(){
+            var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+            iv_bellicon.setOnClickListener {
+                finish()
+            }
+        }
+
 
     fun backimg(){
 
+        }
 
 
     }
@@ -483,6 +521,7 @@ abstract class BaseClass  : AppCompatActivity(){
     protected abstract fun initializeClickListners()
     protected abstract fun initializeInputs()
     protected abstract fun initializeLabels()
+
 
     companion object {
         var isInternetReceiver = false

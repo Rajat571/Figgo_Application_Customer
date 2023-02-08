@@ -21,17 +21,28 @@ class MPinGenerate : AppCompatActivity() {
         var continuetv = findViewById<TextView>(R.id.continuetv)
         mPin.requestFocus();
         mPin.setInputType(InputType.TYPE_CLASS_NUMBER);
-        if(mPin.text.toString().equals(confirm_mpin.text.toString())) {
-            pref.setMpin(mPin.text.toString())
-        }
 
-        else{
-
-            Toast.makeText(this,"PIN not match", Toast.LENGTH_SHORT).show()
-        }
         continuetv.setOnClickListener {
-            startActivity(Intent(this,DashBoard::class.java))
+
+            if (mPin.text.toString().length < 4) {
+
+                Toast.makeText(this@MPinGenerate, " 4 digit's Required", Toast.LENGTH_SHORT).show()
+
+            }else {
+
+                if (mPin.text.toString().equals(confirm_mpin.text.toString())) {
+                    pref.setMpin(mPin.text.toString())
+                    startActivity(Intent(this@MPinGenerate, DashBoard::class.java))
+
+
+                } else {
+
+                      Toast.makeText(this@MPinGenerate, "PIN not match", Toast.LENGTH_SHORT).show()
+                  }
+            }
         }
+
+
 
     }
 }

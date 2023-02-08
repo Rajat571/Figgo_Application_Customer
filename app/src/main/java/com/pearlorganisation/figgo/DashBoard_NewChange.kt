@@ -13,7 +13,7 @@ class DashBoard_NewChange : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dash_board_new_change)
+       /* setContentView(R.layout.activity_dash_board_new_change)*/
         prefManager = PrefManager(this)
         var recyclerView = findViewById<RecyclerView>(R.id.rcv_cardoffer)
 

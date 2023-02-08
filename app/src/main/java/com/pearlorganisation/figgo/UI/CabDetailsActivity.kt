@@ -20,6 +20,7 @@ import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject
 import java.util.*
@@ -101,24 +102,31 @@ class CabDetailsActivity : BaseClass(), PaymentResultListener {
 
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                        progressDialog.hide()
-                        val booking_no = response.getJSONObject("ride").getString("booking_id")
-                        val otp = response.getInt("otp")
+                        try {
 
-                        pref.setOtp(otp.toString())
-                        pref.setBookingNo(booking_no)
-                       supportFragmentManager.beginTransaction().apply {
-                            replace(R.id.nav_controller, thankyouScreenFragment)
-                            commit()
-                        }
+                            progressDialog.hide()
+                            val booking_no = response.getJSONObject("ride").getString("booking_id")
+                            val otp = response.getInt("otp")
+
+                            pref.setOtp(otp.toString())
+                            pref.setBookingNo(booking_no)
+                            supportFragmentManager.beginTransaction().apply {
+                                replace(R.id.nav_controller, thankyouScreenFragment)
+                                commit()
+                            }
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),this@CabDetailsActivity)
+
+                            }
                     }
 
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(this@CabDetailsActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
-
+                    progressDialog.hide()
+                    //Toast.makeText(this@CabDetailsActivity, "Something went wrong!", Toast.LENGTH_LONG).show()
+                    MapUtility.showDialog(error.toString(),this@CabDetailsActivity)
                 }
             }) {
 

@@ -16,43 +16,42 @@
             android:orientation="vertical"
             tools:context=".UI.DashBoard">
 
-        <include
-            android:id="@+id/layout"
-            layout="@layout/dashboard_header_layout"
-            app:layout_constraintBottom_toTopOf="@id/backgrouund"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <include
+                android:id="@+id/layout"
+                layout="@layout/dashboard_header_layout"
+                app:layout_constraintBottom_toTopOf="@id/backgrouund"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/ll1"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:background="@drawable/dashboard_white_searchbar"
-                android:layout_marginTop="-18dp"
-                android:layout_marginLeft="12sp"
-                android:layout_marginRight="12sp">
+            <!-- <LinearLayout
+                 android:id="@+id/ll1"
+                 android:layout_width="match_parent"
+                 android:layout_height="43dp"
+                 android:background="@drawable/dashboard_white_searchbar"
+                 android:layout_marginTop="-18dp"
+                 android:layout_marginLeft="12sp"
+                 android:layout_marginRight="12sp">-->
 
-                <fragment
-                    android:id="@+id/autocomplete_fragment1"
-                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-            </LinearLayout>
-
-          <!--  <TextView
+            <TextView
                 android:id="@+id/live_loc"
-                android:background="@drawable/out_line_box"
-                android:layout_width="0dp"
-                android:layout_weight="3"
+                android:layout_width="match_parent"
                 android:layout_gravity="center"
+                android:layout_marginTop="-12dp"
+                android:visibility="visible"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/dashboard_white_searchbar"
                 android:padding="9dp"
                 android:layout_height="wrap_content"
-                android:hint="Current location"/>-->
+                android:hint="Current location"/>
+
+
+            <!-- </LinearLayout>-->
+
+
 
             <TextView
                 android:id="@+id/tv1"
-                android:layout_below="@id/ll1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -61,590 +60,60 @@
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="6dp">
+                        android:orientation="vertical">
 
 
 
-                        <LinearLayout
+                 <!--       <LinearLayout
+                            android:id="@+id/backgrouund"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_120sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="12dp"
-                            android:paddingHorizontal="8dp"
-                            android:background="@drawable/semi_back"
-                            android:orientation="horizontal">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_weight="1"
-    android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Now"
-                                android:layout_marginTop="@dimen/_46sdp"
-                                android:gravity="center"
-                                android:textColor="@color/coloryellow"
-                                android:textSize="36dp"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Figgo Always With You"
-                                android:layout_marginStart="13dp"
-                                android:textColor="@color/colornavyblue"
-                                android:textSize="@dimen/_12sdp"/>
-</LinearLayout>
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:layout_height="@dimen/_120sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/newdesigngirmimg" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/backgrouund"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@id/layout"
-                        tools:ignore="MissingConstraints">
-
-                        <FrameLayout
-                            android:id="@+id/framedash"
-                            android:layout_width="match_parent"
-                            android:layout_marginHorizontal="@dimen/_6sdp"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="@dimen/_2sdp"
-                            app:layout_constraintBottom_toTopOf="@+id/car"
-                            app:layout_constraintTop_toBottomOf="@+id/layout" />
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toBottomOf="@id/layout"
+                            tools:ignore="MissingConstraints">-->
+                        <include
+                            layout="@layout/layouthometop"
+                            android:visibility="visible"
+                            android:id="@+id/home_top"
+                            />
+
+                            <FrameLayout
+                                android:id="@+id/framedash"
+                                android:layout_width="match_parent"
+                                android:layout_marginHorizontal="@dimen/_6sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="@dimen/_2sdp"
+                                app:layout_constraintBottom_toTopOf="@+id/car"
+                                app:layout_constraintTop_toBottomOf="@+id/layout" />
 
 
+
+<include
+    layout="@layout/layouthome"
+    android:visibility="visible"
+    android:id="@+id/homebottom"
+    />
                     </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="320dp"
-                        android:scaleType="fitXY"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="6dp"
-                        android:src="@drawable/girldashboard_img"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/bookingprder_img"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Orders &amp; Bookings"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                app:fontFamily="sans-serif-black"
-                                tools:ignore="HardcodedText" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Orders &amp; Bookings"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/offerdiscount_img"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                app:fontFamily="sans-serif-black"
-                                android:text="Offer And Discount"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Offer And Discount"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/reward_img"/>
-
-
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="Figgo Rewards"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Figgo Rewards"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/figgoaccount_img"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="Figgo Account"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Figgo Account"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:layout_marginStart="@dimen/_9sdp"
-                            android:src="@drawable/referandearn_img"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="Refer &amp; Earn"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Refer &amp; Earn"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/helpandsupport_img"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="Help &amp; Support"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Help &amp; Support"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/faq_img"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="FAQs"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="FAQs"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/ratesus_img"/>
-
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="Rate Us"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Rate Us"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/feedback_img"/>
-
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                app:fontFamily="sans-serif-black"
-                                android:text="Sends Feddback"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Sends Feddback"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/termcondition_img"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="Term &amp; Conditions"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Term &amp; Conditions"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="60dp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:orientation="horizontal">
-
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:src="@drawable/cancelpolicy_img"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:fontFamily="sans-serif-black"
-                                android:textColor="@color/black"
-                                android:text="Cancellations Policy"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="Cancellations Policy"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-                    <!-- <ImageView
-                     android:id="@+id/girlimage"
-                     android:layout_width="match_parent"
-                     android:layout_height="200dp"
-                     android:layout_marginHorizontal="8dp"
-                     android:scaleType="centerCrop"
-                     android:src="@drawable/girl"
-                     app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintHorizontal_bias="0.5"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@+id/backgrouund" />-->
-
-
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-
-        </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -668,13 +137,13 @@
 
 
 
-        <!--include
-        layout="@layout/bottom_button_layout"
-        android:id="@+id/bottombuttonbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />-->
+    <!--include
+    layout="@layout/bottom_button_layout"
+    android:id="@+id/bottombuttonbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />-->
 
 
 </layout>

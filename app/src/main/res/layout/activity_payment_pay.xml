@@ -8,7 +8,7 @@
     android:background="@color/colorlightblue"
     tools:context=".PaymentPayActivity">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/choose_user"

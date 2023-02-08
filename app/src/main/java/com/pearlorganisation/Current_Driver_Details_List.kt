@@ -25,6 +25,7 @@ import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
 import com.pearlorganisation.figgo.PaymentMethodActivity
 import com.pearlorganisation.figgo.R
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.squareup.picasso.Picasso
@@ -82,13 +83,19 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
         var activavehiclenumber = findViewById<TextView>(R.id.activavehiclenumber)
         var driverimg = findViewById<CircleImageView>(R.id.driverimg)
         var drivername = findViewById<TextView>(R.id.drivername)
+
         var ride_service_rating = findViewById<RatingBar>(R.id.ride_service_rating)
         var dl_number = findViewById<TextView>(R.id.dl_number)
         driver_id = intent.getStringExtra("driver_id")
         ride_id = intent.getStringExtra("ride_id")
         pref = PrefManager(this)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
         shareimg()
         onBackPress()
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this,NotificationBellIconActivity::class.java))
+        }
 
        /* getcurrentdriverdetails()*/
 
@@ -109,8 +116,8 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
                 obj.put("currency", "INR")
                 obj.put("amount", amount)
                 val preFill = JSONObject()
-                preFill.put("email", "a@gmail.com")
-                preFill.put("contact", "91" + "1234567098")
+                preFill.put("email", "support@figgocabs.com")
+                preFill.put("contact", "91" + "9715597855")
                 obj.put("prefill", preFill)
                 checkout.open(this, obj)
             } catch (e: JSONException) {
@@ -137,6 +144,11 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
 
     }
 
+
+
+
+
+
     private fun getOtp() {
         val progressDialog = ProgressDialog(this)
         progressDialog.show()
@@ -157,11 +169,19 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
                         progressDialog.hide()
-                        val booking_no = response.getJSONObject("ride").getString("booking_id")
-                        val otp = response.getInt("otp")
 
-                        pref.setOtp(otp.toString())
-                        pref.setBookingNo(booking_no)
+                        try {
+
+
+                            val booking_no = response.getJSONObject("ride").getString("booking_id")
+                            val otp = response.getInt("otp")
+
+                            pref.setOtp(otp.toString())
+                            pref.setBookingNo(booking_no)
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),this@Current_Driver_Details_List)
+
+                        }
                       /*  supportFragmentManager.beginTransaction().apply {
                             replace(R.id.nav_controller, thankyouScreenFragment)
                             commit()
@@ -171,9 +191,11 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
+                    progressDialog.hide()
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(this@Current_Driver_Details_List, "Something went wrong!", Toast.LENGTH_LONG).show()
+                   // Toast.makeText(this@Current_Driver_Details_List, "Something went wrong!", Toast.LENGTH_LONG).show()
 
+                    MapUtility.showDialog(error.toString(),this@Current_Driver_Details_List)
                 }
             }) {
 

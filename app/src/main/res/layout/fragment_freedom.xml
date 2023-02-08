@@ -9,7 +9,7 @@
     tools:context=".UI.Fragments.OutStation.FreedomFragment">
 
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
     <LinearLayout
         android:layout_width="match_parent"

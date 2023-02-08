@@ -78,6 +78,8 @@
         android:layout_below="@+id/txt_show_map"
         android:background="@color/quantum_bluegrey700" />
 
+
+
     <LinearLayout
         android:id="@+id/ll_history"
         android:layout_width="match_parent"
@@ -87,6 +89,15 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:orientation="vertical">
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_search"
+            android:visibility="visible"
+            android:layout_margin="8dp"
+            android:hint="Search Previous Location"
+            android:background="@color/white"
+            android:textColor="@color/black"/>
         <TextView
             android:id="@+id/label"
             android:layout_width="wrap_content"

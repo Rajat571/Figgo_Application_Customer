@@ -1,10 +1,7 @@
 package com.pearlorganisation.figgo.UI.Fragments
 //Neeraj
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.ProgressDialog
-import android.app.TimePickerDialog
+import android.app.*
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
@@ -19,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +58,7 @@ import com.pearlorganisation.figgo.Model.AdvanceCityCabModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CabDetailsActivity
 import com.pearlorganisation.figgo.UI.LocationPickerActivity
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentAdvanceCityCabBinding
 import org.json.JSONObject
@@ -114,7 +113,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     var datetext: TextView? = null
     var timetext: TextView? = null
     var mapFragment: Fragment? = null
-    private var type: String? = ""
+    private var onResu: String? = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -126,11 +125,11 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         pref = PrefManager(requireActivity())
-        if (pref.getTypeC().equals("1") || pref.getTypeC().equals("2")){
+       /* if (pref.getTypeC().equals("1") || pref.getTypeC().equals("2")){
 
             Navigation.findNavController(view).navigate(R.id.current)
 
-        }
+        }*/
 
         var calenderimg = view.findViewById<LinearLayout>(R.id.calenderimg)
          datetext = view.findViewById<TextView>(R.id.datetext)
@@ -153,6 +152,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         pref.setOtp("")
         pref.setRideId("")
         pref.setVehicleId("")
+        pref.setTypeC("")
 
         val apiKey = getString(R.string.api_key)
 
@@ -169,32 +169,9 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
 
 
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val currentDate = LocalDateTime.now().format(formatter)
-            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
-            val currentTime = LocalDateTime.now().format(formated)
 
-           datetext?.setText(currentDate)
-           timetext?.setText(currentTime)
-        } else {
-            TODO("VERSION.SDK_INT < O")
-        }
 
-        if (pref.getType().equals("1")){
-          getCurrentLoc()
-            if (pref.getToLatM().equals("")){
-            }else{
-                getDestinationLoc()
-            }
-        }else if (pref.getType().equals("2")){
-            if (pref.getToLatL().equals("")){
 
-            }else{
-                getCurrentLoc()
-            }
-            getDestinationLoc()
-        }
 
 
         calenderimg.setOnClickListener {
@@ -250,7 +227,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
 
         liveLoc?.setOnClickListener {
 
-            press = "live";
+            press = "live"
             val field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS,Place.Field.LAT_LNG)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
                 .build(requireActivity())
@@ -306,9 +283,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             }
         }
 
-
-
-
        // Initialize Places.
 
     }
@@ -325,49 +299,72 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         json.put("from_lat", from_lat)
         json.put("from_lng", from_lng)
         json.put("type", "advance_booking")
-        json.put("to_location_name", manualLoc?.text.toString())
-        json.put("from_location_name", liveLoc?.text.toString())
+        json.put("to_location_name", liveLoc?.text.toString())
+        json.put("from_location_name", manualLoc?.text.toString())
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
-
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-
                         progressDialog.hide()
-                        ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true
-                        pref.setCount("vehicle")
+                        try {
 
-                        val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                        val rideId = response.getJSONObject("data").getString("ride_id")
+                            ll_location?.isVisible = false
+                            ll_choose_vehicle?.isVisible = true
+                            pref.setCount("vehicle")
 
-                        for(p2 in 0 until size) {
+                            val size = response.getJSONObject("data").getJSONArray("vehicle_types")
+                                .length()
+                            val rideId = response.getJSONObject("data").getString("ride_id")
 
-                            val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
-                            val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
+                            for (p2 in 0 until size) {
 
+                                val name =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("name")
+                                val image =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("full_image")
+                                val vehicle_id =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("id")
+                                val min =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("min_price")
+                                val max =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("max_price")
 
-                            val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
-                            val min = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
-                            val max = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")
+                                cablist.add(
+                                    AdvanceCityCabModel(
+                                        name,
+                                        image,
+                                        rideId,
+                                        vehicle_id,
+                                        min,
+                                        max
+                                    )
+                                )
+                            }
 
-                            cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id,min,max))
+                            advanceCityAdapter = AdvanceCityDataAdapter(requireActivity(), cablist)
+                            binding.recylerCabList.layoutManager = GridLayoutManager(context, 3)
+                            binding.recylerCabList.adapter = advanceCityAdapter
+                            binding.recylerCabList.layoutManager = GridLayoutManager(context, 3)
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),requireActivity())
+
                         }
-
-                        advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
-                        binding.recylerCabList.layoutManager= GridLayoutManager(context,3)
-                        binding.recylerCabList.adapter=advanceCityAdapter
-                        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
-
                     }
                     // Get your json response and convert it to whatever you want.
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
+                    progressDialog.hide()
+                    MapUtility.showDialog(error.toString(),requireActivity())
+                    //Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
 
                 }
             }) {
@@ -387,8 +384,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
     }
 
 
-
-
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         if (isLocationPermissionGranted()) {
@@ -404,7 +399,7 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             val lastKnownLocationByGps =
                 locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
 
-            // locationByGps = getLastKnownLocation()
+
             lastKnownLocationByGps?.let {
                 locationByGps = lastKnownLocationByGps
             }
@@ -451,10 +446,12 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                     manualLoc!!.setText(place.address)
                     from_lat = place.latLng.latitude
                     from_lng = place.latLng.longitude
+                    onResu = "false"
                 }else if (press.equals("live")){
                     to_lat = place.latLng.latitude
                     to_lng = place.latLng.longitude
                     liveLoc!!.setText(place.address)
+                    onResu = "false"
                 }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 val status = Autocomplete.getStatusFromIntent(data!!)
@@ -929,4 +926,67 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
         manualLoc?.setText(strAdd)
 
     }
+    override fun onResume() {
+        super.onResume()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val currentDate = LocalDateTime.now().format(formatter)
+            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
+            val currentTime = LocalDateTime.now().format(formated)
+
+            datetext?.setText(currentDate)
+            timetext?.setText(currentTime)
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
+        if (onResu.equals("false")){
+            onResu = ""
+        }
+        else {
+            if (pref.getType().equals("1")) {
+
+                if (pref.getToLatL().equals("")) {
+
+                } else {
+                    getCurrentLoc()
+
+                }
+                if (pref.getToLatM().equals("")) {
+
+
+                } else {
+                    if (pref.getToLatM().equals("")) {
+
+                    } else {
+                        getDestinationLoc()
+                    }
+                }
+
+
+            } else if (pref.getType().equals("2")) {
+                if (pref.getToLatL().equals("")) {
+
+                } else {
+                    if (pref.getToLatL().equals("")) {
+
+                    } else {
+                        getCurrentLoc()
+
+                    }
+                }
+                if (pref.getToLatM().equals("")) {
+
+                } else {
+                    getDestinationLoc()
+                }
+
+
+            }
+        }
+
+    }
+
+
 }

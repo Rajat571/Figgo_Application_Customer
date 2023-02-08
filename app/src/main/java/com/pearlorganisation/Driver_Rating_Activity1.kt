@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.DriveRatingActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CityCabActivity
 
@@ -34,12 +35,19 @@ class Driver_Rating_Activity1 : BaseClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_driver_rating1)
-        shareimg()
-      onBackPress()
+
         /*setContentView(R.layout.screenwaiting)*/
         var submitrating = findViewById<TextView>(R.id.submitraing)
         var shareimg = findViewById<ImageView>(R.id.shareimg)
         var ll_back = findViewById<LinearLayout>(R.id.ll_back)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
+
+        shareimg()
+        onBackPress()
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
 
 
         submitrating.setOnClickListener {

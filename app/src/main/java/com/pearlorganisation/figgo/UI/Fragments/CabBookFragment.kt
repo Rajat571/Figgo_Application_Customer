@@ -2,6 +2,7 @@ package com.pearlorganisation.figgo.UI.Fragments
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ import com.payu.ui.model.listeners.PayUHashGenerationListener
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import org.json.JSONException
@@ -73,19 +75,26 @@ class CabBookFragment : Fragment() {
         fare = view.findViewById<TextView>(R.id.fare)
         var ll_back = view.findViewById<LinearLayout>(R.id.ll_back)
         var shareimg = view.findViewById<ImageView>(R.id.shareimg)
+        var iv_bellicon = view.findViewById<ImageView>(R.id.iv_bellicon)
         pref = PrefManager(requireActivity())
 
-
-
-
         getCabBookData()
+
+        iv_bellicon.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_notificationBellIconActivity)
+
+        }
 
         ll_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_cabBookFragment_to_dashBoard)
         }
 
         shareimg.setOnClickListener {
-
+            var intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I am Inviting you to join  Figgo App for better experience to book cabs");
+            intent.setType("text/plain");
+            startActivity(Intent.createChooser(intent, "Invite Friends"))
         }
 
         book_other.setOnClickListener {
@@ -113,8 +122,8 @@ class CabBookFragment : Fragment() {
                 obj.put("currency", "INR")
                 obj.put("amount", amount)
                 val preFill = JSONObject()
-                preFill.put("email", "a@gmail.com")
-                preFill.put("contact", "91" + "1234567098")
+                preFill.put("email", "support@figgocabs.com")
+                preFill.put("contact", "91" + "9715597855")
                 obj.put("prefill", preFill)
                 checkout.open(requireActivity(), obj)
             } catch (e: JSONException) {
@@ -144,33 +153,50 @@ class CabBookFragment : Fragment() {
                     if (response != null) {
 
                         progressDialog.hide()
-                        val distance = response.getJSONObject("data").getString("distance")
-                        val createdAt = response.getJSONObject("data").getJSONObject("ride").getString("created_at")
-                        val updatedAt = response.getJSONObject("data").getJSONObject("ride").getString("updated_at")
-                        val full_image = response.getJSONObject("data").getJSONObject("vehicle").getString("full_image")
-                        val max_price = response.getJSONObject("data").getJSONObject("vehicle").getString("max_price")
-                        val min_price = response.getJSONObject("data").getJSONObject("vehicle").getString("min_price")
-                        val to_location = response.getJSONObject("data").getJSONObject("ride").getJSONObject("to_location").getString("name")
-                        val from_location = response.getJSONObject("data").getJSONObject("ride").getJSONObject("from_location").getString("name")
+                        try {
+
+                            val distance = response.getJSONObject("data").getString("distance")
+                            val createdAt = response.getJSONObject("data").getJSONObject("ride")
+                                .getString("created_at")
+                            val updatedAt = response.getJSONObject("data").getJSONObject("ride")
+                                .getString("updated_at")
+                            val full_image = response.getJSONObject("data").getJSONObject("vehicle")
+                                .getString("full_image")
+                            val max_price = response.getJSONObject("data").getJSONObject("vehicle")
+                                .getString("max_price")
+                            val min_price = response.getJSONObject("data").getJSONObject("vehicle")
+                                .getString("min_price")
+                            val to_location = response.getJSONObject("data").getJSONObject("ride")
+                                .getJSONObject("to_location").getString("name")
+                            val from_location = response.getJSONObject("data").getJSONObject("ride")
+                                .getJSONObject("from_location").getString("name")
 
 
-                        //  Picasso.get().load(full_image).into(image)
-                        created_at?.setText(createdAt)
-                        updated_at?.setText(updatedAt)
-                        dis1?.setText(distance)
-                        dis2?.setText(distance)
-                        to_loc?.setText(to_location)
-                        from_loc?.setText(from_location)
-                        fare?.setText("Approx.. fare Rs. "+ min_price +" to "+ max_price +",\n                for this ride\nwithout waiting  parking charge\nFinal Price is differ from Approx. "
+                            //  Picasso.get().load(full_image).into(image)
+                            created_at?.setText(createdAt)
+                            updated_at?.setText(updatedAt)
+                            dis1?.setText(distance)
+                            dis2?.setText(distance)
+                            to_loc?.setText(to_location)
+                            from_loc?.setText(from_location)
+                            fare?.setText(
+                                "Approx.. fare Rs. " + min_price + " to " + max_price + ",\n                for this ride\nwithout waiting  parking charge\nFinal Price is differ from Approx. "
 
-                        )
+                            )
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),requireActivity())
+
+                        }
                     }
                     // Get your json response and convert it to whatever you want.
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
                     Log.d("SendData", "error===" + error)
-                    Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
+                    progressDialog.hide()
+
+                    MapUtility.showDialog(error.toString(),requireActivity())
+                  //  Toast.makeText(requireActivity(), "Something went wrong!", Toast.LENGTH_LONG).show()
 
                 }
             }) {

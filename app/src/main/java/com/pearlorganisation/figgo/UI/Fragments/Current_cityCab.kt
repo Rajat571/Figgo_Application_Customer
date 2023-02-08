@@ -64,6 +64,7 @@ import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.LocationPickerActivity
 import com.pearlorganisation.figgo.UI.LocationPickerActivityCurr
+import com.pearlorganisation.figgo.UTIL.MapUtility
 import com.pearlorganisation.figgo.databinding.ActivityMainBinding
 import com.pearlorganisation.figgo.databinding.FragmentCurrentCityCabBinding
 import org.json.JSONObject
@@ -123,7 +124,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     private var locationByGps: Location? = null
     private var locationByNetwork: Location? = null
     private var lastKnownLocationByGps: Location? = null
-
+    private var onResu: String? = ""
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -146,7 +147,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         progress = view.findViewById<ProgressBar>(R.id.progress)
         val onewayvehiclelist = view.findViewById<RecyclerView>(R.id.onewayvehiclelist)
         var locLinear = view?.findViewById<LinearLayout>(R.id.linear_loc)
-        var submit = view?.findViewById<Button>(R.id.submit)
+        var submit = view?.findViewById<Button>(R.id.submitC)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         var advance_li = view?.findViewById<LinearLayout>(R.id.adLinear)
       //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
@@ -159,6 +160,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         pref.setOtp("")
         pref.setRideId("")
         pref.setVehicleId("")
+        pref.setType("")
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
@@ -171,39 +173,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val currentDate = LocalDateTime.now().format(formatter)
-            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
-            val currentTime = LocalDateTime.now().format(formated)
-            datetext?.setText(currentDate)
-            timetext?.setText(currentTime)
-        } else {
-
-        }
-        if (pref.getTypeC().equals("1")){
-
-            getCurrentLoc()
-
-            if (pref.getToLatMC().equals("")){
 
 
-            }else{
-                getDestinationLoc()
-            }
-
-
-
-        }else if (pref.getTypeC().equals("2")){
-            if (pref.getToLatLC().equals("")){
-
-            }else{
-                getCurrentLoc()
-            }
-            getDestinationLoc()
-
-
-        }
 
         calenderimg.setOnClickListener {
             val c = Calendar.getInstance()
@@ -358,6 +329,13 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
     }
 
     private fun submitform() {
+
+
+        pref.setToLatLC(to_lat.toString())
+     pref.setToLngLC(to_lng.toString())
+         pref.setToLatMC(from_lat.toString())
+          pref.setToLngMC(from_lng.toString())
+        pref.setTime(datetext?.text.toString())
         progress?.isVisible = true
         ll_location?.isVisible = false
         ll_choose_vehicle?.isVisible  =false
@@ -373,8 +351,8 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         json.put("to_lng", to_lng)
         json.put("from_lat", from_lat)
         json.put("from_lng", from_lng)
-        json.put("to_location_name", manualLoc?.text.toString())
-        json.put("from_location_name", liveLoc?.text.toString())
+        json.put("to_location_name", liveLoc?.text.toString())
+        json.put("from_location_name", manualLoc?.text.toString())
         json.put("type","current_booking")
         Log.d("SendData", "json===" + json)
         val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
@@ -382,11 +360,56 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
             override fun onResponse(response: JSONObject?) {
                 Log.d("SendData", "response===" + response)
                 if (response != null) {
-                    val status = response.getString("status")
+                    if (response != null) {
+
+                            progressDialog.hide()
+                            try {
+
+
+                            ll_location?.isVisible = false
+                            ll_choose_vehicle?.isVisible = true
+                            pref.setCount("vehicle")
+
+                            val size = response.getJSONObject("data").getJSONArray("vehicle_types")
+                                .length()
+                            val ride_id = response.getJSONObject("data").getString("ride_id")
+
+                            for (p2 in 0 until size) {
+
+                                val name =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("name")
+                                val image =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("full_image")
+                                val driver_id =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("id")
+                                val min_price =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("min_price")
+                                val max_price =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("max_price")
+
+                                cablist.add(
+                                    CurrentVehicleModel(
+                                        name,
+                                        image,
+                                        ride_id,
+                                        driver_id,
+                                        min_price,
+                                        max_price
+                                    )
+                                )
+
+                                /*val status = response.getString("status")
                     if(status.equals("false")){
                         Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
                     }else{
                         progressDialog.hide()
+
+
                         val data = response.getJSONObject("data")
                         val ride_id = data.getString("ride_id")
                         pref.setRideId(ride_id)
@@ -396,24 +419,33 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                             val image = vehicle_types.getJSONObject(i).getString("full_image")
                             val id = vehicle_types.getJSONObject(i).getString("id")
                             val min_price = vehicle_types.getJSONObject(i).getString("min_price")
-                            val max_price = vehicle_types.getJSONObject(i).getString("max_price")
-                            cablist.add(CurrentVehicleModel(name,image,ride_id,id, min_price,max_price))
+                            val max_price = vehicle_types.getJSONObject(i).getString("max_price")*/
+
+
+                            }
+
+
+                            currentVehicleAdapter =
+                                CurrentVehicleAdapter(requireContext() as Activity, cablist)
+                            binding.recylerCabList.adapter = currentVehicleAdapter
+                            binding.recylerCabList.layoutManager = GridLayoutManager(context, 3)
+                            progress?.isVisible = false
+                            ll_location?.isVisible = false
+                            ll_choose_vehicle?.isVisible = true
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),requireActivity())
 
                         }
-                        currentVehicleAdapter= CurrentVehicleAdapter(requireContext() as Activity,cablist)
-                        binding.recylerCabList.adapter=currentVehicleAdapter
-                        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
-                        progress?.isVisible = false
-                        ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true
-                    }
+                        }
                 }
 
             }
         }, object : Response.ErrorListener {
             override fun onErrorResponse(error: VolleyError?) {
                 Log.d("SendData", "error===" + error)
-                Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
+                progressDialog.hide()
+                MapUtility.showDialog(error.toString(),requireActivity())
+                //Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
             }
         }) {
             @Throws(AuthFailureError::class)
@@ -627,10 +659,12 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                     manualLoc!!.setText(place.address)
                     from_lat = place.latLng.latitude.toString()
                     from_lng = place.latLng.longitude.toString()
+                    onResu = "false"
                 }else if (press.equals("live")){
                     to_lat = place.latLng.latitude.toString()
                     to_lng = place.latLng.longitude.toString()
                     liveLoc!!.setText(place.address)
+                    onResu = "false"
                 }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 val status = Autocomplete.getStatusFromIntent(
@@ -998,4 +1032,61 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
         manualLoc?.setText(strAdd)
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val currentDate = LocalDateTime.now().format(formatter)
+            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
+            val currentTime = LocalDateTime.now().format(formated)
+            datetext?.setText(currentDate)
+            timetext?.setText(currentTime)
+        } else {
+
+        }
+        pref.setSearchBack("")
+        if (onResu.equals("false")){
+            onResu = ""
+        }else{
+
+
+            if (pref.getTypeC().equals("1")) {
+
+                if (pref.getToLatLC().equals("")) {
+
+                } else {
+                    getCurrentLoc()
+                }
+                if (pref.getToLatMC().equals("")) {
+
+
+                } else {
+                    if (pref.getToLatMC().equals("")) {
+
+                    } else {
+                        getDestinationLoc()
+                    }
+                }
+
+            } else if (pref.getTypeC().equals("2")) {
+                if (pref.getToLatLC().equals("")) {
+
+                } else {
+                    if (pref.getToLatLC().equals("")) {
+
+                    } else {
+                        getCurrentLoc()
+                    }
+                }
+                if (pref.getToLatMC().equals("")) {
+
+                } else {
+                    getDestinationLoc()
+                }
+
+            }
+        }
+    }
+
 }

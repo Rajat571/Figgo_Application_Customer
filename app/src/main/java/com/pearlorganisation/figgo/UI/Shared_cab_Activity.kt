@@ -4,8 +4,10 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.pearlorganisation.NotificationBellIconActivity
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.R
 
@@ -36,13 +38,23 @@ class Shared_cab_Activity : BaseClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shared_cab)
+        var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
+
+       shareimg()
+        onBackPress()
+
+        iv_bellicon.setOnClickListener {
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
+        }
 
         var nav_host_fragment=supportFragmentManager.findFragmentById(R.id.nav_controller) as NavHostFragment
         nav_controller=nav_host_fragment.navController
 
     }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()

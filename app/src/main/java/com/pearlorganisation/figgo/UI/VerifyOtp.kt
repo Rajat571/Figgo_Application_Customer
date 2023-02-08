@@ -124,6 +124,7 @@ class VerifyOtp : AppCompatActivity() {
                 }
             }, object : Response.ErrorListener {
                 override fun onErrorResponse(error: VolleyError?) {
+
                     Toast.makeText(this@VerifyOtp, "Something went wrong!", Toast.LENGTH_LONG).show()
                 }
             }) {

@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Model.CabCategory
-import com.pearlorganisation.figgo.One_Way_OutStationActivity
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.CityCabActivity
 import com.pearlorganisation.figgo.UI.Shared_cab_Activity
 
 class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCategory>): Adapter<CabCategoryAdapter.CabCategoryHolder>() {
@@ -40,76 +38,77 @@ class CabCategoryAdapter( var context:Context,var cab_category_list:List<CabCate
         holder.cab_name.text=data.cab_name
 
         holder.itemView.setOnClickListener {
+
             context.startActivity(Intent(context,Shared_cab_Activity::class.java))
+            holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
             when(holder.adapterPosition){
                 0->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                    /*holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                    /* holder.cab_category.setImageResource(R.drawable.citycab)*/
               /* context.startActivity(Intent(context,CityCabActivity::class.java))*/
 
                 }
                 1->{
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
-
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                     holder.cab_name.setTextColor(Color.WHITE)
                     /*holder.cab_category.setImageResource(R.drawable.intracity)*/
                     /*context.startActivity(Intent(context,One_Way_OutStationActivity::class.java))*/
                 }
                 2->{
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                  /*  holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
 
                     holder.cab_name.setTextColor(Color.WHITE)
                 /*holder.cab_category.setImageResource(R.drawable.city_cab)*/
 
                 }
                 3->{
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
 
                     holder.cab_name.setTextColor(Color.WHITE)
                    /* holder.cab_category.setImageResource(R.drawable.airportcab)*/
                 }
                 4->{
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
 
                     holder.cab_name.setTextColor(Color.WHITE)
                     /*holder.cab_category.setImageResource(R.drawable.royal)*/
                 }
                 5->{
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
 
                     holder.cab_name.setTextColor(Color.WHITE)
                     /*holder.cab_category.setImageResource(R.drawable.tour)*/
                 }
                 6->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                    /* holder.cab_category.setImageResource(R.drawable.goods)*/
                 }
                 7->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                    /*holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                     /*holder.cab_category.setImageResource(R.drawable.hotel)*/
                 }
                 8->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                     /*holder.cab_category.setImageResource(R.drawable.flightwhite)*/
                 }
                 9->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                     /*holder.cab_category.setImageResource(R.drawable.train)*/
                 }
 
                 10->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                   /* holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                    /* holder.cab_category.setImageResource(R.drawable.bus)*/
                 }
                 11->{
                     holder.cab_name.setTextColor(Color.WHITE)
-                    holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))
+                  /*  holder.ll_lnr.setBackgroundColor(Color.parseColor("#A79ECD"))*/
                     /*holder.cab_category.setImageResource(R.drawable.more)*/
                 }
 

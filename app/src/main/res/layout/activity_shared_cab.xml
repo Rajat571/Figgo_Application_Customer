@@ -7,15 +7,9 @@
     android:background="#54C5CF"
     tools:context=".UI.Shared_cab_Activity">
 
-    <ImageView
-        android:id="@+id/work_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/work_in_progress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/headerbackwithnotification"/>
+
+
 
     <fragment
         android:id="@+id/nav_controller"
@@ -23,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +24,18 @@
         app:layout_constraintVertical_bias="0.5"
         app:navGraph="@navigation/share_cab_graph"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/work_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/work_in_progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

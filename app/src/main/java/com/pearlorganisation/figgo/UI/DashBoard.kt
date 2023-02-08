@@ -2,13 +2,12 @@ package com.pearlorganisation.figgo.UI
 //Neeraj
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
-import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Location
-import android.location.LocationManager
+import android.location.*
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -18,7 +17,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -26,42 +24,33 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentMoreFragment
 import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentRidesFragment
 import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
-import com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity
 import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
-import com.pearlorganisation.DrawerSupportActivity
 import com.pearlorganisation.Edit_Profile_Activity
 import com.pearlorganisation.NotificationBellIconActivity
 import com.pearlorganisation.PrefManager
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
 import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.BottomItemFragment.HistoryFragment
 import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
 import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
-import com.pearlorganisation.figgo.databinding.NavHeaderCustomerMenuDrawerBinding
 import java.util.*
 
 
@@ -90,7 +79,7 @@ class DashBoard : BaseClass(){
     private var lastKnownLocationByGps: Location? = null
 
 
-    lateinit var customerMenuDrawerBinding: NavHeaderCustomerMenuDrawerBinding
+    /*lateinit var customerMenuDrawerBinding: NavHeaderCustomerMenuDrawerBinding*/
     lateinit var continu : Button
     lateinit var main : LinearLayout
     lateinit var perm : LinearLayout
@@ -159,21 +148,19 @@ class DashBoard : BaseClass(){
         prefManager.setToLngLC("")
         prefManager.setToLatMC("")
         prefManager.setToLngMC("")
+        prefManager.setSearchBack("")
         Log.d("token",prefManager.getToken())
 
         var window=window
         window.setStatusBarColor(Color.parseColor("#000F3B"))
-        val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+       /* val drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout*/
         var menu_naviagtion = findViewById<ImageView>(R.id.menu_naviagtion)
         val navigationView = findViewById<View>(R.id.navView) as NavigationView
-       var  lleditprofile = navigationView.getHeaderView(0).findViewById<View>(R.id.ll_editprofile)
-        var tv_rajsharma = navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_rajsharma)
-        var tv_mobilenumber = navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_mobilenumber)
-        var tv_gmail = navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_gmail)
-        var iv_imageView = navigationView.getHeaderView(0).findViewById<ImageView>(R.id.iv_imageView)
 
 
-        var rides =/* RidesBottom()*/ CurrentRidesFragment()
+
+
+        var rides =/* RidesBottom()*/ /*CurrentRidesFragment()*/ HistoryFragment()
         var more = /*RoundAndTourFragment()*/ CurrentMoreFragment()
         var support = SupportBottomNav()
         var navView = findViewById<NavigationView>(R.id.navView)
@@ -181,70 +168,39 @@ class DashBoard : BaseClass(){
          main = findViewById<LinearLayout>(R.id.main)
         continu = findViewById<Button>(R.id.continu)
         perm = findViewById<LinearLayout>(R.id.perm)
-        val textView = findViewById<TextView>(R.id.tv1)
         var iv_user = findViewById<ImageView>(R.id.iv_user)
         var iv_bellicon = findViewById<ImageView>(R.id.iv_bellicon)
-
+        var ll_cancelationpolicy = findViewById<LinearLayout>(R.id.ll_cancelationpolicy)
+        var ll_termsconditions = findViewById<LinearLayout>(R.id.ll_termsconditions)
+        var ll_helpsupport = findViewById<LinearLayout>(R.id.ll_helpsupport)
+        var ll_editprofile = findViewById<LinearLayout>(R.id.ll_editprofile)
+        var ll_orderbooking = findViewById<LinearLayout>(R.id.ll_orderbooking)
+        var ll_offeranddiscount = findViewById<LinearLayout>(R.id.ll_offeranddiscount)
+        var ll_figgorewards = findViewById<LinearLayout>(R.id.ll_figgorewards)
+        var ll_referandearn = findViewById<LinearLayout>(R.id.ll_referandearn)
+        var ll_faqs = findViewById<LinearLayout>(R.id.ll_faqs)
+        var ll_ratesus = findViewById<LinearLayout>(R.id.ll_ratesus)
+        var ll_feedsback = findViewById<LinearLayout>(R.id.ll_feedsback)
+        var img_webview = findViewById<ImageView>(R.id.iv_webview)
+         liveLoc = findViewById<TextView>(R.id.live_loc)
+        var ll_logout = findViewById<LinearLayout>(R.id.ll_logout)
+        locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 /*
         liveLoc = findViewById<TextView>(R.id.live_loc)
 */
 
 
-        val ai: ApplicationInfo = applicationContext.packageManager
-            .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)
-        val value = ai.metaData["api_key"]
-        val apiKey = getString(R.string.api_key)
-
-        if (!Places.isInitialized()) {
-            Places.initialize(applicationContext, apiKey)
-        }
-
-        val autocompleteSupportFragment1 = supportFragmentManager.findFragmentById(R.id.autocomplete_fragment1) as AutocompleteSupportFragment?
-
-        autocompleteSupportFragment1!!.setPlaceFields(
-            listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.PHONE_NUMBER, Place.Field.LAT_LNG, Place.Field.OPENING_HOURS, Place.Field.RATING, Place.Field.USER_RATINGS_TOTAL))
-
-
-        autocompleteSupportFragment1.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-
-                val address = place.address
-                val name = place.name
-               /* val phone = place.phoneNumber
-                val latlng = place.latLng
-                val latitude = latlng?.latitude
-                val longitude = latlng?.longitude*/
-
-                val isOpenStatus : String = if(place.isOpen == true){
-                    "Open"
-                } else {
-                    "Closed"
-                }
-
-              /*  val rating = place.rating
-                val userRatings = place.userRatingsTotal*/
-
-               /* textView.text = "Name: $name \nAddress: $address\nIs open: $isOpenStatus \n" */
-            }
-
-            override fun onError(status: Status) {
-                Toast.makeText(applicationContext,"Some error occurred", Toast.LENGTH_SHORT).show()
-            }
-        })
 
 
 
 
-       /* tv_rajsharma.text=prefManager.gettv_rajsharma()*/
-        tv_mobilenumber.text=prefManager.gettv_mobilenumber()
-       /* tv_gmail.text=prefManager.gettv_gmail()*/
-        iv_imageView.setImageResource(R.drawable.girl)
 
-        toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
+
+     /*   toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.Change_MPIN, R.string.Rides)
         drawerLayout.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle.syncState()
-
+*/
         iv_user.setOnClickListener {
             startActivity(Intent(this,Edit_Profile_Activity::class.java))
         }
@@ -252,6 +208,49 @@ class DashBoard : BaseClass(){
         iv_bellicon.setOnClickListener {
             startActivity(Intent(this,NotificationBellIconActivity::class.java))
         }
+
+        ll_editprofile.setOnClickListener {
+            startActivity(Intent(this,Edit_Profile_Activity::class.java))
+        }
+
+        ll_orderbooking.setOnClickListener {
+            Toast.makeText(this, "Order and booking", Toast.LENGTH_LONG).show()
+        }
+
+        ll_offeranddiscount.setOnClickListener {
+            Toast.makeText(this, "Order and discount", Toast.LENGTH_LONG).show()
+        }
+
+        ll_figgorewards.setOnClickListener {
+            Toast.makeText(this, "Figgo rewards", Toast.LENGTH_LONG).show()
+        }
+
+        ll_referandearn.setOnClickListener {
+            Toast.makeText(this, "Refers and earn", Toast.LENGTH_LONG).show()
+        }
+
+        ll_faqs.setOnClickListener {
+            Toast.makeText(this, "Faqs", Toast.LENGTH_LONG).show()
+        }
+
+
+        img_webview.setOnClickListener {
+            startActivity(Intent(this,GoogleWebview::class.java))
+        }
+        ll_feedsback.setOnClickListener {
+            Toast.makeText(this, "Please give me feed back", Toast.LENGTH_LONG).show()
+        }
+
+        ll_ratesus.setOnClickListener {
+            startActivity(Intent(this,GoogleWebview::class.java))
+        }
+
+        ll_logout.setOnClickListener {
+            prefManager.setToken("")
+            startActivity(Intent(this,LoginActivity::class.java))
+        }
+
+
 
 
 
@@ -261,9 +260,16 @@ class DashBoard : BaseClass(){
         }*/
 
 
-        lleditprofile.setOnClickListener {
-            startActivity(Intent(this,Edit_Profile_Activity::class.java))
+
+
+        ll_cancelationpolicy.setOnClickListener {
+            startActivity(Intent(this,CancellationPolicy::class.java))
         }
+
+        ll_termsconditions.setOnClickListener {
+            startActivity(Intent(this,TermAndConditionActivity::class.java))
+        }
+
 
 
        /* liveLoc?.setOnClickListener {
@@ -282,19 +288,28 @@ class DashBoard : BaseClass(){
         }
 
 
-
         grantLocPer()
 
        var bottom = findViewById<BottomNavigationView>(R.id.navigation_bar)
+        var home_top = findViewById<LinearLayout>(R.id.home_top)
+        var home_bottom = findViewById<LinearLayout>(R.id.homebottom)
+        var live_loc = findViewById<TextView>(R.id.live_loc)
         bottom.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home_b->{
                     setfragment(homeFrag)
+                    home_top.visibility=View.VISIBLE
+                    home_bottom.visibility=View.VISIBLE
+                    live_loc.visibility=View.VISIBLE
+
                     true
 
                 }
                 R.id.rides_b->{
                     setfragment(rides)
+                    home_top.visibility=View.GONE
+                    home_bottom.visibility=View.GONE
+                    live_loc.visibility=View.GONE
                     true
 
                 }
@@ -302,11 +317,17 @@ class DashBoard : BaseClass(){
 
                 R.id.more_b->{
                     setfragment(more)
+                    home_top.visibility=View.GONE
+                    home_bottom.visibility=View.GONE
+                    live_loc.visibility=View.GONE
                     true
 
         }
                 R.id.support_b->{
             setfragment(support)
+                    home_top.visibility=View.GONE
+                    home_bottom.visibility=View.GONE
+                    live_loc.visibility=View.GONE
             true
 
 
@@ -321,38 +342,7 @@ class DashBoard : BaseClass(){
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.change_mpin -> {
-                    Toast.makeText(this@DashBoard, "change_mpin Clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.rides -> {
-                    Toast.makeText(this@DashBoard, "rides Clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.Logout -> {
-                    prefManager.setToken("")
-                    prefManager.setMpin("")
-                    startActivity(Intent(this,LoginActivity::class.java))
-                }
 
-                R.id.term_condition -> {
-                    startActivity(Intent(this,TermAndConditionActivity::class.java))
-                }
-                R.id.cancellation_policy -> {
-                    startActivity(Intent(this,CancellationPolicy::class.java))
-                }
-                R.id.About_Figgo -> {
-                    startActivity(Intent(this,CurrentAboutActivity::class.java))
-                }
-                R.id.Logout -> {
-                    startActivity(Intent(this,CurrentAboutActivity::class.java))
-                }
-                R.id.Support -> {
-                    startActivity(Intent(this,DrawerSupportActivity::class.java))
-                }
-            }
-            true
-        }
 
     }
 
@@ -503,6 +493,8 @@ class DashBoard : BaseClass(){
         }
         if (resultCode == -1) {
            setfragment(homeFrag)
+            getLocation()
+
         } else {
             grantLocPer()
         }
@@ -528,8 +520,14 @@ class DashBoard : BaseClass(){
                         perm.isVisible = false
                            grantLocPer()
 
+                    }else{
+                        ActivityCompat.requestPermissions(
+                            this@DashBoard,
+                            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION),
+                            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
                     }
                 } else {
+
 
                     main.isVisible = false
                     perm.isVisible = true
@@ -541,5 +539,122 @@ class DashBoard : BaseClass(){
 
     }
 
+    val gpsLocationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            locationByGps = location
+        }
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
+
+    }
+    //------------------------------------------------------//
+    val networkLocationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            locationByNetwork= location
+            // locationByNetwork= location
+        }
+
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
+    }
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+
+
+        if (hasGps) {
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                5000,
+                0F,
+                gpsLocationListener
+            )
+        }
+//------------------------------------------------------//
+        if (hasNetwork) {
+            locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                5000,
+                0F,
+                networkLocationListener
+            )
+        }
+
+
+        val lastKnownLocationByGps =
+            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+        // locationByGps = getLastKnownLocation()
+        lastKnownLocationByGps?.let {
+            locationByGps = lastKnownLocationByGps
+        }
+        //------------------------------------------------------//
+
+
+        val lastKnownLocationByNetwork =
+            locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        lastKnownLocationByNetwork?.let {
+            locationByNetwork = lastKnownLocationByNetwork
+        }
+//------------------------------------------------------//
+        if (locationByGps != null && locationByNetwork != null) {
+            if (locationByGps!!.accuracy > locationByNetwork!!.accuracy) {
+
+
+                    to_lat = locationByGps?.latitude.toString()
+                    to_lng = locationByGps?.longitude.toString()
+
+            }else{
+
+                to_lat = locationByNetwork?.latitude.toString()
+                    to_lng = locationByNetwork?.longitude.toString()
+
+            }
+        }else {
+            if (locationByNetwork == null) {
+               // Toast.makeText(this, "No Network", Toast.LENGTH_LONG).show()
+
+            } else {
+
+
+
+                to_lat = locationByNetwork?.latitude.toString()
+                to_lng = locationByNetwork?.longitude.toString()
+
+
+            }
+            // use latitude and longitude as per your need
+            // }
+            // }
+
+
+        }
+        var geocoder: Geocoder
+        val addresses: List<Address>
+        geocoder = Geocoder(this, Locale.getDefault())
+
+
+        var strAdd : String? = null
+        try {
+            val addresses = geocoder.getFromLocation(to_lat!!.toDouble(), to_lng!!.toDouble(), 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = java.lang.StringBuilder("")
+               /* for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }*/
+                val cityState = returnedAddress.locality +","+returnedAddress.adminArea;
+                strAdd = cityState
+                Log.w(" Current loction address", strReturnedAddress.toString())
+            } else {
+                Log.w(" Current loction address", "No Address returned!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.w(" Current loction address",  e.printStackTrace().toString())
+        }
+        liveLoc?.setText(strAdd)
+    }
 
 }

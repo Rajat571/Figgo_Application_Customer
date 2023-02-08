@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.Fragments.CabBookFragment">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
 
 

@@ -8,16 +8,16 @@
     android:orientation="vertical"
     android:background="@color/colorlightblue">
 
-    <include layout="@layout/header_layout"/>
+    <include layout="@layout/headerbackwithnotification"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/choose_user"
         android:layout_width="match_parent"
         android:layout_height="560dp"
-        android:layout_marginStart="@dimen/_18sdp"
-        android:layout_marginEnd="@dimen/_18sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:visibility="visible"
-        android:layout_marginTop="-115dp"
+        android:layout_marginTop="-85dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_160sdp"
+            android:layout_height="@dimen/_190sdp"
             app:cardElevation="@dimen/_6sdp"
             android:layout_marginTop="@dimen/_2sdp"
             app:cardCornerRadius="@dimen/_6sdp"
@@ -42,7 +42,7 @@
 
 
                 <ImageView
-                    android:id="@+id/iv_vehicleimg"
+                    android:id="@+id/iv_activaimg"
                     android:layout_width="@dimen/_65sdp"
                     android:layout_height="@dimen/_65sdp"
                     android:background="@drawable/bg_circle_black"
@@ -51,12 +51,13 @@
 
 
                 <TextView
-                    android:id="@+id/tv_vehiclenumber"
+                    android:id="@+id/tv_activanumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:textStyle="bold"
-                    android:layout_marginStart="@dimen/_22sdp"
                     android:text="Activa - CH-01-2015"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
@@ -67,46 +68,51 @@
                 android:id="@+id/crl_driverimg"
                 android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_65sdp"
-                android:layout_marginTop="@dimen/_69sdp"
+                android:layout_marginTop="@dimen/_89sdp"
                 android:background="@drawable/bg_circle_black"
                 android:src="@drawable/girl_img"
                 app:civ_border_width="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_12sdp"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="252dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_34sdp"
+                android:layout_marginStart="@dimen/_29sdp"
                 android:layout_marginTop="@dimen/_26sdp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/iv_drivername"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_drivername"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:fontFamily="sans-serif-black"
                     android:text="Ravi Singh"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp" />
 
                 <RatingBar
                     android:id="@+id/ride_service_rating"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:max="5"
-                    android:numStars="5"
-                    style="?android:attr/ratingBarStyleSmall"/>
+                    android:numStars="5" />
 
                 <TextView
                     android:id="@+id/tv_dl_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:text="DL. No. Cgdjn9857imvc"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp" />
@@ -120,7 +126,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-43dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
@@ -140,6 +145,7 @@
 
 
             <ImageView
+                android:id="@+id/iv_call"
                 android:layout_width="@dimen/_26sdp"
                 android:layout_height="@dimen/_26sdp"
                 android:layout_weight="1"
@@ -150,13 +156,13 @@
                 android:id="@+id/tv_emrgencybtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="@dimen/_6sdp"
+                android:layout_weight="1"
                 android:background="@color/colorRed"
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:text="Emergency"
-                android:textColor="@color/white"
+                android:textColor="#000000"
                 android:textSize="@dimen/_12sdp" />
 
 
@@ -176,16 +182,7 @@
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
-            <ImageButton
-                android:id="@+id/currentLocationImageButton"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="25dp"
-                android:layout_marginEnd="15dp"
-                android:contentDescription="@null"
-                android:src="@drawable/axis_logo" />
+
 
             <Button
                 android:id="@+id/directions"
@@ -194,6 +191,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text = "Click"
+                android:visibility="gone"
                 tools:ignore="MissingConstraints" />
 
 

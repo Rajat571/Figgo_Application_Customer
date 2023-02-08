@@ -73,9 +73,9 @@ class EmergencyMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap
         binding = ActivityEmergencyMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var emrgencybtn = findViewById<TextView>(R.id.emrgencybtn)
-        tv_vehiclenumber = findViewById<TextView>(R.id.tv_vehiclenumber)
+       /* tv_vehiclenumber = findViewById<TextView>(R.id.tv_vehiclenumber)
         iv_drivername = findViewById<TextView>(R.id.iv_drivername)
-        tv_dl_number = findViewById<TextView>(R.id.tv_dl_number)
+        tv_dl_number = findViewById<TextView>(R.id.tv_dl_number)*/
         var tv_emrgencybtn = findViewById<TextView>(R.id.tv_emrgencybtn)
         var tv_otp = findViewById<TextView>(R.id.tv_otp)
         var ll_back = findViewById<LinearLayout>(R.id.ll_back)
@@ -100,6 +100,7 @@ class EmergencyMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap
         pref.getdl_number().toString()
         val bundle = intent.extras
         if (bundle != null) {
+
             /* driver_name.text = " ${bundle.getString("drivername")}"
             activanumber.text = "${bundle.getString("activavehiclenumber")}"
             dlnumber.text = "${bundle.getString("dl_number")}"*/

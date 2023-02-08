@@ -7,24 +7,25 @@
 
     <ImageView
         android:id="@+id/menu_naviagtion"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_28sdp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center"
         android:layout_marginStart="@dimen/_12sdp"
-        android:src="@drawable/ic_baseline_density_medium_24"/>
+        android:src="@drawable/ic_baseline_arrow_back_24"/>
 
     <ImageView
         android:id="@+id/showmotification"
-        android:layout_width="@dimen/_28sdp"
-        android:layout_height="@dimen/_28sdp"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
         android:layout_marginStart="@dimen/_105sdp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
-        android:src="@drawable/bell_icon"/>
+        android:src="@drawable/notification_whiteimg"/>
 
     <ImageView
         android:id="@+id/shareimg"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_28sdp"
+        android:layout_height="@dimen/_22sdp"
         android:layout_marginStart="@dimen/_96sdp"
         android:layout_gravity="center"
         android:src="@drawable/ic_baseline_share_24"/>
