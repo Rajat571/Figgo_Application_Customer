@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".Wallet_Activity">
+    tools:context=".UI.Wallet_Activity">
 
     <include layout="@layout/headerbackwithnotification" />
 

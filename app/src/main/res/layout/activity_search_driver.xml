@@ -9,13 +9,18 @@
     tools:context="com.pearlorganisation.SearchDriver">
 
     <include layout="@layout/headerbackwithnotification" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-
         android:visibility="visible"
-        android:id="@+id/ll_main">
+        android:id="@+id/ll_main"
+        android:orientation="vertical">
+
+
+
+
         <TextView
             android:layout_marginTop="@dimen/_20sdp"
             android:id="@+id/textView"
@@ -24,10 +29,10 @@
             android:gravity="center"
             android:text="Seaching for Nearby Drivers Please Wait ..."
             android:textColor="@color/white"
-            android:textSize="15sp"
-         />
+            android:textSize="15sp" />
 
     </LinearLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"

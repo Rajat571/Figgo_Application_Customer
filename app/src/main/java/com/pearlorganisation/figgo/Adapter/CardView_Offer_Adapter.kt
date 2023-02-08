@@ -10,9 +10,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.Model.CurrentVehicle_itemListAdapter
-import com.pearlorganisation.figgo.One_Way_OutStationActivity
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.UI.CityCabActivity
 import com.pearlorganisation.figgo.UI.Shared_cab_Activity

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.Fragments.Share_Cab.ShareCab_EasyLifeShare">
+    tools:context=".Fragments.Share_Cab.ShareCab_EasyLifeShare">
 
     <include layout="@layout/header_layout"
         android:id="@+id/layout"

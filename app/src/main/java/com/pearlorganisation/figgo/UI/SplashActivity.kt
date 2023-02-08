@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.widget.TextView
-import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.WelcomeSlider
 
 class SplashActivity : AppCompatActivity() {
 

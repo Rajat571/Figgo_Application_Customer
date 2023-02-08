@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:paddingVertical="@dimen/_30sdp"
-    android:paddingHorizontal="@dimen/_40sdp"
     android:background="@color/white"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,6 +11,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_40sdp"
             android:orientation="vertical">
 
     <ImageView
@@ -57,7 +55,7 @@
         android:text="V E R I F Y"
         android:id="@+id/otp_Verify_button"
         android:textColor="@color/white"
-        android:backgroundTint="#236A8B"/>
+        android:background="@drawable/continue_background"/>
 
     <TextView
         android:layout_width="wrap_content"

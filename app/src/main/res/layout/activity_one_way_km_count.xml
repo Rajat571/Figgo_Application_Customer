@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".OneWay_Km_CountActivity">
+    tools:context=".UI.OneWay_Km_CountActivity">
 
     <include layout="@layout/headerbackwithnotification"/>
 
@@ -43,7 +43,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        tools:context=".CurrentMap.MapsActivity1" />
+        tools:context=".UI.CurrentMap.MapsActivity1" />
 
             <LinearLayout
                 android:id="@+id/ll_accept"

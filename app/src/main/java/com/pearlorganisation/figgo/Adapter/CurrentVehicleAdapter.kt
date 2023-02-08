@@ -18,11 +18,12 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.pearlorganisation.PrefManager
-import com.pearlorganisation.SearchDriver
+import com.pearlorganisation.figgo.pearlLib.PrefManager
+import com.pearlorganisation.figgo.UI.SearchDriver
 import com.pearlorganisation.figgo.Model.CurrentVehicleModel
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UTIL.MapUtility
+import com.pearlorganisation.figgo.Util.MapUtility
+import com.pearlorganisation.figgo.pearlLib.Helper
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
@@ -68,14 +69,12 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Curren
             pref.setride_id(data.ride_id)
              progressDialog = ProgressDialog(context)
             progressDialog.show()
-            val URL = "https://test.pearl-developer.com/figo/api/ride/select-city-vehicle-type"
-            Log.d("SendData", "URL===" + URL)
             val queue = Volley.newRequestQueue(context)
             val json = JSONObject()
             json.put("vehicle_type_id", data.driver_id)
             json.put("ride_id",data.ride_id)
             Log.d("SendData", "json===" + json)
-            val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, URL, json, object :
+            val jsonOblect: JsonObjectRequest = object : JsonObjectRequest(Method.POST, Helper.Selectcityvehicletype, json, object :
                 Response.Listener<JSONObject?>               {
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)

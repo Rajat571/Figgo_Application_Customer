@@ -5,10 +5,8 @@ import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.android.volley.AuthFailureError
@@ -16,11 +14,11 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.pearlorganisation.PrefManager
-import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.pearlLib.PrefManager
+import com.pearlorganisation.figgo.pearlLib.BaseClass
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
-import com.pearlorganisation.figgo.UTIL.MapUtility
+import com.pearlorganisation.figgo.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment
+import com.pearlorganisation.figgo.Util.MapUtility
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject
 import java.util.*

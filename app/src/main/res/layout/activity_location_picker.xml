@@ -90,14 +90,15 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/edt_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edt_search"
-            android:visibility="visible"
             android:layout_margin="8dp"
-            android:hint="Search Previous Location"
             android:background="@color/white"
-            android:textColor="@color/black"/>
+            android:hint="Search Previous Location"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:visibility="gone" />
         <TextView
             android:id="@+id/label"
             android:layout_width="wrap_content"

@@ -34,22 +34,19 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentMoreFragment
-import com.pearlorganisation.CurrentBottomNavigationFragment.CurrentRidesFragment
-import com.pearlorganisation.DrawerItemActivity.CancellationPolicy
-import com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity
-import com.pearlorganisation.Edit_Profile_Activity
-import com.pearlorganisation.NotificationBellIconActivity
-import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.Fragments.CurrentBottomNavigationFragment.CurrentMoreFragment
+import com.pearlorganisation.figgo.UI.Edit_Profile_Activity
+import com.pearlorganisation.figgo.UI.NotificationBellIconActivity
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.Adapter.CabCategoryAdapter
 import com.pearlorganisation.figgo.Adapter.FiggoAddAdapter
-import com.pearlorganisation.figgo.BaseClass
-import com.pearlorganisation.figgo.BottomItemFragment.HistoryFragment
+import com.pearlorganisation.figgo.pearlLib.BaseClass
+import com.pearlorganisation.figgo.Fragments.HistoryFragment
 import com.pearlorganisation.figgo.Model.CabCategory
 import com.pearlorganisation.figgo.Model.FiggoAdd
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.Fragments.HomeDashboard
-import com.pearlorganisation.figgo.UI.Fragments.SupportBottomNav
+import com.pearlorganisation.figgo.Fragments.HomeDashboard
+import com.pearlorganisation.figgo.Fragments.SupportBottomNav
 import com.pearlorganisation.figgo.databinding.ActivityDashBoardBinding
 import java.util.*
 
@@ -202,15 +199,15 @@ class DashBoard : BaseClass(){
         toggle.syncState()
 */
         iv_user.setOnClickListener {
-            startActivity(Intent(this,Edit_Profile_Activity::class.java))
+            startActivity(Intent(this, Edit_Profile_Activity::class.java))
         }
 
         iv_bellicon.setOnClickListener {
-            startActivity(Intent(this,NotificationBellIconActivity::class.java))
+            startActivity(Intent(this, NotificationBellIconActivity::class.java))
         }
 
         ll_editprofile.setOnClickListener {
-            startActivity(Intent(this,Edit_Profile_Activity::class.java))
+            startActivity(Intent(this, Edit_Profile_Activity::class.java))
         }
 
         ll_orderbooking.setOnClickListener {
@@ -263,11 +260,11 @@ class DashBoard : BaseClass(){
 
 
         ll_cancelationpolicy.setOnClickListener {
-            startActivity(Intent(this,CancellationPolicy::class.java))
+            startActivity(Intent(this, CancellationPolicy::class.java))
         }
 
         ll_termsconditions.setOnClickListener {
-            startActivity(Intent(this,TermAndConditionActivity::class.java))
+            startActivity(Intent(this, TermAndConditionActivity::class.java))
         }
 
 

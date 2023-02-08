@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".UI.Fragments.Shared_Cab_Fragment.RideshBottomFragment">
+    tools:context=".Fragments.Shared_Cab_Fragment.RideshBottomFragment">
 
     <include layout="@layout/headerbackwithnotification"/>
 

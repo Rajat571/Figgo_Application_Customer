@@ -33,35 +33,35 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <activity
-            android:name=".DashBoard_NewChange"
+            android:name=".UI.DashBoard_NewChange"
             android:exported="false" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
-<activity android:name="com.pearlorganisation.HomeFragmentReplace"
+<activity android:name=".UI.HomeFragmentReplace"
     android:exported="false"/>
 
-       <activity android:name="com.pearlorganisation.HelpAndSupportActivity"
+       <activity android:name=".UI.HelpAndSupportActivity"
            android:exported="false"/>
-        <activity android:name="com.pearlorganisation.Edit_Profile_Activity"
+        <activity android:name=".UI.Edit_Profile_Activity"
             android:exported="false"/>
 
-      <activity android:name="com.pearlorganisation.NotificationBellIconActivity"
+      <activity android:name=".UI.NotificationBellIconActivity"
           android:exported="false"/>
-      <activity android:name="com.pearlorganisation.DrawerItemActivity.TermAndConditionActivity"
+      <activity android:name=".UI.TermAndConditionActivity"
           android:exported="false"/>
-        <activity android:name="com.pearlorganisation.DrawerItemActivity.CurrentAboutActivity"
+        <activity android:name=".UI.CurrentAboutActivity"
             android:exported="false"/>
 
-       <activity android:name="com.pearlorganisation.DrawerItemActivity.CancellationPolicy"
+       <activity android:name=".UI.CancellationPolicy"
            android:exported="false"/>
-      <activity android:name="com.pearlorganisation.Current_Driver_Details_List"
+      <activity android:name=".UI.Current_Driver_Details_List"
           android:exported="false"/>
-        <activity android:name="com.pearlorganisation.EmergencyRoutedraweActivity"
+        <activity android:name=".UI.EmergencyRoutedraweActivity"
             android:exported="false"/>
 
-        <activity android:name="com.pearlorganisation.SearchDriver"
+        <activity android:name=".UI.SearchDriver"
             android:exported="false"/>
         <activity
             android:name=".UI.GoogleWebview"
@@ -70,7 +70,7 @@
             android:name=".UI.MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".CurrentMap.EmergencyMapsActivity"
+            android:name=".UI.CurrentMap.EmergencyMapsActivity"
             android:exported="false" />
         <activity
             android:name=".UI.VerifyOtp"
@@ -86,49 +86,49 @@
             android:exported="false"
             android:noHistory="false" />
         <activity
-            android:name=".StudenAddActivity"
+            android:name=".UI.StudenAddActivity"
             android:exported="false" />
         <activity
-            android:name=".OTPVerifyPageActivity"
+            android:name=".UI.OTPVerifyPageActivity"
             android:exported="false" />
         <activity
-            android:name=".PaymentMethodActivity"
+            android:name=".UI.PaymentMethodActivity"
             android:exported="false" />
         <activity
-            android:name=".CurrentMap.MapsActivity2"
+            android:name=".UI.CurrentMap.MapsActivity2"
             android:exported="false" />
         <activity
-            android:name=".PaymentPayActivity"
+            android:name=".UI.PaymentPayActivity"
             android:exported="false" />
         <activity
             android:name=".CabBookActivity"
             android:exported="false" />
         <activity
-            android:name=".OneWayBookingActivity"
+            android:name=".UI.OneWayBookingActivity"
             android:exported="false" />
         <activity
-            android:name=".DriveRatingActivity"
+            android:name=".UI.DriveRatingActivity"
             android:exported="false" />
         <activity
-            android:name=".CurrentMap.MapsActivity1"
+            android:name=".UI.CurrentMap.MapsActivity1"
             android:exported="false" />
         <activity
-            android:name=".EmergencyActivity"
+            android:name=".UI.EmergencyActivity"
             android:exported="false" />
         <activity
             android:name=".TotalDistance_Count_Km_Activity"
             android:exported="false" />
         <activity
-            android:name=".OneWay_Km_CountActivity"
+            android:name=".UI.OneWay_Km_CountActivity"
             android:exported="false" />
         <activity
-            android:name=".FreedomOutstationActivity"
+            android:name=".UI.FreedomOutstationActivity"
             android:exported="false" />
         <activity
             android:name=".RoundAndTourActivity"
             android:exported="false" />
         <activity
-            android:name=".One_Way_OutStationActivity"
+            android:name=".UI.One_Way_OutStationActivity"
             android:exported="false" />
         <activity
             android:name=".CustomerMenuDrawerActivity"
@@ -193,7 +193,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".WelcomeSlider"
+            android:name=".UI.WelcomeSlider"
             android:exported="false" />
         <activity
             android:name=".UI.WelcomeActivity"

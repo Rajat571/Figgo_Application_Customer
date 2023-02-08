@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorlightblue"
     android:orientation="vertical"
-    tools:context=".FreedomOutstationActivity">
+    tools:context=".UI.FreedomOutstationActivity">
 
 
     <include layout="@layout/headerbackwithnotification"/>

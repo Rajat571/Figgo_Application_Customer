@@ -34,13 +34,13 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.Adapter.HistoryAdapter
 import com.pearlorganisation.figgo.Adapter.RideCityAdapter
 import com.pearlorganisation.figgo.Model.Data
 import com.pearlorganisation.figgo.Model.HistoryAdd
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UTIL.MapUtility
+import com.pearlorganisation.figgo.Util.MapUtility
 import com.release.gfg1.DBHelper
 import java.io.IOException
 import java.util.*

@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pearlorganisation.figgo.HistoryMapsActivity
+import com.pearlorganisation.figgo.UI.HistoryMapsActivity
 import com.pearlorganisation.figgo.R
 
 data class BottomHistoryRideAdapter(var data: List<String>,var x:Int,var context: Context): RecyclerView.Adapter<RideHistoryHolder>() {

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".UI.Fragments.Shared_Cab_Fragment.RoundAndTourFragment">
+    tools:context=".Fragments.Shared_Cab_Fragment.RoundAndTourFragment">
 
     <include layout="@layout/headerbackwithnotification"/>
 

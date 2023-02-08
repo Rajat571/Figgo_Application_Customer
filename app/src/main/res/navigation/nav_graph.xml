@@ -7,7 +7,7 @@
 
    <!-- <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.WelcomeFragment"
+        android:name="com.pearlorganisation.figgo.Fragments.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
        &lt;!&ndash; <action
@@ -22,7 +22,7 @@
     </fragment>-->
     <!--<fragment
         android:id="@+id/verifyNumber2"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.VerifyNumber"
+        android:name="com.pearlorganisation.figgo.Fragments.VerifyNumber"
         android:label="fragment_verify_number"
         tools:layout="@layout/login_activity" >
         <action
@@ -38,7 +38,7 @@
 
    <!-- <fragment
         android:id="@+id/MPinGenerate2"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.MPinGenerate"
+        android:name="com.pearlorganisation.figgo.Fragments.MPinGenerate"
         android:label="fragment_m_pin_generate"
         tools:layout="@layout/fragment_m_pin_generate" >
         <action

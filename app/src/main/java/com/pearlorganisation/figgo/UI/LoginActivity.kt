@@ -1,6 +1,5 @@
 package com.pearlorganisation.figgo.UI
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 
@@ -9,13 +8,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import com.android.volley.AuthFailureError
@@ -32,16 +29,15 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
-import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UTIL.MapUtility
+import com.pearlorganisation.figgo.Util.MapUtility
+import com.pearlorganisation.figgo.pearlLib.Helper
 
 import org.json.JSONObject
 
 
 class LoginActivity : AppCompatActivity(){
-
-    val URL = "https://test.pearl-developer.com/figo/api/register"
 
     private val REQUEST_LOCATION = 1
     private val RC_SIGN_IN = 1
@@ -65,6 +61,7 @@ class LoginActivity : AppCompatActivity(){
     lateinit var txt_otpW : TextView
     lateinit var txt_MPinW : TextView
     lateinit var mPin : EditText
+    lateinit var ll_number : LinearLayout
     var press :String ?= "otp"
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +71,7 @@ class LoginActivity : AppCompatActivity(){
         //  var email = findViewById<TextView>(R.id.email)
         //  var number = findViewById<TextView>(R.id.number)
         input_number = findViewById<TextView>(R.id.input_number)
+        ll_number = findViewById<LinearLayout>(R.id.ll_number)
 
 
         val continuetv = findViewById<TextView>(R.id.continuetv)
@@ -180,16 +178,13 @@ class LoginActivity : AppCompatActivity(){
 
             txt_otpW.isVisible = false
             txt_MPinW.isVisible = true
-            input_number.isVisible = false
+            ll_number.isVisible = false
             mPin.isVisible = true
             //getotp()
 
         }
 
         txt_otp.setOnClickListener {
-
-            //var mobile_num=binding.inputNumber.text.toString()
-
             txt_mpin.setBackgroundColor(getColor(R.color.colorbluedark))
             txt_otp.setBackgroundColor(Color.BLACK)
 
@@ -197,7 +192,7 @@ class LoginActivity : AppCompatActivity(){
             txt_otpW.isVisible = true
             txt_MPinW.isVisible = false
             mPin.isVisible = false
-            input_number.isVisible = true
+            ll_number.isVisible = true
             //getotp()
 
         }
@@ -297,7 +292,7 @@ class LoginActivity : AppCompatActivity(){
         progress.isVisible  =true
         cc_number.isVisible = false
         otp_screen.isVisible = false
-        val URL = "https://test.pearl-developer.com/figo/api/register"
+        val URL = Helper.REGISTER
         val queue = Volley.newRequestQueue(this@LoginActivity)
         val json = JSONObject()
         json.put("contact_no", input_number.text.toString())
@@ -348,7 +343,7 @@ class LoginActivity : AppCompatActivity(){
 
     private fun getotp(){
         pref.setNumber(input_number.text.toString())
-        val URL = "https://test.pearl-developer.com/figo/api/otp/send-otp"
+        val URL = Helper.SEND_OTP
         val queue = Volley.newRequestQueue(this@LoginActivity)
         val json = JSONObject()
         json.put("type", "user")
@@ -393,7 +388,7 @@ class LoginActivity : AppCompatActivity(){
     private fun verifyOtp(){
         val progressDialog = ProgressDialog(this)
         progressDialog.show()
-        val URL = " https://test.pearl-developer.com/figo/api/otp/check-otp"
+        val URL = Helper.CHECK_OTP
         val queue = Volley.newRequestQueue(this@LoginActivity)
         val json = JSONObject()
         json.put("type", "user")

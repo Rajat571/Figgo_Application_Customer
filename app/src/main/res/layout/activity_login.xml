@@ -75,7 +75,7 @@
                         android:textColor="@color/white"
                         android:background="@color/colorbluedark"
                         android:layout_weight="0.5"
-                        android:text="Login with Mpin"
+                        android:text="Login with MPIN"
                         android:textAlignment="center"
                         android:textSize="17sp" />
 
@@ -85,7 +85,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
                     android:id="@+id/txt_otp"
                     android:text="What's your MOBILE NUMBER"
                     android:textAlignment="center"
@@ -105,8 +105,7 @@
                     android:id="@+id/Linear_Fragment_Container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -131,20 +130,37 @@
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/input_number"
-                    android:layout_width="300dp"
+                <LinearLayout
+                    android:id="@+id/ll_number"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/out_line_box"
-                    android:hint="Enter Your Mobile number"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:maxEms="10"
-                    android:textAlignment="center"
-                    android:visibility="visible" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/out_line_box"
+                        android:padding="2dp"
+                        android:src="@drawable/india_flag" />
+
+                    <EditText
+                        android:id="@+id/input_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight=".2"
+                        android:background="@drawable/out_line_box"
+                        android:hint="Enter Your Mobile number"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:visibility="visible" />
+
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/edt_mpin"
@@ -195,6 +211,7 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/background_card"
                     android:padding="10dp"
+                    android:visibility="gone"
                     android:text="I forgot my Account Info"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -218,7 +235,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="  or  " />
+                        android:text="  OR  " />
 
                     <View
                         android:layout_width="0dp"

@@ -2,31 +2,17 @@ package com.pearlorganisation.figgo.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.AuthFailureError
-import com.android.volley.DefaultRetryPolicy
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import com.pearlorganisation.PrefManager
-import com.pearlorganisation.figgo.CurrentMap.EmergencyMapsActivity
-import com.pearlorganisation.figgo.CurrentMap.MapsActivity1
-import com.pearlorganisation.figgo.CurrentMap.MapsActivity2
-import com.pearlorganisation.figgo.Current_Cab_DetailsActivity
+import com.pearlorganisation.figgo.pearlLib.PrefManager
+import com.pearlorganisation.figgo.UI.Current_Cab_DetailsActivity
 import com.pearlorganisation.figgo.Model.OneWayListRatingVehicle
 import com.pearlorganisation.figgo.R
-import org.json.JSONObject
 
 class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<OneWayListRatingVehicle>) : RecyclerView.Adapter<CurrentOneWayKmCountAdapter.ViewHolder>() {
 

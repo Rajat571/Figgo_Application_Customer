@@ -1,6 +1,5 @@
 package com.pearlorganisation.figgo.UI
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -11,10 +10,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.pearlorganisation.PrefManager
-import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.R
-import com.pearlorganisation.figgo.UI.DashBoard
 import com.pearlorganisation.figgo.databinding.FragmentMPinGenerateBinding
 
 class GooglePlayWebview : Fragment() {

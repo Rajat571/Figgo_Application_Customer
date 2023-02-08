@@ -1,6 +1,5 @@
 package com.pearlorganisation.figgo.Adapter
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.pearlorganisation.SearchDriver
-import com.pearlorganisation.figgo.HistoryMapsActivity
-import com.pearlorganisation.figgo.Model.AdvanceCityCab
+import com.pearlorganisation.figgo.UI.HistoryMapsActivity
 import com.pearlorganisation.figgo.Model.HistoryBottomModelList
 import com.pearlorganisation.figgo.R
 

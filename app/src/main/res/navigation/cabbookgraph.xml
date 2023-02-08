@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cabBookFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.CabBookFragment"
+        android:name="com.pearlorganisation.figgo.Fragments.CabBookFragment"
         android:label="fragment_cab_book"
         tools:layout="@layout/fragment_cab_book" >
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/payFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.PayFragment"
+        android:name="com.pearlorganisation.figgo.Fragments.PayFragment"
         android:label="fragment_pay"
         tools:layout="@layout/fragment_pay" >
         <action
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/paymentWayFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.PaymentWayFragment"
+        android:name="com.pearlorganisation.figgo.Fragments.PaymentWayFragment"
         android:label="fragment_payment_way"
         tools:layout="@layout/fragment_payment_way" >
         <action
@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/thankyouScreenFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment"
+        android:name="com.pearlorganisation.figgo.Fragments.Shared_Cab_Fragment.ThankyouScreenFragment"
         android:label="fragment_thankyou_screen"
         tools:layout="@layout/fragment_thankyou_screen" >
        <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/vehicleNumberFragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.VehicleNumberFragment"
+        android:name="com.pearlorganisation.figgo.Fragments.Shared_Cab_Fragment.VehicleNumberFragment"
         android:label="fragment_vehicle_number"
         tools:layout="@layout/fragment_vehicle_number">
         <action
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/thankyou_Rating_Fragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.Thankyou_Rating_Fragment"
+        android:name="com.pearlorganisation.figgo.Fragments.Shared_Cab_Fragment.Thankyou_Rating_Fragment"
         android:label="fragment_thankyou__rating_"
         tools:layout="@layout/fragment_thankyou__rating_" />
     <activity
@@ -79,7 +79,7 @@
         tools:layout="@layout/a_dashboard" />
     <activity
         android:id="@+id/notificationBellIconActivity"
-        android:name="com.pearlorganisation.NotificationBellIconActivity"
+        android:name="com.pearlorganisation.figgo.UI.NotificationBellIconActivity"
         android:label="NotificationBellIconActivity" />
 
 </navigation>

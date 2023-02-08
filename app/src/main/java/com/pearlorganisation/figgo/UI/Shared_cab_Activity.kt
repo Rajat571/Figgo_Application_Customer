@@ -2,13 +2,12 @@ package com.pearlorganisation.figgo.UI
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.pearlorganisation.NotificationBellIconActivity
-import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.UI.NotificationBellIconActivity
+import com.pearlorganisation.figgo.pearlLib.BaseClass
 import com.pearlorganisation.figgo.R
 
 class Shared_cab_Activity : BaseClass() {

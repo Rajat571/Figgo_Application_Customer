@@ -23,13 +23,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.R
 import org.json.JSONObject
 
 class VerifyOtp : AppCompatActivity() {
 
-    val URL = "https://test.pearl-developer.com/figo/api/register"
 
     private val REQUEST_LOCATION = 1
     private val RC_SIGN_IN = 1

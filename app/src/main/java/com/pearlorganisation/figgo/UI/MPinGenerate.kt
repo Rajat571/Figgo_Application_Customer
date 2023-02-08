@@ -7,7 +7,7 @@ import android.text.InputType
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.pearlorganisation.PrefManager
+import com.pearlorganisation.figgo.pearlLib.PrefManager
 import com.pearlorganisation.figgo.R
 
 class MPinGenerate : AppCompatActivity() {
@@ -33,10 +33,7 @@ class MPinGenerate : AppCompatActivity() {
                 if (mPin.text.toString().equals(confirm_mpin.text.toString())) {
                     pref.setMpin(mPin.text.toString())
                     startActivity(Intent(this@MPinGenerate, DashBoard::class.java))
-
-
                 } else {
-
                       Toast.makeText(this@MPinGenerate, "PIN not match", Toast.LENGTH_SHORT).show()
                   }
             }

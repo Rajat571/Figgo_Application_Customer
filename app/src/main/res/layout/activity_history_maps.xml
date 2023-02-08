@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#B9E5FA"
-    tools:context=".HistoryMapsActivity">
+    tools:context=".UI.HistoryMapsActivity">
 
     <include
         android:id="@+id/include2"

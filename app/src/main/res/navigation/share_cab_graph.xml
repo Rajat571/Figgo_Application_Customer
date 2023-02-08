@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/shareCab_Fragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.ShareCab_Fragment"
+        android:name="com.pearlorganisation.figgo.Fragments.Shared_Cab_Fragment.ShareCab_Fragment"
         android:label="fragment_share_cab_"
         tools:layout="@layout/fragment_share_cab_" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/liveSharecab_Fragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.LiveSharecab_Fragment"
+        android:name="com.pearlorganisation.figgo.Fragments.Shared_Cab_Fragment.LiveSharecab_Fragment"
         android:label="fragment_live_sharecab_"
         tools:layout="@layout/fragment_live_sharecab_" >
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/advanceSharecab_Fragment"
-        android:name="com.pearlorganisation.figgo.UI.Fragments.Shared_Cab_Fragment.AdvanceSharecab_Fragment"
+        android:name="com.pearlorganisation.figgo.Fragments.Shared_Cab_Fragment.AdvanceSharecab_Fragment"
         android:label="fragment_advance_sharecab_"
         tools:layout="@layout/fragment_advance_sharecab_" >
         <action
