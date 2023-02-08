@@ -322,15 +322,28 @@ class SearchDriver : BaseClass() , PaymentResultListener {
         }
         mBuilder.setStyle(inboxStyle)
 
+<<<<<<< HEAD:app/src/main/java/com/pearlorganisation/figgo/UI/SearchDriver.kt
+=======
+        /* Creates an explicit intent for an Activity in your app */
+>>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924:app/src/main/java/com/pearlorganisation/SearchDriver.kt
         val resultIntent = Intent(this, SearchDriver::class.java)
 
         val stackBuilder = TaskStackBuilder.create(this)
         stackBuilder.addParentStack(SearchDriver::class.java)
+<<<<<<< HEAD:app/src/main/java/com/pearlorganisation/figgo/UI/SearchDriver.kt
         stackBuilder.addNextIntent(resultIntent)
+=======
+
+        /* Adds the Intent that starts the Activity to the top of the stack */stackBuilder.addNextIntent(resultIntent)
+>>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924:app/src/main/java/com/pearlorganisation/SearchDriver.kt
         val resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
         mBuilder.setContentIntent(resultPendingIntent)
        var mNotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
+<<<<<<< HEAD:app/src/main/java/com/pearlorganisation/figgo/UI/SearchDriver.kt
+=======
+        /* notificationID allows you to update the notification later on. */
+>>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924:app/src/main/java/com/pearlorganisation/SearchDriver.kt
         mNotificationManager.notify(1, mBuilder.build())
     }
 
@@ -340,7 +353,11 @@ class SearchDriver : BaseClass() , PaymentResultListener {
     }
 
     private fun getRideStatus() {
+<<<<<<< HEAD:app/src/main/java/com/pearlorganisation/figgo/UI/SearchDriver.kt
         val URL =Helper.CHECK_RIDE_REQUEST_STATUS
+=======
+        val URL ="https://test.pearl-developer.com/figo/api/ride/check-ride-request-status"
+>>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924:app/src/main/java/com/pearlorganisation/SearchDriver.kt
         Log.d("searchDriver", "json===" +URL )
         Log.d("SendData", pref.getride_id() )
         val queue = Volley.newRequestQueue(this)
@@ -563,11 +580,16 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                                 intent.putExtra("veh_number", v_number)
                                 intent.putExtra("price", prices)
 
+<<<<<<< HEAD:app/src/main/java/com/pearlorganisation/figgo/UI/SearchDriver.kt
 
                                 startActivity(Intent())
 
                                 /*startActivity(Intent).(this@SearchDriver,EmergencyRoutedraweActivity::class.java))*/
 
+=======
+                                startActivity(Intent(this@SearchDriver,EmergencyRoutedraweActivity::class.java))
+
+>>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924:app/src/main/java/com/pearlorganisation/SearchDriver.kt
                             } else {
 
                             }

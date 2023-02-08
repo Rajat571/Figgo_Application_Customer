@@ -27,9 +27,15 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
+<<<<<<< HEAD:app/src/main/java/com/pearlorganisation/figgo/UI/EmergencyRoutedraweActivity.kt
 import com.pearlorganisation.figgo.R
 import com.pearlorganisation.figgo.pearlLib.BaseClass
 import com.pearlorganisation.figgo.pearlLib.PrefManager
+=======
+import com.pearlorganisation.figgo.BaseClass
+import com.pearlorganisation.figgo.DriveRatingActivity
+import com.pearlorganisation.figgo.R
+>>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924:app/src/main/java/com/pearlorganisation/EmergencyRoutedraweActivity.kt
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader

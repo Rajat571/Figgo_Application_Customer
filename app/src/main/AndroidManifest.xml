@@ -44,7 +44,14 @@
 
        <activity android:name=".UI.HelpAndSupportActivity"
            android:exported="false"/>
+<<<<<<< HEAD
         <activity android:name=".UI.Edit_Profile_Activity"
+=======
+        <activity android:name=".HistoryMapsActivity"
+            android:exported="false"/>
+
+        <activity android:name="com.pearlorganisation.Edit_Profile_Activity"
+>>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924
             android:exported="false"/>
 
       <activity android:name=".UI.NotificationBellIconActivity"
