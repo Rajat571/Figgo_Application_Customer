@@ -44,6 +44,9 @@
 
        <activity android:name="com.pearlorganisation.HelpAndSupportActivity"
            android:exported="false"/>
+        <activity android:name=".HistoryMapsActivity"
+            android:exported="false"/>
+
         <activity android:name="com.pearlorganisation.Edit_Profile_Activity"
             android:exported="false"/>
 

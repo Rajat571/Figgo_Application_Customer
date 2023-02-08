@@ -169,11 +169,19 @@ class Current_Driver_Details_List : BaseClass(), PaymentResultListener {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
                         progressDialog.hide()
-                        val booking_no = response.getJSONObject("ride").getString("booking_id")
-                        val otp = response.getInt("otp")
 
-                        pref.setOtp(otp.toString())
-                        pref.setBookingNo(booking_no)
+                        try {
+
+
+                            val booking_no = response.getJSONObject("ride").getString("booking_id")
+                            val otp = response.getInt("otp")
+
+                            pref.setOtp(otp.toString())
+                            pref.setBookingNo(booking_no)
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),this@Current_Driver_Details_List)
+
+                        }
                       /*  supportFragmentManager.beginTransaction().apply {
                             replace(R.id.nav_controller, thankyouScreenFragment)
                             commit()

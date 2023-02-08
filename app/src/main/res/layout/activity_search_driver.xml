@@ -17,6 +17,8 @@
         android:visibility="visible"
         android:id="@+id/ll_main">
 
+
+
         <TextView
             android:layout_marginTop="@dimen/_20sdp"
             android:id="@+id/textView"
