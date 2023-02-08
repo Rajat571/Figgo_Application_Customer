@@ -175,10 +175,9 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                       }else  if (searching_status.equals("1")){
                          getRideStatus()
 
-
                      }
                 } else{
-                    Toast.makeText(this@SearchDriver, "Unable to search driver...", Toast.LENGTH_LONG).show()
+
                 }
             }
         }, object : Response.ErrorListener {
@@ -204,15 +203,11 @@ class SearchDriver : BaseClass() , PaymentResultListener {
 
     }
     private fun getRideStatus() {
-
         val URL ="https://test.pearl-developer.com/figo/api/ride/check-ride-request-status"
         Log.d("searchDriver", "json===" +URL )
         Log.d("SendData", pref.getride_id() )
-
         val queue = Volley.newRequestQueue(this)
         val json = JSONObject()
-
-
         json.put("ride_id", pref.getride_id())
        //json.put("ride_id", "1070")
         val jsonOblect: JsonObjectRequest =
@@ -224,23 +219,21 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                         Log.d("Ride Status", "response===" + response)
 
                         val status = response.getString("status")
-
                         if (status.equals("true")){
                             if (::cTimer.isInitialized) {
                                 cTimer.cancel()
                             }
                             ll_search?.isVisible = false
                             ll_details?.isVisible = true
-                             prices = response.getJSONObject("data").getString("price")
+                            prices = response.getJSONObject("data").getString("price")
                             name = response.getJSONObject("data").getJSONObject("ride_driver").getString("name")
-                              dlnumber = response.getJSONObject("data").getJSONObject("ride_driver").getString("dl_number")
+                            dlnumber = response.getJSONObject("data").getJSONObject("ride_driver").getString("dl_number")
                             v_number = response.getJSONObject("data").getJSONObject("ride_driver").getJSONObject("cab").getString("v_number")
-                           /*val name1 = response.getJSONObject("data").getJSONObject("cab_details").getString("name")*/
                             pref.setReqRideId(response.getJSONObject("data").getString("id"))
-                               val rating_avg = response.getJSONObject("data").getJSONObject("ride_driver").getString("rating_avg")
+                            val rating_avg = response.getJSONObject("data").getJSONObject("ride_driver").getString("rating_avg")
 
-                              drivername?.setText(name)
-                              dl_number?.setText(dlnumber)
+                            drivername?.setText(name)
+                            dl_number?.setText(dlnumber)
                             activavehiclenumber?.setText(v_number)
                             price?.setText(prices)
                             pref.setPrice(prices)
@@ -266,7 +259,6 @@ class SearchDriver : BaseClass() , PaymentResultListener {
 
                     Log.d("SendData", "error===" + error)
                     //
-
                     MapUtility.showDialog(error.toString(),this@SearchDriver)
                 }
             }) {
@@ -308,7 +300,7 @@ class SearchDriver : BaseClass() , PaymentResultListener {
         cTimer = object : CountDownTimer(300000, 1000) {
             override fun onTick(millisUntilFinished: Long) {//300000
                 txtTimer?.setText("seconds remaining: " +""+ (millisUntilFinished / 1000).toString())
-                if (count % 10 ==  0) {
+                if (count % 30 ==  0) {
                     getRideStatus()
                    // Toast.makeText(this@SearchDriver, "fetching driver...", Toast.LENGTH_LONG).show()
 
@@ -319,12 +311,8 @@ class SearchDriver : BaseClass() , PaymentResultListener {
             override fun onFinish() {
                 Toast.makeText(this@SearchDriver, "Unable to found nearby drivers...", Toast.LENGTH_LONG).show()
                 textView?.setText("Unable to found nearby drivers...")
-
-
-
                 /* deletePendingReq()*/
                 finish()
-
             }
         }
         cTimer.start()
@@ -345,7 +333,6 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
-
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
                       //  progressDialog.hide()
@@ -363,14 +350,9 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                   //  progressDialog.hide()
                     Log.d("SendDataE", "error===" + error)
                     // Toast.makeText(this@Current_Driver_Details_List, "Something went wrong!", Toast.LENGTH_LONG).show()
-
-
                     MapUtility.showDialog(error.toString(),this@SearchDriver)
                 }
             }) {
-
-
-
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers: MutableMap<String, String> = java.util.HashMap()
@@ -384,7 +366,6 @@ class SearchDriver : BaseClass() , PaymentResultListener {
         queue.add(jsonOblect)
 
     }
-
 
     private fun getAcceptRide() {
        // val progressDialog = ProgressDialog(this)
@@ -414,7 +395,6 @@ class SearchDriver : BaseClass() , PaymentResultListener {
                             intent.putExtra("price",prices)
 
                             startActivity(intent)
-
                             //startActivity(Intent(this@SearchDriver,EmergencyRoutedraweActivity::class.java))
                         }else{
 
@@ -518,8 +498,10 @@ class SearchDriver : BaseClass() , PaymentResultListener {
         canBtn.setOnClickListener {
             dialog.dismiss()
         }
+
         if (!(this@SearchDriver as Activity).isFinishing) {
             dialog.show()
+           /* finish()*/
         }
 
         val window: Window? = dialog.getWindow()

@@ -283,9 +283,6 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
             }
         }
 
-
-
-
        // Initialize Places.
 
     }
@@ -308,10 +305,8 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                 Response.Listener<JSONObject?>               {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(response: JSONObject?) {
-
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-
                         progressDialog.hide()
                         ll_location?.isVisible = false
                         ll_choose_vehicle?.isVisible  =true

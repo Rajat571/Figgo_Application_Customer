@@ -8,15 +8,16 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.location.*
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -26,12 +27,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
-import com.google.gson.Gson
 import com.pearlorganisation.figgo.BaseClass
 import com.pearlorganisation.figgo.DriveRatingActivity
 import com.pearlorganisation.figgo.R
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -95,7 +93,13 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
         var tv_emrgencybtn = findViewById<TextView>(R.id.tv_emrgencybtn)
         var tv_vehiclenumber = findViewById<TextView>(R.id.tv_vehiclenumber)
         var iv_drivername = findViewById<TextView>(R.id.iv_drivername)
+
+
+        var tv_activanumber = findViewById<TextView>(R.id.tv_activanumber)
+        var tv_drivername = findViewById<TextView>(R.id.tv_drivername)
         var tv_dl_number = findViewById<TextView>(R.id.tv_dl_number)
+        var iv_call = findViewById<ImageView>(R.id.iv_call)
+
      //   var tv_emrgencybtn = findViewById<TextView>(R.id.tv_emrgencybtn)
         val profileName=intent.getStringExtra("name")
         val dl_number=intent.getStringExtra("dl_number")
@@ -103,8 +107,8 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
         val price=intent.getStringExtra("price")
 
 
-        tv_vehiclenumber.setText(veh_number)
-        iv_drivername.setText(profileName)
+        tv_activanumber.setText(veh_number)
+        tv_drivername.setText(profileName)
         tv_dl_number.setText(dl_number)
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
@@ -121,6 +125,14 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
         tv_emrgencybtn.setOnClickListener {
             startActivity(Intent(this, DriveRatingActivity::class.java))
         }
+
+        iv_call.setOnClickListener {
+            
+            var intent_call = Intent(Intent.ACTION_DIAL)
+            intent_call.data = Uri.parse("tel:"+"+919715597855")
+            startActivity(intent_call)
+        }
+
 
 
 
@@ -173,31 +185,28 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
         dropLocation = LatLng(from_lat!!.toDouble() , from_lng!!.toDouble())
         val height = 100
         val width = 100
-        val bitmapdraw = resources.getDrawable(R.drawable.city_cab) as BitmapDrawable
+        val bitmapdraw = resources.getDrawable(R.drawable.carmove_img) as BitmapDrawable
         val b = bitmapdraw.bitmap
         val smallMarker = Bitmap.createScaledBitmap(b, width, height, false)
-        mMap?.addMarker(
-            MarkerOptions().position(pickupLocation!!)
-                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-                .title("Current Location")
-        )
+        mMap?.addMarker(MarkerOptions().position(pickupLocation!!).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).title("Current Location"))
+
         val bitmapdraw2 = resources.getDrawable(R.drawable.drop_location) as BitmapDrawable
         val b2 = bitmapdraw2.bitmap
         val smallMarker2 = Bitmap.createScaledBitmap(b2, width, height, false)
-        mMap?.addMarker(
-            MarkerOptions().position(dropLocation!!)
-                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker2))
-                .title("dropoff")
-
-        )
+        mMap?.addMarker(MarkerOptions().position(dropLocation!!).icon(BitmapDescriptorFactory.fromBitmap(smallMarker2)).title("dropoff"))
 
         val source = "" + curLat + "," + curLong
         val destination = "" + from_lat!!.toDouble() + "," + from_lng!!.toDouble()
      //   Log.e("Origin ", "$source\n Destination $destination")
-        polyline!!.remove()
+        if (polyline.toString().equals("null") || polyline.toString().equals("")){
+
+        }else {
+            polyline!!.remove()
+        }
         GetDirection().execute(source, destination)
 
     }
+
 
 
     private fun isGooglePlayServicesAvailable(): Boolean {
@@ -239,17 +248,12 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
         mMap?.addMarker(
             MarkerOptions().position(pickupLocation!!)
                 .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-                .title("pickup")
-        )
+                .title("pickup"))
+
         val bitmapdraw2 = resources.getDrawable(R.drawable.drop_location) as BitmapDrawable
         val b2 = bitmapdraw2.bitmap
         val smallMarker2 = Bitmap.createScaledBitmap(b2, width, height, false)
-        mMap?.addMarker(
-            MarkerOptions().position(dropLocation!!)
-                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker2))
-                .title("dropoff")
-
-        )
+        mMap?.addMarker(MarkerOptions().position(dropLocation!!).icon(BitmapDescriptorFactory.fromBitmap(smallMarker2)).title("dropoff"))
 
         val source = "" + to_lat + "," + to_lng
         val destination = "" + from_lat + "," + from_lng
@@ -257,20 +261,6 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
         GetDirection().execute(source, destination)
 
 
-        //   val myLocation = LatLng(30.302810, 78.012234)
-        //  mMap.addMarker(MarkerOptions().position(myLocation).title("Marker in Sydney"))
-        //  mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
-
-
-
-
-
-
-        /* mMap = p0!!
-        val originLocation = LatLng(originLatitude, originLongitude)
-        mMap.clear()
-        mMap.addMarker(MarkerOptions().position(originLocation))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(originLocation, 18F))*/
     }
 
     inner class GetDirection :
@@ -362,8 +352,6 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
 
 
         override fun onPostExecute(file_url: String?) {
-
-
             var src1: LatLng? = null
             var dest: LatLng? = null
             for (i in 0 until pontos.size - 1) {
@@ -381,12 +369,11 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
                             LatLng(dest.latitude, dest.longitude)
                         ).width(7f).color(
                             Color.GREEN
-                        ).geodesic(true)
-                    )
+                        ).geodesic(true))
                 } catch (e: NullPointerException) {
-                   // Log.e("Error", "NullPointerException onPostExecute: $e")
+                    Log.e("Error", "NullPointerException onPostExecute: $e")
                 } catch (e2: Exception) {
-                   // Log.e("Error", "Exception onPostExecute: $e2")
+                    Log.e("Error", "Exception onPostExecute: $e2")
                 }
             }
             try {
@@ -394,7 +381,7 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
                 builder.include(src1!!)
                 builder.include(dest!!)
                 val bounds = builder.build()
-                //                    mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                //  mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
                 val padding = 250 // offset from edges of the map in pixels
                 val cu = CameraUpdateFactory.newLatLngBounds(bounds, 100)
                 mMap?.moveCamera(cu)

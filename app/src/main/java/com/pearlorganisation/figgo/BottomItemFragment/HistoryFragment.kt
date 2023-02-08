@@ -94,7 +94,6 @@ class HistoryFragment : Fragment() {
                         var actual_distance:String
                         var price:String
                         for(p in 0..allrideArray.length()-1){
-
                             val booking_id = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getString("booking_id")
                             val name = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getJSONObject("to_location").getString("name")
                             val name1 = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getJSONObject("from_location").getString("name")
