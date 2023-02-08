@@ -308,11 +308,18 @@ class LoginActivity : AppCompatActivity(){
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
-                        pref.setUserId(response.getJSONObject("user").getString("id"))
-                        pref.settv_mobilenumber(response.getJSONObject("user").getString("contact_no"))
-                        pref.settv_rajsharma(response.getJSONObject("user").getString("name"))
-                        pref.settv_gmail(response.getJSONObject("user").getString("email"))
-                        getotp()
+                        try {
+                            pref.setUserId(response.getJSONObject("user").getString("id"))
+                            pref.settv_mobilenumber(
+                                response.getJSONObject("user").getString("contact_no")
+                            )
+                            pref.settv_rajsharma(response.getJSONObject("user").getString("name"))
+                            pref.settv_gmail(response.getJSONObject("user").getString("email"))
+                            getotp()
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),this@LoginActivity)
+
+                        }
                     }
 
                     // Get your json response and convert it to whatever you want.
@@ -400,35 +407,50 @@ class LoginActivity : AppCompatActivity(){
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
                         progressDialog.hide()
-                        if (pref.getToken().equals("") || pref.getToken().equals("null")) {
+                        try {
+                            if (pref.getToken().equals("") || pref.getToken().equals("null")) {
 
-                            val token = response.getString("token")
-                            pref.setToken(token)
-                            pref.isValidLogin()
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Login Successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            //  Log.d("SendData", "token===" + token)
-                            //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
-                            if (pref.getMpin().equals("")) {
-                                startActivity(Intent(this@LoginActivity,
-                                        MPinGenerate::class.java))
-                            } else {
-                                startActivity(Intent(this@LoginActivity,
-                                        DashBoard::class.java
+                                val token = response.getString("token")
+                                pref.setToken(token)
+                                pref.isValidLogin()
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Login Successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                //  Log.d("SendData", "token===" + token)
+                                //  startActivity(Intent(this@LoginActivity,MPinGenerate::class.java))
+                                if (pref.getMpin().equals("")) {
+                                    startActivity(
+                                        Intent(
+                                            this@LoginActivity,
+                                            MPinGenerate::class.java
+                                        )
                                     )
-                                )
+                                } else {
+                                    startActivity(
+                                        Intent(
+                                            this@LoginActivity,
+                                            DashBoard::class.java
+                                        )
+                                    )
+                                }
+
+
+                            } else {
+                                val token = response.getString("token")
+                                pref.setToken(token)
+                                pref.isValidLogin()
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Login Successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                startActivity(Intent(this@LoginActivity, DashBoard::class.java))
                             }
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),this@LoginActivity)
 
-
-                        } else {
-                            val token = response.getString("token")
-                            pref.setToken(token)
-                            pref.isValidLogin()
-                            Toast.makeText(  this@LoginActivity,"Login Successfully",Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginActivity, DashBoard::class.java))
                         }
 
                     }

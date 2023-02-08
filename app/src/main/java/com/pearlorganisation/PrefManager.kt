@@ -390,4 +390,13 @@ import android.content.SharedPreferences
          return pref?.getString("price","null").toString()
      }
 
+     fun setTime(type:String){
+         editor?.putString("time",type)
+         editor?.commit()
+     }
+
+     fun getTime():String{
+         return pref?.getString("time","null").toString()
+     }
+
  }

@@ -549,6 +549,11 @@ class LocationPickerActivityCurr :AppCompatActivity(), OnMapReadyCallback, RideC
         if (mMap!!.isIndoorEnabled()) {
             mMap?.setIndoorEnabled(false)
         }
+        this@LocationPickerActivityCurr.showCurrentLocationOnMap(false)
+        doAfterPermissionProvided = 2
+        doAfterLocationSwitchedOn = 2
+
+
         mMap?.setInfoWindowAdapter(object : InfoWindowAdapter {
             // Use default InfoWindow frame
             override fun getInfoWindow(arg0: Marker): View? {

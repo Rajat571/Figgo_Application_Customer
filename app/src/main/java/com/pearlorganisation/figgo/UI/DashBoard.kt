@@ -613,7 +613,7 @@ class DashBoard : BaseClass(){
             }
         }else {
             if (locationByNetwork == null) {
-                Toast.makeText(this, "No Network", Toast.LENGTH_LONG).show()
+               // Toast.makeText(this, "No Network", Toast.LENGTH_LONG).show()
 
             } else {
 

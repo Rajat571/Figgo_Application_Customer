@@ -313,29 +313,54 @@ class Advance_cityCab : Fragment(), OnMapReadyCallback, GoogleApiClient.Connecti
                     if (response != null) {
 
                         progressDialog.hide()
-                        ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true
-                        pref.setCount("vehicle")
+                        try {
 
-                        val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                        val rideId = response.getJSONObject("data").getString("ride_id")
+                            ll_location?.isVisible = false
+                            ll_choose_vehicle?.isVisible = true
+                            pref.setCount("vehicle")
 
-                        for(p2 in 0 until size) {
+                            val size = response.getJSONObject("data").getJSONArray("vehicle_types")
+                                .length()
+                            val rideId = response.getJSONObject("data").getString("ride_id")
 
-                            val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
-                            val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                            val vehicle_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
-                            val min = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
-                            val max = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")
+                            for (p2 in 0 until size) {
 
-                            cablist.add(AdvanceCityCabModel(name,image,rideId,vehicle_id,min,max))
+                                val name =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("name")
+                                val image =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("full_image")
+                                val vehicle_id =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("id")
+                                val min =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("min_price")
+                                val max =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("max_price")
+
+                                cablist.add(
+                                    AdvanceCityCabModel(
+                                        name,
+                                        image,
+                                        rideId,
+                                        vehicle_id,
+                                        min,
+                                        max
+                                    )
+                                )
+                            }
+
+                            advanceCityAdapter = AdvanceCityDataAdapter(requireActivity(), cablist)
+                            binding.recylerCabList.layoutManager = GridLayoutManager(context, 3)
+                            binding.recylerCabList.adapter = advanceCityAdapter
+                            binding.recylerCabList.layoutManager = GridLayoutManager(context, 3)
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),requireActivity())
+
                         }
-
-                        advanceCityAdapter= AdvanceCityDataAdapter(requireActivity(),cablist)
-                        binding.recylerCabList.layoutManager= GridLayoutManager(context,3)
-                        binding.recylerCabList.adapter=advanceCityAdapter
-                        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
-
                     }
                     // Get your json response and convert it to whatever you want.
                 }

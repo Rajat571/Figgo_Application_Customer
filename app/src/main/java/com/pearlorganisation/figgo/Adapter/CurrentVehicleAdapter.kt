@@ -80,13 +80,21 @@ class CurrentVehicleAdapter(var context: Activity, var cablist: ArrayList<Curren
                 override fun onResponse(response: JSONObject?) {
                     Log.d("SendData", "response===" + response)
                     if (response != null) {
+
                         progressDialog.hide()
-                        val status = response.getString("status")
-                        if(status.equals("false")){
-                            Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                        }else{
-                            context.startActivity(Intent(context,SearchDriver::class.java))
-                       }
+                        try {
+
+
+                            val status = response.getString("status")
+                            if (status.equals("false")) {
+                                Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_LONG)
+                                    .show()
+                            } else {
+                                context.startActivity(Intent(context, SearchDriver::class.java))
+                            }
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),context)
+                        }
                     }
                 }
             }, object : Response.ErrorListener {

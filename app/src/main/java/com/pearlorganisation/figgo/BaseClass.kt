@@ -522,6 +522,7 @@ abstract class BaseClass  : AppCompatActivity(){
     protected abstract fun initializeInputs()
     protected abstract fun initializeLabels()
 
+
     companion object {
         var isInternetReceiver = false
         fun isValidNumber(number: String): Boolean {

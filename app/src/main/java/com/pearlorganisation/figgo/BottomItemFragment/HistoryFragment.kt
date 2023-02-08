@@ -83,27 +83,51 @@ class HistoryFragment : Fragment() {
                 override fun onResponse(response: JSONObject?) {
 
                     if(response!=null){
-                        Log.d("Data Response",""+response)
-                        var allride:JSONObject = response.getJSONObject("data")
-                        var allrideArray: JSONArray = allride.getJSONArray("all_rides")
-                        var ride_details:JSONObject
-                        var booking_id:String
-                        var destination:String
-                        var from:String
-                        var status:String
-                        var actual_distance:String
-                        var price:String
-                        for(p in 0..allrideArray.length()-1){
+                        try {
 
-                            val booking_id = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getString("booking_id")
-                            val name = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getJSONObject("to_location").getString("name")
-                            val name1 = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getJSONObject("from_location").getString("name")
-                            val status = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getString("status")
-                            val actual_distance = response.getJSONObject("data").getJSONArray("all_rides").getJSONObject(p).getString("actual_distance")
-                            contentdata.add(listOf(booking_id,name,name1,status,actual_distance,"View"))
+                            Log.d("Data Response", "" + response)
+                            var allride: JSONObject = response.getJSONObject("data")
+                            var allrideArray: JSONArray = allride.getJSONArray("all_rides")
+                            var ride_details: JSONObject
+                            var booking_id: String
+                            var destination: String
+                            var from: String
+                            var status: String
+                            var actual_distance: String
+                            var price: String
+                            for (p in 0..allrideArray.length() - 1) {
+
+                                val booking_id =
+                                    response.getJSONObject("data").getJSONArray("all_rides")
+                                        .getJSONObject(p).getString("booking_id")
+                                val name = response.getJSONObject("data").getJSONArray("all_rides")
+                                    .getJSONObject(p).getJSONObject("to_location").getString("name")
+                                val name1 = response.getJSONObject("data").getJSONArray("all_rides")
+                                    .getJSONObject(p).getJSONObject("from_location")
+                                    .getString("name")
+                                val status =
+                                    response.getJSONObject("data").getJSONArray("all_rides")
+                                        .getJSONObject(p).getString("status")
+                                val actual_distance =
+                                    response.getJSONObject("data").getJSONArray("all_rides")
+                                        .getJSONObject(p).getString("actual_distance")
+                                contentdata.add(
+                                    listOf(
+                                        booking_id,
+                                        name,
+                                        name1,
+                                        status,
+                                        actual_distance,
+                                        "View"
+                                    )
+                                )
+                            }
+                            header?.adapter = RideHistoryRowAdapter(contentdata, requireContext())
+                            header?.layoutManager = LinearLayoutManager(requireContext())
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),requireActivity())
+
                         }
-                        header?.adapter = RideHistoryRowAdapter(contentdata,requireContext())
-                        header?.layoutManager=LinearLayoutManager(requireContext())
                     }
 
                 }

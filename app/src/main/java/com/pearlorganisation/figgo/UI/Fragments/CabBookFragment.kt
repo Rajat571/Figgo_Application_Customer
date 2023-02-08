@@ -153,26 +153,40 @@ class CabBookFragment : Fragment() {
                     if (response != null) {
 
                         progressDialog.hide()
-                        val distance = response.getJSONObject("data").getString("distance")
-                        val createdAt = response.getJSONObject("data").getJSONObject("ride").getString("created_at")
-                        val updatedAt = response.getJSONObject("data").getJSONObject("ride").getString("updated_at")
-                        val full_image = response.getJSONObject("data").getJSONObject("vehicle").getString("full_image")
-                        val max_price = response.getJSONObject("data").getJSONObject("vehicle").getString("max_price")
-                        val min_price = response.getJSONObject("data").getJSONObject("vehicle").getString("min_price")
-                        val to_location = response.getJSONObject("data").getJSONObject("ride").getJSONObject("to_location").getString("name")
-                        val from_location = response.getJSONObject("data").getJSONObject("ride").getJSONObject("from_location").getString("name")
+                        try {
+
+                            val distance = response.getJSONObject("data").getString("distance")
+                            val createdAt = response.getJSONObject("data").getJSONObject("ride")
+                                .getString("created_at")
+                            val updatedAt = response.getJSONObject("data").getJSONObject("ride")
+                                .getString("updated_at")
+                            val full_image = response.getJSONObject("data").getJSONObject("vehicle")
+                                .getString("full_image")
+                            val max_price = response.getJSONObject("data").getJSONObject("vehicle")
+                                .getString("max_price")
+                            val min_price = response.getJSONObject("data").getJSONObject("vehicle")
+                                .getString("min_price")
+                            val to_location = response.getJSONObject("data").getJSONObject("ride")
+                                .getJSONObject("to_location").getString("name")
+                            val from_location = response.getJSONObject("data").getJSONObject("ride")
+                                .getJSONObject("from_location").getString("name")
 
 
-                        //  Picasso.get().load(full_image).into(image)
-                        created_at?.setText(createdAt)
-                        updated_at?.setText(updatedAt)
-                        dis1?.setText(distance)
-                        dis2?.setText(distance)
-                        to_loc?.setText(to_location)
-                        from_loc?.setText(from_location)
-                        fare?.setText("Approx.. fare Rs. "+ min_price +" to "+ max_price +",\n                for this ride\nwithout waiting  parking charge\nFinal Price is differ from Approx. "
+                            //  Picasso.get().load(full_image).into(image)
+                            created_at?.setText(createdAt)
+                            updated_at?.setText(updatedAt)
+                            dis1?.setText(distance)
+                            dis2?.setText(distance)
+                            to_loc?.setText(to_location)
+                            from_loc?.setText(from_location)
+                            fare?.setText(
+                                "Approx.. fare Rs. " + min_price + " to " + max_price + ",\n                for this ride\nwithout waiting  parking charge\nFinal Price is differ from Approx. "
 
-                        )
+                            )
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),requireActivity())
+
+                        }
                     }
                     // Get your json response and convert it to whatever you want.
                 }

@@ -335,6 +335,7 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
      pref.setToLngLC(to_lng.toString())
          pref.setToLatMC(from_lat.toString())
           pref.setToLngMC(from_lng.toString())
+        pref.setTime(datetext?.text.toString())
         progress?.isVisible = true
         ll_location?.isVisible = false
         ll_choose_vehicle?.isVisible  =false
@@ -361,25 +362,48 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                 if (response != null) {
                     if (response != null) {
 
-                        progressDialog.hide()
-                        ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true
-                        pref.setCount("vehicle")
+                            progressDialog.hide()
+                            try {
 
-                        val size = response.getJSONObject("data").getJSONArray("vehicle_types").length()
-                        val ride_id = response.getJSONObject("data").getString("ride_id")
 
-                        for(p2 in 0 until size) {
+                            ll_location?.isVisible = false
+                            ll_choose_vehicle?.isVisible = true
+                            pref.setCount("vehicle")
 
-                            val name = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("name")
-                            val image = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("full_image")
-                            val driver_id = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("id")
-                            val min_price = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("min_price")
-                            val max_price = response.getJSONObject("data").getJSONArray("vehicle_types").getJSONObject(p2).getString("max_price")
+                            val size = response.getJSONObject("data").getJSONArray("vehicle_types")
+                                .length()
+                            val ride_id = response.getJSONObject("data").getString("ride_id")
 
-                            cablist.add(CurrentVehicleModel(name,image,ride_id,driver_id, min_price,max_price))
+                            for (p2 in 0 until size) {
 
-                    /*val status = response.getString("status")
+                                val name =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("name")
+                                val image =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("full_image")
+                                val driver_id =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("id")
+                                val min_price =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("min_price")
+                                val max_price =
+                                    response.getJSONObject("data").getJSONArray("vehicle_types")
+                                        .getJSONObject(p2).getString("max_price")
+
+                                cablist.add(
+                                    CurrentVehicleModel(
+                                        name,
+                                        image,
+                                        ride_id,
+                                        driver_id,
+                                        min_price,
+                                        max_price
+                                    )
+                                )
+
+                                /*val status = response.getString("status")
                     if(status.equals("false")){
                         Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
                     }else{
@@ -398,19 +422,21 @@ class Current_cityCab : Fragment(),IOnBackPressed, OnMapReadyCallback, GoogleMap
                             val max_price = vehicle_types.getJSONObject(i).getString("max_price")*/
 
 
+                            }
 
 
+                            currentVehicleAdapter =
+                                CurrentVehicleAdapter(requireContext() as Activity, cablist)
+                            binding.recylerCabList.adapter = currentVehicleAdapter
+                            binding.recylerCabList.layoutManager = GridLayoutManager(context, 3)
+                            progress?.isVisible = false
+                            ll_location?.isVisible = false
+                            ll_choose_vehicle?.isVisible = true
+                        }catch (e:Exception){
+                            MapUtility.showDialog(e.toString(),requireActivity())
 
                         }
-
-
-                        currentVehicleAdapter= CurrentVehicleAdapter(requireContext() as Activity,cablist)
-                        binding.recylerCabList.adapter=currentVehicleAdapter
-                        binding.recylerCabList.layoutManager=GridLayoutManager(context,3)
-                        progress?.isVisible = false
-                        ll_location?.isVisible = false
-                        ll_choose_vehicle?.isVisible  =true
-                    }
+                        }
                 }
 
             }
