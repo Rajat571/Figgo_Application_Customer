@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.pearlorganisation.figgo'
+    namespace 'com.figgo.customer'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.pearlorganisation.figgo"
+        applicationId "com.figgo.customer"
         minSdk 23
         versionCode 1
         targetSdk 33
@@ -102,7 +102,7 @@ dependencies {
     implementation 'in.payu:payu-checkout-pro:1.8.2'
     implementation 'com.google.android.libraries.places:places:3.0.0'
 
-   
+    implementation 'com.paytm.appinvokesdk:appinvokesdk:1.6.14'
 
 
 

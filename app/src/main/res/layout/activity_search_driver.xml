@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/colorlightblue"
-    tools:context="com.pearlorganisation.SearchDriver">
+    >
 
     <include layout="@layout/headerbackwithnotification" />
 
@@ -15,13 +15,11 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="visible"
-<<<<<<< HEAD
+
         android:id="@+id/ll_main"
         android:orientation="vertical">
 
-=======
-        android:id="@+id/ll_main">
->>>>>>> f277e8a4a95ac1c84ea1662c6fdef3be7abd4924
+
 
 
 
