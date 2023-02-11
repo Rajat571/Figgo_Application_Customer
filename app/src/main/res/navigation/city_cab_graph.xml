@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/advance"
-        android:name="com.pearlorganisation.figgo.Fragments.Advance_cityCab"
+        android:name="com.figgo.customer.Fragments.Advance_cityCab"
         android:label="fragment_advance_city_cab"
         tools:layout="@layout/fragment_advance_city_cab" >
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/current"
-        android:name="com.pearlorganisation.figgo.Fragments.Current_cityCab"
+        android:name="com.figgo.customer.Fragments.Current_cityCab"
         android:label="fragment_current_city_cab"
         tools:layout="@layout/fragment_current_city_cab" >
         <action
@@ -29,18 +29,18 @@
 
    <fragment
         android:id="@+id/packagee"
-        android:name="com.pearlorganisation.figgo.Fragments.Package_cityCab"
+        android:name="com.figgo.customer.Fragments.Package_cityCab"
         android:label="fragment_package_city_cab"
         tools:layout="@layout/package_work_progress" />
 
     <activity
         android:id="@+id/oneWay_Km_CountActivity"
-        android:name="com.pearlorganisation.figgo.UI.OneWay_Km_CountActivity"
+        android:name="com.figgo.customer.UI.OneWay_Km_CountActivity"
         android:label="activity_one_way_km_count"
         tools:layout="@layout/activity_one_way_km_count" />
     <activity
         android:id="@+id/vehicleBookActivity"
-        android:name="com.pearlorganisation.figgo.UI.Current_Cab_DetailsActivity"
+        android:name="com.figgo.customer.UI.Current_Cab_DetailsActivity"
         android:label="vehiclebookactivity"
         tools:layout="@layout/current_cab_details_activity" />
 
