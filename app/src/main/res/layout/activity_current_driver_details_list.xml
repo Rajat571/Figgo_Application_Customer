@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context="com.pearlorganisation.Current_Driver_Details_List">
+    tools:context=".UI.Current_Driver_Details_List">
 
     <include layout="@layout/headerbackwithnotification"/>
 

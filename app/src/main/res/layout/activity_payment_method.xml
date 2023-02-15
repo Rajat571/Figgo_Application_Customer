@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".PaymentMethodActivity">
+    tools:context=".UI.PaymentMethodActivity">
 
 
     <include layout="@layout/headerbackwithnotification"/>

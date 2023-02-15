@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".DriveRatingActivity">
+    tools:context=".UI.DriveRatingActivity">
 
     <include layout="@layout/headerbackwithnotification"/>
 

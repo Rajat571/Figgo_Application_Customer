@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#54C5CF"
     android:id="@+id/navigation_bar2"
-    tools:context=".One_Way_OutStationActivity">
+    tools:context=".UI.One_Way_OutStationActivity">
 
 
     <include

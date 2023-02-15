@@ -14,8 +14,8 @@
         android:id="@+id/choose_user"
         android:layout_width="match_parent"
         android:layout_height="560dp"
-        android:layout_marginStart="@dimen/_18sdp"
-        android:layout_marginEnd="@dimen/_18sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:visibility="visible"
         android:layout_marginTop="-85dp"
         app:cardBackgroundColor="@color/white"
@@ -29,9 +29,9 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_160sdp"
+            android:layout_height="@dimen/_190sdp"
             app:cardElevation="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_1sdp"
             app:cardCornerRadius="@dimen/_6sdp"
             app:cardMaxElevation="@dimen/_6sdp">
 
@@ -45,6 +45,7 @@
                     android:id="@+id/iv_activaimg"
                     android:layout_width="@dimen/_65sdp"
                     android:layout_height="@dimen/_65sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:background="@drawable/bg_circle_black"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:src="@drawable/blueactiva_img" />
@@ -55,8 +56,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:textStyle="bold"
-                    android:layout_marginStart="@dimen/_32sdp"
                     android:text="Activa - CH-01-2015"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
@@ -67,46 +69,51 @@
                 android:id="@+id/crl_driverimg"
                 android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_65sdp"
-                android:layout_marginTop="@dimen/_69sdp"
+                android:layout_marginTop="@dimen/_89sdp"
                 android:background="@drawable/bg_circle_black"
                 android:src="@drawable/girl_img"
                 app:civ_border_width="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_12sdp"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="252dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_34sdp"
+                android:layout_marginStart="@dimen/_29sdp"
                 android:layout_marginTop="@dimen/_26sdp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_drivername"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:fontFamily="sans-serif-black"
                     android:text="Ravi Singh"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp" />
 
                 <RatingBar
                     android:id="@+id/ride_service_rating"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:max="5"
-                    android:numStars="5"
-                    style="?android:attr/ratingBarStyleSmall"/>
+                    android:numStars="5" />
 
                 <TextView
                     android:id="@+id/tv_dl_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:text="DL. No. Cgdjn9857imvc"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp" />
@@ -120,7 +127,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-43dp"
+
+            android:elevation="@dimen/_16sdp"
+            android:layout_marginTop="-8dp"
+
             android:layout_gravity="center"
             android:orientation="horizontal">
 
@@ -140,9 +150,11 @@
 
 
             <ImageView
+                android:id="@+id/iv_call"
                 android:layout_width="@dimen/_26sdp"
                 android:layout_height="@dimen/_26sdp"
                 android:layout_weight="1"
+                android:elevation="6dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_baseline_call_24" />
 
@@ -172,7 +184,7 @@
 
             <fragment
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="260dp"
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"/>
 

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorlightblue"
-    tools:context=".UI.Fragments.Share_Cab.LiveVehicleFragment">
+    tools:context=".Fragments.Share_Cab.LiveVehicleFragment">
 
     <include layout="@layout/top_layout"
         android:id="@+id/layout"

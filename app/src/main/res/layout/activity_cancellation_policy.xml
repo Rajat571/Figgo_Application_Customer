@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pearlorganisation.DrawerItemActivity.CancellationPolicy">
+    tools:context=".UI.CancellationPolicy">
 
   <TextView
       android:layout_width="match_parent"

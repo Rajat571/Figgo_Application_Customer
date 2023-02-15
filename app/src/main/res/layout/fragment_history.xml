@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#B9E5FA"
-    tools:context=".BottomItemFragment.HistoryFragment">
+    tools:context=".Fragments.HistoryFragment">
 
     <TextView
         android:layout_width="wrap_content"
