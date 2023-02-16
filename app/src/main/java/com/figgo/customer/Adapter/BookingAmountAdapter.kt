@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.figgo.customer.*
 import com.figgo.customer.Model.BookingAmountList
-import com.figgo.customer.UI.Current_Cab_DetailsActivity
 
 class BookingAmountAdapter (var context: Context,private val mList1: List<BookingAmountList>) : RecyclerView.Adapter<BookingAmountAdapter.ViewHolder>()  {
 
@@ -32,7 +31,7 @@ class BookingAmountAdapter (var context: Context,private val mList1: List<Bookin
         holder.driverchangepurple.text = BookingAmountList.driverchangepurple
 
         holder.amountpurple.setOnClickListener {
-            context.startActivity(Intent(context, Current_Cab_DetailsActivity::class.java))
+           /* context.startActivity(Intent(context, Current_Cab_DetailsActivity::class.java))*/
 
         }
 

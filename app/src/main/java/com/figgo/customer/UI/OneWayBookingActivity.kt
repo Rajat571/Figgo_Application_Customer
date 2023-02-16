@@ -27,7 +27,7 @@ class OneWayBookingActivity : AppCompatActivity() {
         var backimg = findViewById<ImageView>(R.id.backimg)
 
         backimg.setOnClickListener {
-            val intent = Intent(this, DriveRatingActivity::class.java)
+            val intent = Intent(this, Driver_Rating_Activity1::class.java)
             startActivity(intent)
         }
 
@@ -42,9 +42,7 @@ class OneWayBookingActivity : AppCompatActivity() {
             startActivity(Intent.createChooser(intent, "Invite Friends"));
         }
 
-        one_way.setOnClickListener {
-            startActivity(Intent(this, Current_Cab_DetailsActivity::class.java))
-        }
+
 
         var recyclerView = findViewById<RecyclerView>(R.id.recyclerviewbookingamount)
         val mList1 = ArrayList<BookingAmountList>()

@@ -3,48 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/_5sdp"
+    android:background="@color/colorlightblue"
+    android:layout_gravity="center"
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
-
         android:background="@drawable/mpin_gradinet">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:gravity="left"
             android:padding="10dp"
             android:orientation="vertical">
-            <!-- <TextView
-                 android:id="@+id/txt_filter"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="Pending"
-                 android:layout_gravity="center"
-                 android:background="@drawable/shadow_transparent_radius"
-                 android:textSize="16sp"
-                 android:textStyle="bold"
-                 android:gravity="center"
-                 android:paddingTop="5dp"
-                 android:paddingBottom="5dp"
-                 android:paddingRight="20dp"
-                 android:layout_marginRight="10dp"
-                 android:paddingLeft="20dp"
-                 android:layout_weight="1"
-                 android:textColor="@color/box_green"/>-->
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_close"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/appicon"
-                android:layout_gravity="right"
-                />
+                android:layout_gravity="right" />
 
 
             <LinearLayout
@@ -57,8 +41,8 @@
 
                 <ImageView
                     android:id="@+id/iv_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
                     android:src="@drawable/appicon" />
 
                 <TextView
@@ -85,23 +69,6 @@
 
 
 
-            <!--   <TextView
-                   android:id="@+id/done"
-                   android:background="@drawable/round_btn_bg"
-                   android:textColor="@color/white"
-                   android:textStyle="bold"
-                   android:gravity="center"
-                   android:layout_gravity="center"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="@dimen/dp_18"
-                   android:paddingRight="30dp"
-                   android:paddingLeft="30dp"
-                   android:paddingTop="5dp"
-                   android:paddingBottom="5dp"
-                   android:layout_marginTop="15dp"
-                   android:layout_marginBottom="15dp"
-                   android:text="Done" />-->
 
         </RelativeLayout>
 

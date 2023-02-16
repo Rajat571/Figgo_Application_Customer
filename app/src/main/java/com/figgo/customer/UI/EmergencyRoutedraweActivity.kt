@@ -125,7 +125,7 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
         }
 
         tv_emrgencybtn.setOnClickListener {
-            startActivity(Intent(this,DriveRatingActivity::class.java))
+            startActivity(Intent(this,Driver_Rating_Activity1::class.java))
         }
 
         iv_call.setOnClickListener {
@@ -135,15 +135,8 @@ class EmergencyRoutedraweActivity : BaseClass(), OnMapReadyCallback, LocationLis
             startActivity(intent_call)
         }
 
-
-
-
-
         val locationRequest=LocationRequest.CREATOR
 
-
-
-        // Fetching API_KEY which we wrapped
         val ai: ApplicationInfo = applicationContext.packageManager
             .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)
         val value = ai.metaData["api_key"]

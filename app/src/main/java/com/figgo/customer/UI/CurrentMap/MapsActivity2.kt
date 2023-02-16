@@ -22,6 +22,7 @@ import com.figgo.customer.UI.NotificationBellIconActivity
 import com.figgo.customer.pearlLib.PrefManager
 import com.figgo.customer.pearlLib.BaseClass
 import com.figgo.customer.R
+import com.figgo.customer.UI.EmergencyRoutedraweActivity
 import com.figgo.customer.databinding.ActivityMaps2Binding
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -112,7 +113,7 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         }
 
         accept.setOnClickListener {
-            startActivity(Intent(this, EmergencyMapsActivity::class.java))
+            startActivity(Intent(this, EmergencyRoutedraweActivity::class.java))
         }
 
         //  kmsTxt = findViewById<TextView>(R.id.kms)
@@ -267,7 +268,7 @@ class MapsActivity2 : BaseClass(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                                 startTimer()
                             } else if (ride_request_status.equals("1")) {
 
-                                val intent = Intent(this@MapsActivity2, EmergencyMapsActivity::class.java);
+                                val intent = Intent(this@MapsActivity2, EmergencyRoutedraweActivity::class.java);
                                 intent.putExtra("to_lat", toLat)
                                 intent.putExtra("to_lng", toLong)
                                 intent.putExtra("from_lat", fromLat)

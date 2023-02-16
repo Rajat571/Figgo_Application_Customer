@@ -8,10 +8,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -24,6 +26,13 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".UI.CurrentWalletActivity"
+            android:exported="false" />
+        <activity android:name=".UI.DiscountListActivity"
+            android:exported="false"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -33,122 +42,121 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <activity
-            android:name="com.figgo.customer.UI.DashBoard_NewChange"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
-<activity android:name="com.figgo.customer.UI.HomeFragmentReplace"
-    android:exported="false"/>
 
-       <activity android:name="com.figgo.customer.UI.HelpAndSupportActivity"
-           android:exported="false"/>
-
-        <activity android:name="com.figgo.customer.UI.Edit_Profile_Activity"
-            android:exported="false"/>
-
-        <activity android:name="com.figgo.customer.UI.HistoryMapsActivity"
-            android:exported="false"/>
-
-
-      <activity android:name="com.figgo.customer.UI.NotificationBellIconActivity"
-          android:exported="false"/>
-      <activity android:name="com.figgo.customer.UI.TermAndConditionActivity"
-          android:exported="false"/>
-        <activity android:name="com.figgo.customer.UI.CurrentAboutActivity"
-            android:exported="false"/>
-
-       <activity android:name="com.figgo.customer.UI.CancellationPolicy"
-           android:exported="false"/>
-      <activity android:name="com.figgo.customer.UI.Current_Driver_Details_List"
-          android:exported="false"/>
-        <activity android:name="com.figgo.customer.UI.EmergencyRoutedraweActivity"
-            android:exported="false"/>
-
-        <activity android:name="com.figgo.customer.UI.SearchDriver"
-            android:exported="false"/>
         <activity
-            android:name="com.figgo.customer.UI.GoogleWebview"
+            android:name=".UI.HomeFragmentReplace"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.MapsActivity"
+            android:name=".UI.HelpAndSupportActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.CurrentMap.EmergencyMapsActivity"
+            android:name=".UI.Edit_Profile_Activity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.VerifyOtp"
+            android:name=".UI.HistoryMapsActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.LocationDisActivity"
+            android:name=".UI.NotificationBellIconActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.LocationPickerActivity"
+            android:name=".UI.TermAndConditionActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.LocationPickerActivityCurr"
+            android:name=".UI.CurrentAboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.CancellationPolicy"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Current_Driver_Details_List"
+            android:exported="false" />
+        <activity
+            android:name=".UI.EmergencyRoutedraweActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.SearchDriver"
+            android:exported="false" />
+        <activity
+            android:name=".UI.GoogleWebview"
+            android:exported="false" />
+        <activity
+            android:name=".UI.MapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.CurrentMap.EmergencyMapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.VerifyOtp"
+            android:exported="false" />
+        <activity
+            android:name=".UI.LocationDisActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.LocationPickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.LocationPickerActivityCurr"
             android:exported="false"
             android:noHistory="false" />
         <activity
-            android:name="com.figgo.customer.UI.StudenAddActivity"
+            android:name=".UI.StudenAddActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.OTPVerifyPageActivity"
+            android:name=".UI.OTPVerifyPageActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.PaymentMethodActivity"
+            android:name=".UI.PaymentMethodActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.CurrentMap.MapsActivity2"
+            android:name=".UI.CurrentMap.MapsActivity2"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.PaymentPayActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="com.figgo.customer.UI.OneWayBookingActivity"
+            android:name=".UI.PaymentPayActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.DriveRatingActivity"
+            android:name=".UI.OneWayBookingActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.CurrentMap.MapsActivity1"
+            android:name=".UI.Driver_Rating_Activity1"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.EmergencyActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="com.figgo.customer.UI.OneWay_Km_CountActivity"
+            android:name=".UI.CurrentMap.MapsActivity1"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.FreedomOutstationActivity"
+            android:name=".UI.EmergencyActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.RoundAndTourActivity"
+            android:name=".UI.OneWay_Km_CountActivity"
             android:exported="false" />
         <activity
-            android:name="com.figgo.customer.UI.One_Way_OutStationActivity"
+            android:name=".UI.FreedomOutstationActivity"
             android:exported="false" />
-
         <activity
-            android:name="com.figgo.customer.UI.MPinGenerate"
+            android:name=".UI.RoundAndTourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.One_Way_OutStationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.MPinGenerate"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.figgo.customer.UI.Shared_cab_Activity"
+            android:name=".UI.Shared_cab_Activity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.figgo.customer.UI.CabDetailsActivity"
+            android:name=".UI.CabDetailsActivity"
             android:exported="false"
             android:label="@string/title_activity_cab_details"
             android:theme="@style/Theme.Figgo.NoActionBar">
@@ -157,32 +165,31 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.figgo.customer.UI.CityCabActivity"
+            android:name=".UI.CityCabActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.figgo.customer.UI.DashBoard"
+            android:name=".UI.DashBoard"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.figgo.customer.UI.LoginActivity"
+            android:name=".UI.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.figgo.customer.UI.WelcomeSlider"
+            android:name=".UI.WelcomeSlider"
             android:exported="false" />
-
         <activity
-            android:name="com.figgo.customer.UI.SplashActivity"
+            android:name=".UI.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -195,7 +202,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.figgo.customer.UI.MainActivity"
+            android:name=".UI.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

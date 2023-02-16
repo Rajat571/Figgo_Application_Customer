@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_205sdp"
+        android:layout_height="@dimen/_215sdp"
         android:layout_margin="@dimen/_12sdp"
         android:backgroundTint="@color/colornavyblue"
         app:cardCornerRadius="@dimen/_6sdp"
-        app:cardElevation="@dimen/_6sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,23 +23,24 @@
             android:orientation="horizontal">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/activaimg"
                 android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_65sdp"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:src="@drawable/blueactiva_img" />
 
 
             <TextView
                 android:id="@+id/activavehiclenumber"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_22sdp"
+              android:gravity="center"
                 android:text="Activa - CH-01-2015"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -48,10 +49,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_110sdp"
             android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_3sdp"
             android:layout_marginTop="@dimen/_6sdp"
-            app:cardCornerRadius="@dimen/_6sdp"
-            app:cardElevation="@dimen/_6sdp"
-            app:cardMaxElevation="@dimen/_6sdp">
+            android:layout_marginStart="@dimen/_3sdp"
+            app:cardCornerRadius="@dimen/_6sdp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/driverimg"
@@ -65,9 +66,10 @@
                 app:civ_border_width="@dimen/_1sdp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginStart="@dimen/_23sdp"
                 android:orientation="vertical">
 
@@ -75,7 +77,8 @@
                     android:id="@+id/drivername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:fontFamily="sans-serif-black"
                     android:text="Ravi Singh"
                     android:textColor="@color/black"
@@ -86,7 +89,7 @@
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:max="5"
                     android:numStars="5" />
@@ -95,7 +98,8 @@
                     android:id="@+id/dl_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:text="DL. No."
                     android:textColor="@color/black"
@@ -105,8 +109,8 @@
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="Price"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp" />
@@ -132,8 +136,8 @@
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:text="Reject"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_accept"
@@ -147,7 +151,7 @@
                 android:padding="@dimen/_5sdp"
                 android:text="Accept"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 

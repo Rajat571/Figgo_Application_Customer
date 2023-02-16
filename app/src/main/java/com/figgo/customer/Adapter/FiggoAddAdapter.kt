@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.figgo.customer.Model.FiggoAdd
 import com.figgo.customer.R
 
-class FiggoAddAdapter(var figgo_add_list:List<FiggoAdd>):
-    Adapter<FiggoAddAdapter.Figgo_Add_Holder>() {
+class FiggoAddAdapter(var figgo_add_list:List<FiggoAdd>): Adapter<FiggoAddAdapter.Figgo_Add_Holder>() {
 
 
     class Figgo_Add_Holder(view:View):ViewHolder(view){

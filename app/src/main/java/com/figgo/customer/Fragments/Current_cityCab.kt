@@ -15,6 +15,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -74,7 +75,7 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
     private val REQUEST_CHECK_SETTINGS: Int=101
     private lateinit var mMap: GoogleMap
     var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=101
-    private lateinit var fusedLocationClient: FusedLocationProviderClient;
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
     private lateinit var locationRequest: LocationRequest
 
@@ -119,6 +120,8 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
     private var onResu: String? = ""
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    lateinit var cTimer : CountDownTimer
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding=DataBindingUtil.inflate(inflater,R.layout.fragment_current_city_cab, container, false)
         return binding.root
@@ -135,37 +138,41 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         ll_choose_vehicle = view?.findViewById<LinearLayout>(R.id.ll_choose_vehicle)!!
         manualLoc = view?.findViewById<TextView>(R.id.loc_manual)
         liveLoc = view?.findViewById<TextView>(R.id.live_loc)
-        /* nxtbtn = view.findViewById(R.id.nxtbtn)*/
         progress = view.findViewById<ProgressBar>(R.id.progress)
         val onewayvehiclelist = view.findViewById<RecyclerView>(R.id.onewayvehiclelist)
         var locLinear = view?.findViewById<LinearLayout>(R.id.linear_loc)
         var submit = view?.findViewById<Button>(R.id.submitC)
         var destLinear = view?.findViewById<LinearLayout>(R.id.linear_des)
         var advance_li = view?.findViewById<LinearLayout>(R.id.adLinear)
-      //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
+        //  var map_li = view?.findViewById<RelativeLayout>(R.id.mapLinear)
         var set = view?.findViewById<TextView>(R.id.img_marker)
         ll_choose_vehicle?.isVisible = false
 
-      //  map_li?.isVisible = false
+        //  map_li?.isVisible = false
         ll_choose_vehicle?.isVisible = false
         pref.setBookingNo("")
         pref.setOtp("")
         pref.setRideId("")
         pref.setVehicleId("")
         pref.setType("")
+        pref.setType("")
+        pref.setToLatL("")
+        pref.setToLngL("")
+        pref.setToLatM("")
+        pref.setToLngM("")
         val apiKey = getString(R.string.api_key)
         if (!Places.isInitialized()) {
             Places.initialize(requireActivity(), apiKey)
         }
         set?.setOnClickListener {
             advance_li?.isVisible = true
-          //  map_li?.isVisible = false
+            //  map_li?.isVisible = false
         }
         locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-
+        startTimer()
 
 
         calenderimg.setOnClickListener {
@@ -194,18 +201,21 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
             if (datePickerDialog != null) {
                 datePickerDialog.show()
             }
-            watchimg?.setOnClickListener {
-                val cal = Calendar.getInstance()
-                val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                    cal.set(Calendar.HOUR_OF_DAY, hour)
-                    cal.set(Calendar.MINUTE, minute)
-                    if (timetext != null) {
-                        timetext?.text = SimpleDateFormat("HH:mm:s").format(cal.time)
-                    }
-                }
-                TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
-            }
 
+        }
+        watchimg?.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                if (timetext != null) {
+                    if (::cTimer.isInitialized) {
+                        cTimer.cancel()
+                    }
+                    timetext?.text = SimpleDateFormat("HH:mm:ss").format(cal.time)
+                }
+            }
+            TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
 
         manualLoc?.setOnClickListener {
@@ -249,27 +259,27 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         locLinear?.setOnClickListener {
-          /*  val internet :Boolean = isOnline(requireActivity())
-            if(internet == true) {
-                mainBinding = ActivityMainBinding.inflate(layoutInflater)
-                mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-                selects = "start"
-                if (isLocationPermissionGranted()) {
-                    advance_li?.isVisible = false
-                    map_li?.isVisible = true
-                    val mapFragment = getChildFragmentManager()
-                        .findFragmentById(R.id.map) as SupportMapFragment
-                    mapFragment.getMapAsync(this)
-                    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-                    // startActivity(Intent(requireActivity(), MapsActivity::class.java))
-                }else{
-                    requestPermissions()
-                }
-            }else{
+            /*  val internet :Boolean = isOnline(requireActivity())
+              if(internet == true) {
+                  mainBinding = ActivityMainBinding.inflate(layoutInflater)
+                  mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+                  selects = "start"
+                  if (isLocationPermissionGranted()) {
+                      advance_li?.isVisible = false
+                      map_li?.isVisible = true
+                      val mapFragment = getChildFragmentManager()
+                          .findFragmentById(R.id.map) as SupportMapFragment
+                      mapFragment.getMapAsync(this)
+                      fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+                      // startActivity(Intent(requireActivity(), MapsActivity::class.java))
+                  }else{
+                      requestPermissions()
+                  }
+              }else{
 
-                Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
+                  Toast.makeText(requireActivity(), "Please turn on internet", Toast.LENGTH_LONG).show()
 
-            }*/
+              }*/
             val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
                 selects = "start"
@@ -285,19 +295,19 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
         destLinear?.setOnClickListener {
             val internet :Boolean = isOnline(requireActivity())
             if(internet == true) {
-             /*   mainBinding = ActivityMainBinding.inflate(layoutInflater)
-                mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-                selects = "dest"
-                if (isLocationPermissionGranted()) {
-                    advance_li?.isVisible = false
-                    map_li?.isVisible = true
-                    val mapFragment = getChildFragmentManager()
-                        .findFragmentById(R.id.map) as SupportMapFragment
-                    mapFragment.getMapAsync(this)
-                    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-                }else{
-                    requestPermissions()
-                }*/
+                /*   mainBinding = ActivityMainBinding.inflate(layoutInflater)
+                   mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+                   selects = "dest"
+                   if (isLocationPermissionGranted()) {
+                       advance_li?.isVisible = false
+                       map_li?.isVisible = true
+                       val mapFragment = getChildFragmentManager()
+                           .findFragmentById(R.id.map) as SupportMapFragment
+                       mapFragment.getMapAsync(this)
+                       fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+                   }else{
+                       requestPermissions()
+                   }*/
                 pref.setTypeC("2")
                 selects = "dest"
                 val i = Intent(requireActivity(), LocationPickerActivityCurr::class.java)
@@ -320,13 +330,41 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
 
     }
 
+    fun startTimer() {
+
+        cTimer = object : CountDownTimer(3000000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {//300000
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                    val currentDate = LocalDateTime.now().format(formatter)
+                    val formated = DateTimeFormatter.ofPattern("HH:mm:s")
+                    val currentTime = LocalDateTime.now().format(formated)
+
+                    datetext?.setText(currentDate)
+                    timetext?.setText(currentTime)
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }
+
+            }
+
+            override fun onFinish() {
+
+
+            }
+        }
+        cTimer.start()
+    }
+
+
+
     private fun submitform() {
 
 
         pref.setToLatLC(to_lat.toString())
-     pref.setToLngLC(to_lng.toString())
-         pref.setToLatMC(from_lat.toString())
-          pref.setToLngMC(from_lng.toString())
+        pref.setToLngLC(to_lng.toString())
+        pref.setToLatMC(from_lat.toString())
+        pref.setToLngMC(from_lng.toString())
         pref.setTime(datetext?.text.toString())
         progress?.isVisible = true
         ll_location?.isVisible = false
@@ -352,8 +390,8 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
                 if (response != null) {
                     if (response != null) {
 
-                            progressDialog.hide()
-                            try {
+                        progressDialog.hide()
+                        try {
 
 
                             ll_location?.isVisible = false
@@ -382,34 +420,7 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
                                     response.getJSONObject("data").getJSONArray("vehicle_types")
                                         .getJSONObject(p2).getString("max_price")
 
-                                cablist.add(
-                                    CurrentVehicleModel(
-                                        name,
-                                        image,
-                                        ride_id,
-                                        driver_id,
-                                        min_price,
-                                        max_price
-                                    )
-                                )
-
-                                /*val status = response.getString("status")
-                    if(status.equals("false")){
-                        Toast.makeText(requireActivity(), "Something Went Wrong!", Toast.LENGTH_LONG).show()
-                    }else{
-                        progressDialog.hide()
-
-
-                        val data = response.getJSONObject("data")
-                        val ride_id = data.getString("ride_id")
-                        pref.setRideId(ride_id)
-                        val vehicle_types = data.getJSONArray("vehicle_types")
-                        for (i in 0 until vehicle_types.length()){
-                            val name = vehicle_types.getJSONObject(i).getString("name")
-                            val image = vehicle_types.getJSONObject(i).getString("full_image")
-                            val id = vehicle_types.getJSONObject(i).getString("id")
-                            val min_price = vehicle_types.getJSONObject(i).getString("min_price")
-                            val max_price = vehicle_types.getJSONObject(i).getString("max_price")*/
+                                cablist.add(CurrentVehicleModel(name, image, ride_id, driver_id, min_price, max_price))
 
 
                             }
@@ -426,7 +437,7 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
                             MapUtility.showDialog(e.toString(),requireActivity())
 
                         }
-                        }
+                    }
                 }
 
             }
@@ -1025,16 +1036,7 @@ class Current_cityCab : Fragment(), IOnBackPressed, OnMapReadyCallback, GoogleMa
 
     override fun onResume() {
         super.onResume()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val currentDate = LocalDateTime.now().format(formatter)
-            val formated = DateTimeFormatter.ofPattern("HH:mm:s")
-            val currentTime = LocalDateTime.now().format(formated)
-            datetext?.setText(currentDate)
-            timetext?.setText(currentTime)
-        } else {
 
-        }
         pref.setSearchBack("")
         if (onResu.equals("false")){
             onResu = ""

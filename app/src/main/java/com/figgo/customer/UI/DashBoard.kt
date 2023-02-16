@@ -209,11 +209,11 @@ class DashBoard : BaseClass(){
         }
 
         ll_orderbooking.setOnClickListener {
-            Toast.makeText(this, "Order and booking", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this,CurrentWalletActivity::class.java))
         }
 
         ll_offeranddiscount.setOnClickListener {
-            Toast.makeText(this, "Order and discount", Toast.LENGTH_LONG).show()
+           startActivity(Intent(this,DiscountListActivity::class.java))
         }
 
         ll_figgorewards.setOnClickListener {

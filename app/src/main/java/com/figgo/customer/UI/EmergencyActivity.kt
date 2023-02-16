@@ -61,7 +61,7 @@ class EmergencyActivity : BaseClass() {
         }
 
         emrgencybtn.setOnClickListener {
-            startActivity(Intent(this, DriveRatingActivity::class.java))
+            startActivity(Intent(this, Driver_Rating_Activity1::class.java))
         }
 
     }

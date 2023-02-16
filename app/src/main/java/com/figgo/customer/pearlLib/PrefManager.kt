@@ -399,4 +399,15 @@ import android.content.SharedPreferences
          return pref?.getString("time","null").toString()
      }
 
+
+     fun setNotify(type:String){
+         editor?.putString("notify",type)
+         editor?.commit()
+     }
+
+     fun getNotify():String{
+         return pref?.getString("notify","null").toString()
+     }
+
+
  }

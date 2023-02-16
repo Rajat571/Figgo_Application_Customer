@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_130sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_6sdp"
+    android:layout_margin="@dimen/_6sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_datewallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="12.1.2023"
+            android:layout_marginStart="@dimen/_12sdp"/>
+
+        <TextView
+            android:id="@+id/tv_pay_amount"
+            android:layout_width="match_parent"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorgreen"
+            android:textSize="19sp"
+            android:text="+ RS.500"
+            android:layout_marginEnd="@dimen/_12sdp"/>
+
+    </LinearLayout>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:layout_marginTop="-22dp"
+      android:orientation="horizontal">
+
+      <TextView
+          android:id="@+id/tv_usernamewallet"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/black"
+          android:textSize="14sp"
+          android:text="From:Mr:xyz"
+          android:layout_marginStart="@dimen/_12sdp"/>
+
+      <ImageView
+          android:id="@+id/iv_walletimg"
+          android:layout_width="45dp"
+          android:src="@drawable/currentwalletimg"
+          android:layout_gravity="end"
+          android:layout_marginEnd="@dimen/_16sdp"
+          android:layout_marginStart="@dimen/_185sdp"
+          android:layout_height="@dimen/_45sdp" />
+
+  </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_minutetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_gravity="start|center"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:textSize="14sp"
+        android:text="15 minutes 6.25pm"
+        android:layout_marginStart="@dimen/_12sdp"/>
+
+    <TextView
+        android:id="@+id/tv_kmwallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_gravity="start|center"
+        android:layout_marginTop="@dimen/_28sdp"
+        android:textSize="14sp"
+        android:text="10 km"
+        android:layout_marginStart="@dimen/_12sdp"/>
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

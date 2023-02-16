@@ -10,7 +10,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.figgo.customer.pearlLib.PrefManager
-import com.figgo.customer.UI.Current_Cab_DetailsActivity
 import com.figgo.customer.Model.OneWayListRatingVehicle
 import com.figgo.customer.R
 
@@ -38,12 +37,12 @@ class CurrentOneWayKmCountAdapter(var context: Context, private val mList: List<
         holder.ride_service_rating.rating = rating.toFloat()
 
 
-
+/*
         holder.ll_main.setOnClickListener {
             context.startActivity(Intent(context, Current_Cab_DetailsActivity::class.java)
                 .putExtra("ride_id",OneWayListRatingVehicle.ride_id)
                 .putExtra("driver_id",OneWayListRatingVehicle.driver_id))
-        }
+        }*/
 
        /* holder.acceptbutton.setOnClickListener {
            // Toast.makeText(context,"Accepted Driver",Toast.LENGTH_SHORT).show()

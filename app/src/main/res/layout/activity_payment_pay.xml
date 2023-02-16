@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,18 +8,21 @@
     android:background="@color/colorlightblue"
     tools:context=".UI.PaymentPayActivity">
 
-    <include layout="@layout/headerbackwithnotification"/>
+    <include
+        android:id="@+id/include5"
+        layout="@layout/headerbackwithnotification" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/choose_user"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        android:layout_marginTop="-19dp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
         android:visibility="visible"
+        android:layout_margin="@dimen/_10sdp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_6sdp">
+        app:cardCornerRadius="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include5"
+        tools:layout_editor_absoluteX="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,21 +31,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="@dimen/_16sdp"
+                android:padding="8dp"
+                android:text="25.10.2022 / 6.00 pm"
                 android:textColor="@color/black"
-                android:text="25.10.2022 / 6.00 pm"/>
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -54,36 +59,38 @@
                             android:layout_marginStart="@dimen/_9sdp"
                             android:layout_marginEnd="@dimen/_9sdp"
                             android:background="@drawable/btn_background_grey">
+
                             <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:layout_marginStart="@dimen/_6sdp"
-                                android:layout_marginEnd="@dimen/_6sdp"
-                                android:hint="Passenger Name"
                                 android:id="@+id/psg_name"
-                                android:textColor="@color/black"/>
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:background="@null"
+                                android:hint="Passenger Name"
+                                android:textColor="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_marginStart="@dimen/_9sdp"
-                            android:layout_marginEnd="@dimen/_9sdp"
                             android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginEnd="@dimen/_9sdp"
                             android:background="@drawable/btn_background_grey">
+
                             <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:background="@null"
-                                android:layout_marginStart="@dimen/_6sdp"
-                                android:layout_marginEnd="@dimen/_6sdp"
-                                android:maxEms="10"
                                 android:id="@+id/psg_contact_no"
-                                android:maxLength="10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:background="@null"
                                 android:hint="Passenger Contact No."
-                                android:textColor="@color/black"/>
+                                android:inputType="number"
+                                android:maxEms="10"
+                                android:maxLength="10"
+                                android:textColor="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -91,101 +98,108 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_marginStart="@dimen/_9sdp"
-                            android:background="@drawable/btn_background_grey"
+                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_marginEnd="@dimen/_9sdp"
-                            android:layout_marginTop="@dimen/_6sdp">
+                            android:background="@drawable/btn_background_grey">
+
                             <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Pick Up Address"
-                                android:layout_marginStart="@dimen/_6sdp"
-                                android:background="@null"
                                 android:id="@+id/pick_address"
-                                android:textColor="@color/black"/>
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:background="@null"
+                                android:hint="Pick Up Address"
+                                android:textColor="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_marginStart="@dimen/_9sdp"
-                            android:background="@drawable/btn_background_grey"
+                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_marginEnd="@dimen/_9sdp"
-                            android:layout_marginTop="@dimen/_6sdp">
+                            android:background="@drawable/btn_background_grey">
+
                             <EditText
+                                android:id="@+id/landmark"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Landmark"
                                 android:layout_marginStart="@dimen/_6sdp"
                                 android:layout_marginEnd="@dimen/_6sdp"
                                 android:background="@null"
-                                android:id="@+id/landmark"
-                                android:textColor="@color/black"/>
+                                android:hint="Landmark"
+                                android:textColor="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_marginStart="@dimen/_9sdp"
-                            android:background="@drawable/btn_background_grey"
+                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_marginEnd="@dimen/_9sdp"
-                            android:layout_marginTop="@dimen/_6sdp">
+                            android:background="@drawable/btn_background_grey">
+
                             <TextView
+                                android:id="@+id/pick_location"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_6sdp"
                                 android:layout_marginEnd="@dimen/_6sdp"
                                 android:background="@null"
-                                android:id="@+id/pick_location"
                                 android:hint="Attach Pick Up Location"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_80sdp"
                             android:layout_marginStart="@dimen/_9sdp"
-                            android:background="@drawable/btn_background_grey"
+                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_marginEnd="@dimen/_9sdp"
-                            android:layout_marginTop="@dimen/_6sdp">
+                            android:background="@drawable/btn_background_grey">
+
                             <EditText
+                                android:id="@+id/msg"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Any Message"
                                 android:layout_marginStart="@dimen/_6sdp"
                                 android:layout_marginEnd="@dimen/_6sdp"
                                 android:background="@null"
-                                android:id="@+id/msg"
-                                android:textColorHint="@color/black"/>
+                                android:hint="Any Message"
+                                android:textColorHint="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <LinearLayout
-                            android:layout_margin="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
                             android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_weight="1">
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_6sdp"
-                                    android:text="Rs. 500/-"/>
+                                    android:text="Rs. 500/-" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_6sdp"
-                                    android:text="For conformation pay only 20%"/>
+                                    android:text="For conformation pay only 20%" />
                             </LinearLayout>
+
                             <Button
                                 android:id="@+id/pay_now"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Pay Now"
-                                android:backgroundTint="#FFF101"/>
+                                android:backgroundTint="#FFF101"
+                                android:text="Pay Now" />
 
                         </LinearLayout>
 
@@ -197,13 +211,12 @@
 
     <ImageView
         android:id="@+id/car"
-        android:scaleType="centerCrop"
         android:layout_width="wrap_content"
         android:layout_height="90dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottombuttonbar"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/figgofooter"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/figgofooter"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

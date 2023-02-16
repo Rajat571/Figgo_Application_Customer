@@ -73,7 +73,7 @@
                         android:padding="8dp"
                         android:id="@+id/txtMpin"
                         android:textColor="@color/white"
-                        android:background="@color/colorbluedark"
+                        android:background="@color/colornavyblue"
                         android:layout_weight="0.5"
                         android:text="Login with MPIN"
                         android:textAlignment="center"
